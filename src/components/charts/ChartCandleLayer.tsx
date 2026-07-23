@@ -20,7 +20,6 @@ type Props = {
   onHover: (index: number, clientX: number, clientY: number) => void;
   margin: { top: number; left: number };
   width: number;
-  height: number;
 };
 
 export function ChartCandleLayer({
@@ -30,7 +29,6 @@ export function ChartCandleLayer({
   onHover,
   margin,
   width,
-  height,
 }: Props): React.ReactNode {
   return (
     <>

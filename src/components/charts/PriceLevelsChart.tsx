@@ -45,6 +45,9 @@ const defaultMaActive = {
   ema200: true,
 };
 
+const CHART_WIDTH = 860;
+const CHART_MARGIN = { top: 12, right: 16, bottom: 28, left: 58 } as const;
+
 export function PriceLevelsChart({
   candles,
   reports,
@@ -55,8 +58,6 @@ export function PriceLevelsChart({
   divergenceActive,
   showHitMarkers = true,
 }: Props): React.ReactNode {
-  const width = 860;
-  const margin = { top: 12, right: 16, bottom: 28, left: 58 };
   const [hover, setHover] = useState<CandleHover | null>(null);
   const [previewKind, setPreviewKind] = useState<LevelKind | null>(null);
   const [fitMode, setFitMode] = useState<YFitMode>('price');
@@ -69,8 +70,9 @@ export function PriceLevelsChart({
   });
 
   const geom = useMemo(() => {
-    const innerW = width - margin.left - margin.right;
-    const innerH = height - margin.top - margin.bottom;
+    const { left, right, top, bottom } = CHART_MARGIN;
+    const innerW = CHART_WIDTH - left - right;
+    const innerH = height - top - bottom;
     const empty = {
       xTicks: [] as { x: number; label: string }[],
       yTicks: [] as { y: number; label: string }[],
@@ -124,7 +126,7 @@ export function PriceLevelsChart({
       candleRects,
       hits: showHitMarkers ? findLevelHits(candles, levels) : [],
     };
-  }, [candles, reports, height, fitMode, showHitMarkers, margin]);
+  }, [candles, reports, height, fitMode, showHitMarkers]);
 
   const previewLevels = previewKind
     ? geom.levelLines.filter((l) => l.kind === previewKind && activeKinds[l.kind])
@@ -193,7 +195,7 @@ export function PriceLevelsChart({
       ) : null}
       <div className="relative" onPointerLeave={() => setHover(null)}>
         <svg
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${CHART_WIDTH} ${height}`}
           className="h-auto w-full select-none"
           role="img"
           aria-label="BTC price with report levels"
@@ -205,14 +207,14 @@ export function PriceLevelsChart({
             </linearGradient>
           </defs>
           <rect
-            x={margin.left}
-            y={margin.top}
+            x={CHART_MARGIN.left}
+            y={CHART_MARGIN.top}
             width={geom.innerW}
             height={geom.innerH}
             fill="url(#plotFade)"
             rx={8}
           />
-          <g transform={`translate(${margin.left},${margin.top})`}>
+          <g transform={`translate(${CHART_MARGIN.left},${CHART_MARGIN.top})`}>
             {geom.yTicks.map((t) => (
               <g key={t.label}>
                 <line
@@ -256,9 +258,8 @@ export function PriceLevelsChart({
               candles={geom.candleRects}
               hoverIndex={hover?.index ?? null}
               innerH={geom.innerH}
-              margin={margin}
-              width={width}
-              height={height}
+              margin={CHART_MARGIN}
+              width={CHART_WIDTH}
               onHover={(index, clientX, clientY) =>
                 setHover({ index, clientX, clientY })
               }
@@ -311,7 +312,7 @@ export function PriceLevelsChart({
         </svg>
         {tipCandle && hover ? (
           <ChartTooltip
-            x={Math.min(Math.max(hover.clientX, 90), width - 90)}
+            x={Math.min(Math.max(hover.clientX, 90), CHART_WIDTH - 90)}
             y={Math.max(hover.clientY, 80)}
             title={d3.timeFormat('%b %d · %H:%M')(new Date(tipCandle.candle.openTime))}
             rows={[
