@@ -1,0 +1,58 @@
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-sans/700.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-bg-deep text-ink antialiased;
+  }
+
+  body {
+    @apply min-h-screen;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  ::selection {
+    @apply bg-brand/30 text-ink;
+  }
+}
+
+@layer components {
+  .text-link {
+    @apply inline-flex items-center gap-1 font-medium text-signal opacity-70 transition-opacity;
+    @apply hover:opacity-100;
+  }
+
+  .stagger-children > * {
+    @apply animate-fade-up;
+  }
+
+  .stagger-children > *:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .stagger-children > *:nth-child(2) {
+    animation-delay: 60ms;
+  }
+  .stagger-children > *:nth-child(3) {
+    animation-delay: 120ms;
+  }
+  .stagger-children > *:nth-child(4) {
+    animation-delay: 180ms;
+  }
+  .stagger-children > *:nth-child(5) {
+    animation-delay: 240ms;
+  }
+  .stagger-children > *:nth-child(6) {
+    animation-delay: 300ms;
+  }
+}
