@@ -75,7 +75,6 @@ export function DashboardPage(): React.ReactNode {
         isError={live.isError}
         dataUpdatedAt={live.dataUpdatedAt}
         reports={reports}
-        date={day?.date}
       />
 
       <Card padded={false} className="overflow-hidden p-3 md:p-4">

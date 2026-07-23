@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/Card';
-import { routeDay } from '@/config/constants';
 import { formatPrice } from '@/lib/formatters';
 import type { Report, Session } from '@/lib/types';
 import { cn } from '@/lib/cn';
@@ -11,7 +9,6 @@ type Props = {
   isError?: boolean;
   dataUpdatedAt?: number;
   reports: Partial<Record<Session, Report>>;
-  date?: string;
 };
 
 function ageLabel(dataUpdatedAt?: number): string | null {
@@ -28,7 +25,6 @@ export function LivePriceStrip({
   isError = false,
   dataUpdatedAt,
   reports,
-  date,
 }: Props): React.ReactNode {
   const sessions: Session[] = ['morning', 'midday', 'endday'];
   const stale = isError || (dataUpdatedAt != null && Date.now() - dataUpdatedAt > 90_000);
@@ -76,7 +72,7 @@ export function LivePriceStrip({
                   key={session}
                   className="rounded-xl border border-stroke/50 bg-bg/40 px-3 py-2.5 text-xs text-ink-muted"
                 >
-                  {session}: —
+                  <span className="capitalize">{session}</span>: —
                 </div>
               );
             }
@@ -84,8 +80,11 @@ export function LivePriceStrip({
               ((livePrice - report.priceSnapshot.value) /
                 report.priceSnapshot.value) *
               100;
-            const body = (
-              <>
+            return (
+              <div
+                key={session}
+                className="rounded-xl border border-stroke/50 bg-bg/50 px-3 py-2.5 text-xs"
+              >
                 <span className="capitalize text-ink-muted">{session}</span>
                 <p
                   className={cn(
@@ -96,17 +95,6 @@ export function LivePriceStrip({
                   {delta >= 0 ? '+' : ''}
                   {delta.toFixed(2)}% vs snapshot
                 </p>
-              </>
-            );
-            const className =
-              'rounded-xl border border-stroke/50 bg-bg/50 px-3 py-2.5 text-xs transition hover:border-signal/40 hover:bg-bg';
-            return date ? (
-              <Link key={session} to={`${routeDay(date)}#${session}`} className={className}>
-                {body}
-              </Link>
-            ) : (
-              <div key={session} className={className}>
-                {body}
               </div>
             );
           })}
