@@ -274,7 +274,10 @@ export const ReportSchema = z
       .passthrough()
       .optional(),
 
-    divergences: z.array(DivergenceSchema).default([]),
+    // Resilient: a malformed/free-text `divergences` (e.g. a report that wrote
+    // prose instead of the structured shape) falls back to [] instead of
+    // failing the whole report's validation and blanking the session.
+    divergences: z.array(DivergenceSchema).catch([]).default([]),
 
     calibration: z
       .object({

@@ -1,11 +1,12 @@
 import { Crosshair, Layers, Timer, TrendingDown, Wallet } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import type { Report } from '@/lib/types';
 import { formatPrice } from '@/lib/formatters';
+import { GLOSSARY } from '@/lib/glossary';
 import { ActionBadge, FuturesSideLegend } from '@/components/dashboard/ActionBadge';
 import { Card } from '@/components/ui/Card';
 import { InfoPopover } from '@/components/ui/InfoPopover';
 import { Title } from '@/components/ui/Title';
-import type { LucideIcon } from 'lucide-react';
 
 type Operation = Report['operations'][number];
 type ScalpContext = NonNullable<Report['scalpContext']>;
@@ -43,8 +44,37 @@ const horizonHelp: Record<string, { title: string; body: string; Icon: LucideIco
   },
 };
 
+const FIELD_SHORT: Record<'entry' | 'stop' | 'targets' | 'rr' | 'confidence', string> = {
+  entry: 'Entry',
+  stop: 'Stop',
+  targets: 'Targets',
+  rr: 'R:R',
+  confidence: 'Confidence',
+};
+
 function formatHorizon(horizon: string): string {
   return horizonHelp[horizon]?.title ?? horizon.replace(/_/g, ' ');
+}
+
+function FieldLabel({
+  term,
+}: {
+  term: 'entry' | 'stop' | 'targets' | 'rr' | 'confidence';
+}): React.ReactNode {
+  const g = GLOSSARY[term];
+  return (
+    <InfoPopover
+      variant="text"
+      label={`What is ${g.title}?`}
+      title={g.title}
+      textClassName="text-ink-muted hover:text-signal"
+      text={FIELD_SHORT[term]}
+    >
+      {g.body.map((line) => (
+        <p key={line}>{line}</p>
+      ))}
+    </InfoPopover>
+  );
 }
 
 function OperationRow({ op }: { op: Operation }): React.ReactNode {
@@ -90,7 +120,9 @@ function OperationRow({ op }: { op: Operation }): React.ReactNode {
       <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
         {op.entry && op.entry.length > 0 ? (
           <>
-            <dt className="text-ink-muted">Entry</dt>
+            <dt>
+              <FieldLabel term="entry" />
+            </dt>
             <dd className="text-right font-mono tabular-nums">
               {op.entry.map((p) => formatPrice(p)).join(' · ')}
             </dd>
@@ -98,13 +130,17 @@ function OperationRow({ op }: { op: Operation }): React.ReactNode {
         ) : null}
         {op.stop != null ? (
           <>
-            <dt className="text-ink-muted">Stop</dt>
+            <dt>
+              <FieldLabel term="stop" />
+            </dt>
             <dd className="text-right font-mono tabular-nums">{formatPrice(op.stop)}</dd>
           </>
         ) : null}
         {op.tp && op.tp.length > 0 ? (
           <>
-            <dt className="text-ink-muted">Targets</dt>
+            <dt>
+              <FieldLabel term="targets" />
+            </dt>
             <dd className="text-right font-mono tabular-nums">
               {op.tp.map((p) => formatPrice(p)).join(' · ')}
             </dd>
@@ -112,13 +148,17 @@ function OperationRow({ op }: { op: Operation }): React.ReactNode {
         ) : null}
         {op.rr != null ? (
           <>
-            <dt className="text-ink-muted">R:R</dt>
+            <dt>
+              <FieldLabel term="rr" />
+            </dt>
             <dd className="text-right font-mono tabular-nums">{op.rr.toFixed(2)}</dd>
           </>
         ) : null}
         {op.confidence != null ? (
           <>
-            <dt className="text-ink-muted">Confidence</dt>
+            <dt>
+              <FieldLabel term="confidence" />
+            </dt>
             <dd className="text-right font-mono tabular-nums">
               {op.confidence.toFixed(2)}
             </dd>
@@ -220,8 +260,8 @@ export function OperationsCard({ operations, scalpContext }: Props): React.React
             to hold.
           </p>
           <p>
-            Hover a horizon name or an action badge (short / long / WAIT) for what it
-            means. Entry, stop, and targets tell you where to act.
+            Hover a horizon name, an action badge, or labels like R:R for plain-language
+            definitions. Entry, stop, and targets tell you where to act.
           </p>
           <p>
             <span className="font-medium text-ink">Scalp context</span> is the intraday

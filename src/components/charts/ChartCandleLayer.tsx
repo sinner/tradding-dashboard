@@ -41,11 +41,10 @@ export function ChartCandleLayer({
           const svg = e.currentTarget.ownerSVGElement as SVGSVGElement;
           const rect = svg.getBoundingClientRect();
           const scaleX = rect.width / width;
-          const scaleY = rect.height / height;
           onHover(
             i,
             (c.x + c.width / 2 + margin.left) * scaleX,
-            Math.min(c.yHigh, c.yOpen, c.yClose) * scaleY + margin.top * scaleY,
+            e.clientY - rect.top,
           );
         };
         return (
@@ -68,9 +67,9 @@ export function ChartCandleLayer({
             />
             <rect
               x={c.x + c.width / 2 - hitW / 2}
-              y={Math.min(c.yHigh, c.yLow) - 2}
+              y={0}
               width={hitW}
-              height={Math.abs(c.yHigh - c.yLow) + 4}
+              height={innerH}
               fill="transparent"
               className="cursor-crosshair"
               onPointerMove={onMove}
