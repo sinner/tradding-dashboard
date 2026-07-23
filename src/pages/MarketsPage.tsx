@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { MacroStrip } from '@/components/dashboard/MacroStrip';
 import { NonCryptoPanel } from '@/components/dashboard/NonCryptoPanel';
 import { Card } from '@/components/ui/Card';
 import { Title } from '@/components/ui/Title';
@@ -35,10 +36,12 @@ export function MarketsPage(): React.ReactNode {
       <div>
         <Title level={1}>Markets</Title>
         <p className="mt-1 text-sm text-ink-muted">
-          VOO / QQQ and stock watchlist from the latest reports ({formatDate(day.date)}).
-          Snapshot levels — not live quotes.
+          VOO / QQQ, macro drivers, and stock watchlist from the latest reports (
+          {formatDate(day.date)}). Snapshot levels — not live quotes.
         </p>
       </div>
+
+      {primary ? <MacroStrip report={primary} /> : null}
 
       <NonCryptoPanel report={primary} />
 

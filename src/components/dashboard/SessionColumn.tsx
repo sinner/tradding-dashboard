@@ -1,7 +1,6 @@
 import { BiasBadge } from '@/components/dashboard/BiasBadge';
 import { DecisionBox } from '@/components/dashboard/DecisionBox';
 import { LevelsCard } from '@/components/dashboard/LevelsCard';
-import { MacroStrip } from '@/components/dashboard/MacroStrip';
 import { OperationsCard } from '@/components/dashboard/OperationsCard';
 import { ProbabilityBars } from '@/components/dashboard/ProbabilityBars';
 import { Card } from '@/components/ui/Card';
@@ -114,7 +113,6 @@ export function SessionColumn({
           <span aria-hidden>→</span>
         </Link>
       </Card>
-      <MacroStrip report={report} />
       <DecisionBox decision={report.decisionBox} />
       <OperationsCard operations={report.operations} scalpContext={report.scalpContext} />
       <LevelsCard levels={report.levels} />
