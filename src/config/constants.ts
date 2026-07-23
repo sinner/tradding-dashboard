@@ -18,6 +18,8 @@ export const BINANCE = {
   baseUrl: 'https://api.binance.com/api/v3',
   symbol: 'BTCUSDT',
   pricePollMs: 30_000,
+  /** Refresh intraday chart while the tab is visible. */
+  klinesRefreshMs: 5 * 60_000,
   klinesLimit: 500,
 } as const;
 

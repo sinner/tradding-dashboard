@@ -1,9 +1,9 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import Markdown from 'react-markdown';
 import { BiasBadge } from '@/components/dashboard/BiasBadge';
 import { DecisionBox } from '@/components/dashboard/DecisionBox';
 import { OperationsCard } from '@/components/dashboard/OperationsCard';
+import { ReportMarkdown } from '@/components/report/ReportMarkdown';
 import { Card } from '@/components/ui/Card';
 import { Title } from '@/components/ui/Title';
 import { QUERY_KEYS, routeDay } from '@/config/constants';
@@ -11,6 +11,37 @@ import { useManifest } from '@/hooks/useManifest';
 import { useReport } from '@/hooks/useDayReports';
 import { formatDateTime, formatSession } from '@/lib/formatters';
 import { reportService } from '@/services/reportService';
+
+type NarrativeBodyProps = Readonly<{
+  loading: boolean;
+  error: boolean;
+  mdPath: string;
+  content: string;
+}>;
+
+function NarrativeBody({
+  loading,
+  error,
+  mdPath,
+  content,
+}: NarrativeBodyProps): React.ReactNode {
+  if (loading) {
+    return <p className="text-sm text-ink-muted">Loading narrative…</p>;
+  }
+  if (error) {
+    return (
+      <div className="space-y-2">
+        <Title level={3}>Narrative unavailable</Title>
+        <p className="text-sm text-ink-muted">
+          No markdown report yet. Add{' '}
+          <code className="text-brand">{mdPath}</code> to show the full write-up
+          here. Decision and operations still come from the JSON.
+        </p>
+      </div>
+    );
+  }
+  return <ReportMarkdown content={content} />;
+}
 
 export function ReportPage(): React.ReactNode {
   const { id = '' } = useParams();
@@ -86,24 +117,16 @@ export function ReportPage(): React.ReactNode {
         <BiasBadge bias={r.overallBias} />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[1fr_320px]">
-        <Card className="prose prose-invert max-w-none prose-headings:text-ink prose-p:text-ink-muted prose-a:text-brand">
-          {markdown.isLoading ? (
-            <p className="text-sm text-ink-muted">Loading narrative…</p>
-          ) : markdown.isError || !markdown.data?.trim() ? (
-            <div className="space-y-2 not-prose">
-              <Title level={3}>Narrative unavailable</Title>
-              <p className="text-sm text-ink-muted">
-                No markdown report yet. Add{' '}
-                <code className="text-brand">{mdPath}</code> to show the full write-up
-                here. Decision and operations still come from the JSON.
-              </p>
-            </div>
-          ) : (
-            <Markdown>{markdown.data}</Markdown>
-          )}
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <Card className="overflow-hidden p-5 md:p-7">
+          <NarrativeBody
+            loading={markdown.isLoading}
+            error={markdown.isError || !markdown.data?.trim()}
+            mdPath={mdPath}
+            content={markdown.data ?? ''}
+          />
         </Card>
-        <div className="space-y-4">
+        <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
           <DecisionBox decision={r.decisionBox} />
           <OperationsCard operations={r.operations} scalpContext={r.scalpContext} />
         </div>

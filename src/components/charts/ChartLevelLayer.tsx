@@ -1,5 +1,6 @@
 import {
   LEVEL_COLORS,
+  sessionLevelStroke,
   type LevelKind,
   type LevelLine,
 } from '@/components/charts/chartLevels';
@@ -19,23 +20,27 @@ export function ChartLevelLayer({
   previewKind = null,
   innerW,
 }: Props): React.ReactNode {
+  const presentSessions = new Set(levels.map((l) => l.session));
+
   return (
     <>
       {levels.map((l, i) => {
         if (!activeKinds[l.kind]) return null;
         const active = hoverIndex === i || previewKind === l.kind;
         const dimmed = previewKind !== null && previewKind !== l.kind;
+        const style = sessionLevelStroke(l.kind, l.session, presentSessions);
+        const opacity = dimmed ? 0.15 : active ? 1 : style.opacity;
+
         return (
-          <g key={`${l.kind}-${l.price}-${i}`} opacity={dimmed ? 0.18 : 1}>
+          <g key={`${l.kind}-${l.price}-${i}`} opacity={opacity}>
             <line
               x1={0}
               x2={innerW}
               y1={l.y}
               y2={l.y}
-              stroke={LEVEL_COLORS[l.kind]}
-              strokeWidth={active ? 2.4 : 1.3}
+              stroke={active ? LEVEL_COLORS[l.kind] : style.color}
+              strokeWidth={active ? 2.5 : style.strokeWidth}
               strokeDasharray={l.kind === 'reduce' || l.kind === 'add' ? '7 4' : '3 4'}
-              opacity={active ? 1 : 0.7}
               pointerEvents="none"
             />
             {active ? (

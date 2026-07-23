@@ -7,7 +7,7 @@ import {
   type MaCrossMark,
   type MaSeriesMap,
 } from '@/components/charts/MovingAveragesOverlay';
-import { LEVEL_COLORS, type LevelKind, type LevelLine } from '@/components/charts/chartLevels';
+import { sessionLevelStroke, type LevelKind, type LevelLine } from '@/components/charts/chartLevels';
 import type { LevelHit } from '@/components/charts/chartScale';
 import { CHART_MARGIN, CHART_WIDTH } from '@/components/charts/priceChartGeom';
 import type { DivergenceHit, DivergenceType } from '@/indicators';
@@ -137,15 +137,20 @@ export function PriceChartPlot({
         {hits.map((h) => {
           const g = candleRects[h.index];
           if (!g) return null;
+          const sessions = new Set([
+            ...levelLines.map((l) => l.session),
+            ...hits.map((x) => x.session),
+          ]);
+          const style = sessionLevelStroke(h.kind, h.session, sessions);
           return (
-            <g key={`${h.kind}-${h.session}-${h.price}`}>
+            <g key={`${h.kind}-${h.session}-${h.price}`} opacity={style.opacity}>
               <circle
                 cx={g.x + g.width / 2}
                 cy={y(h.price)}
                 r={6}
-                fill={LEVEL_COLORS[h.kind]}
-                fillOpacity={0.25}
-                stroke={LEVEL_COLORS[h.kind]}
+                fill={style.color}
+                fillOpacity={0.3}
+                stroke={style.color}
                 strokeWidth={1.5}
               />
               <title>

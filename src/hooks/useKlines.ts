@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { BINANCE, QUERY_KEYS, type KlineInterval } from '@/config/constants';
+import { usePageVisible } from '@/hooks/usePageVisible';
 import { binanceService } from '@/services/binanceService';
 
 export function useKlines(options: {
@@ -8,6 +9,8 @@ export function useKlines(options: {
   endTime?: number;
   symbol?: string;
   enabled?: boolean;
+  /** Poll while the tab is visible. Default: BINANCE.klinesRefreshMs. Pass false to disable. */
+  refreshMs?: number | false;
 }) {
   const {
     interval,
@@ -15,7 +18,12 @@ export function useKlines(options: {
     endTime,
     symbol = BINANCE.symbol,
     enabled = true,
+    refreshMs = BINANCE.klinesRefreshMs,
   } = options;
+
+  const pageVisible = usePageVisible();
+  const poll =
+    refreshMs !== false && pageVisible && enabled ? refreshMs : false;
 
   return useQuery({
     queryKey: QUERY_KEYS.klines(symbol, interval, startTime, endTime),
@@ -37,7 +45,10 @@ export function useKlines(options: {
       });
     },
     enabled,
-    staleTime: 60_000,
+    staleTime: typeof refreshMs === 'number' ? refreshMs / 2 : 60_000,
+    refetchInterval: poll,
+    refetchIntervalInBackground: false,
+    refetchOnWindowFocus: true,
   });
 }
 

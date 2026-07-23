@@ -1,4 +1,9 @@
-import { LEVEL_COLORS, type LevelKind, type LevelLine } from '@/components/charts/chartLevels';
+import {
+  LEVEL_COLORS,
+  sessionLevelOpacity,
+  type LevelKind,
+  type LevelLine,
+} from '@/components/charts/chartLevels';
 import { formatPrice } from '@/lib/formatters';
 
 type Props = {
@@ -34,6 +39,7 @@ export function ChartLevelPreviewPanel({
 }: Props): React.ReactNode {
   if (levels.length === 0) return null;
   const ordered = sortBySessionNewestFirst(levels);
+  const present = new Set(levels.map((l) => l.session));
 
   return (
     <div
@@ -52,6 +58,7 @@ export function ChartLevelPreviewPanel({
           <li
             key={`${l.session}-${l.price}`}
             className="flex justify-between gap-3 font-mono tabular-nums"
+            style={{ opacity: sessionLevelOpacity(l.session, present) }}
           >
             <span className="capitalize text-ink-muted">{l.session}</span>
             <span className="text-ink">{formatPrice(l.price)}</span>
