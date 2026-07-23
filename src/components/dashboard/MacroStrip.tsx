@@ -7,8 +7,12 @@ type Props = {
 };
 
 function scalarValue(
-  v: number | { value?: number; changePct?: number | null; note?: string } | null | undefined,
-): { value?: number; changePct?: number | null; note?: string } | null {
+  v:
+    | number
+    | { value?: number; changePct?: number | null; note?: string | null }
+    | null
+    | undefined,
+): { value?: number; changePct?: number | null; note?: string | null } | null {
   if (v == null) return null;
   if (typeof v === 'number') return { value: v };
   return v;

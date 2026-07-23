@@ -16,7 +16,7 @@ const NullableNumber = z.number().nullable();
 
 const TriggerSchema = z.object({
   price: z.number(),
-  confirmation: z.string().optional(),
+  confirmation: z.string().nullable().optional(),
 });
 
 const StopOrderSchema = z.object({
@@ -45,9 +45,9 @@ const TimeframeSchema = z
     emas: EmasSchema.optional(),
     structure: z.string().nullable().optional(),
     bias: z.string().nullable().optional(),
-    source: z.string().optional(),
+    source: z.string().nullable().optional(),
     asOf: z.string().nullable().optional(),
-    note: z.string().optional(),
+    note: z.string().nullable().optional(),
   })
   .passthrough();
 
@@ -61,24 +61,24 @@ const OperationSchema = z
     tp: z.array(z.number()).optional(),
     rr: z.number().nullable().optional(),
     confidence: z.number().nullable().optional(),
-    hold: z.string().optional(),
-    note: z.string().optional(),
+    hold: z.string().nullable().optional(),
+    note: z.string().nullable().optional(),
   })
   .passthrough();
 
 const ScalpContextSchema = z
   .object({
-    intradayBias: z.string().optional(),
+    intradayBias: z.string().nullable().optional(),
     longAbove: NullableNumber.optional(),
     shortBelow: NullableNumber.optional(),
     invalidates: NullableNumber.optional(),
-    note: z.string().optional(),
+    note: z.string().nullable().optional(),
   })
   .passthrough();
 
 const LiquidationLevelSchema = z.object({
   price: z.number(),
-  note: z.string().optional(),
+  note: z.string().nullable().optional(),
 });
 
 const DivergenceSchema = z.object({
@@ -94,7 +94,7 @@ const DivergenceSchema = z.object({
   priceTo: z.object({ t: z.string(), price: z.number() }),
   oscFrom: z.number(),
   oscTo: z.number(),
-  note: z.string().optional(),
+  note: z.string().nullable().optional(),
 });
 
 const SourceSchema = z.object({
@@ -109,18 +109,18 @@ const DcaSignalSchema = z
     pctFromHigh: NullableNumber.optional(),
     rsi14: NullableNumber.optional(),
     zone: z.enum(['very-cheap', 'cheap', 'fair', 'rich']),
-    note: z.string().optional(),
+    note: z.string().nullable().optional(),
   })
   .passthrough();
 
 const IndexBiasSchema = z
   .object({
     ticker: z.string(),
-    level: z.string().optional(),
+    level: z.string().nullable().optional(),
     price: NullableNumber.optional(),
     changePct: NullableNumber.optional(),
-    bias: z.string().optional(),
-    note: z.string().optional(),
+    bias: z.string().nullable().optional(),
+    note: z.string().nullable().optional(),
     dcaSignal: DcaSignalSchema.nullable().optional(),
     source: SourceSchema.optional(),
   })
@@ -129,13 +129,13 @@ const IndexBiasSchema = z
 const StockWatchItemSchema = z
   .object({
     ticker: z.string(),
-    company: z.string().optional(),
-    whyNow: z.string().optional(),
-    keyStat: z.string().optional(),
-    valuation: z.string().optional(),
-    analystView: z.string().optional(),
-    stance: z.string().optional(),
-    risk: z.string().optional(),
+    company: z.string().nullable().optional(),
+    whyNow: z.string().nullable().optional(),
+    keyStat: z.string().nullable().optional(),
+    valuation: z.string().nullable().optional(),
+    analystView: z.string().nullable().optional(),
+    stance: z.string().nullable().optional(),
+    risk: z.string().nullable().optional(),
     source: SourceSchema.optional(),
   })
   .passthrough();
@@ -148,7 +148,7 @@ const MacroScalarSchema = z
       .object({
         value: z.number(),
         changePct: NullableNumber.optional(),
-        note: z.string().optional(),
+        note: z.string().nullable().optional(),
       })
       .passthrough(),
   ])
@@ -164,7 +164,7 @@ export const ReportSchema = z
     asset: z.string().default('BTC-USDT'),
 
     overallBias: BiasSchema,
-    biasTilt: BiasSchema.or(z.string()).optional(),
+    biasTilt: BiasSchema.or(z.string()).nullable().optional(),
     confidence: NullableNumber.optional(),
 
     priceSnapshot: z
@@ -172,11 +172,11 @@ export const ReportSchema = z
         value: z.number(),
         currency: z.string().default('USD'),
         changePct: NullableNumber.optional(),
-        source: z.string().optional(),
-        asOf: z.string().optional(),
-        note: z.string().optional(),
+        source: z.string().nullable().optional(),
+        asOf: z.string().nullable().optional(),
+        note: z.string().nullable().optional(),
         sessionRange: z
-          .object({ low: z.number(), high: z.number() })
+          .object({ low: NullableNumber, high: NullableNumber })
           .nullable()
           .optional(),
       })
@@ -193,7 +193,7 @@ export const ReportSchema = z
       })
       .passthrough(),
 
-    overnightRisk: z.string().optional(),
+    overnightRisk: z.string().nullable().optional(),
 
     probabilities: z.object({
       bullish: z.number(),
@@ -212,9 +212,9 @@ export const ReportSchema = z
         value: NullableNumber,
         period: z.number().optional(),
         pct: NullableNumber.optional(),
-        source: z.string().optional(),
-        asOf: z.string().optional(),
-        note: z.string().optional(),
+        source: z.string().nullable().optional(),
+        asOf: z.string().nullable().optional(),
+        note: z.string().nullable().optional(),
       })
       .passthrough()
       .nullable()
@@ -232,7 +232,7 @@ export const ReportSchema = z
         etfFlows: z
           .object({
             streakDays: z.number().optional(),
-            note: z.string().optional(),
+            note: z.string().nullable().optional(),
           })
           .passthrough()
           .nullable()
@@ -245,7 +245,7 @@ export const ReportSchema = z
             skew: NullableNumber.optional(),
             traders: NullableNumber.optional(),
             openInterestUsd: NullableNumber.optional(),
-            note: z.string().optional(),
+            note: z.string().nullable().optional(),
           })
           .passthrough()
           .nullable()
@@ -256,8 +256,8 @@ export const ReportSchema = z
             z
               .object({
                 ticker: z.string(),
-                reaction: z.string().optional(),
-                note: z.string().optional(),
+                reaction: z.string().nullable().optional(),
+                note: z.string().nullable().optional(),
               })
               .passthrough(),
           )
@@ -284,7 +284,7 @@ export const ReportSchema = z
         priorReduceFired: z.boolean().nullable().optional(),
         actingHelped: z.boolean().nullable().optional(),
         rollingRecord: z.string().nullable().optional(),
-        note: z.string().optional(),
+        note: z.string().nullable().optional(),
       })
       .passthrough()
       .optional(),
