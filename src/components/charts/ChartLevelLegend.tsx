@@ -5,6 +5,8 @@ type Props = {
   activeKinds: Record<LevelKind, boolean>;
   onToggle: (kind: LevelKind) => void;
   onPreview?: (kind: LevelKind | null) => void;
+  /** Called when pointer leaves a legend chip (parent may delay-clear). */
+  onPreviewLeave?: () => void;
 };
 
 const kinds = Object.keys(LEVEL_COLORS) as LevelKind[];
@@ -13,6 +15,7 @@ export function ChartLevelLegend({
   activeKinds,
   onToggle,
   onPreview,
+  onPreviewLeave,
 }: Props): React.ReactNode {
   return (
     <div className="flex flex-wrap gap-2 px-1">
@@ -22,7 +25,7 @@ export function ChartLevelLegend({
           type="button"
           onClick={() => onToggle(kind)}
           onPointerEnter={() => onPreview?.(kind)}
-          onPointerLeave={() => onPreview?.(null)}
+          onPointerLeave={() => onPreviewLeave?.() ?? onPreview?.(null)}
           className={cn(
             'inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-[11px] font-medium capitalize transition',
             activeKinds[kind]
@@ -38,7 +41,7 @@ export function ChartLevelLegend({
         </button>
       ))}
       <span className="self-center text-[11px] text-ink-muted">
-        Hover candles for OHLC · hover legend to highlight levels
+        Hover candles for OHLC · hover legend to list levels
       </span>
     </div>
   );
