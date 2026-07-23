@@ -181,15 +181,35 @@ function OperationRow({ op }: { op: Operation }): React.ReactNode {
 }
 
 function ScalpContextBlock({ ctx }: { ctx: ScalpContext }): React.ReactNode {
+  const help = horizonHelp.scalping;
   const hasLevels =
     ctx.longAbove != null || ctx.shortBelow != null || ctx.invalidates != null;
   return (
     <div className="rounded-xl border border-signal/40 bg-signal/5 px-3 py-2.5">
       <div className="flex items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 text-ink">
-          <Crosshair className="size-3.5 shrink-0" aria-hidden />
-          Scalp context
-        </span>
+        <InfoPopover
+          variant="text"
+          label="What is Scalp context?"
+          title={help.title}
+          textClassName="inline-flex items-center gap-1.5 text-ink hover:text-signal"
+          text={
+            <span className="inline-flex items-center gap-1.5">
+              <Crosshair className="size-3.5 shrink-0" aria-hidden />
+              Scalp context
+            </span>
+          }
+        >
+          <p>{help.body}</p>
+          <p>
+            This block is the <span className="font-medium text-ink">intraday frame</span>{' '}
+            only — long-above / short-below levels to trade around. Actual entries come
+            from the live chart, not this snapshot.
+          </p>
+          <p>
+            Badge <span className="font-medium text-ink">live-driven</span> means the
+            report will not invent a full scalp trade plan here.
+          </p>
+        </InfoPopover>
         <span className="rounded-full bg-signal/15 px-2 py-0.5 text-[10px] uppercase tracking-wide text-signal">
           live-driven
         </span>

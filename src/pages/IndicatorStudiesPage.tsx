@@ -1,14 +1,11 @@
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  DIVERGENCE_COLORS,
-  DIVERGENCE_LABELS,
-  DIVERGENCE_TYPES,
-} from '@/components/charts/DivergenceOverlay';
+import { DivergenceControls } from '@/components/charts/DivergenceControls';
 import { MACDChart } from '@/components/charts/MACDChart';
 import { PriceLevelsChart } from '@/components/charts/PriceLevelsChart';
 import { RSIChart } from '@/components/charts/RSIChart';
 import { Card } from '@/components/ui/Card';
+import { InfoPopover } from '@/components/ui/InfoPopover';
 import { Radio, RadioGroup } from '@/components/ui/Radio';
 import { Title } from '@/components/ui/Title';
 import { KLINE_INTERVALS, type KlineInterval } from '@/config/constants';
@@ -25,8 +22,8 @@ import {
 } from '@/indicators';
 import { displayStartIndex, warmupStartTime } from '@/lib/interval';
 import { formatDate } from '@/lib/formatters';
+import { GLOSSARY } from '@/lib/glossary';
 import type { Report } from '@/lib/types';
-import { cn } from '@/lib/cn';
 
 const defaultDivActive: Record<DivergenceType, boolean> = {
   regular_bullish: true,
@@ -44,7 +41,7 @@ export function IndicatorStudiesPage(): React.ReactNode {
   const day = manifest.data?.days.find((d) => d.date === date) ?? latest.day;
   const { reports } = useDayReports(day);
 
-  const [interval, setInterval] = useState<KlineInterval>('1h');
+  const [interval, setInterval] = useState<KlineInterval>('15m');
   const [divActive, setDivActive] = useState(defaultDivActive);
   const [pivotLookback, setPivotLookback] = useState(3);
 
@@ -135,37 +132,6 @@ export function IndicatorStudiesPage(): React.ReactNode {
         ))}
       </RadioGroup>
 
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-[11px] uppercase tracking-wide text-ink-muted">
-          Divergences
-        </span>
-        {DIVERGENCE_TYPES.map((t) => (
-          <button
-            key={t}
-            type="button"
-            onClick={() => setDivActive((p) => ({ ...p, [t]: !p[t] }))}
-            className={cn(
-              'rounded-full px-2.5 py-1 text-[11px] font-medium ring-1 transition',
-              divActive[t] ? 'bg-bg ring-stroke' : 'text-ink-muted/40 ring-transparent',
-            )}
-            style={{ color: divActive[t] ? DIVERGENCE_COLORS[t] : undefined }}
-          >
-            {DIVERGENCE_LABELS[t]}
-          </button>
-        ))}
-        <label className="ml-2 flex items-center gap-1.5 text-[11px] text-ink-muted">
-          Pivot
-          <input
-            type="number"
-            min={2}
-            max={8}
-            value={pivotLookback}
-            onChange={(e) => setPivotLookback(Number(e.target.value) || 3)}
-            className="w-12 rounded border border-stroke bg-bg px-1.5 py-0.5 font-mono text-ink"
-          />
-        </label>
-      </div>
-
       {study.crosses.length > 0 ? (
         <p className="text-xs text-ink-muted">
           EMA50/200 crosses in window:{' '}
@@ -191,15 +157,41 @@ export function IndicatorStudiesPage(): React.ReactNode {
         />
       </Card>
 
-      <Card padded={false} className="overflow-hidden p-3 md:p-4">
-        <Title level={4} className="mb-1 px-1 text-ink-muted">
-          RSI(14)
+      <Card padded={false} className="space-y-3 overflow-hidden p-3 md:p-4">
+        <div className="flex flex-wrap items-center gap-2 px-1">
+          <Title level={4} className="text-ink-muted">
+            RSI(14)
+          </Title>
+          <InfoPopover
+            variant="text"
+            trigger="click"
+            label="What is RSI?"
+            title={GLOSSARY.rsi.title}
+            textClassName="text-xs font-medium text-signal hover:text-brand-light"
+            text="What is RSI?"
+          >
+            {GLOSSARY.rsi.body.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+            <p>
+              Colored divergence lines below compare RSI swings with price. Click a type
+              name for the definition.
+            </p>
+          </InfoPopover>
           {snapshotRsi != null ? (
-            <span className="ml-2 font-normal text-accent">
+            <span className="text-xs font-normal text-accent">
               report snapshot {snapshotRsi.toFixed(2)}
             </span>
           ) : null}
-        </Title>
+        </div>
+
+        <DivergenceControls
+          active={divActive}
+          onToggle={(t) => setDivActive((p) => ({ ...p, [t]: !p[t] }))}
+          pivotLookback={pivotLookback}
+          onPivotChange={setPivotLookback}
+        />
+
         <RSIChart
           candles={study.all}
           visibleFrom={study.visibleFrom}

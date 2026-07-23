@@ -108,4 +108,39 @@ export const GLOSSARY = {
       'Exponential Moving Average — a smoothed average of recent prices that reacts faster than a simple average. EMA50/200 crosses are classic trend signals.',
     ],
   },
+  divergences: {
+    title: 'Divergences',
+    body: [
+      'A divergence is when price and an oscillator (here RSI) disagree at swing highs/lows — often an early hint of a turn or trend continuation.',
+      'Colored lines on the price and RSI charts mark detected divergences for the toggles you leave on.',
+    ],
+  },
+  regularBull: {
+    title: 'Regular bullish divergence',
+    body: [
+      'Price makes a lower low while RSI makes a higher low.',
+      'Bearish momentum is fading — often an early bounce / reversal-up signal.',
+    ],
+  },
+  regularBear: {
+    title: 'Regular bearish divergence',
+    body: [
+      'Price makes a higher high while RSI makes a lower high.',
+      'Bullish momentum is fading — often an early drop / reversal-down signal.',
+    ],
+  },
+  hiddenBull: {
+    title: 'Hidden bullish divergence',
+    body: [
+      'Price makes a higher low while RSI makes a lower low.',
+      'Usually a pullback in an uptrend — often continuation higher.',
+    ],
+  },
+  hiddenBear: {
+    title: 'Hidden bearish divergence',
+    body: [
+      'Price makes a lower high while RSI makes a higher high.',
+      'Usually a bounce in a downtrend — often continuation lower.',
+    ],
+  },
 } as const;

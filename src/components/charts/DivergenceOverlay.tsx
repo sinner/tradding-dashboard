@@ -8,10 +8,10 @@ const COLORS: Record<DivergenceType, string> = {
 };
 
 const LABELS: Record<DivergenceType, string> = {
-  regular_bullish: 'Reg bull',
-  regular_bearish: 'Reg bear',
-  hidden_bullish: 'Hid bull',
-  hidden_bearish: 'Hid bear',
+  regular_bullish: 'Regular bull',
+  regular_bearish: 'Regular bear',
+  hidden_bullish: 'Hidden bull',
+  hidden_bearish: 'Hidden bear',
 };
 
 type Point = { x: number; y: number };

@@ -44,15 +44,15 @@ export function DecisionBox({ decision }: Props): React.ReactNode {
       <dl className="grid gap-2 text-sm">
         {decision.reduceIf ? (
           <div className="flex justify-between gap-2">
-            <dt>
+            <dt className="shrink-0">
               <InfoPopover
                 variant="text"
                 label="What does Reduce if mean?"
                 title={GLOSSARY.reduceIf.title}
-                textClassName="inline-flex items-center gap-1 text-ink-muted hover:text-accent"
+                textClassName="inline-flex items-center gap-1 whitespace-nowrap text-ink-muted hover:text-accent"
                 text={
-                  <span className="inline-flex items-center gap-1">
-                    <CircleMinus className="size-3.5 text-accent" aria-hidden />
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                    <CircleMinus className="size-3.5 shrink-0 text-accent" aria-hidden />
                     Reduce if
                   </span>
                 }
@@ -72,15 +72,15 @@ export function DecisionBox({ decision }: Props): React.ReactNode {
         ) : null}
         {decision.addIf ? (
           <div className="flex justify-between gap-2">
-            <dt>
+            <dt className="shrink-0">
               <InfoPopover
                 variant="text"
                 label="What does Add if mean?"
                 title={GLOSSARY.addIf.title}
-                textClassName="inline-flex items-center gap-1 text-ink-muted hover:text-bull"
+                textClassName="inline-flex items-center gap-1 whitespace-nowrap text-ink-muted hover:text-bull"
                 text={
-                  <span className="inline-flex items-center gap-1">
-                    <CirclePlus className="size-3.5 text-bull" aria-hidden />
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                    <CirclePlus className="size-3.5 shrink-0 text-bull" aria-hidden />
                     Add if
                   </span>
                 }

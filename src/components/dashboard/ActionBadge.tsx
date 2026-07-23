@@ -63,21 +63,17 @@ export function ActionBadge({ action, market, className }: Props): React.ReactNo
 /** Compact long vs short primer shown above operations. */
 export function FuturesSideLegend(): React.ReactNode {
   return (
-    <div className="grid grid-cols-2 gap-2 rounded-xl border border-stroke/60 bg-bg/30 p-2.5">
+    <div className="flex flex-wrap items-center gap-1.5">
       <InfoPopover
         variant="text"
         label="When to go long"
         title="Long (futures)"
-        textClassName="flex w-full items-start gap-2 rounded-lg border border-bull/25 bg-bull/5 p-2 text-left text-xs text-ink no-underline border-solid"
+        textClassName="inline-flex items-center gap-1 rounded-md border border-bull/30 bg-bull/5 px-1.5 py-0.5 text-[11px] text-ink no-underline border-solid"
         text={
-          <span className="flex gap-2">
-            <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-bull" aria-hidden />
-            <span>
-              <span className="font-semibold text-bull">Long</span>
-              <span className="mt-0.5 block text-[11px] text-ink-muted">
-                Profit if price rises · hover
-              </span>
-            </span>
+          <span className="inline-flex items-center gap-1 whitespace-nowrap">
+            <ArrowUpRight className="size-3 shrink-0 text-bull" aria-hidden />
+            <span className="font-semibold text-bull">Long</span>
+            <span className="text-ink-muted">· rises</span>
           </span>
         }
       >
@@ -89,16 +85,12 @@ export function FuturesSideLegend(): React.ReactNode {
         variant="text"
         label="When to go short"
         title="Short (futures)"
-        textClassName="flex w-full items-start gap-2 rounded-lg border border-bear/25 bg-bear/5 p-2 text-left text-xs text-ink no-underline border-solid"
+        textClassName="inline-flex items-center gap-1 rounded-md border border-bear/30 bg-bear/5 px-1.5 py-0.5 text-[11px] text-ink no-underline border-solid"
         text={
-          <span className="flex gap-2">
-            <ArrowDownRight className="mt-0.5 size-4 shrink-0 text-bear" aria-hidden />
-            <span>
-              <span className="font-semibold text-bear">Short</span>
-              <span className="mt-0.5 block text-[11px] text-ink-muted">
-                Profit if price falls · hover
-              </span>
-            </span>
+          <span className="inline-flex items-center gap-1 whitespace-nowrap">
+            <ArrowDownRight className="size-3 shrink-0 text-bear" aria-hidden />
+            <span className="font-semibold text-bear">Short</span>
+            <span className="text-ink-muted">· falls</span>
           </span>
         }
       >
