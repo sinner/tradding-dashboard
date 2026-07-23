@@ -43,13 +43,25 @@ export async function fetchCalibration(): Promise<CalibrationRow[]> {
   return parsed.data;
 }
 
+function looksLikeHtml(text: string, contentType: string | null): boolean {
+  const type = (contentType ?? '').toLowerCase();
+  if (type.includes('text/html')) return true;
+  const head = text.trimStart().slice(0, 200).toLowerCase();
+  return head.startsWith('<!doctype html') || head.startsWith('<html');
+}
+
 export async function fetchReportMarkdown(path: string): Promise<string> {
   const url = dataUrl(path);
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`Failed to load markdown: ${path}`);
   }
-  return res.text();
+  const text = await res.text();
+  // Vite SPA fallback serves index.html (200) for missing static files.
+  if (!text.trim() || looksLikeHtml(text, res.headers.get('content-type'))) {
+    throw new Error(`Markdown missing: ${path}`);
+  }
+  return text;
 }
 
 /** Derive markdown path from a report id like `2026-07-22-midday`. */

@@ -90,12 +90,13 @@ export function ReportPage(): React.ReactNode {
         <Card className="prose prose-invert max-w-none prose-headings:text-ink prose-p:text-ink-muted prose-a:text-brand">
           {markdown.isLoading ? (
             <p className="text-sm text-ink-muted">Loading narrative…</p>
-          ) : markdown.isError ? (
+          ) : markdown.isError || !markdown.data?.trim() ? (
             <div className="space-y-2 not-prose">
               <Title level={3}>Narrative unavailable</Title>
               <p className="text-sm text-ink-muted">
-                Place the markdown at <code className="text-brand">{mdPath}</code> to
-                render the full report here. Structured fields below still work from JSON.
+                No markdown report yet. Add{' '}
+                <code className="text-brand">{mdPath}</code> to show the full write-up
+                here. Decision and operations still come from the JSON.
               </p>
             </div>
           ) : (
