@@ -8,9 +8,11 @@ import { Title } from '@/components/ui/Title';
 import type { LucideIcon } from 'lucide-react';
 
 type Operation = Report['operations'][number];
+type ScalpContext = NonNullable<Report['scalpContext']>;
 
 type Props = {
   operations: Report['operations'];
+  scalpContext?: Report['scalpContext'];
 };
 
 const horizonHelp: Record<string, { title: string; body: string; Icon: LucideIcon }> = {
@@ -138,10 +140,72 @@ function OperationRow({ op }: { op: Operation }): React.ReactNode {
   );
 }
 
-export function OperationsCard({ operations }: Props): React.ReactNode {
-  if (operations.length === 0) return null;
+function ScalpContextBlock({ ctx }: { ctx: ScalpContext }): React.ReactNode {
+  const hasLevels =
+    ctx.longAbove != null || ctx.shortBelow != null || ctx.invalidates != null;
+  return (
+    <div className="rounded-xl border border-signal/40 bg-signal/5 px-3 py-2.5">
+      <div className="flex items-center justify-between gap-2">
+        <span className="inline-flex items-center gap-1.5 text-ink">
+          <Crosshair className="size-3.5 shrink-0" aria-hidden />
+          Scalp context
+        </span>
+        <span className="rounded-full bg-signal/15 px-2 py-0.5 text-[10px] uppercase tracking-wide text-signal">
+          live-driven
+        </span>
+      </div>
+      <p className="mt-1 text-[11px] text-ink-muted">
+        Fast setups (minutes–hours) come from the live chart, not this snapshot. Use these
+        as the intraday frame to scalp around.
+      </p>
+      {hasLevels ? (
+        <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
+          {ctx.intradayBias ? (
+            <>
+              <dt className="text-ink-muted">Intraday bias</dt>
+              <dd className="text-right capitalize text-ink">{ctx.intradayBias}</dd>
+            </>
+          ) : null}
+          {ctx.longAbove != null ? (
+            <>
+              <dt className="text-ink-muted">Long above</dt>
+              <dd className="text-right font-mono tabular-nums text-bull">
+                {formatPrice(ctx.longAbove)}
+              </dd>
+            </>
+          ) : null}
+          {ctx.shortBelow != null ? (
+            <>
+              <dt className="text-ink-muted">Short below</dt>
+              <dd className="text-right font-mono tabular-nums text-bear">
+                {formatPrice(ctx.shortBelow)}
+              </dd>
+            </>
+          ) : null}
+          {ctx.invalidates != null ? (
+            <>
+              <dt className="text-ink-muted">Invalidates</dt>
+              <dd className="text-right font-mono tabular-nums">
+                {formatPrice(ctx.invalidates)}
+              </dd>
+            </>
+          ) : null}
+        </dl>
+      ) : null}
+      {ctx.note ? (
+        <p className="mt-2 border-t border-stroke/60 pt-2 text-[11px] text-ink-muted">
+          {ctx.note}
+        </p>
+      ) : null}
+    </div>
+  );
+}
 
-  const hasFutures = operations.some((o) => o.market.toLowerCase().includes('futures'));
+export function OperationsCard({ operations, scalpContext }: Props): React.ReactNode {
+  const rows = operations.filter((o) => o.horizon !== 'scalping');
+  if (rows.length === 0 && !scalpContext) return null;
+
+  const hasFutures = rows.some((o) => o.market.toLowerCase().includes('futures'));
 
   return (
     <Card className="space-y-3">
@@ -159,13 +223,19 @@ export function OperationsCard({ operations }: Props): React.ReactNode {
             Hover a horizon name or an action badge (short / long / WAIT) for what it
             means. Entry, stop, and targets tell you where to act.
           </p>
+          <p>
+            <span className="font-medium text-ink">Scalp context</span> is the intraday
+            frame only — actual fast signals come from the live chart, not this report.
+          </p>
         </InfoPopover>
       </div>
+
+      {scalpContext ? <ScalpContextBlock ctx={scalpContext} /> : null}
 
       {hasFutures ? <FuturesSideLegend /> : null}
 
       <div className="space-y-2">
-        {operations.map((op) => (
+        {rows.map((op) => (
           <OperationRow key={`${op.horizon}-${op.market}-${op.action}`} op={op} />
         ))}
       </div>

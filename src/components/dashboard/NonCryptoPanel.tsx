@@ -1,7 +1,9 @@
+import { Wallet } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/Card';
 import { Title } from '@/components/ui/Title';
 import { routeReport } from '@/config/constants';
+import { formatPrice } from '@/lib/formatters';
 import type { Report } from '@/lib/types';
 import { cn } from '@/lib/cn';
 
@@ -10,11 +12,57 @@ type Props = {
   compact?: boolean;
 };
 
+type IndexRow = NonNullable<Report['nonCrypto']>['indices'][number];
+type Dca = NonNullable<IndexRow['dcaSignal']>;
+
 function biasTone(bias?: string): string {
   const b = (bias ?? '').toLowerCase();
   if (b.includes('bull')) return 'text-bull';
   if (b.includes('bear')) return 'text-bear';
   return 'text-ink-muted';
+}
+
+const dcaTone: Record<string, string> = {
+  'very-cheap': 'bg-bull/20 text-bull ring-bull/40',
+  cheap: 'bg-bull/10 text-bull ring-bull/30',
+  fair: 'bg-bg/40 text-ink-muted ring-stroke',
+  rich: 'bg-bear/10 text-bear ring-bear/30',
+};
+
+const dcaLabel: Record<string, string> = {
+  'very-cheap': 'Very cheap · strong DCA',
+  cheap: 'Cheap · good DCA entry',
+  fair: 'Fair value',
+  rich: 'Rich · patience',
+};
+
+function DcaZoneBadge({ dca }: { dca: Dca }): React.ReactNode {
+  return (
+    <div className="mt-2 rounded-lg border border-stroke/50 bg-bg/30 px-2.5 py-2">
+      <div className="flex items-center justify-between gap-2">
+        <span className="inline-flex items-center gap-1.5 text-[11px] text-ink-muted">
+          <Wallet className="size-3.5 shrink-0" aria-hidden />
+          Monthly DCA
+        </span>
+        <span
+          className={cn(
+            'rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ring-1',
+            dcaTone[dca.zone] ?? dcaTone.fair,
+          )}
+        >
+          {dcaLabel[dca.zone] ?? dca.zone}
+        </span>
+      </div>
+      <p className="mt-1.5 font-mono text-[11px] tabular-nums text-ink-muted">
+        {dca.percentileInMonth}% up from month low
+        {dca.pctVs20dAvg != null
+          ? ` · ${dca.pctVs20dAvg >= 0 ? '+' : ''}${dca.pctVs20dAvg.toFixed(2)}% vs 20-day avg`
+          : ''}
+        {dca.rsi14 != null ? ` · RSI ${dca.rsi14.toFixed(0)}` : ''}
+      </p>
+      {dca.note ? <p className="mt-1 text-[11px] text-ink-muted">{dca.note}</p> : null}
+    </div>
+  );
 }
 
 export function NonCryptoPanel({ report, compact = false }: Props): React.ReactNode {
@@ -56,12 +104,36 @@ export function NonCryptoPanel({ report, compact = false }: Props): React.ReactN
                 </span>
               ) : null}
             </div>
-            {idx.level ? (
-              <p className="mt-1 font-mono text-sm tabular-nums text-ink-muted">
-                {idx.level}
+            {idx.price != null ? (
+              <p className="mt-1 font-mono text-lg font-semibold tabular-nums text-ink">
+                {formatPrice(idx.price)}
+                {idx.changePct != null ? (
+                  <span
+                    className={cn(
+                      'ml-2 text-xs',
+                      idx.changePct >= 0 ? 'text-bull' : 'text-bear',
+                    )}
+                  >
+                    {idx.changePct >= 0 ? '+' : ''}
+                    {idx.changePct.toFixed(2)}%
+                  </span>
+                ) : null}
               </p>
+            ) : idx.level ? (
+              <p className="mt-1 font-mono text-base tabular-nums text-ink">{idx.level}</p>
             ) : null}
-            {idx.note ? <p className="mt-1 text-xs text-ink-muted">{idx.note}</p> : null}
+            {idx.dcaSignal ? <DcaZoneBadge dca={idx.dcaSignal} /> : null}
+            {idx.note ? <p className="mt-2 text-xs text-ink-muted">{idx.note}</p> : null}
+            {idx.source?.url ? (
+              <a
+                href={idx.source.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-link mt-2 inline-block text-xs"
+              >
+                {idx.source.title ?? 'Price source'} ↗
+              </a>
+            ) : null}
           </div>
         ))}
       </div>

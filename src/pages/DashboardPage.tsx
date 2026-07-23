@@ -1,6 +1,5 @@
 import { BiasLegend } from '@/components/dashboard/BiasBadge';
 import { LivePriceStrip } from '@/components/dashboard/LivePriceStrip';
-import { NonCryptoPanel } from '@/components/dashboard/NonCryptoPanel';
 import { SessionColumn } from '@/components/dashboard/SessionColumn';
 import { PriceLevelsChart } from '@/components/charts/PriceLevelsChart';
 import { Card } from '@/components/ui/Card';
@@ -26,7 +25,6 @@ export function DashboardPage(): React.ReactNode {
   });
 
   const reportList = Object.values(reports).filter(Boolean) as Report[];
-  const marketsReport = reports.endday ?? reports.midday ?? reports.morning;
 
   if (isManifestLoading) {
     return <p className="animate-fade-up text-ink-muted">Loading manifest…</p>;
@@ -79,8 +77,6 @@ export function DashboardPage(): React.ReactNode {
         reports={reports}
         date={day?.date}
       />
-
-      <NonCryptoPanel report={marketsReport} compact />
 
       <Card padded={false} className="overflow-hidden p-3 md:p-4">
         <div className="mb-3 flex items-center justify-between gap-2 px-1">

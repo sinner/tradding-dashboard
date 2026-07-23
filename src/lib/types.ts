@@ -66,6 +66,16 @@ const OperationSchema = z
   })
   .passthrough();
 
+const ScalpContextSchema = z
+  .object({
+    intradayBias: z.string().optional(),
+    longAbove: NullableNumber.optional(),
+    shortBelow: NullableNumber.optional(),
+    invalidates: NullableNumber.optional(),
+    note: z.string().optional(),
+  })
+  .passthrough();
+
 const LiquidationLevelSchema = z.object({
   price: z.number(),
   note: z.string().optional(),
@@ -92,12 +102,27 @@ const SourceSchema = z.object({
   url: z.string(),
 });
 
+const DcaSignalSchema = z
+  .object({
+    percentileInMonth: z.number(),
+    pctVs20dAvg: NullableNumber.optional(),
+    pctFromHigh: NullableNumber.optional(),
+    rsi14: NullableNumber.optional(),
+    zone: z.enum(['very-cheap', 'cheap', 'fair', 'rich']),
+    note: z.string().optional(),
+  })
+  .passthrough();
+
 const IndexBiasSchema = z
   .object({
     ticker: z.string(),
     level: z.string().optional(),
+    price: NullableNumber.optional(),
+    changePct: NullableNumber.optional(),
     bias: z.string().optional(),
     note: z.string().optional(),
+    dcaSignal: DcaSignalSchema.nullable().optional(),
+    source: SourceSchema.optional(),
   })
   .passthrough();
 
@@ -197,6 +222,7 @@ export const ReportSchema = z
 
     timeframes: z.array(TimeframeSchema).default([]),
     operations: z.array(OperationSchema).default([]),
+    scalpContext: ScalpContextSchema.nullable().optional(),
 
     macro: z
       .object({

@@ -1,32 +1,15 @@
 import path from 'node:path';
-import type { Plugin } from 'vite';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const BASE = '/btc-dashboard/';
-
-/** Redirect `/` → base path so opening localhost:5173 works in dev. */
-function redirectBase(): Plugin {
-  return {
-    name: 'redirect-base',
-    configureServer(server) {
-      server.middlewares.use((req, res, next) => {
-        const url = req.url?.split('?')[0] ?? '';
-        if (url === '/' || url === '') {
-          res.statusCode = 302;
-          res.setHeader('Location', BASE);
-          res.end();
-          return;
-        }
-        next();
-      });
-    },
-  };
-}
-
-export default defineConfig({
-  base: BASE,
-  plugins: [redirectBase(), react()],
+// GitHub Pages serves under /btc-dashboard/; local dev uses `/` so
+// http://127.0.0.1:5173/ works without Vite's base-URL error page.
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/btc-dashboard/' : '/',
+  plugins: [react()],
+  server: {
+    open: '/',
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -44,4 +27,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

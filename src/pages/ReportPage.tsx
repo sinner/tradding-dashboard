@@ -105,7 +105,7 @@ export function ReportPage(): React.ReactNode {
         </Card>
         <div className="space-y-4">
           <DecisionBox decision={r.decisionBox} />
-          <OperationsCard operations={r.operations} />
+          <OperationsCard operations={r.operations} scalpContext={r.scalpContext} />
         </div>
       </div>
     </div>

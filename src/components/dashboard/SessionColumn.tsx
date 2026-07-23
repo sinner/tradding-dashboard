@@ -116,7 +116,7 @@ export function SessionColumn({
       </Card>
       <MacroStrip report={report} />
       <DecisionBox decision={report.decisionBox} />
-      <OperationsCard operations={report.operations} />
+      <OperationsCard operations={report.operations} scalpContext={report.scalpContext} />
       <LevelsCard levels={report.levels} />
     </div>
   );
