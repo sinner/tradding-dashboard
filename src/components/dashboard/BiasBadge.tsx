@@ -25,3 +25,16 @@ export function BiasBadge({ bias, className }: Props): React.ReactNode {
     </span>
   );
 }
+
+/** Tiny color key for RANGE / BULLISH / BEARISH. */
+export function BiasLegend({ className }: { className?: string }): React.ReactNode {
+  return (
+    <ul className={cn('flex flex-wrap gap-2 text-[10px]', className)}>
+      {(Object.keys(styles) as Bias[]).map((b) => (
+        <li key={b}>
+          <BiasBadge bias={b} />
+        </li>
+      ))}
+    </ul>
+  );
+}

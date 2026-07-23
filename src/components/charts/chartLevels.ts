@@ -10,8 +10,8 @@ export type LevelLine = {
 export const LEVEL_COLORS: Record<LevelKind, string> = {
   support: '#C4B5FD',
   resistance: '#F472B6',
-  reduce: '#E879F9',
-  add: '#A78BFA',
+  reduce: '#FB7185',
+  add: '#67E8F9',
 };
 
 export const CANDLE = {

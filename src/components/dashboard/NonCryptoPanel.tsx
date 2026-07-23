@@ -1,0 +1,129 @@
+import { Link } from 'react-router-dom';
+import { Card } from '@/components/ui/Card';
+import { Title } from '@/components/ui/Title';
+import { routeReport } from '@/config/constants';
+import type { Report } from '@/lib/types';
+import { cn } from '@/lib/cn';
+
+type Props = {
+  report: Report | undefined;
+  compact?: boolean;
+};
+
+function biasTone(bias?: string): string {
+  const b = (bias ?? '').toLowerCase();
+  if (b.includes('bull')) return 'text-bull';
+  if (b.includes('bear')) return 'text-bear';
+  return 'text-ink-muted';
+}
+
+export function NonCryptoPanel({ report, compact = false }: Props): React.ReactNode {
+  const indices = report?.nonCrypto?.indices ?? [];
+  const stocks = report?.nonCrypto?.stockWatchlist ?? [];
+
+  if (indices.length === 0 && stocks.length === 0) {
+    return (
+      <Card>
+        <Title level={3}>VOO / QQQ</Title>
+        <p className="mt-2 text-sm text-ink-muted">
+          No non-crypto snapshot in this report yet.
+        </p>
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="space-y-4">
+      <div className="flex items-center justify-between gap-2">
+        <Title level={3}>VOO / QQQ &amp; stocks</Title>
+        {report ? (
+          <Link to={routeReport(report.id)} className="text-link text-xs">
+            Source report
+          </Link>
+        ) : null}
+      </div>
+      <div className={cn('grid gap-3', compact ? 'sm:grid-cols-2' : 'md:grid-cols-2')}>
+        {indices.map((idx) => (
+          <div
+            key={idx.ticker}
+            className="rounded-xl border border-stroke/60 bg-bg/40 px-3 py-2.5"
+          >
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-semibold text-ink">{idx.ticker}</span>
+              {idx.bias ? (
+                <span className={cn('text-xs capitalize', biasTone(idx.bias))}>
+                  {idx.bias}
+                </span>
+              ) : null}
+            </div>
+            {idx.level ? (
+              <p className="mt-1 font-mono text-sm tabular-nums text-ink-muted">
+                {idx.level}
+              </p>
+            ) : null}
+            {idx.note ? <p className="mt-1 text-xs text-ink-muted">{idx.note}</p> : null}
+          </div>
+        ))}
+      </div>
+      {stocks.length > 0 ? (
+        <ul className="space-y-3">
+          {stocks.map((s) => (
+            <li
+              key={s.ticker}
+              className="rounded-xl border border-stroke/60 bg-bg/30 px-3 py-2.5 text-sm"
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-semibold">{s.ticker}</span>
+                {s.company ? (
+                  <span className="text-ink-muted">{s.company}</span>
+                ) : null}
+                {s.stance ? (
+                  <span className="rounded-full bg-signal/15 px-2 py-0.5 text-[11px] font-semibold uppercase text-signal ring-1 ring-signal/35">
+                    {s.stance}
+                  </span>
+                ) : null}
+              </div>
+              {s.whyNow ? <p className="mt-1 text-xs text-ink-muted">{s.whyNow}</p> : null}
+              <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
+                {s.keyStat ? (
+                  <>
+                    <dt className="text-ink-muted">Key stat</dt>
+                    <dd>{s.keyStat}</dd>
+                  </>
+                ) : null}
+                {s.valuation ? (
+                  <>
+                    <dt className="text-ink-muted">Valuation</dt>
+                    <dd>{s.valuation}</dd>
+                  </>
+                ) : null}
+                {s.analystView ? (
+                  <>
+                    <dt className="text-ink-muted">Analyst</dt>
+                    <dd>{s.analystView}</dd>
+                  </>
+                ) : null}
+                {s.risk ? (
+                  <>
+                    <dt className="text-ink-muted">Risk</dt>
+                    <dd>{s.risk}</dd>
+                  </>
+                ) : null}
+              </dl>
+              {s.source?.url ? (
+                <a
+                  href={s.source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-link mt-2 text-xs"
+                >
+                  {s.source.title ?? 'Source'}
+                </a>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </Card>
+  );
+}

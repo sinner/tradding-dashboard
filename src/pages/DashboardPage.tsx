@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { BiasLegend } from '@/components/dashboard/BiasBadge';
 import { LivePriceStrip } from '@/components/dashboard/LivePriceStrip';
+import { NonCryptoPanel } from '@/components/dashboard/NonCryptoPanel';
 import { SessionColumn } from '@/components/dashboard/SessionColumn';
 import { PriceLevelsChart } from '@/components/charts/PriceLevelsChart';
 import { Card } from '@/components/ui/Card';
@@ -10,6 +11,7 @@ import { dayBoundsEt, useKlines } from '@/hooks/useKlines';
 import { useLivePrice } from '@/hooks/useLivePrice';
 import { formatDate } from '@/lib/formatters';
 import type { Report } from '@/lib/types';
+import { Link } from 'react-router-dom';
 
 export function DashboardPage(): React.ReactNode {
   const { day, reports, isLoading, isManifestLoading, manifestError } = useLatestDay();
@@ -24,6 +26,7 @@ export function DashboardPage(): React.ReactNode {
   });
 
   const reportList = Object.values(reports).filter(Boolean) as Report[];
+  const marketsReport = reports.endday ?? reports.midday ?? reports.morning;
 
   if (isManifestLoading) {
     return <p className="animate-fade-up text-ink-muted">Loading manifest…</p>;
@@ -51,6 +54,7 @@ export function DashboardPage(): React.ReactNode {
               {formatDate(day.date)} · three sessions vs live BTC
             </p>
           ) : null}
+          <BiasLegend className="mt-2" />
         </div>
         {day ? (
           <div className="flex flex-wrap gap-4 text-sm">
@@ -60,6 +64,9 @@ export function DashboardPage(): React.ReactNode {
             <Link to={routeStudies(day.date)} className="text-link">
               Indicator studies
             </Link>
+            <Link to="/markets" className="text-link">
+              VOO / QQQ
+            </Link>
           </div>
         ) : null}
       </div>
@@ -67,9 +74,13 @@ export function DashboardPage(): React.ReactNode {
       <LivePriceStrip
         livePrice={live.data}
         isLoading={live.isLoading}
+        isError={live.isError}
+        dataUpdatedAt={live.dataUpdatedAt}
         reports={reports}
         date={day?.date}
       />
+
+      <NonCryptoPanel report={marketsReport} compact />
 
       <Card padded={false} className="overflow-hidden p-3 md:p-4">
         <div className="mb-3 flex items-center justify-between gap-2 px-1">

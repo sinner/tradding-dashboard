@@ -8,26 +8,55 @@ import { cn } from '@/lib/cn';
 type Props = {
   livePrice: number | undefined;
   isLoading: boolean;
+  isError?: boolean;
+  dataUpdatedAt?: number;
   reports: Partial<Record<Session, Report>>;
   date?: string;
 };
 
+function ageLabel(dataUpdatedAt?: number): string | null {
+  if (!dataUpdatedAt) return null;
+  const sec = Math.max(0, Math.round((Date.now() - dataUpdatedAt) / 1000));
+  if (sec < 5) return 'just now';
+  if (sec < 60) return `${sec}s ago`;
+  return `${Math.round(sec / 60)}m ago`;
+}
+
 export function LivePriceStrip({
   livePrice,
   isLoading,
+  isError = false,
+  dataUpdatedAt,
   reports,
   date,
 }: Props): React.ReactNode {
   const sessions: Session[] = ['morning', 'midday', 'endday'];
+  const stale = isError || (dataUpdatedAt != null && Date.now() - dataUpdatedAt > 90_000);
+  const updated = ageLabel(dataUpdatedAt);
 
   return (
-    <Card>
+    <Card className={cn(stale && 'opacity-60')}>
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-brand animate-pulse-live" />
+            <span
+              className={cn(
+                'size-2 rounded-full bg-brand',
+                !stale && 'animate-pulse-live',
+              )}
+            />
             <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-muted">
               Live BTC-USDT
+              {updated ? (
+                <span className="ml-2 normal-case tracking-normal">
+                  · updated {updated}
+                </span>
+              ) : null}
+              {stale ? (
+                <span className="ml-2 normal-case tracking-normal text-accent">
+                  · stale
+                </span>
+              ) : null}
             </p>
           </div>
           <p className="mt-2 font-mono text-3xl font-semibold tracking-tight tabular-nums text-brand-light md:text-4xl">

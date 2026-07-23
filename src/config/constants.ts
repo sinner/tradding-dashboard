@@ -2,6 +2,7 @@ export const ROUTES = {
   dashboard: '/',
   history: '/history',
   day: '/day/:date',
+  markets: '/markets',
   studies: '/studies',
   studiesDay: '/studies/:date',
   calibration: '/calibration',

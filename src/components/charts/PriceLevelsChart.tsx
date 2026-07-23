@@ -5,31 +5,62 @@ import { ChartLevelLayer } from '@/components/charts/ChartLevelLayer';
 import { ChartLevelLegend } from '@/components/charts/ChartLevelLegend';
 import { ChartTooltip } from '@/components/charts/ChartTooltip';
 import {
+  DivergenceOverlay,
+} from '@/components/charts/DivergenceOverlay';
+import {
+  MA_LEGEND,
+  MovingAveragesOverlay,
+  type MaCrossMark,
+  type MaSeriesMap,
+} from '@/components/charts/MovingAveragesOverlay';
+import {
   LEVEL_COLORS,
   collectLevels,
   type LevelKind,
   type LevelLine,
 } from '@/components/charts/chartLevels';
+import { findLevelHits, priceYDomain, type YFitMode } from '@/components/charts/chartScale';
+import type { DivergenceHit, DivergenceType } from '@/indicators';
 import { formatPrice } from '@/lib/formatters';
 import type { Candle, Report } from '@/lib/types';
+import { cn } from '@/lib/cn';
 
 type Props = {
   candles: Candle[];
   reports: Report[];
   height?: number;
+  maSeries?: MaSeriesMap;
+  maCrosses?: MaCrossMark[];
+  divergences?: DivergenceHit[];
+  divergenceActive?: Record<DivergenceType, boolean>;
+  showHitMarkers?: boolean;
 };
 
 type CandleHover = { index: number; clientX: number; clientY: number };
+
+const defaultMaActive = {
+  ema20: true,
+  ema50: true,
+  ema100: false,
+  ema200: true,
+};
 
 export function PriceLevelsChart({
   candles,
   reports,
   height = 340,
+  maSeries,
+  maCrosses,
+  divergences,
+  divergenceActive,
+  showHitMarkers = true,
 }: Props): React.ReactNode {
   const width = 860;
   const margin = { top: 12, right: 16, bottom: 28, left: 58 };
   const [hover, setHover] = useState<CandleHover | null>(null);
   const [previewKind, setPreviewKind] = useState<LevelKind | null>(null);
+  const [fitMode, setFitMode] = useState<YFitMode>('price');
+  const [maActive, setMaActive] = useState(defaultMaActive);
   const [activeKinds, setActiveKinds] = useState<Record<LevelKind, boolean>>({
     support: true,
     resistance: true,
@@ -40,33 +71,47 @@ export function PriceLevelsChart({
   const geom = useMemo(() => {
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
-    if (candles.length === 0) {
-      return {
-        xTicks: [] as { x: number; label: string }[],
-        yTicks: [] as { y: number; label: string }[],
-        levelLines: [] as (LevelLine & { y: number })[],
-        candleRects: [] as CandleGeom[],
-        innerW,
-        innerH,
-      };
-    }
+    const empty = {
+      xTicks: [] as { x: number; label: string }[],
+      yTicks: [] as { y: number; label: string }[],
+      levelLines: [] as (LevelLine & { y: number })[],
+      candleRects: [] as CandleGeom[],
+      hits: [] as ReturnType<typeof findLevelHits>,
+      y: d3.scaleLinear(),
+      innerW,
+      innerH,
+    };
+    if (candles.length === 0) return empty;
+
     const x = d3
       .scaleBand()
       .domain(candles.map((_, i) => String(i)))
       .range([0, innerW])
       .padding(0.2);
     const levels = collectLevels(reports);
-    const prices = candles.flatMap((c) => [c.high, c.low]);
-    for (const l of levels) prices.push(l.price);
     const y = d3
       .scaleLinear()
-      .domain(d3.extent(prices) as [number, number])
+      .domain(priceYDomain(candles, levels, fitMode))
       .nice()
       .range([innerH, 0]);
     const step = Math.max(1, Math.floor(candles.length / 6));
+    const candleRects = candles.map((c, i) => {
+      const cx = x(String(i)) ?? 0;
+      return {
+        x: cx,
+        width: x.bandwidth(),
+        yHigh: y(c.high),
+        yLow: y(c.low),
+        yOpen: y(c.open),
+        yClose: y(c.close),
+        up: c.close >= c.open,
+        candle: c,
+      };
+    });
     return {
       innerW,
       innerH,
+      y,
       xTicks: candles
         .map((c, i) => ({ c, i }))
         .filter(({ i }) => i % step === 0)
@@ -76,21 +121,10 @@ export function PriceLevelsChart({
         })),
       yTicks: y.ticks(5).map((t) => ({ y: y(t), label: formatPrice(t, 0) })),
       levelLines: levels.map((l) => ({ ...l, y: y(l.price) })),
-      candleRects: candles.map((c, i) => {
-        const cx = x(String(i)) ?? 0;
-        return {
-          x: cx,
-          width: x.bandwidth(),
-          yHigh: y(c.high),
-          yLow: y(c.low),
-          yOpen: y(c.open),
-          yClose: y(c.close),
-          up: c.close >= c.open,
-          candle: c,
-        };
-      }),
+      candleRects,
+      hits: showHitMarkers ? findLevelHits(candles, levels) : [],
     };
-  }, [candles, reports, height, margin.left, margin.right, margin.top, margin.bottom]);
+  }, [candles, reports, height, fitMode, showHitMarkers, margin]);
 
   const previewLevels = previewKind
     ? geom.levelLines.filter((l) => l.kind === previewKind && activeKinds[l.kind])
@@ -107,42 +141,56 @@ export function PriceLevelsChart({
     );
   }
 
-  const candleTip = (() => {
-    if (!hover) return null;
-    const g = geom.candleRects[hover.index];
-    if (!g) return null;
-    const c = g.candle;
-    return (
-      <ChartTooltip
-        x={Math.min(Math.max(hover.clientX, 90), width - 90)}
-        y={Math.max(hover.clientY, 80)}
-        title={d3.timeFormat('%b %d · %H:%M')(new Date(c.openTime))}
-        rows={[
-          { label: 'Open', value: formatPrice(c.open) },
-          { label: 'High', value: formatPrice(c.high), tone: 'up' },
-          { label: 'Low', value: formatPrice(c.low), tone: 'down' },
-          {
-            label: 'Close',
-            value: formatPrice(c.close),
-            tone: g.up ? 'up' : 'down',
-          },
-          {
-            label: 'Vol',
-            value: c.volume.toLocaleString(undefined, { maximumFractionDigits: 2 }),
-            tone: 'muted',
-          },
-        ]}
-      />
-    );
-  })();
+  const tipCandle = hover ? geom.candleRects[hover.index] : null;
 
   return (
     <div className="space-y-3">
-      <ChartLevelLegend
-        activeKinds={activeKinds}
-        onToggle={(kind) => setActiveKinds((prev) => ({ ...prev, [kind]: !prev[kind] }))}
-        onPreview={setPreviewKind}
-      />
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <ChartLevelLegend
+          activeKinds={activeKinds}
+          onToggle={(kind) =>
+            setActiveKinds((prev) => ({ ...prev, [kind]: !prev[kind] }))
+          }
+          onPreview={setPreviewKind}
+        />
+        <div className="flex flex-wrap gap-1">
+          {(['price', 'levels'] as const).map((m) => (
+            <button
+              key={m}
+              type="button"
+              onClick={() => setFitMode(m)}
+              className={cn(
+                'rounded-full px-2.5 py-1 text-[11px] font-medium transition',
+                fitMode === m
+                  ? 'bg-brand/25 text-brand-light'
+                  : 'text-ink-muted hover:text-ink',
+              )}
+            >
+              Fit {m}
+            </button>
+          ))}
+        </div>
+      </div>
+      {maSeries ? (
+        <div className="flex flex-wrap gap-1">
+          {MA_LEGEND.map((m) => (
+            <button
+              key={m.key}
+              type="button"
+              onClick={() => setMaActive((p) => ({ ...p, [m.key]: !p[m.key] }))}
+              className={cn(
+                'rounded-full px-2 py-0.5 text-[10px] font-medium ring-1 transition',
+                maActive[m.key]
+                  ? 'bg-bg text-ink ring-stroke'
+                  : 'text-ink-muted/50 ring-transparent',
+              )}
+              style={{ color: maActive[m.key] ? m.color : undefined }}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
       <div className="relative" onPointerLeave={() => setHover(null)}>
         <svg
           viewBox={`0 0 ${width} ${height}`}
@@ -195,6 +243,15 @@ export function PriceLevelsChart({
               previewKind={previewKind}
               innerW={geom.innerW}
             />
+            {maSeries ? (
+              <MovingAveragesOverlay
+                series={maSeries}
+                candles={geom.candleRects}
+                y={geom.y}
+                crosses={maCrosses}
+                active={maActive}
+              />
+            ) : null}
             <ChartCandleLayer
               candles={geom.candleRects}
               hoverIndex={hover?.index ?? null}
@@ -202,8 +259,41 @@ export function PriceLevelsChart({
               margin={margin}
               width={width}
               height={height}
-              onHover={(index, clientX, clientY) => setHover({ index, clientX, clientY })}
+              onHover={(index, clientX, clientY) =>
+                setHover({ index, clientX, clientY })
+              }
             />
+            {divergences && divergenceActive ? (
+              <DivergenceOverlay
+                hits={divergences}
+                active={divergenceActive}
+                pointAt={(index, price) => {
+                  const g = geom.candleRects[index];
+                  if (!g) return null;
+                  return { x: g.x + g.width / 2, y: geom.y(price) };
+                }}
+              />
+            ) : null}
+            {geom.hits.map((h) => {
+              const g = geom.candleRects[h.index];
+              if (!g) return null;
+              return (
+                <g key={`${h.kind}-${h.session}-${h.price}`}>
+                  <circle
+                    cx={g.x + g.width / 2}
+                    cy={geom.y(h.price)}
+                    r={6}
+                    fill={LEVEL_COLORS[h.kind]}
+                    fillOpacity={0.25}
+                    stroke={LEVEL_COLORS[h.kind]}
+                    strokeWidth={1.5}
+                  />
+                  <title>
+                    {h.kind.toUpperCase()} hit · {h.session} · {formatPrice(h.price)}
+                  </title>
+                </g>
+              );
+            })}
             {geom.xTicks.map((t) => (
               <text
                 key={t.label + t.x}
@@ -219,7 +309,23 @@ export function PriceLevelsChart({
             ))}
           </g>
         </svg>
-        {candleTip}
+        {tipCandle && hover ? (
+          <ChartTooltip
+            x={Math.min(Math.max(hover.clientX, 90), width - 90)}
+            y={Math.max(hover.clientY, 80)}
+            title={d3.timeFormat('%b %d · %H:%M')(new Date(tipCandle.candle.openTime))}
+            rows={[
+              { label: 'Open', value: formatPrice(tipCandle.candle.open) },
+              { label: 'High', value: formatPrice(tipCandle.candle.high), tone: 'up' },
+              { label: 'Low', value: formatPrice(tipCandle.candle.low), tone: 'down' },
+              {
+                label: 'Close',
+                value: formatPrice(tipCandle.candle.close),
+                tone: tipCandle.up ? 'up' : 'down',
+              },
+            ]}
+          />
+        ) : null}
         {previewKind && previewLevels.length > 0 ? (
           <div className="animate-fade-in absolute right-2 top-2 z-20 max-w-[220px] rounded-xl border border-stroke/80 bg-bg-deep/95 p-3 shadow-glow backdrop-blur-md">
             <p
@@ -242,6 +348,10 @@ export function PriceLevelsChart({
           </div>
         ) : null}
       </div>
+      <p className="text-[11px] text-ink-muted">
+        Candles = intraday structure. Dashed lines = report levels. Markers = REDUCE/ADD
+        first touch. Fit price keeps the axis tight; Fit levels shows all levels.
+      </p>
     </div>
   );
 }

@@ -21,6 +21,9 @@ const CalibrationPage = lazy(() =>
     default: m.CalibrationPage,
   })),
 );
+const MarketsPage = lazy(() =>
+  import('@/pages/MarketsPage').then((m) => ({ default: m.MarketsPage })),
+);
 const ReportPage = lazy(() =>
   import('@/pages/ReportPage').then((m) => ({ default: m.ReportPage })),
 );
@@ -38,6 +41,7 @@ export function AppRouter(): React.ReactNode {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/day/:date" element={<DayPage />} />
+            <Route path="/markets" element={<MarketsPage />} />
             <Route path="/studies" element={<IndicatorStudiesPage />} />
             <Route path="/studies/:date" element={<IndicatorStudiesPage />} />
             <Route path="/calibration" element={<CalibrationPage />} />

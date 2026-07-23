@@ -65,6 +65,8 @@ export function DayPage(): React.ReactNode {
       <LivePriceStrip
         livePrice={live.data}
         isLoading={live.isLoading}
+        isError={live.isError}
+        dataUpdatedAt={live.dataUpdatedAt}
         reports={reports}
         date={date}
       />

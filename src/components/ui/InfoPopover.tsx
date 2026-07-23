@@ -52,7 +52,7 @@ export function InfoPopover({
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState<PanelPos | null>(null);
   const id = useId();
-  const rootRef = useRef<HTMLElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<number | null>(null);
 
@@ -159,7 +159,7 @@ export function InfoPopover({
 
   if (variant === 'text') {
     return (
-      <span ref={rootRef} className={cn('relative inline-flex', className)} {...hoverProps}>
+      <div ref={rootRef} className={cn('relative inline-flex', className)} {...hoverProps}>
         <button
           type="button"
           aria-label={label}
@@ -176,7 +176,7 @@ export function InfoPopover({
           {text ?? title}
         </button>
         {panel}
-      </span>
+      </div>
     );
   }
 

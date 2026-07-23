@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
 import { BiasBadge } from '@/components/dashboard/BiasBadge';
 import { DecisionBox } from '@/components/dashboard/DecisionBox';
 import { LevelsCard } from '@/components/dashboard/LevelsCard';
+import { MacroStrip } from '@/components/dashboard/MacroStrip';
 import { OperationsCard } from '@/components/dashboard/OperationsCard';
 import { ProbabilityBars } from '@/components/dashboard/ProbabilityBars';
 import { Card } from '@/components/ui/Card';
@@ -11,6 +11,7 @@ import { routeReport } from '@/config/constants';
 import { formatPrice, formatSession } from '@/lib/formatters';
 import type { Report } from '@/lib/types';
 import { cn } from '@/lib/cn';
+import { Link } from 'react-router-dom';
 
 type Props = {
   report: Report | undefined;
@@ -113,6 +114,7 @@ export function SessionColumn({
           <span aria-hidden>→</span>
         </Link>
       </Card>
+      <MacroStrip report={report} />
       <DecisionBox decision={report.decisionBox} />
       <OperationsCard operations={report.operations} />
       <LevelsCard levels={report.levels} />
