@@ -32,8 +32,10 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm build
+      # Same prep as `pnpm pages:deploy` (build + SPA 404.html), without
+      # pushing via gh-pages — Actions uploads the artifact instead.
+      - name: Prepare Pages site
+        run: pnpm pages:prepare
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "pages:deploy": "pnpm run build && cp dist/index.html dist/404.html && gh-pages -d dist"
+    "pages:prepare": "pnpm run build && cp dist/index.html dist/404.html",
+    "pages:deploy": "pnpm run pages:prepare && gh-pages -d dist"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",
@@ -43,6 +44,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "gh-pages": "^6.3.0",
     "globals": "^16.3.0",
     "only-allow": "^1.2.1",
     "postcss": "^8.5.6",

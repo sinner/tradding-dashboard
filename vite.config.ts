@@ -2,11 +2,10 @@ import path from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// GitHub Pages serves project sites from /{repo}/. Keep dev at / for convenience.
+// GitHub Pages project site: https://sinner.github.io/tradding-dashboard/
+// Local `pnpm dev` uses `/` so http://127.0.0.1:5173/ works without a base-URL error.
 const githubPagesBase = '/tradding-dashboard/';
 
-// GitHub Pages serves under /btc-dashboard/; local dev uses `/` so
-// http://127.0.0.1:5173/ works without Vite's base-URL error page.
 export default defineConfig(({ command }) => ({
   base: command === 'build' ? githubPagesBase : '/',
   plugins: [react()],
