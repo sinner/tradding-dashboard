@@ -61,3 +61,46 @@ export function findLevelHits(
   }
   return hits;
 }
+
+export type LevelTouch = {
+  kind: LevelLine['kind'];
+  price: number;
+  session: string;
+  label: string;
+  index: number;
+};
+
+/** Candle wick spans the level price (high ≥ level ≥ low). */
+export function candleTouchesPrice(
+  candle: Pick<Candle, 'high' | 'low'>,
+  price: number,
+): boolean {
+  return candle.low <= price && candle.high >= price;
+}
+
+/**
+ * Every candle×level touch. Used for snackbar alerts (callers filter “new”).
+ */
+export function findLevelTouches(
+  candles: Candle[],
+  levels: LevelLine[],
+): LevelTouch[] {
+  const touches: LevelTouch[] = [];
+  for (const level of levels) {
+    candles.forEach((c, index) => {
+      if (!candleTouchesPrice(c, level.price)) return;
+      touches.push({
+        kind: level.kind,
+        price: level.price,
+        session: level.session,
+        label: level.label,
+        index,
+      });
+    });
+  }
+  return touches;
+}
+
+export function levelTouchKey(t: Pick<LevelTouch, 'kind' | 'session' | 'price' | 'index'>): string {
+  return `${t.kind}:${t.session}:${t.price}:${t.index}`;
+}

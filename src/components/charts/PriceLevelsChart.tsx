@@ -16,6 +16,8 @@ import {
   buildPriceChartGeom,
 } from '@/components/charts/priceChartGeom';
 import { useDelayedPreview } from '@/components/charts/useDelayedPreview';
+import { useLevelTouchAlerts } from '@/components/charts/useLevelTouchAlerts';
+import { ChartLevelSnackbar } from '@/components/charts/ChartLevelSnackbar';
 import type { DivergenceHit, DivergenceType } from '@/indicators';
 import { formatPrice } from '@/lib/formatters';
 import type { Candle, Report } from '@/lib/types';
@@ -74,6 +76,11 @@ export function PriceLevelsChart({
       }),
     [candles, reports, height, fitMode, showHitMarkers],
   );
+
+  const { alerts, dismiss } = useLevelTouchAlerts({
+    candles,
+    levels: geom.levelLines,
+  });
 
   const previewLevels = previewKind
     ? geom.levelLines.filter((l) => l.kind === previewKind && activeKinds[l.kind])
@@ -187,10 +194,11 @@ export function PriceLevelsChart({
             onPointerLeave={schedulePreviewClose}
           />
         ) : null}
+        <ChartLevelSnackbar alerts={alerts} onDismiss={dismiss} />
       </div>
       <p className="text-[11px] text-ink-muted">
         Candles = intraday structure. Dashed lines = report levels. Markers = REDUCE/ADD
-        first touch. Fit price keeps the axis tight; Fit levels shows all levels.
+        first touch. Snackbar fires when a live candle touches a level.
       </p>
     </div>
   );
