@@ -17,6 +17,9 @@ export const formatNumber = (value: number, decimals = 2): string =>
     maximumFractionDigits: decimals,
   }).format(value);
 
+/** Trim a BTC amount to a readable, non-scientific string (up to 6 dp, no trailing zeros). */
+export const formatBtc = (value: number): string => `${parseFloat(value.toFixed(6))}`;
+
 export const formatCompact = (value: number): string =>
   new Intl.NumberFormat('en-US', {
     notation: 'compact',
