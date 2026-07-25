@@ -392,6 +392,7 @@ export const PortfolioActionSchema = z.enum([
   'EXPENSE',
   'BANKRUPTCY',
   'RESET',
+  'FROZEN',
 ]);
 export type PortfolioAction = z.infer<typeof PortfolioActionSchema>;
 
@@ -565,6 +566,9 @@ export const PortfolioSchema = z
     round: z.number().default(1),
     /** Number of bankruptcies so far. */
     bankruptcies: z.number().default(0),
+    /** 'active' normally; 'bankrupt' freezes trading until the next midnight restart. */
+    status: z.enum(['active', 'bankrupt']).default('active').optional(),
+    bankruptSince: z.string().nullable().optional(),
     expenses: PortfolioExpensesSchema.nullable().optional(),
     /** Current wallet state (the newest snapshot). */
     latest: PortfolioSnapshotSchema.nullable(),

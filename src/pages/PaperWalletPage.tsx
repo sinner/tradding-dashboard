@@ -25,6 +25,16 @@ export function PaperWalletPage(): React.ReactNode {
         </p>
       </div>
 
+      {p?.status === 'bankrupt' ? (
+        <Card className="border-bear/50 bg-bear/10">
+          <p className="flex items-center gap-2 text-sm font-medium text-bear">
+            <Skull className="size-4" aria-hidden />
+            Bankrupt — the wallet is frozen (no trading) and will restart at the next
+            midnight session.
+          </p>
+        </Card>
+      ) : null}
+
       <PortfolioPanel portfolio={p} isLoading={isLoading} />
 
       {hasData ? (

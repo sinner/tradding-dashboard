@@ -85,7 +85,8 @@ export function PortfolioPanel({ portfolio, isLoading }: Props): React.ReactNode
           <p>
             They must cover a {formatPrice(exp?.monthlyUsd ?? 30)}/month cost of living.
             Profits sweep 20% into an untouchable savings bucket. Can&apos;t pay → bankrupt
-            + reset, logged in the hall of shame with a lesson.
+            + frozen until the next midnight restart, logged in the hall of shame with a
+            lesson.
           </p>
         </InfoPopover>
       </div>

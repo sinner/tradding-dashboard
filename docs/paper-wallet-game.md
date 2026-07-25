@@ -88,11 +88,13 @@ The cash and the BTC are **separate**: cash is liquidity, the BTC is a held posi
   (no charge). Paid from **savings first, then cash**. Per-session quota = 30 ÷ 4 =
   **7.5 USDT/month** (used only for scoreboard accountability).
 
-**Bankruptcy**
-- If a due charge can't be covered (savings + equity < owed), the wallet is **bankrupt**:
-  `bankruptcies += 1`, `round += 1`, reset to **both books flat + 100 USDT cash +
-  0 savings** (the gift is genesis-only), and a **hall-of-shame** entry is recorded with
-  *why* it blew up and the *lesson* for the next round.
+**Bankruptcy → freeze, then midnight revive**
+- If a due charge can't be covered (savings + equity < owed), the wallet is **flattened to
+  cash**, marked **bankrupt** (`bankruptcies += 1`, `status: "bankrupt"`) and **frozen** —
+  no session trades it. Any **non-midnight** session that runs meanwhile records a
+  `FROZEN` no-op (it does not trade). **Only the next midnight session revives it**: reset
+  to **100 USDT cash flat**, `round += 1`, `status` back to `active` (the gift is
+  genesis-only). Each bankruptcy logs a **hall-of-shame** entry with *why* + *lesson*.
 
 **Skip rule**
 - A session **may skip** trading when the setup is poor (preferred over forcing a bad
@@ -125,7 +127,7 @@ The split that keeps token cost and errors low:
   the wallet's lessons/hall-of-shame/messages for context, and **chooses one decision**.
 - **`scripts/paper_wallet.py` is the accountant**: a deterministic, stdlib-only Python
   ledger that does *all* the math — SL/TP/liquidation resolution, mark-to-market, the
-  20% sweep, the monthly expense, bankruptcy + reset + hall-of-shame, scoreboard
+  20% sweep, the monthly expense, bankruptcy freeze + midnight revive + hall-of-shame, scoreboard
   attribution, messages/lessons, net worth — and writes `portfolio.json`. The LLM never
   does arithmetic or hand-edits the wallet.
 
@@ -150,7 +152,7 @@ The split that keeps token cost and errors low:
 
 | File | Contents |
 |---|---|
-| `public/data/portfolio.json` | Current wallet state: `latest` snapshot, `scoreboard`, `expenses`, `savingsUsd`, `round`, `bankruptcies`, `hallOfShame`, `lessons`, `messages`, `history` |
+| `public/data/portfolio.json` | Current wallet state: `latest` snapshot, `scoreboard`, `expenses`, `savingsUsd`, `round`, `bankruptcies`, `status` (`active`/`bankrupt`), `hallOfShame`, `lessons`, `messages`, `history` |
 | `scripts/paper_wallet.py` | The deterministic ledger (source of truth for the math) |
 | `scripts/test_paper_wallet.py` | Deterministic tests (INIT, TP/stop hits, expense, bankruptcy, skip rule) |
 
@@ -173,8 +175,9 @@ path gated on measured triggers).
 - **Hand-off notes · Hall of shame · Learned patterns · Recent snapshots** — the
   narrative and history of the game.
 
-If a session can't verify a fresh price, it **skips** the wallet update rather than
-guess — so the ledger never moves on fabricated data.
+When the wallet is **bankrupt**, `/paper-wallet` shows a red banner and the game is frozen
+until the next midnight restart. If a session can't verify a fresh price, it **skips** the
+wallet update rather than guess — so the ledger never moves on fabricated data.
 
 ---
 

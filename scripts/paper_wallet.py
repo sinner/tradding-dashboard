@@ -127,22 +127,28 @@ def resolve_sltp(fut, low, high):
     return None
 
 # ---------- expenses / bankruptcy ----------
-def hall_of_shame(port, snap, shortfall):
+def bankrupt(port, snap, owed):
+    """Insolvent: FLATTEN everything to cash at mark, pay what we can, and FREEZE.
+    Does NOT reset — only the next midnight session (revive) reseeds to 100 flat."""
+    mp = snap["markPrice"]
+    pool_before = r2(port["savingsUsd"] + snap["equityUsd"])
+    close_futures(port, mp)                       # forced-close futures at mark
+    sp = snap["spot"]
+    if (sp.get("btc") or 0.0) > 0:                # liquidate spot to cash (no sweep on a forced exit)
+        snap["cashUsd"] = r2(snap["cashUsd"] + sp["btc"] * mp)
+        snap["spot"] = {"btc": 0.0, "avgEntry": None, "costBasisUsd": 0.0, "valueUsd": 0.0}
+    pay_sav = min(port["savingsUsd"], owed)       # pay what we can: savings first, then cash
+    port["savingsUsd"] = r2(port["savingsUsd"] - pay_sav)
+    snap["cashUsd"] = r2(max(0.0, snap["cashUsd"] - (owed - pay_sav)))
     port["bankruptcies"] = int(port.get("bankruptcies", 0)) + 1
-    port["round"] = int(port.get("round", 1)) + 1
+    port["status"] = "bankrupt"
+    port["bankruptSince"] = snap["ts"]
     port.setdefault("hallOfShame", []).append({
-        "ts": snap["ts"], "round": port["round"] - 1, "session": snap["session"],
-        "equityBefore": r2(snap["equityUsd"]), "shortfallUsd": r2(shortfall),
-        "reason": "Could not cover the monthly cost of living — savings + equity fell below what was owed.",
+        "ts": snap["ts"], "round": int(port.get("round", 1)), "session": snap["session"],
+        "equityBefore": r2(snap["equityUsd"]), "shortfallUsd": r2(max(0.0, owed - pool_before)),
+        "reason": "Could not cover the monthly cost of living — savings + equity fell below what was owed. Wallet flattened and FROZEN until the next midnight restart.",
         "lesson": "Keep a fatter savings buffer and cut risk before month-end; a leveraged drawdown into the 1st is what kills the wallet.",
     })
-    # reset: both books flat, cash 100, savings 0, new baseline
-    snap["spot"] = {"btc": 0.0, "avgEntry": None, "costBasisUsd": 0.0, "valueUsd": 0.0}
-    snap["futures"] = empty_futures()
-    snap["cashUsd"] = 100.0
-    port["savingsUsd"] = 0.0
-    port["initialCapitalUsd"] = 100.0
-    snap["realizedPnlUsd"] = 0.0
 
 def apply_expenses(port, today):
     """Charge every due monthly expense on/after nextChargeAt. Bankruptcy if uncovered."""
@@ -157,9 +163,9 @@ def apply_expenses(port, today):
         owed = float(exp.get("monthlyUsd", MONTHLY_EXPENSE))
         pool = port["savingsUsd"] + s["equityUsd"]
         if pool + 1e-9 < owed:
-            hall_of_shame(port, s, owed - pool)
+            bankrupt(port, s, owed)
             events.append("BANKRUPTCY")
-            # after reset advance charge pointer so we don't loop on the same date
+            # advance the charge pointer so a later revive doesn't re-owe this date
             exp["lastChargeAt"] = exp["nextChargeAt"]
             exp["nextChargeAt"] = first_of_next_month(exp["nextChargeAt"])
             break
@@ -262,7 +268,7 @@ def init_wallet(intent):
             "rationale": intent.get("rationale", "Wallet seeded at 100 USDT, flat.")}
     return {"schemaVersion": "1.0.0", "baseCurrency": "USDT", "initialCapitalUsd": 100.0,
             "startedAt": intent["ts"], "updatedAt": intent["ts"], "savingsUsd": 0.0,
-            "round": 1, "bankruptcies": 0,
+            "round": 1, "bankruptcies": 0, "status": "active",
             "expenses": {"monthlyUsd": MONTHLY_EXPENSE, "cadence": "monthly",
                          "perSessionQuotaUsd": PER_SESSION_QUOTA, "graceUntil": nx,
                          "nextChargeAt": nx, "lastChargeAt": None, "totalPaidUsd": 0.0, "note": ""},
@@ -279,6 +285,59 @@ def sb(port, session):
            "quotaUsd": PER_SESSION_QUOTA, "quotaCoveredUsd": 0.0, "skips": 0, "note": None}
     port["scoreboard"].append(row); return row
 
+def _msg_lesson(port, snap, intent):
+    if intent.get("message"):
+        m = intent["message"]; port.setdefault("messages", []).append(
+            {"ts": snap["ts"], "from": snap["session"], "to": m.get("to", "all"), "text": m["text"]})
+        port["messages"] = port["messages"][-20:]
+    if intent.get("lesson"):
+        l = intent["lesson"]; port.setdefault("lessons", []).append(
+            {"ts": snap["ts"], "session": snap["session"], "pattern": l["pattern"], "insight": l["insight"]})
+
+def frozen(port, intent):
+    """Bankrupt wallet touched by a NON-seeder session: record a frozen no-op snapshot."""
+    prev = port["latest"]; mp = float(intent["markPrice"])
+    snap = {"ts": intent["ts"], "session": intent["session"], "reportId": intent.get("reportId"),
+            "markPrice": r2(mp), "action": "FROZEN",
+            "spot": dict(prev["spot"]), "futures": dict(prev["futures"]),
+            "cashUsd": float(prev["cashUsd"]), "realizedPnlUsd": 0.0, "unrealizedPnlUsd": 0.0,
+            "equityUsd": float(prev["equityUsd"]), "savingsUsd": float(port["savingsUsd"]),
+            "netWorthUsd": 0.0, "sweptToSavingsUsd": None,
+            "consecutiveSkips": int(prev.get("consecutiveSkips") or 0),
+            "rationale": intent.get("rationale") or "Wallet is bankrupt — frozen; no trading until the next midnight restart."}
+    port["_snap"] = snap
+    mark(port, mp)
+    _msg_lesson(port, snap, intent)
+    del port["_snap"]
+    port["latest"] = snap; port.setdefault("history", []).append(snap)
+    port["updatedAt"] = intent["ts"]
+
+def revive(port, intent):
+    """Midnight seeder restarting a bankrupt wallet: reseed 100 flat, new round, status active.
+    May also apply midnight's decision on the fresh wallet (no expenses/attribution)."""
+    mp = float(intent["markPrice"])
+    port["round"] = int(port.get("round", 1)) + 1
+    port["status"] = "active"; port.pop("bankruptSince", None)
+    port["savingsUsd"] = 0.0; port["initialCapitalUsd"] = 100.0
+    snap = {"ts": intent["ts"], "session": intent["session"], "reportId": intent.get("reportId"),
+            "markPrice": r2(mp), "action": "RESET",
+            "spot": {"btc": 0.0, "avgEntry": None, "costBasisUsd": 0.0, "valueUsd": 0.0},
+            "futures": empty_futures(), "cashUsd": 100.0, "savingsUsd": 0.0,
+            "realizedPnlUsd": 0.0, "unrealizedPnlUsd": 0.0, "equityUsd": 100.0,
+            "netWorthUsd": 100.0, "sweptToSavingsUsd": None, "consecutiveSkips": 0,
+            "rationale": intent.get("rationale") or f"Revived from bankruptcy \u2192 round {port['round']}, reseeded 100 USDT flat."}
+    port["_snap"] = snap
+    d = intent.get("decision", {"type": "hold"})
+    if d.get("type") not in (None, "hold", "skip"):
+        action, _ = apply_decision(port, d, mp)
+        if action != "HOLD": snap["action"] = action
+    mark(port, mp)
+    row = sb(port, snap["session"]); row["decisions"] += 1
+    _msg_lesson(port, snap, intent)
+    del port["_snap"]
+    port["latest"] = snap; port.setdefault("history", []).append(snap)
+    port["updatedAt"] = intent["ts"]
+
 def run(portfolio_path, intent):
     exists = os.path.exists(portfolio_path)
     if not exists:
@@ -291,6 +350,16 @@ def run(portfolio_path, intent):
         return
     with open(portfolio_path) as fh:
         port = json.load(fh)
+
+    # bankruptcy freeze: ONLY the midnight seeder may restart the wallet
+    if port.get("status") == "bankrupt":
+        if intent.get("isSeeder"):
+            revive(port, intent); _write(portfolio_path, port); s = port["latest"]
+            print(f"{s['session']} RESET (revived) \u00b7 round {port['round']} \u00b7 cash {s['cashUsd']} \u00b7 net {s['netWorthUsd']}")
+            return
+        frozen(port, intent); _write(portfolio_path, port); s = port["latest"]
+        print(f"{s['session']} FROZEN \u00b7 bankrupt, awaiting midnight restart \u00b7 net {s['netWorthUsd']}")
+        return
 
     prev = dict(port["latest"])
     prev_equity = float(prev["equityUsd"])
@@ -330,9 +399,21 @@ def run(portfolio_path, intent):
         if attributed > 0: row["wins"] += 1
         elif attributed < 0: row["losses"] += 1
         row["quotaCoveredUsd"] = r2(row["quotaCoveredUsd"] + attributed)
-    # 4) expenses (may bankrupt+reset)
+    # 4) expenses (may bankrupt -> freeze this run, no trading afterwards)
     exp_events = apply_expenses(port, intent["today"])
     if exp_events: auto += exp_events
+    if port.get("status") == "bankrupt":
+        mark(port, mp)
+        snap["action"] = "BANKRUPTCY"; snap["consecutiveSkips"] = 0
+        if not snap["rationale"]:
+            snap["rationale"] = ("Bankrupt: could not cover the monthly expense; wallet flattened and "
+                                 "frozen until the next midnight restart.")
+        _msg_lesson(port, snap, intent)
+        del port["_snap"]; port["latest"] = snap; port.setdefault("history", []).append(snap)
+        port["updatedAt"] = intent["ts"]; _write(portfolio_path, port)
+        print(f"{snap['session']} BANKRUPTCY \u00b7 net {snap['netWorthUsd']} \u00b7 bankruptcies "
+              f"{port['bankruptcies']} \u00b7 frozen until midnight")
+        return
     mark(port, mp)
     # 5) apply this session's decision
     action, realized = apply_decision(port, d, mp)

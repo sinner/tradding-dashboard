@@ -59,21 +59,38 @@ run({"session":"midday","ts":"2026-07-26T12:40:00-04:00","today":"2026-07-26","m
      "decision":{"type":"skip"}}, expect=2)
 check("3rd skip rejected (exit2)", True)
 
-# 6) bankruptcy: force a due expense with tiny equity
-# craft a near-empty wallet directly
+# 6) bankruptcy FREEZES (non-midnight), midnight REVIVES
 p=load()
-p["latest"]["cashUsd"]=1.0; p["latest"]["spot"]={"btc":0.0,"avgEntry":None,"costBasisUsd":0.0,"valueUsd":0.0}
+p["status"]="active"
+p["latest"]["cashUsd"]=1.0
+p["latest"]["spot"]={"btc":0.0,"avgEntry":None,"costBasisUsd":0.0,"valueUsd":0.0}
 p["latest"]["futures"]={"side":"flat","sizeUsd":0.0,"btc":None,"leverage":1,"entryPrice":None,"marginUsd":0.0,"stopPrice":None,"liquidationPrice":None,"takeProfit":[],"unrealizedPnlUsd":0.0}
 p["savingsUsd"]=2.0; p["latest"]["equityUsd"]=1.0; p["latest"]["netWorthUsd"]=3.0
 p["expenses"]["nextChargeAt"]="2026-08-01"
 json.dump(p, open(PORT,"w"))
-b0=p["bankruptcies"]
-run({"session":"midnight","ts":"2026-08-01T02:00:00-04:00","today":"2026-08-01","markPrice":68000,
-     "isSeeder":True,"decision":{"type":"hold"}})
+b0=p["bankruptcies"]; r0=p["round"]
+# a NON-midnight session hits the due expense -> BANKRUPTCY (freeze), NOT reset
+run({"session":"midday","ts":"2026-08-01T12:40:00-04:00","today":"2026-08-01","markPrice":68000,
+     "isSeeder":False,"decision":{"type":"hold"}})
 p=load()
 check("bankruptcy incremented", p["bankruptcies"]==b0+1, p["bankruptcies"])
-check("reset cash 100", p["latest"]["cashUsd"]==100.0, p["latest"]["cashUsd"])
+check("status bankrupt", p.get("status")=="bankrupt", p.get("status"))
+check("NOT reset to 100", p["latest"]["cashUsd"]!=100.0, p["latest"]["cashUsd"])
 check("hall of shame entry", len(p["hallOfShame"])>=1)
+# another non-midnight session stays FROZEN (ignores its trade)
+run({"session":"morning","ts":"2026-08-01T13:50:00-04:00","today":"2026-08-01","markPrice":68000,
+     "isSeeder":False,"decision":{"type":"fut_open","side":"long","sizeUsd":50,"leverage":2,"stop":60000,"tp":[80000]}})
+p=load()
+check("frozen no-op", p["latest"]["action"]=="FROZEN" and p["latest"]["futures"]["side"]=="flat", p["latest"]["action"])
+check("still bankrupt", p.get("status")=="bankrupt")
+# MIDNIGHT revives -> reset 100 flat, new round, active
+run({"session":"midnight","ts":"2026-08-02T02:00:00-04:00","today":"2026-08-02","markPrice":68000,
+     "isSeeder":True,"decision":{"type":"hold"}})
+p=load()
+check("revived active", p.get("status")=="active", p.get("status"))
+check("reset cash 100", p["latest"]["cashUsd"]==100.0, p["latest"]["cashUsd"])
+check("round incremented", p["round"]==r0+1, p["round"])
+check("action RESET", p["latest"]["action"]=="RESET", p["latest"]["action"])
 
 print("\n" + ("ALL TESTS PASSED" if not fails else f"{len(fails)} FAILED: {fails}"))
 sys.exit(1 if fails else 0)
