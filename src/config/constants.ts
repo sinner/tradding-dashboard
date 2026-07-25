@@ -6,6 +6,7 @@ export const ROUTES = {
   studies: '/studies',
   studiesDay: '/studies/:date',
   calibration: '/calibration',
+  paperWallet: '/paper-wallet',
   report: '/report/:id',
 } as const;
 
@@ -28,6 +29,7 @@ export const QUERY_KEYS = {
   report: (id: string) => ['report', id] as const,
   reportPath: (path: string) => ['reportPath', path] as const,
   calibration: ['calibration'] as const,
+  portfolio: ['portfolio'] as const,
   livePrice: (symbol: string) => ['livePrice', symbol] as const,
   klines: (symbol: string, interval: string, start?: number, end?: number) =>
     ['klines', symbol, interval, start ?? null, end ?? null] as const,

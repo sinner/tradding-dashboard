@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Check, X, Minus } from 'lucide-react';
 import { Sparkline } from '@/components/charts/Sparkline';
 import { Card } from '@/components/ui/Card';
 import { InfoPopover } from '@/components/ui/InfoPopover';
@@ -14,10 +15,10 @@ import {
 import { formatDate } from '@/lib/formatters';
 import { cn } from '@/lib/cn';
 
-function mark(v: TriState): string {
-  if (v === true) return '✓';
-  if (v === false) return '✗';
-  return '—';
+function TriIcon({ v }: { v: TriState }): React.ReactNode {
+  if (v === true) return <Check className="size-5" aria-label="yes" />;
+  if (v === false) return <X className="size-5" aria-label="no" />;
+  return <Minus className="size-4 text-ink-muted" aria-label="n/a" />;
 }
 
 function MetricCard({
@@ -157,7 +158,7 @@ export function CalibrationPage(): React.ReactNode {
                       s.biasCorrect === false && 'text-bear',
                     )}
                   >
-                    {mark(s.biasCorrect)}
+                    <TriIcon v={s.biasCorrect} />
                   </td>
                   <td
                     className={cn(
@@ -166,7 +167,7 @@ export function CalibrationPage(): React.ReactNode {
                       s.reduceHit === false && 'text-bear',
                     )}
                   >
-                    {mark(s.reduceHit)}
+                    <TriIcon v={s.reduceHit} />
                   </td>
                   <td
                     className={cn(
@@ -175,7 +176,7 @@ export function CalibrationPage(): React.ReactNode {
                       s.addHit === false && 'text-bear',
                     )}
                   >
-                    {mark(s.addHit)}
+                    <TriIcon v={s.addHit} />
                   </td>
                   <td
                     className={cn(
@@ -184,7 +185,11 @@ export function CalibrationPage(): React.ReactNode {
                       s.actingHelped === false && 'text-bear',
                     )}
                   >
-                    {s.actingHelped === null ? s.actingLabel : mark(s.actingHelped)}
+                    {s.actingHelped === null ? (
+                      <span className="text-xs text-ink-muted">{s.actingLabel}</span>
+                    ) : (
+                      <TriIcon v={s.actingHelped} />
+                    )}
                   </td>
                 </tr>
               ))}

@@ -40,7 +40,13 @@ export function ChartLevelLayer({
               y2={l.y}
               stroke={active ? LEVEL_COLORS[l.kind] : style.color}
               strokeWidth={active ? 2.5 : style.strokeWidth}
-              strokeDasharray={l.kind === 'reduce' || l.kind === 'add' ? '7 4' : '3 4'}
+              strokeDasharray={
+                l.kind === 'reduce' || l.kind === 'add'
+                  ? '7 4'
+                  : l.kind === 'liquidation'
+                    ? '1 3'
+                    : '3 4'
+              }
               pointerEvents="none"
             />
             {active ? (

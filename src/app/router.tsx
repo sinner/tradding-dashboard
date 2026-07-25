@@ -27,6 +27,9 @@ const MarketsPage = lazy(() =>
 const ReportPage = lazy(() =>
   import('@/pages/ReportPage').then((m) => ({ default: m.ReportPage })),
 );
+const PaperWalletPage = lazy(() =>
+  import('@/pages/PaperWalletPage').then((m) => ({ default: m.PaperWalletPage })),
+);
 
 function PageFallback(): React.ReactNode {
   return <p className="text-sm text-ink-muted">Loading page…</p>;
@@ -45,6 +48,7 @@ export function AppRouter(): React.ReactNode {
             <Route path="/studies" element={<IndicatorStudiesPage />} />
             <Route path="/studies/:date" element={<IndicatorStudiesPage />} />
             <Route path="/calibration" element={<CalibrationPage />} />
+            <Route path="/paper-wallet" element={<PaperWalletPage />} />
             <Route path="/report/:id" element={<ReportPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

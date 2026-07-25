@@ -1,6 +1,7 @@
 import { BiasLegend } from '@/components/dashboard/BiasBadge';
 import { LivePriceStrip } from '@/components/dashboard/LivePriceStrip';
 import { SessionColumn } from '@/components/dashboard/SessionColumn';
+import { SessionAccordion } from '@/components/dashboard/SessionAccordion';
 import { PriceLevelsChart } from '@/components/charts/PriceLevelsChart';
 import { Card } from '@/components/ui/Card';
 import { Title } from '@/components/ui/Title';
@@ -25,7 +26,12 @@ export function DashboardPage(): React.ReactNode {
     enabled: Boolean(bounds),
   });
 
-  const reportList = Object.values(reports).filter(Boolean) as Report[];
+  const SESSION_ORDER = ['midnight', 'morning', 'midday', 'endday'] as const;
+  const orderedReports = SESSION_ORDER.map((sKey) => reports[sKey]).filter(
+    Boolean,
+  ) as Report[];
+  // Only the two most-recent sessions draw level lines, or the chart gets unreadable.
+  const chartReports = orderedReports.slice(-2);
 
   if (isManifestLoading) {
     return <p className="animate-fade-up text-ink-muted">Loading manifest…</p>;
@@ -50,7 +56,7 @@ export function DashboardPage(): React.ReactNode {
           <Title level={1}>Daily dashboard</Title>
           {day ? (
             <p className="mt-1 text-sm text-ink-muted">
-              {formatDate(day.date)} · three sessions vs live BTC
+              {formatDate(day.date)} · four sessions vs live BTC
               {isPollingDeploys ? (
                 <span className="ml-1">· checks for new reports every 30 min</span>
               ) : null}
@@ -95,21 +101,23 @@ export function DashboardPage(): React.ReactNode {
             Could not load Binance klines. Check network / rate limits.
           </p>
         ) : (
-          <PriceLevelsChart candles={klines.data ?? []} reports={reportList} />
+          <PriceLevelsChart candles={klines.data ?? []} reports={chartReports} />
         )}
       </Card>
 
       {isLoading ? (
         <p className="text-sm text-ink-muted">Loading session reports…</p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <SessionColumn
-            session="morning"
-            report={reports.morning}
-            livePrice={live.data}
-          />
-          <SessionColumn session="midday" report={reports.midday} livePrice={live.data} />
-          <SessionColumn session="endday" report={reports.endday} livePrice={live.data} />
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {SESSION_ORDER.map((sKey) => (
+            <SessionAccordion key={sKey} session={sKey} report={reports[sKey]}>
+              <SessionColumn
+                session={sKey}
+                report={reports[sKey]}
+                livePrice={live.data}
+              />
+            </SessionAccordion>
+          ))}
         </div>
       )}
     </div>

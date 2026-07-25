@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const SessionSchema = z.enum(['morning', 'midday', 'endday']);
+export const SessionSchema = z.enum(['midnight', 'morning', 'midday', 'endday']);
 export type Session = z.infer<typeof SessionSchema>;
 
 export const BiasSchema = z.enum(['bullish', 'range', 'bearish']);
@@ -76,10 +76,31 @@ const ScalpContextSchema = z
   })
   .passthrough();
 
-const LiquidationLevelSchema = z.object({
-  price: z.number(),
-  note: z.string().nullable().optional(),
-});
+const LiquidationLevelSchema = z
+  .object({
+    price: z.number(),
+    // Where the cluster sits relative to spot when the report was written.
+    side: z.enum(['above', 'below']).nullable().optional(),
+    // Relative size of the liquidity pool on the CoinGlass heatmap.
+    intensity: z.enum(['low', 'medium', 'high', 'extreme']).nullable().optional(),
+    // True when this pool is the dominant magnet price is likely drawn toward.
+    magnet: z.boolean().nullable().optional(),
+    note: z.string().nullable().optional(),
+  })
+  .passthrough();
+
+/** Actionable summary of the liquidation heatmap — the nearest magnets and the pull. */
+const LiquidityMagnetSchema = z
+  .object({
+    nearestAbove: NullableNumber.optional(),
+    nearestBelow: NullableNumber.optional(),
+    // Which way the dominant pool tends to pull price next.
+    pull: z.enum(['up', 'down', 'balanced']).nullable().optional(),
+    source: z.string().nullable().optional(),
+    asOf: z.string().nullable().optional(),
+    note: z.string().nullable().optional(),
+  })
+  .passthrough();
 
 const DivergenceSchema = z.object({
   type: z.enum([
@@ -205,6 +226,7 @@ export const ReportSchema = z
       support: z.array(z.number()).default([]),
       resistance: z.array(z.number()).default([]),
       liquidation: z.array(LiquidationLevelSchema).default([]),
+      liquidityMagnet: LiquidityMagnetSchema.nullable().optional(),
     }),
 
     atr: z
@@ -298,6 +320,7 @@ export type Report = z.infer<typeof ReportSchema>;
 export const ManifestDaySchema = z.object({
   date: z.string(),
   sessions: z.object({
+    midnight: z.string().nullable().optional(),
     morning: z.string().nullable(),
     midday: z.string().nullable(),
     endday: z.string().nullable(),
@@ -344,3 +367,215 @@ export type Candle = {
   volume: number;
   closeTime: number;
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Portfolio game — the 4 sessions relay ONE paper wallet (100 USDT), spot + shorts
+// /leverage allowed. Each run marks the inherited position to market, applies its
+// decision, and appends a snapshot. `scoreboard` ranks each session's contribution.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const PortfolioSideSchema = z.enum(['flat', 'long', 'short']);
+export type PortfolioSide = z.infer<typeof PortfolioSideSchema>;
+
+export const PortfolioActionSchema = z.enum([
+  'INIT',
+  'HOLD',
+  'OPEN_LONG',
+  'OPEN_SHORT',
+  'ADD',
+  'REDUCE',
+  'CLOSE',
+  'FLIP',
+  'STOPPED_OUT',
+  'LIQUIDATED',
+  'SKIP',
+  'EXPENSE',
+  'BANKRUPTCY',
+  'RESET',
+]);
+export type PortfolioAction = z.infer<typeof PortfolioActionSchema>;
+
+const PortfolioPositionSchema = z
+  .object({
+    side: PortfolioSideSchema,
+    /** Notional exposure marked to market (USD). 0 when flat. */
+    sizeUsd: z.number().default(0),
+    /** Signed coin quantity (+long / −short); null when flat. */
+    btc: NullableNumber.optional(),
+    /** 1 = spot, >1 = leveraged. */
+    leverage: z.number().default(1),
+    entryPrice: NullableNumber,
+    stopPrice: NullableNumber.optional(),
+    liquidationPrice: NullableNumber.optional(),
+    takeProfit: z.array(z.number()).default([]),
+  })
+  .passthrough();
+
+/** SPOT book — BTC held outright (long-only, no liquidation). The gifted core lives here. */
+const PortfolioSpotSchema = z
+  .object({
+    btc: z.number().default(0),
+    avgEntry: NullableNumber.optional(),
+    costBasisUsd: z.number().default(0),
+    valueUsd: z.number().default(0),
+    lots: z
+      .array(
+        z
+          .object({
+            btc: z.number(),
+            entryPrice: z.number(),
+            costUsd: NullableNumber.optional(),
+          })
+          .passthrough(),
+      )
+      .optional(),
+  })
+  .passthrough();
+
+/** FUTURES book — perp position (long/short, leverage, liquidation), margined by cash. */
+const PortfolioFuturesSchema = z
+  .object({
+    side: PortfolioSideSchema.default('flat'),
+    sizeUsd: z.number().default(0),
+    btc: NullableNumber.optional(),
+    leverage: z.number().default(1),
+    entryPrice: NullableNumber,
+    marginUsd: z.number().default(0),
+    stopPrice: NullableNumber.optional(),
+    liquidationPrice: NullableNumber.optional(),
+    takeProfit: z.array(z.number()).default([]),
+    unrealizedPnlUsd: z.number().default(0),
+  })
+  .passthrough();
+
+export const PortfolioSnapshotSchema = z
+  .object({
+    ts: z.string(),
+    session: SessionSchema,
+    reportId: z.string().nullable().optional(),
+    /** Verified spot used to mark the wallet this run. */
+    markPrice: z.number(),
+    action: PortfolioActionSchema.or(z.string()),
+    // Legacy single-position (kept optional for back-compat).
+    position: PortfolioPositionSchema.optional(),
+    spot: PortfolioSpotSchema.optional(),
+    futures: PortfolioFuturesSchema.optional(),
+    /** Free collateral not committed to the open position. */
+    cashUsd: z.number(),
+    /** Cumulative realized PnL since inception. */
+    realizedPnlUsd: z.number().default(0),
+    /** Mark-to-market PnL of the open position. */
+    unrealizedPnlUsd: z.number().default(0),
+    /** Total account value = cash + margin + unrealized (trading + free cash). */
+    equityUsd: z.number(),
+    /** Untouchable savings bucket (not tradeable). Pays expenses first. */
+    savingsUsd: z.number().default(0).optional(),
+    /** Amount swept into savings this snapshot (20% of realized gains). */
+    sweptToSavingsUsd: NullableNumber.optional(),
+    /** Consecutive skipped sessions ending at this snapshot (max 2 allowed). */
+    consecutiveSkips: z.number().default(0).optional(),
+    /** Net worth = equity + savings. */
+    netWorthUsd: NullableNumber.optional(),
+    rationale: z.string().nullable().optional(),
+  })
+  .passthrough();
+export type PortfolioSnapshot = z.infer<typeof PortfolioSnapshotSchema>;
+
+export const SessionScoreSchema = z
+  .object({
+    session: SessionSchema,
+    decisions: z.number().default(0),
+    /** Equity change (USD) attributed to this session's decisions. */
+    attributedPnlUsd: z.number().default(0),
+    wins: z.number().default(0),
+    losses: z.number().default(0),
+    /** This session's monthly cost-of-living quota (30 / 4 = 7.5 USD). */
+    quotaUsd: z.number().default(7.5).optional(),
+    /** How much of its cumulative quota this session has covered via attributed PnL. */
+    quotaCoveredUsd: z.number().default(0).optional(),
+    /** Times this session chose not to trade. */
+    skips: z.number().default(0).optional(),
+    note: z.string().nullable().optional(),
+  })
+  .passthrough();
+export type SessionScore = z.infer<typeof SessionScoreSchema>;
+
+/** Cost-of-living: 30 USDT/month, charged on the 1st, first month is grace. */
+export const PortfolioExpensesSchema = z
+  .object({
+    monthlyUsd: z.number().default(30),
+    cadence: z.string().default('monthly'),
+    perSessionQuotaUsd: z.number().default(7.5),
+    /** No charge on/before this date (first-month grace). */
+    graceUntil: z.string().nullable().optional(),
+    nextChargeAt: z.string().nullable().optional(),
+    lastChargeAt: z.string().nullable().optional(),
+    totalPaidUsd: z.number().default(0),
+    note: z.string().nullable().optional(),
+  })
+  .passthrough();
+export type PortfolioExpenses = z.infer<typeof PortfolioExpensesSchema>;
+
+/** A bankruptcy post-mortem — the "hall of shame" the game learns from. */
+export const HallOfShameEntrySchema = z
+  .object({
+    ts: z.string(),
+    round: z.number(),
+    session: SessionSchema.nullable().optional(),
+    equityBefore: NullableNumber.optional(),
+    shortfallUsd: NullableNumber.optional(),
+    reason: z.string(),
+    lesson: z.string(),
+  })
+  .passthrough();
+export type HallOfShameEntry = z.infer<typeof HallOfShameEntrySchema>;
+
+/** A learned pattern that feeds the next round (and later the skill). */
+export const PortfolioLessonSchema = z
+  .object({
+    ts: z.string(),
+    session: SessionSchema.nullable().optional(),
+    pattern: z.string(),
+    insight: z.string(),
+  })
+  .passthrough();
+export type PortfolioLesson = z.infer<typeof PortfolioLessonSchema>;
+
+/** A note one session leaves for the next (the relay hand-off channel). */
+export const PortfolioMessageSchema = z
+  .object({
+    ts: z.string(),
+    from: SessionSchema,
+    to: SessionSchema.or(z.literal('all')).nullable().optional(),
+    text: z.string(),
+  })
+  .passthrough();
+export type PortfolioMessage = z.infer<typeof PortfolioMessageSchema>;
+
+export const PortfolioSchema = z
+  .object({
+    schemaVersion: z.string(),
+    baseCurrency: z.string().default('USDT'),
+    initialCapitalUsd: z.number().default(100),
+    startedAt: z.string(),
+    updatedAt: z.string(),
+    /** Untouchable savings bucket in USD. */
+    savingsUsd: z.number().default(0),
+    /** Game round; increments on each bankruptcy reset. */
+    round: z.number().default(1),
+    /** Number of bankruptcies so far. */
+    bankruptcies: z.number().default(0),
+    expenses: PortfolioExpensesSchema.nullable().optional(),
+    /** Current wallet state (the newest snapshot). */
+    latest: PortfolioSnapshotSchema.nullable(),
+    history: z.array(PortfolioSnapshotSchema).default([]),
+    scoreboard: z.array(SessionScoreSchema).default([]),
+    /** Bankruptcy post-mortems — why the wallet blew up, and the lesson. */
+    hallOfShame: z.array(HallOfShameEntrySchema).default([]),
+    /** Accumulated learned patterns that improve the next round. */
+    lessons: z.array(PortfolioLessonSchema).default([]),
+    /** Hand-off notes between sessions (keep the most recent ~20). */
+    messages: z.array(PortfolioMessageSchema).default([]),
+  })
+  .passthrough();
+export type Portfolio = z.infer<typeof PortfolioSchema>;

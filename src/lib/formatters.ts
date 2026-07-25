@@ -46,6 +46,7 @@ export const formatDateTime = (iso: string): string =>
 
 export const formatSession = (session: string): string => {
   const map: Record<string, string> = {
+    midnight: 'Midnight',
     morning: 'Morning',
     midday: 'Midday',
     endday: 'End of day',

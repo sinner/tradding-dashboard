@@ -1,8 +1,10 @@
 import { dataUrl } from '@/config/constants';
 import {
   CalibrationSchema,
+  PortfolioSchema,
   ReportSchema,
   type CalibrationRow,
+  type Portfolio,
   type Report,
 } from '@/lib/types';
 import { logger } from '@/services/loggerService';
@@ -43,6 +45,22 @@ export async function fetchCalibration(): Promise<CalibrationRow[]> {
   return parsed.data;
 }
 
+export async function fetchPortfolio(): Promise<Portfolio | null> {
+  const url = dataUrl('data/portfolio.json');
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) {
+    logger.warn('portfolio', `not available (${res.status})`);
+    return null;
+  }
+  const json: unknown = await res.json();
+  const parsed = PortfolioSchema.safeParse(json);
+  if (!parsed.success) {
+    logger.error('portfolio', 'schema validation failed', parsed.error.issues);
+    return null;
+  }
+  return parsed.data;
+}
+
 function looksLikeHtml(text: string, contentType: string | null): boolean {
   const type = (contentType ?? '').toLowerCase();
   if (type.includes('text/html')) return true;
@@ -73,6 +91,7 @@ export function markdownPathFromId(id: string): string {
 export const reportService = {
   fetchReportByPath,
   fetchCalibration,
+  fetchPortfolio,
   fetchReportMarkdown,
   markdownPathFromId,
 };

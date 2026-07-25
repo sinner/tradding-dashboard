@@ -25,7 +25,7 @@ export function useDayReports(
   isError: boolean;
   dataUpdatedAt: number;
 } {
-  const sessions: Session[] = ['morning', 'midday', 'endday'];
+  const sessions: Session[] = ['midnight', 'morning', 'midday', 'endday'];
   const paths = sessions.map((s) => day?.sessions[s] ?? null);
   const interval = options.refetchInterval ?? false;
 
@@ -59,5 +59,15 @@ export function useCalibration() {
     queryKey: QUERY_KEYS.calibration,
     queryFn: () => reportService.fetchCalibration(),
     staleTime: 5 * 60_000,
+  });
+}
+
+export function usePortfolio(options: DayReportOptions = {}) {
+  return useQuery({
+    queryKey: QUERY_KEYS.portfolio,
+    queryFn: () => reportService.fetchPortfolio(),
+    staleTime: 5 * 60_000,
+    refetchInterval: options.refetchInterval ?? false,
+    refetchIntervalInBackground: false,
   });
 }

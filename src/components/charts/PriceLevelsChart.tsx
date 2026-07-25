@@ -61,6 +61,7 @@ export function PriceLevelsChart({
     resistance: true,
     reduce: true,
     add: true,
+    liquidation: true,
   });
   const { previewKind, openPreview, schedulePreviewClose, clearPreviewClose } =
     useDelayedPreview();

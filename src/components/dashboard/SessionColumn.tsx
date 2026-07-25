@@ -20,6 +20,8 @@ type Props = {
 };
 
 const sessionBlurb: Record<string, string> = {
+  midnight:
+    'Written in the small hours (ET, ~2am). It reads the overnight Asia/Europe tape versus yesterday\'s close and sets the first plan before the US morning.',
   morning:
     'Written near the open (ET). It captures overnight moves and sets the first plan for the day.',
   midday:

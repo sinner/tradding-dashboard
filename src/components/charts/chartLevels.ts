@@ -1,4 +1,4 @@
-export type LevelKind = 'support' | 'resistance' | 'reduce' | 'add';
+export type LevelKind = 'support' | 'resistance' | 'reduce' | 'add' | 'liquidation';
 
 export type LevelLine = {
   price: number;
@@ -12,6 +12,7 @@ export const LEVEL_COLORS: Record<LevelKind, string> = {
   resistance: '#F472B6',
   reduce: '#FB7185',
   add: '#67E8F9',
+  liquidation: '#FBBF24',
 };
 
 /** Mix a hex color toward a mute target (0 = original, 1 = fully muted). */
@@ -35,7 +36,7 @@ export const CANDLE = {
   wickDown: '#F9A8D4',
 } as const;
 
-const SESSION_RANK = ['morning', 'midday', 'endday'] as const;
+const SESSION_RANK = ['midnight', 'morning', 'midday', 'endday'] as const;
 
 /**
  * Fade older session levels when newer sessions exist.
@@ -90,6 +91,7 @@ export function collectLevels(
     levels: {
       support: number[];
       resistance: number[];
+      liquidation?: { price: number; note?: string | null }[];
     };
     decisionBox: {
       reduceIf?: { price: number } | null;
@@ -112,6 +114,14 @@ export function collectLevels(
         price: p,
         label: `${r.session} resistance`,
         kind: 'resistance',
+        session: r.session,
+      });
+    }
+    for (const l of r.levels.liquidation ?? []) {
+      lines.push({
+        price: l.price,
+        label: `${r.session} liquidation${l.note ? ` · ${l.note}` : ''}`,
+        kind: 'liquidation',
         session: r.session,
       });
     }

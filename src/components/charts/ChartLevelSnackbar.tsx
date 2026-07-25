@@ -9,6 +9,7 @@ const KIND_COPY: Record<LevelKind, string> = {
   resistance: 'Resistance',
   reduce: 'Reduce if',
   add: 'Add if',
+  liquidation: 'Liquidation',
 };
 
 type Props = Readonly<{
