@@ -21,21 +21,21 @@
     }
   },
   "decisionBox": {
-    "position": "HOLD",
+    "position": "ADD",
     "reduceIf": {
       "price": 63500,
       "confirmation": "A 1H/4H close below $63,500 loses the daily higher-low pivot — scale the spot core toward EXIT; next shelves $63,000, then $62,700."
     },
     "addIf": {
       "price": 64300,
-      "confirmation": "A 1H close back above $64,300 (ideally reclaim $64,800) confirms the floor reclaim holds — only then add the tranche trimmed Friday midday."
+      "confirmation": "A 1H close back above $64,300 (ideally reclaim $64,800) confirms the floor reclaim holds — then add the larger momentum tranche trimmed Friday midday on top of tonight's small DCA."
     },
     "invalidatesAt": 63500,
     "stopOrder": {
       "recommended": false,
       "price": 63500
     },
-    "changed": "Since Friday's endday, BTC quietly reclaimed the $64,062 floor from below (now ~$64,216) but has NOT cleared the $64,300 add trigger. Stance is unchanged: HOLD the spot core, no new futures risk into a thin weekend tape. The $63,500 invalidation still governs; a resting stop is optional at midnight (not the pre-gap endday setup) but $63,500 remains the line."
+    "changed": "Since Friday's endday, BTC reclaimed the $64,062 floor from below (now ~$64,216), holding above the $63,500 invalidation. As the midnight seeder I put a little idle cash to work: a small $30 spot DCA into the long-term core on the floor reclaim — direction-agnostic accumulation, not a leveraged bet. Futures stay flat and the larger momentum add is still gated on a 1H close above $64,300. The $63,500 line still governs the core."
   },
   "probabilities": {
     "bullish": 20.0,
@@ -166,8 +166,10 @@
     {
       "horizon": "position",
       "market": "spot",
-      "action": "hold",
-      "entry": null,
+      "action": "add",
+      "entry": [
+        64216
+      ],
       "stop": 63500,
       "tp": [
         64800,
@@ -180,8 +182,10 @@
     {
       "horizon": "spot_core",
       "market": "spot",
-      "action": "HOLD",
-      "entry": null,
+      "action": "ADD",
+      "entry": [
+        64216
+      ],
       "stop": 63500,
       "tp": [],
       "rr": null,
