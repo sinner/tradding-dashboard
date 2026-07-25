@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { readFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -6,9 +7,25 @@ import react from '@vitejs/plugin-react';
 // Local `pnpm dev` uses `/` so http://127.0.0.1:5173/ works without a base-URL error.
 const githubPagesBase = '/tradding-dashboard/';
 
+const { version: appVersion } = JSON.parse(
+  readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8'),
+) as { version: string };
+
 export default defineConfig(({ command }) => ({
   base: command === 'build' ? githubPagesBase : '/',
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'inject-app-version',
+      transformIndexHtml(html) {
+        return html.replaceAll('%APP_VERSION%', appVersion);
+      },
+    },
+  ],
+  // Available in app code as import.meta.env.VITE_APP_VERSION
+  define: {
+    'import.meta.env.VITE_APP_VERSION': JSON.stringify(appVersion),
+  },
   server: {
     open: '/',
   },
