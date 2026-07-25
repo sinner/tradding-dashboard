@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/Card';
 import { Title } from '@/components/ui/Title';
 import { routeStudies } from '@/config/constants';
 import { useDayReports } from '@/hooks/useDayReports';
-import { dayBoundsEt, useKlines } from '@/hooks/useKlines';
+import { dayBoundsBogota, useKlines } from '@/hooks/useKlines';
 import { useLivePrice } from '@/hooks/useLivePrice';
 import { useManifest } from '@/hooks/useManifest';
 import { formatDate } from '@/lib/formatters';
@@ -19,7 +19,7 @@ export function DayPage(): React.ReactNode {
   const { reports, isLoading } = useDayReports(day);
   const live = useLivePrice();
 
-  const bounds = date ? dayBoundsEt(date) : undefined;
+  const bounds = date ? dayBoundsBogota(date) : undefined;
   const klines = useKlines({
     interval: '15m',
     startTime: bounds?.startTime,

@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/Card';
 import { Title } from '@/components/ui/Title';
 import { REPORT_DEPLOY_POLL_MS, routeDay, routeStudies } from '@/config/constants';
 import { useLatestDay } from '@/hooks/useLatestDay';
-import { dayBoundsEt, useKlines } from '@/hooks/useKlines';
+import { dayBoundsBogota, useKlines } from '@/hooks/useKlines';
 import { useLivePrice } from '@/hooks/useLivePrice';
 import { formatDate } from '@/lib/formatters';
 import type { Report } from '@/lib/types';
@@ -18,7 +18,7 @@ export function DashboardPage(): React.ReactNode {
     useLatestDay({ pollForDeploysMs: REPORT_DEPLOY_POLL_MS });
   const live = useLivePrice();
 
-  const bounds = day ? dayBoundsEt(day.date) : undefined;
+  const bounds = day ? dayBoundsBogota(day.date) : undefined;
   const klines = useKlines({
     interval: '15m',
     startTime: bounds?.startTime,

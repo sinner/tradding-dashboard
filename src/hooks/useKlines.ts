@@ -52,9 +52,9 @@ export function useKlines(options: {
   });
 }
 
-/** ET midnight → next midnight as UTC ms for a YYYY-MM-DD date. */
-export function dayBoundsEt(date: string): { startTime: number; endTime: number } {
-  const start = new Date(`${date}T00:00:00-04:00`);
-  const end = new Date(`${date}T23:59:59.999-04:00`);
+/** Bogotá (America/Bogota, UTC−5, no DST) midnight → end of day as UTC ms for a YYYY-MM-DD date. */
+export function dayBoundsBogota(date: string): { startTime: number; endTime: number } {
+  const start = new Date(`${date}T00:00:00-05:00`);
+  const end = new Date(`${date}T23:59:59.999-05:00`);
   return { startTime: start.getTime(), endTime: end.getTime() };
 }

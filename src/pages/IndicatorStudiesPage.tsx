@@ -10,7 +10,7 @@ import { Radio, RadioGroup } from '@/components/ui/Radio';
 import { Title } from '@/components/ui/Title';
 import { KLINE_INTERVALS, type KlineInterval } from '@/config/constants';
 import { useDayReports } from '@/hooks/useDayReports';
-import { dayBoundsEt, useKlines } from '@/hooks/useKlines';
+import { dayBoundsBogota, useKlines } from '@/hooks/useKlines';
 import { useLatestDay } from '@/hooks/useLatestDay';
 import { useManifest } from '@/hooks/useManifest';
 import {
@@ -45,7 +45,7 @@ export function IndicatorStudiesPage(): React.ReactNode {
   const [divActive, setDivActive] = useState(defaultDivActive);
   const [pivotLookback, setPivotLookback] = useState(3);
 
-  const bounds = date ? dayBoundsEt(date) : undefined;
+  const bounds = date ? dayBoundsBogota(date) : undefined;
   const startTime = bounds
     ? warmupStartTime(bounds.startTime, interval)
     : undefined;
