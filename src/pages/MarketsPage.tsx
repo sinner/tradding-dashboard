@@ -10,7 +10,9 @@ import type { Report, Session } from '@/lib/types';
 
 export function MarketsPage(): React.ReactNode {
   const { day, reports, isLoading, isManifestLoading, manifestError } = useLatestDay();
-  const sessions: Session[] = ['endday', 'midday', 'morning'];
+  // Prefer the latest completed daytime session, but fall back to midnight so a
+  // day whose only report so far is the midnight run still shows its snapshot.
+  const sessions: Session[] = ['endday', 'midday', 'morning', 'midnight'];
   const primary =
     sessions.map((s) => reports[s]).find(Boolean) ?? undefined;
 
