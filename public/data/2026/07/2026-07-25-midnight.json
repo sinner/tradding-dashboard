@@ -7,17 +7,17 @@
   "asset": "BTC-USDT",
   "overallBias": "range",
   "biasTilt": "bearish",
-  "confidence": 5.0,
+  "confidence": 5.75,
   "priceSnapshot": {
-    "value": 64216,
+    "value": 63804,
     "currency": "USD",
-    "changePct": 0.9,
-    "source": "CoinDesk live BTC widget ($64,215.87, +0.90% 24h; freshest verifiable print at this Saturday ~02:00 ET run). Last confirmed session close was $64,119 (Jul 24 endday, 6:19 p.m. ET).",
-    "asOf": "2026-07-25T02:10:00-05:00",
-    "note": "Quiet weekend overnight. BTC drifted a touch higher from Friday's $64,119 close and now trades ~$64,216, back ABOVE the $64,062 range floor it lost intraday Friday — a modest overnight reclaim rather than a trend change. Still capped under the $64,300 reclaim level. Weekend liquidity is thin, so this small bid is low-conviction until a 1H close holds $64,300+.",
+    "changePct": -1.94,
+    "source": "CoinDesk live BTC widget ($63,804.41, -1.94% 24h), read via browser ~03:10 COT. 24h open $65,165.90, 24h high $65,087, 24h low $63,748.43.",
+    "asOf": "2026-07-25T03:10:00-05:00",
+    "note": "Updated intra-session: after the brief overnight reclaim of $64,062, BTC rolled over and rejected the $65k area, sliding to a $63,748 low and now ~$63,804 (-1.94% 24h). The $64,062 floor is lost again and now caps overhead alongside the ~$64,000 liquidation magnet; price is pressing the lower rail toward the $62,200 downside liquidity shelf.",
     "sessionRange": {
-      "low": null,
-      "high": null
+      "low": 63748,
+      "high": 64300
     }
   },
   "decisionBox": {
@@ -32,15 +32,15 @@
     },
     "invalidatesAt": 63500,
     "stopOrder": {
-      "recommended": false,
-      "price": 63500
+      "recommended": true,
+      "price": 64320
     },
-    "changed": "Since Friday's endday, BTC reclaimed the $64,062 floor from below (now ~$64,216), holding above the $63,500 invalidation. As the midnight seeder I put a little idle cash to work: a small $30 spot DCA into the long-term core on the floor reclaim — direction-agnostic accumulation, not a leveraged bet. Futures stay flat and the larger momentum add is still gated on a 1H close above $64,300. The $63,500 line still governs the core."
+    "changed": "Intra-session update: the overnight reclaim failed. BTC rejected ~$65k and slid to a $63,748 low (now ~$63,804, -1.94%), losing the $64,062 floor again. Two actions taken: (1) kept the small $30 spot DCA core (now marked at $63,804, ~-$0.4 unrealized), and (2) opened a defined-risk FUTURES SHORT ($60 notional, 2x, entry ~$63,804, stop $64,320 above the $64k liquidation magnet, targets $63,000 then the $62,200 CoinGlass liquidity shelf). The stopOrder here refers to the short's protective stop at $64,320. A 1H close back above $64,300 invalidates the short."
   },
   "probabilities": {
-    "bullish": 20.0,
-    "range": 42.0,
-    "bearish": 38.0
+    "bullish": 17.0,
+    "range": 38.0,
+    "bearish": 45.0
   },
   "levels": {
     "support": [
@@ -191,12 +191,17 @@
     {
       "horizon": "swing",
       "market": "futures",
-      "action": "wait",
-      "entry": null,
-      "stop": null,
-      "tp": [],
-      "rr": null,
-      "confidence": 4.0,
+      "action": "short",
+      "entry": [
+        63804
+      ],
+      "stop": 64320,
+      "tp": [
+        63000,
+        62200
+      ],
+      "rr": 3.1,
+      "confidence": 6.0,
       "hold": "days-weeks"
     },
     {
@@ -230,10 +235,10 @@
     }
   ],
   "scalpContext": {
-    "intradayBias": "neutral while boxed between $64,062 and $64,300",
+    "intradayBias": "bearish while capped under the lost $64,062 floor / $64,000 liquidation magnet",
     "longAbove": 64300,
-    "shortBelow": 63700,
-    "invalidates": 64800,
+    "shortBelow": 63748,
+    "invalidates": 64320,
     "note": "Scalp only the edges — live signals come from the chart, not this report."
   },
   "macro": {
