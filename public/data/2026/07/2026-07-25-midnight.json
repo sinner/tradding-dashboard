@@ -56,14 +56,50 @@
       65000,
       65700
     ],
-    "liquidation": [],
+    "liquidation": [
+      {
+        "price": 64000,
+        "side": "below",
+        "intensity": "extreme",
+        "magnet": true,
+        "note": "Dominant bright-yellow band hugging current price — thickest liquidity cluster on the map. Read from the CoinGlass Liquidation Heatmap (Model 3, Binance BTC/USDT perp, 48h) via browser."
+      },
+      {
+        "price": 65000,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Older overhead cluster from the last 48h; thinner on the recent (right) side."
+      },
+      {
+        "price": 62200,
+        "side": "below",
+        "intensity": "high",
+        "magnet": false,
+        "note": "Green support-side band — the first real downside magnet if $64k gives way."
+      },
+      {
+        "price": 61700,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Secondary downside shelf just under the 62.2k band."
+      },
+      {
+        "price": 60000,
+        "side": "below",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Faint deeper cluster."
+      }
+    ],
     "liquidityMagnet": {
-      "nearestAbove": null,
-      "nearestBelow": null,
-      "pull": "balanced",
-      "source": "OKX free public liquidation/OI feed unavailable this run (blocked by sandbox proxy 403 and by TLS interception on the fallback fetcher). Not fabricated.",
-      "asOf": "2026-07-25T02:10:00-05:00",
-      "note": "No verified resting-liquidation data this run — magnets left null rather than estimated. Structurally, the crowded interest sits just above $64,300 (recent stops from the Friday floor break) and below $63,500 (the invalidation shelf)."
+      "nearestAbove": 65000,
+      "nearestBelow": 64000,
+      "pull": "down",
+      "source": "CoinGlass Liquidation Heatmap Model 3 (Binance BTC/USDT Perpetual, 48h), read via browser screenshot. Aggregate header: Open Interest $113.97B (-1.34% 24h), 24h liquidations $251.82M (-8.48%), long/short accounts 47.77%/52.23%. OKX free API path was blocked this run, so this was captured from the CoinGlass web UI instead.",
+      "asOf": "2026-07-25T03:05:00-05:00",
+      "note": "The heaviest band sits right at price (~$64,000); overhead liquidity toward $65,000 is comparatively thin, while the downside stacks into $62,200 then $61,700 — so the near-term pull is DOWN toward the $62k shelf if the $64k band breaks."
     }
   },
   "atr": {
@@ -218,10 +254,10 @@
     "liquidations": {
       "longsUsd": null,
       "shortsUsd": null,
-      "skew": null,
+      "skew": 0.91,
       "traders": null,
-      "openInterestUsd": null,
-      "note": "OKX free public feed (open-interest / funding / long-short ratio / realized liquidations) was unreachable this run — sandbox proxy returned 403 and the fallback fetcher hit TLS interception. All derivatives-positioning fields left null rather than fabricated. Consider a keyed source (CoinGlass) if this persists."
+      "openInterestUsd": 113967075829,
+      "note": "Source: CoinGlass web UI (aggregate, all exchanges) read via browser screenshot at ~03:05 COT. Open Interest $113.97B (-1.34% 24h); 24h liquidations $251.82M total (-8.48%, long/short USD split not shown in the header, left null); long/short accounts 47.77%/52.23% → skew 0.91 (<1 = shorts slightly more crowded than longs). The OKX free API path was blocked (proxy 403 / TLS interception), so these came from CoinGlass instead."
     },
     "fearGreed": null,
     "earnings": [
@@ -294,6 +330,10 @@
     "note": "Endday bias (bear 42 / range 40 / bull 18, reduce 63,500) played out as a range hold. The overnight reclaim of the $64,062 floor nudges the balance slightly less bearish (bear 38 / range 42 / bull 20), still capped under $64,300 and low-conviction on thin weekend liquidity."
   },
   "sources": [
+    {
+      "title": "BTC Liquidation Heatmap (Model 3, Binance BTC/USDT perp, 48h) — read via browser at ~03:05 COT",
+      "url": "https://www.coinglass.com/pro/futures/LiquidationHeatMapModel3?coin=BTC&type=pair"
+    },
     {
       "title": "Bitcoin price today, BTC to USD live price (CoinDesk live widget, Jul 24-25 2026)",
       "url": "https://www.coindesk.com/price/bitcoin"
