@@ -1,0 +1,351 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-07-25-morning",
+  "date": "2026-07-25",
+  "session": "morning",
+  "generatedAt": "2026-07-25T07:05:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bearish",
+  "confidence": 5.5,
+  "priceSnapshot": {
+    "value": 63930,
+    "currency": "USD",
+    "changePct": -1.69,
+    "source": "Gemini public ticker last $63,930.00 (bid 63,926.93), corroborated by Blockchain.info $64,087. Kraken read lagging at $62,942 but its 24h low $62,187 / high $64,740 marks the overnight range. 24h change vs ~$65,030 a day ago (Jul 24 morning).",
+    "asOf": "2026-07-25T07:00:00-05:00",
+    "note": "Overnight the short thesis played out: BTC swept the flagged ~$62,200 downside liquidity shelf (Kraken 24h low $62,187) then V-reclaimed to ~$63,930. Net roughly flat vs the midnight $63,804 mark (+0.2%) but ~-1.7% over 24h. Price is back mid-range, capped under the lost $64,062 floor / $64,300 reclaim trigger and holding above the reclaimed $62,200 shelf.",
+    "sessionRange": {
+      "low": 62187,
+      "high": 64100
+    }
+  },
+  "decisionBox": {
+    "position": "ADD",
+    "reduceIf": {
+      "price": 62200,
+      "confirmation": "A 1H/4H close back below $62,200 loses the reclaimed shelf and re-opens $61,700 then $60,300 — scale the spot core down toward EXIT."
+    },
+    "addIf": {
+      "price": 64300,
+      "confirmation": "A 1H close back above $64,300 (ideally reclaim $64,800) confirms the $64k floor is retaken — then add the larger momentum tranche on top of the small spot DCA."
+    },
+    "invalidatesAt": 62200,
+    "stopOrder": {
+      "recommended": false,
+      "price": 61900
+    },
+    "changed": "Overnight the midnight futures SHORT (entry $63,804, targets $63,000/$62,200) worked: price swept to $62,187 and reclaimed, so both take-profits filled and the short is out in profit (auto-resolved by the ledger). Morning action: with the leverage view realized and price back mid-range at ~$63,930 with no clean edge between the $62,200 shelf and the $64,300 reclaim, deploy a small spot DCA into the long-term core on the reclaim and hold. New invalidation moves down to $62,200 (the reclaimed shelf); the momentum add stays gated on a 1H close above $64,300."
+  },
+  "probabilities": {
+    "bullish": 22.0,
+    "range": 43.0,
+    "bearish": 35.0
+  },
+  "levels": {
+    "support": [
+      63500,
+      63000,
+      62200,
+      61700,
+      60300
+    ],
+    "resistance": [
+      64062,
+      64300,
+      64800,
+      65000
+    ],
+    "liquidation": [
+      {
+        "price": 62200,
+        "side": "below",
+        "intensity": "high",
+        "magnet": true,
+        "note": "Downside liquidity shelf — VALIDATED overnight when price tagged ~$62,187 and bounced. Level is S/R-anchored (leverage-bracket estimate near support), NOT fresh exchange resting-order data this run."
+      },
+      {
+        "price": 61700,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Secondary downside shelf just under $62,200. Estimated leverage-bracket magnet, not exchange resting-order data."
+      },
+      {
+        "price": 64300,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Overhead reclaim zone / lost floor cluster around $64k. Estimated leverage-bracket magnet, not exchange resting-order data."
+      },
+      {
+        "price": 65000,
+        "side": "above",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Older overhead cluster. Estimated leverage-bracket magnet, not exchange resting-order data."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 64300,
+      "nearestBelow": 62200,
+      "pull": "balanced",
+      "source": "OKX free API returned stale June-cached data through this run's proxy; the CoinGlass browser fallback is unavailable in this headless scheduled run. Levels are S/R-anchored estimates, not measured resting orders.",
+      "asOf": "2026-07-25T07:00:00-05:00",
+      "note": "The downside $62,200 magnet did its job overnight (tagged $62,187, bounced). With price back mid-range the near-term pull is balanced between the reclaimed $62,200 shelf below and the $64,300 reclaim magnet above."
+    }
+  },
+  "atr": {
+    "value": null,
+    "period": 14,
+    "pct": null,
+    "source": "Not verified this run (exchange OHLC feeds returned stale/cached candles). Overnight high-low ~$1,900+ ($62,187 to ~$64,100) was an expanded, above-average range. Not carried into any calculation.",
+    "asOf": null
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Sharp overnight flush to ~$62,187 then a V-shaped reclaim back to ~$63,930 — a liquidity-grab low. Short-term constructive off the lows but pushing straight into the lost $64,062 floor / $64,300 supply.",
+      "bias": "neutral-bullish",
+      "source": "Price action per Gemini / Blockchain.info / Kraken 24h range (Jul 25, ~07:00 COT); intraday indicator table not verified (exchange OHLC feeds cached/stale).",
+      "asOf": "2026-07-25T07:00:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Reclaimed $63,500 and now presses the lost $64,062 floor. Range re-defined between the reclaimed $62,200 shelf and the $64,300 reclaim trigger until one side gives on a 1H close.",
+      "bias": "neutral",
+      "source": "Intraday indicators not verified (exchange OHLC feeds cached/stale).",
+      "asOf": "2026-07-25T07:00:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "The overnight wick swept the $62,200 downside liquidity and recovered — a stop-run rather than a trend break. The July higher-low sequence ($62,000/$62,700/$63,500) holds, still capped under $64,800-$65,000.",
+      "bias": "neutral-bearish",
+      "source": "Structure per Gemini / Kraken 24h range / WebSearch (Jul 25); indicators not verified.",
+      "asOf": "2026-07-25T07:00:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Still a higher-low July repair: price held above the low-$62k region on the flush but sits below the descending daily 50-EMA and well under the higher-TF EMAs — the macro downtrend is intact. RSI mid-range/neutral. Numeric daily indicators not re-verified this run (OHLC feed cached).",
+      "bias": "neutral-bearish",
+      "source": "Structure per Gemini / Kraken / WebSearch (Jul 25); daily RSI/EMAs not re-verified (feed cached).",
+      "asOf": "2026-07-25T07:00:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "add",
+      "entry": [
+        63930
+      ],
+      "stop": 62200,
+      "tp": [
+        64800,
+        65500
+      ],
+      "rr": null,
+      "confidence": 5.0,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "ADD",
+      "entry": [
+        63930
+      ],
+      "stop": 62200,
+      "tp": [],
+      "rr": null,
+      "confidence": 5.0,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "constructive above the reclaimed $62,200 shelf, capped under the lost $64,062 floor / $64,300 trigger",
+    "longAbove": 64300,
+    "shortBelow": 62200,
+    "invalidates": 62200,
+    "note": "Scalp only the edges — live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 97.0,
+      "changePct": -4.0
+    },
+    "dxy": {
+      "value": 101.47
+    },
+    "us10y": {
+      "value": 4.65
+    },
+    "etfFlows": {
+      "streakDays": 0,
+      "note": "No weekend ETF flows. The prior 7-day US spot BTC ETF inflow streak snapped Jul 23 (~$225M net outflows, IBIT-led); the structural bid stays absent into the new week. Macro values shown are Friday's closes (US markets closed over the weekend)."
+    },
+    "liquidations": {
+      "longsUsd": null,
+      "shortsUsd": null,
+      "skew": null,
+      "traders": null,
+      "openInterestUsd": null,
+      "note": "OKX free API returned stale June-cached responses through this run's proxy (ticker/OI/funding/long-short all weeks old), so no fresh derivatives positioning could be verified. The CoinGlass browser fallback is unavailable in this headless scheduled run. Per the data-integrity rule these fields are null rather than fabricated; consider a keyed CoinGlass source for reliable liquidation data."
+    },
+    "fearGreed": 27,
+    "earnings": [
+      {
+        "ticker": "AAPL",
+        "reaction": "pending",
+        "note": "Reports next week alongside MSFT and META; options are pricing outsized swings — the key forward risk-appetite catalyst for the coming week."
+      }
+    ]
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 684.23,
+        "changePct": -1.12,
+        "bias": "bearish",
+        "note": "Friday close $684.23 (-1.12%), a fresh trailing-21-session low after the AI/Mag-7 selloff and the oil spike above $100 on US-Iran tension. No new session over the weekend; carried from Friday's verified close.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -3.86,
+          "pctFromHigh": -7.08,
+          "rsi14": 35.87,
+          "zone": "very-cheap",
+          "note": "Carried from Friday's last close (market closed weekend) — relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 679.10,
+        "changePct": 0.07,
+        "bias": "neutral",
+        "note": "Friday close $679.10 (+0.07%, prev close $678.61), holding mid its trailing-monthly range as the oil reversal offset tech weakness. No new session over the weekend; carried from Friday's verified close.",
+        "dcaSignal": {
+          "percentileInMonth": 38,
+          "pctVs20dAvg": -0.98,
+          "pctFromHigh": -2.12,
+          "rsi14": 41.32,
+          "zone": "fair",
+          "note": "Carried from Friday's last close (market closed weekend) — relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": null,
+        "changePct": null,
+        "bias": "cautious",
+        "note": "StockAnalysis quote is frozen at a stale Jun 18, 2026 print ($101.73) — no clean current close is verifiable. Per the data-integrity rule price/changePct are null and dcaSignal is omitted rather than carrying a five-week-old value as current.",
+        "source": {
+          "title": "JPXN — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": true,
+    "actingHelped": true,
+    "rollingRecord": "The midnight short (entry $63,804, TP $63,000/$62,200, stop $64,320) was the right call: price flushed to $62,187 overnight — through the $63,500 invalidation and into the flagged $62,200 magnet — filling both take-profits before reclaiming. The bearish tilt carried all week keeps paying at the range edges.",
+    "note": "Midnight bias (bull 17 / range 38 / bear 45, invalidation $63,500) resolved as a downside sweep-and-reclaim. Because the $62,200 magnet was tagged and rejected, the balance eases slightly less bearish (bull 22 / range 43 / bear 35), still capped under $64,300 and low-conviction."
+  },
+  "sources": [
+    {
+      "title": "Gemini public ticker BTCUSD (last $63,930), Jul 25 2026 ~07:00 COT",
+      "url": "https://api.gemini.com/v1/pubticker/btcusd"
+    },
+    {
+      "title": "Blockchain.info BTC ticker (USD $64,087 corroboration), Jul 25 2026",
+      "url": "https://blockchain.info/ticker"
+    },
+    {
+      "title": "Kraken public ticker XBTUSD (24h low $62,187 / high $64,740), Jul 25 2026",
+      "url": "https://api.kraken.com/0/public/Ticker?pair=XBTUSD"
+    },
+    {
+      "title": "Crypto Fear & Greed Index (27, Fear), Jul 25 2026",
+      "url": "https://api.alternative.me/fng/"
+    },
+    {
+      "title": "QQQ / VOO / JPXN ETF quotes — StockAnalysis (Friday Jul 24 closes)",
+      "url": "https://stockanalysis.com/etf/qqq/"
+    },
+    {
+      "title": "Bitcoin price coverage, late July 2026 (WebSearch: $62k-$63k weekend range)",
+      "url": "https://www.coindesk.com/price/bitcoin"
+    }
+  ]
+}
