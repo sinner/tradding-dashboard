@@ -9,7 +9,7 @@ import { logger } from '@/services/loggerService';
 
 export async function fetchReportByPath(path: string): Promise<Report> {
   const url = dataUrl(path);
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) {
     logger.error('report', `failed to load (${res.status})`, { path });
     throw new Error(`Failed to load report: ${path}`);

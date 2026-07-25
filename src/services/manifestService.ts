@@ -4,7 +4,8 @@ import { logger } from '@/services/loggerService';
 
 export async function fetchManifest(): Promise<Manifest> {
   const url = dataUrl('data/manifest.json');
-  const res = await fetch(url);
+  // Bypass browser HTTP cache so deploy polls see new sessions promptly.
+  const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) {
     logger.error('manifest', `failed to load (${res.status})`, { url });
     throw new Error(`Failed to load manifest: ${res.status}`);

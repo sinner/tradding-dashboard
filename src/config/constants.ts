@@ -37,6 +37,9 @@ export const QUERY_KEYS = {
 export const KLINE_INTERVALS = ['15m', '1h', '4h', '1d'] as const;
 export type KlineInterval = (typeof KLINE_INTERVALS)[number];
 
+/** How often the dashboard re-checks for newly deployed reports. */
+export const REPORT_DEPLOY_POLL_MS = 30 * 60_000;
+
 /** Resolve a data path relative to Vite `base` (GitHub Pages subpath). */
 export const dataUrl = (path: string): string => {
   const cleaned = path.replace(/^\//, '');

@@ -4,7 +4,7 @@ import { SessionColumn } from '@/components/dashboard/SessionColumn';
 import { PriceLevelsChart } from '@/components/charts/PriceLevelsChart';
 import { Card } from '@/components/ui/Card';
 import { Title } from '@/components/ui/Title';
-import { routeDay, routeStudies } from '@/config/constants';
+import { REPORT_DEPLOY_POLL_MS, routeDay, routeStudies } from '@/config/constants';
 import { useLatestDay } from '@/hooks/useLatestDay';
 import { dayBoundsEt, useKlines } from '@/hooks/useKlines';
 import { useLivePrice } from '@/hooks/useLivePrice';
@@ -13,7 +13,8 @@ import type { Report } from '@/lib/types';
 import { Link } from 'react-router-dom';
 
 export function DashboardPage(): React.ReactNode {
-  const { day, reports, isLoading, isManifestLoading, manifestError } = useLatestDay();
+  const { day, reports, isLoading, isManifestLoading, manifestError, isPollingDeploys } =
+    useLatestDay({ pollForDeploysMs: REPORT_DEPLOY_POLL_MS });
   const live = useLivePrice();
 
   const bounds = day ? dayBoundsEt(day.date) : undefined;
@@ -50,6 +51,9 @@ export function DashboardPage(): React.ReactNode {
           {day ? (
             <p className="mt-1 text-sm text-ink-muted">
               {formatDate(day.date)} · three sessions vs live BTC
+              {isPollingDeploys ? (
+                <span className="ml-1">· checks for new reports every 30 min</span>
+              ) : null}
             </p>
           ) : null}
           <BiasLegend className="mt-2" />

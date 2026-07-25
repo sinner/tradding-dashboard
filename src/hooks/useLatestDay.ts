@@ -1,5 +1,7 @@
-import { useManifest } from '@/hooks/useManifest';
+import { REPORT_DEPLOY_POLL_MS } from '@/config/constants';
 import { useDayReports } from '@/hooks/useDayReports';
+import { useManifest } from '@/hooks/useManifest';
+import { usePageVisible } from '@/hooks/usePageVisible';
 import type { Manifest, ManifestDay } from '@/lib/types';
 
 function hasReports(day: ManifestDay): boolean {
@@ -49,13 +51,23 @@ export function resolveDashboardDay(manifest: Manifest): ManifestDay | undefined
   return fromLatest.date.localeCompare(fromDays.date) > 0 ? fromLatest : fromDays;
 }
 
-export function useLatestDay() {
-  const manifestQuery = useManifest();
+type LatestDayOptions = Readonly<{
+  /** When set, re-fetch manifest + session reports on this interval (tab visible only). */
+  pollForDeploysMs?: number | false;
+}>;
+
+export function useLatestDay(options: LatestDayOptions = {}) {
+  const visible = usePageVisible();
+  const wantPoll = options.pollForDeploysMs ?? false;
+  const refetchInterval =
+    wantPoll && visible ? wantPoll : false;
+
+  const manifestQuery = useManifest({ refetchInterval });
   const day = manifestQuery.data
     ? resolveDashboardDay(manifestQuery.data)
     : undefined;
 
-  const dayReports = useDayReports(day);
+  const dayReports = useDayReports(day, { refetchInterval });
 
   return {
     manifest: manifestQuery.data,
@@ -63,5 +75,8 @@ export function useLatestDay() {
     ...dayReports,
     isManifestLoading: manifestQuery.isLoading,
     manifestError: manifestQuery.error,
+    manifestUpdatedAt: manifestQuery.dataUpdatedAt,
+    isPollingDeploys: Boolean(refetchInterval),
+    pollIntervalMs: wantPoll === false ? 0 : wantPoll || REPORT_DEPLOY_POLL_MS,
   };
 }
