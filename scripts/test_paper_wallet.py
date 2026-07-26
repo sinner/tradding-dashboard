@@ -41,6 +41,10 @@ p=load()
 check("TP auto-resolved flat", p["latest"]["futures"]["side"]=="flat", p["latest"]["action"])
 check("savings swept >0", p["savingsUsd"]>0, p["savingsUsd"])
 check("morning credited profit", any(r["session"]=="morning" and r["attributedPnlUsd"]>0 for r in p["scoreboard"]))
+ax = p["latest"].get("autoExits")
+check("autoExits persisted on TP", bool(ax) and ax[0]["reason"]=="TP", ax)
+check("autoExits records exit price 70000", bool(ax) and abs(ax[0]["price"]-70000)<0.01, ax)
+check("autoExits records closed side long", bool(ax) and ax[0]["side"]=="long", ax)
 
 # 4) endday: spot buy 50 usd, leave message + lesson
 run({"session":"endday","ts":"2026-07-25T19:30:00-04:00","today":"2026-07-25","markPrice":70000,

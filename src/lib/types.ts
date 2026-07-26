@@ -478,6 +478,21 @@ export const PortfolioSnapshotSchema = z
     /** Net worth = equity + savings. */
     netWorthUsd: NullableNumber.optional(),
     rationale: z.string().nullable().optional(),
+    /**
+     * Auto-resolved SL/TP/liquidation fills the ledger applied this snapshot,
+     * BEFORE any discretionary trade — the exact exit level and side of the
+     * position that closed. Empty when nothing auto-filled.
+     */
+    autoExits: z
+      .array(
+        z.object({
+          reason: z.enum(['TP', 'STOPPED_OUT', 'LIQUIDATED']).or(z.string()),
+          price: z.number(),
+          side: z.enum(['long', 'short']).or(z.string()).nullable().optional(),
+        }),
+      )
+      .default([])
+      .optional(),
   })
   .passthrough();
 export type PortfolioSnapshot = z.infer<typeof PortfolioSnapshotSchema>;

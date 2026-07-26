@@ -373,7 +373,7 @@ def run(portfolio_path, intent):
 
     # new working snapshot inherits prev books
     snap = {"ts": intent["ts"], "session": intent["session"], "reportId": intent.get("reportId"),
-            "markPrice": r2(mp), "action": "HOLD",
+            "markPrice": r2(mp), "action": "HOLD", "autoExits": [],
             "spot": dict(prev["spot"]), "futures": dict(prev["futures"]),
             "cashUsd": float(prev["cashUsd"]), "realizedPnlUsd": 0.0,
             "unrealizedPnlUsd": 0.0, "equityUsd": prev_equity,
@@ -381,14 +381,18 @@ def run(portfolio_path, intent):
             "sweptToSavingsUsd": None, "consecutiveSkips": 0, "rationale": intent.get("rationale", "")}
     port["_snap"] = snap
     auto = []
+    auto_exits = []  # structured record of SL/TP/liq fills for the UI (reason + exact price + side)
 
     # 1) resolve SL/TP/liq on the inherited futures position
     hit = resolve_sltp(snap["futures"], intent.get("sessionLow"), intent.get("sessionHigh"))
     if hit:
         price, reason = hit
+        closed_side = snap["futures"].get("side")
         close_futures(port, price)
         snap["action"] = reason
         auto.append(f"{reason}@{price}")
+        auto_exits.append({"reason": reason, "price": r2(price), "side": closed_side})
+    snap["autoExits"] = auto_exits
     # 2) mark to market
     mark(port, mp)
     # 3) attribute the interval's move to the PREVIOUS session's decision
