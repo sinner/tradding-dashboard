@@ -317,14 +317,19 @@ export const ReportSchema = z
 
 export type Report = z.infer<typeof ReportSchema>;
 
+// Session pointers are resilient: a missing key is treated as `null` (session
+// not run yet) instead of failing validation. This keeps one partially-written
+// day from blanking the entire dashboard. Every key resolves to `string | null`.
 export const ManifestDaySchema = z.object({
   date: z.string(),
-  sessions: z.object({
-    midnight: z.string().nullable().optional(),
-    morning: z.string().nullable(),
-    midday: z.string().nullable(),
-    endday: z.string().nullable(),
-  }),
+  sessions: z
+    .object({
+      midnight: z.string().nullable().default(null),
+      morning: z.string().nullable().default(null),
+      midday: z.string().nullable().default(null),
+      endday: z.string().nullable().default(null),
+    })
+    .default({ midnight: null, morning: null, midday: null, endday: null }),
 });
 
 export const ManifestSchema = z.object({
