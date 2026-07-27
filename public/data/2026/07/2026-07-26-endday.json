@@ -1,0 +1,339 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-07-26-endday",
+  "date": "2026-07-26",
+  "session": "endday",
+  "generatedAt": "2026-07-26T19:35:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bullish",
+  "confidence": 4.4,
+  "priceSnapshot": {
+    "value": 64300,
+    "currency": "USD",
+    "changePct": null,
+    "source": "WebSearch consensus, Jul 26 evening COT: CoinDesk live BTC $64,502 (~05:27 EDT); Robinhood/prediction-market evening read $64,318 (~18:00 EDT). Consensus into the endday window ~$64,300, a mild fade from the midday ~$64,500 mark. OKX public API and CoinGecko/CryptoCompare direct calls all returned empty/blocked in this headless run (no browser fallback available), so no fresh OKX ticker/OHLC/positioning this session; the ~$64,300 mark is the web-read consensus.",
+    "asOf": "2026-07-26T19:30:00-05:00",
+    "note": "BTC gave back a little into the close: from the midday ~$64,500 consensus down to ~$64,300, still inside the July box, above the held $63,700 floor and capped under the $65,406/$65,631 double-rejection zone. 24h change not cleanly verifiable this run (direct feeds blocked), so changePct is null rather than estimated; the day was roughly flat-to-slightly-soft (midnight $64,144 -> morning $64,400 -> midday $64,500 -> endday ~$64,300). Constructive-within-range, no breakout, mild evening fade.",
+    "sessionRange": {
+      "low": 64150,
+      "high": 64550
+    }
+  },
+  "decisionBox": {
+    "position": "HOLD",
+    "reduceIf": {
+      "price": 63000,
+      "confirmation": "A 4H close back below $63,000 loses the reclaimed floor and re-opens the $62,200 shelf then $61,870 — scale the spot core down toward EXIT."
+    },
+    "addIf": {
+      "price": 65406,
+      "confirmation": "A 1H/4H close above the $65,406 rejection high (and ideally the ~$65,631 50-month EMA) that HOLDS confirms a real breakout of the July range — only then deploy the last cash into the larger momentum add on top of the accumulated core."
+    },
+    "invalidatesAt": 62200,
+    "stopOrder": {
+      "recommended": false,
+      "price": 63000
+    },
+    "changed": "Unchanged stance from midday: HOLD the accumulated spot core, mark to market. BTC faded modestly from ~$64,500 to ~$64,300 into the close but nothing structural broke — the $63,700 floor held, $65,406 stayed untested, F&G still ~27 fear, ETF-outflow tape (~$465M/2d) unresolved until Monday's print. Cash is nearly exhausted (~$6.6) and at ~$64,300 price still sits in the mid-upper third of the box under the cap, a poor DCA location per the week's own 'accumulate the held floor, don't chase the top' lessons. Defensive endday into the overnight gap: keep the last powder dry for a gap-down toward the $62,200 magnet. No resting stop is set at the ledger level because price (~$64,300) sits well above the $63,000 reduce level in mid-range — the overnight plan is to DCA a gap-down toward $62,200 rather than defend a stop up here. Futures stay flat — no leverage across the thin Sunday-night window."
+  },
+  "overnightRisk": "Thin Sunday-night / early-Asia liquidity is where the sharpest air-pocket moves happen, and BTC sits mid-range (~$64,300) with a validated downside magnet at $62,200 and thin liquidity between it and the $63,700 floor — a flush through $63,700/$63,000 could travel quickly to $62,200. Specific catalysts into the overnight and Monday: (1) Monday Jul 27 US spot-BTC-ETF flow print — whether the ~$465M two-day outflow was a one-off pause or the start of a broader reversal; a second heavy outflow day is the main downside trigger. (2) Mega-cap earnings week (AAPL/MSFT/META) sets risk appetite and QQQ, which is already at a trailing-monthly low (-1.12% Friday). (3) The stalling CLARITY Act vote (Polymarket ~34% for 2026 passage) is a crypto-specific headline risk. (4) US10Y ~4.65% and DXY ~101.5 (Friday carry) — a Monday risk-off tape pressures BTC. Upside surprise risk is smaller but real: a clean close >$65,406 that holds would flip the range. No resting stop is armed up here (price is far above the $63,000 reduce level); the plan is to buy a gap-down toward $62,200 with the reserved ~$6.6 powder, and to scale the core down only on a 4H close below $63,000."
+  ,
+  "probabilities": {
+    "bullish": 31.00,
+    "range": 47.00,
+    "bearish": 22.00
+  },
+  "levels": {
+    "support": [
+      64150,
+      64000,
+      63700,
+      63000,
+      62200
+    ],
+    "resistance": [
+      64550,
+      65000,
+      65406,
+      65631,
+      67950
+    ],
+    "liquidation": [
+      {
+        "price": 65406,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Repeated rejection high / overhead supply just under the ~$65,631 50-month EMA — trapped-long / stop-cluster zone if price presses it again. Structure-anchored ESTIMATE, not fresh exchange resting-order data this run (OKX feed blocked, browser fallback unavailable in this headless run)."
+      },
+      {
+        "price": 62200,
+        "side": "below",
+        "intensity": "high",
+        "magnet": true,
+        "note": "Structural downside shelf, validated on the Jul 25 overnight sweep ($62,187 then reversed). Nearest heavy downside magnet if $63,700/$63,000 gives — the key overnight-gap target. Structure-anchored estimate, not fresh exchange resting-order data this run."
+      },
+      {
+        "price": 61870,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Secondary downside support just under $62,200 per the intraday cheat sheet. Estimated leverage-bracket magnet, not exchange resting-order data."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 65406,
+      "nearestBelow": 62200,
+      "pull": "balanced",
+      "source": "OKX public liquidation/heatmap API blocked this run (empty responses); CoinGlass browser fallback unavailable in this headless scheduled run. Levels below are structure/S-R-anchored estimates, not measured resting orders.",
+      "asOf": "2026-07-26T19:30:00-05:00",
+      "note": "With price ~$64,300 the pull is roughly BALANCED with a mild downside lean into the overnight: the $65,406/$65,631 rejection zone caps the upside and is the nearest magnet on a firm-up, while the validated $62,200 shelf is the heavy downside magnet if the $63,700/$63,000 floor gives in thin Sunday-night liquidity."
+    }
+  },
+  "atr": {
+    "value": null,
+    "period": 14,
+    "pct": null,
+    "source": "Not verified this run (OKX OHLC blocked; no clean intraday ATR feed). The day band held roughly $64,150-$64,550, tight and contained, not carried into any calculation.",
+    "asOf": null
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Mild evening fade from the midday ~$64,500 into ~$64,300, holding above $64,000 with the $65,406 cap untested. Low-conviction Sunday drift; a loss of $63,700 re-opens $63,000 then the $62,200 magnet.",
+      "bias": "neutral",
+      "source": "Price action per WebSearch (Jul 26 evening COT); intraday indicator table not verified (OKX feed blocked).",
+      "asOf": "2026-07-26T19:30:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Range intact: the higher-low base above $63,700 holds and price rolled back from the $64,500 upper-third to ~$64,300 without threatening the floor — still boxed under the $65,406 cap. Slow, low-conviction grind, mild evening softening.",
+      "bias": "neutral-bullish",
+      "source": "Structure per WebSearch (Jul 26); RSI/MACD/EMAs not verified this run (OKX feed blocked).",
+      "asOf": "2026-07-26T19:30:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "The July higher-low base holds (Jul 25 $62,187 sweep reclaimed) and the two-day firm keeps it constructive-within-range, but the 4H is still capped under the descending trendline / ~$65,631 50-month EMA / $67,950 supply. The mild evening fade is chop inside the box, not a trend change.",
+      "bias": "neutral-bullish",
+      "source": "Structure per WebSearch (Jul 26); indicators not verified (OKX feed blocked).",
+      "asOf": "2026-07-26T19:30:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 50.0,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Still inside the daily downtrend under the descending trendline from the May 2026 high and below the ~$65,631 50-month EMA; June closed ~-20% with a 21-month low near $57,815. Price consolidates low-to-mid $64ks; daily RSI ~50 neutral. Short-term bias stays capped until $67,500 is reclaimed.",
+      "bias": "neutral-bearish",
+      "source": "Daily RSI ~50 read from the ~$64,300 consolidation (essentially flat vs the midday read); trend structure per WebSearch. Daily EMAs not re-verified this run (OKX feed blocked).",
+      "asOf": "2026-07-26T19:30:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "hold",
+      "entry": null,
+      "stop": 62200,
+      "tp": [
+        65406,
+        67000
+      ],
+      "rr": null,
+      "confidence": 5.0,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "HOLD",
+      "entry": null,
+      "stop": 62200,
+      "tp": [],
+      "rr": null,
+      "confidence": 5.0,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "mildly constructive while price holds above $64,000, capped at the $65,406 rejection high; two-sided and downside-lean only on a loss of $63,700 into thin overnight liquidity",
+    "longAbove": 65406,
+    "shortBelow": 63700,
+    "invalidates": 62200,
+    "note": "Scalp only the edges — live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 97.0,
+      "changePct": 0.0
+    },
+    "dxy": {
+      "value": 101.47
+    },
+    "us10y": {
+      "value": 4.65
+    },
+    "etfFlows": {
+      "streakDays": 0,
+      "note": "US spot BTC ETFs sit in net outflow: ~$465M over Jul 23-24 (IBIT the biggest single-day withdrawal at -$202.48M), snapping a prior 7-session inflow streak. No weekend flows (US markets closed Sun); next print is Monday Jul 27 — the key near-term catalyst for whether the outflow was a one-off. Macro values (Brent/DXY/US10Y) are Friday Jul 24 closes carried over the weekend, market closed."
+    },
+    "liquidations": {
+      "longsUsd": null,
+      "shortsUsd": null,
+      "skew": null,
+      "traders": null,
+      "openInterestUsd": null,
+      "note": "No fresh liquidation/positioning data this run: OKX public API (open-interest, funding, long-short ratio, liquidation-orders) returned empty/blocked from this headless host, and the CoinGlass browser fallback is unavailable in a headless scheduled run. Rather than carry the midday realized-liq total ($82M) forward as if fresh, longs/shorts/skew/OI are null. Consider a keyed CoinGlass source for a forward liquidation heatmap."
+    },
+    "fearGreed": 27,
+    "earnings": [
+      {
+        "ticker": "AAPL",
+        "reaction": "pending",
+        "note": "Reports this coming week alongside MSFT and META — the key forward risk-appetite catalyst; combined with Monday's ETF-flow print and the stalling CLARITY Act (Polymarket 2026-passage odds ~34%) it sets the tone for whether the July range resolves up or down."
+      }
+    ]
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 684.23,
+        "changePct": -1.12,
+        "bias": "bearish",
+        "note": "Friday Jul 24 close $684.23 (-1.12%), a trailing-21-session low after the AI/Mag-7 selloff. Sunday, no new session; carried from Friday's verified close, market closed. Next session Monday Jul 27, into a mega-cap earnings week (AAPL/MSFT/META).",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -3.86,
+          "pctFromHigh": -7.08,
+          "rsi14": 35.87,
+          "zone": "very-cheap",
+          "note": "Carried from Friday's last close (market closed weekend) — relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 679.14,
+        "changePct": 0.08,
+        "bias": "neutral",
+        "note": "Friday Jul 24 close $679.14 (+0.08%), holding mid its trailing-monthly range as the oil reversal offset tech weakness. Sunday, no new session; carried from Friday's verified close, market closed. Next session Monday Jul 27.",
+        "dcaSignal": {
+          "percentileInMonth": 38,
+          "pctVs20dAvg": -0.98,
+          "pctFromHigh": -2.12,
+          "rsi14": 41.32,
+          "zone": "fair",
+          "note": "Carried from Friday's last close (market closed weekend) — relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": null,
+        "changePct": null,
+        "bias": "cautious",
+        "note": "StockAnalysis/Yahoo/Barchart quotes remain frozen at a stale mid-June 2026 print — no clean current close is verifiable this run, and it is a weekend besides (Tokyo also closed). Per the data-integrity rule price/changePct are null and dcaSignal is omitted rather than carrying a five-week-old value as current.",
+        "source": {
+          "title": "JPXN — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": true,
+    "rollingRecord": "The week's discipline holds: accumulate spot at/above the range floor, refuse leverage into a directionless mid-range tape, and — with cash nearly spent and price near the cap — refuse to chase a top-of-range DCA. The accumulated core (~0.00347 BTC, avg ~$63,990) sits roughly flat as price eased to ~$64,300; net worth holds ~$230, zero blow-ups.",
+    "note": "Midday bias (bull 33 / range 46 / bear 21, reduce $63,000 / add $65,406) resolved into a mild FADE: price eased ~$64,500 -> ~$64,300, floor $63,700 held, $65,406 untested. Tilt nudges marginally softer into the overnight (bull 31 / range 47 / bear 22) but stays range-bound and capped under the $65,406-$65,631 rejection zone with the ETF-outflow tape unresolved until Monday and F&G still in fear."
+  },
+  "sources": [
+    {
+      "title": "Bitcoin price today, BTC to USD live (~$64,502 05:27 EDT / ~$64,318 evening) Jul 26 2026 — CoinDesk / prediction-market reads",
+      "url": "https://www.coindesk.com/price/bitcoin"
+    },
+    {
+      "title": "Bitcoin Continues to Flirt With $64,000 After $225M ETF Outflow — Bitcoin.com News (Jul 25 2026)",
+      "url": "https://news.bitcoin.com/bitcoin-price-64000-reclaim-july-25-2026/"
+    },
+    {
+      "title": "Bitcoin ETF Outflows Mark End to 7-Day Inflow Streak (~$225M Jul 24, ~$465M two-day) — Cryptonomist",
+      "url": "https://en.cryptonomist.ch/2026/07/24/bitcoin-etf-outflows-streak-end/"
+    },
+    {
+      "title": "Crypto Fear & Greed Index ~27 (fear) Jul 25-26 2026 — Bitcoin.com / CFGI",
+      "url": "https://cfgi.io/bitcoin-fear-greed-index/"
+    },
+    {
+      "title": "QQQ / VOO / JPXN ETF quotes — StockAnalysis (Friday Jul 24 closes, carried over weekend)",
+      "url": "https://stockanalysis.com/etf/qqq/"
+    }
+  ]
+}
