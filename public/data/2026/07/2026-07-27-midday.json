@@ -1,0 +1,367 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-07-27-midday",
+  "date": "2026-07-27",
+  "session": "midday",
+  "generatedAt": "2026-07-27T12:50:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bullish",
+  "confidence": 4.7,
+  "priceSnapshot": {
+    "value": 65050,
+    "currency": "USD",
+    "changePct": -0.46,
+    "source": "WebSearch consensus, Jul 27 ~12:45 COT: CoinMarketCap $65,141 (+1.11% 24h); Fortune tape 7am ET $65,358.92 then 9:11am ET dip to $64,974.08; Bybit/CoinDesk ~$65,330 (24h low $64,237 / high $65,461). US cash-session tape soft (QQQ -0.95%). Consensus midday mark ~$65,050. OKX public API STILL stale this run (ticker ts 2026-05-16 ~$78,183; OI ts 2026-06-20; funding ts 2026-06-21) — all discarded per the freshness guard. Liquidation heatmap read LIVE via CoinGlass browser fallback (fresh, price axis matched ~$65k).",
+    "asOf": "2026-07-27T12:45:00-05:00",
+    "note": "BTC eased ~$300 from the morning $65,350 mark to ~$65,050 (-0.46% session-over-session, both endpoints verified; the exchange 24h read is ~+1.11%). Price slid off the $65,406/$65,631 cap through the US morning — a dip to ~$64,974 at 9:11am ET on a risk-off equity tape (QQQ -0.95%, tech leading lower) — then steadied on the $65,000 support shelf. Still range-bound: holding the reclaimed $65k floor under the unbroken cap, into the binary Jul 28-29 Fed. The fresh CoinGlass heatmap shows the heaviest liquidity sitting just below at ~$64,700 then ~$64,000, so a loss of $65,000 magnetizes toward $64,000.",
+    "sessionRange": {
+      "low": 64850,
+      "high": 65358
+    }
+  },
+  "decisionBox": {
+    "position": "ADD",
+    "reduceIf": {
+      "price": 63000,
+      "confirmation": "A 4H close back below $63,000 loses the reclaimed floor and re-opens the $62,200 magnet — scale the remaining spot core down toward EXIT."
+    },
+    "addIf": {
+      "price": 65631,
+      "confirmation": "A 1H/4H close above the ~$65,631 50-month EMA that HOLDS (not just a wick over $65,406) confirms a real breakout of the July range — only then redeploy the rest of the raised cash into a momentum add. The $65,406 tag has been rejected repeatedly, so the trigger stays a holding close above $65,631."
+    },
+    "invalidatesAt": 62200,
+    "stopOrder": {
+      "recommended": false,
+      "price": 63000
+    },
+    "changed": "From morning HOLD to a small ADD. Price pulled back ~$300 off the cap into the $65,000 support shelf, so the desk deployed a small $15 spot DCA into the long-term core near support rather than sit passive for a second straight mark. This is a laddered starter, NOT a momentum chase: ~$25 of dry powder is deliberately kept for the heavier $64,000/$62,200 liquidity magnets and the post-Fed move. No leverage into the binary Jul 28-29 Fed. Reduce stays $63,000; the breakout momentum-add trigger stays a holding close above $65,631."
+  },
+  "probabilities": {
+    "bullish": 35.0,
+    "range": 45.0,
+    "bearish": 20.0
+  },
+  "levels": {
+    "support": [
+      65000,
+      64700,
+      64237,
+      63700,
+      63000,
+      62200
+    ],
+    "resistance": [
+      65406,
+      65631,
+      66000,
+      67000,
+      67900
+    ],
+    "liquidation": [
+      {
+        "price": 65700,
+        "side": "above",
+        "intensity": "high",
+        "magnet": true,
+        "note": "Bright yellow liquidation band immediately overhead on the CoinGlass Model-3 heatmap (Binance BTC/USDT perp, 48h) — the nearest overhead short-liq magnet just above the $65,406/$65,631 cap; a decisive reclaim would squeeze trapped shorts into it. Read live via browser screenshot; band price solid, USD magnitude qualitative."
+      },
+      {
+        "price": 67900,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Secondary bright band higher up on the heatmap; the next overhead magnet only in play on a confirmed breakout of the July range toward $67,000+."
+      },
+      {
+        "price": 64700,
+        "side": "below",
+        "intensity": "extreme",
+        "magnet": true,
+        "note": "The BRIGHTEST heatmap band sits right below spot at ~$64,700 — heavy resting liquidity directly under price. A clean loss of $65,000 could accelerate a flush into this cluster. Fresh CoinGlass browser read; the key near-term downside magnet this run."
+      },
+      {
+        "price": 64000,
+        "side": "below",
+        "intensity": "high",
+        "magnet": false,
+        "note": "Thick bright band a step lower on the heatmap, overlapping the $64,237 structural shelf. The natural continuation target if $64,700 gives."
+      },
+      {
+        "price": 62150,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": true,
+        "note": "Deeper yellow band aligning the structural $62,200 shelf validated on the Jul 25 overnight sweep ($62,187 then reversed); below the dense heatmap zone into thinner liquidity — the deeper post-Fed flush target."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 65700,
+      "nearestBelow": 64700,
+      "pull": "down",
+      "source": "CoinGlass Liquidation Heatmap Model 3 (Binance BTC/USDT perp, 48h), read live via browser screenshot Jul 27 ~12:45 COT (price axis matched ~$65k — fresh). Header aggregates: Open Interest $114.94B (+0.69%), 24h Liquidation $438.5M (+294%), 24h Long/Short 49.83%/50.17%. OKX public API stale again this run and discarded.",
+      "asOf": "2026-07-27T12:45:00-05:00",
+      "note": "Price is pinned on the $65,000 shelf with a bright ~$65,700 band overhead and HEAVIER, brighter clusters right below at ~$64,700 then ~$64,000. Near-term pull is DOWN — the heavier liquidity sits just underneath, so a loss of $65,000 magnetizes toward $64,000; a holding reclaim of $65,631 flips the pull up toward the $65,700 then $66,000-$67,000 bands."
+    }
+  },
+  "atr": {
+    "value": null,
+    "period": 14,
+    "pct": null,
+    "source": "Not verified this run (OKX OHLC stale; no clean intraday ATR feed). Intraday band ~ $64,850-$65,358 not carried into any calculation.",
+    "asOf": null
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Rolled over intraday: price faded from the ~$65,350 morning mark, tagged ~$64,974 into the US open on the soft equity tape, then based on the $65,000 shelf. Capped and slightly heavy; a clean loss of $65,000 opens the ~$64,700 heatmap cluster toward $64,000, while reclaiming $65,406 re-tests the cap.",
+      "bias": "neutral",
+      "source": "Price action per WebSearch (Jul 27 ~12:45 COT); intraday indicator table not verified (OKX feed stale).",
+      "asOf": "2026-07-27T12:45:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Higher-low base above $63,700 intact but momentum cooled: the fresh 5-week high stalled at the $65,406/$65,631 cap and price slipped back to the $65,000 shelf. Still the TOP of the July box, just no longer pressing the cap — a range fade within the range rather than a breakdown.",
+      "bias": "neutral-bullish",
+      "source": "Structure per WebSearch (Jul 27); RSI/MACD/EMAs not verified (OKX feed stale).",
+      "asOf": "2026-07-27T12:45:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "The July higher-low base holds under the descending-trendline / ~$65,631 50-month EMA confluence, unchanged from morning except that the cap rejected again and price sits mid-box. Make-or-break is still a holding 4H close above $65,631 (opens $65,700 then $66,000-$67,000); failure keeps the multi-week range with risk of a fade to the $64,000/$63,700 floor. The risk-off equity tape trims the odds of an immediate up-resolution.",
+      "bias": "neutral",
+      "source": "Structure per WebSearch (Jul 27); indicators not verified (OKX feed stale).",
+      "asOf": "2026-07-27T12:45:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Still inside the daily downtrend under the descending trendline from the May 2026 high; the ~$65,631 50-month EMA remains the pivotal cap and today's rejection keeps it intact. A daily close and HOLD above $65,631 would be the first structural crack of the downtrend since June — the post-Fed read is the catalyst that could deliver it. Until then the bias is capped and the tape is a range fade. Daily RSI not computed this run (OKX feed stale) — left null.",
+      "bias": "neutral-bearish",
+      "source": "Trend structure per WebSearch (Jul 27); daily EMAs/RSI not re-verified this run (OKX feed stale).",
+      "asOf": "2026-07-27T12:45:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "add",
+      "entry": [
+        65050
+      ],
+      "stop": 62200,
+      "tp": [
+        65631,
+        67000
+      ],
+      "rr": null,
+      "confidence": 5.0,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "ADD",
+      "entry": null,
+      "stop": 62200,
+      "tp": [],
+      "rr": null,
+      "confidence": 5.0,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "two-sided and slightly heavy while price holds the $65,000 shelf but sits capped under $65,406/$65,631; a clean loss of $65,000 opens the ~$64,700 heatmap cluster toward $64,000, while only a reclaim of $65,406 re-tests the cap into the Fed window",
+    "longAbove": 65631,
+    "shortBelow": 64237,
+    "invalidates": 62200,
+    "note": "Scalp only the edges — live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 90.28,
+      "changePct": -8.23
+    },
+    "dxy": {
+      "value": 100.9
+    },
+    "us10y": {
+      "value": 4.64
+    },
+    "etfFlows": {
+      "streakDays": 0,
+      "note": "US spot-BTC-ETF flow backdrop still soft/unresolved: the ~$465M Jul 23-24 outflow tape has not cleanly reversed and Monday Jul 27 has not closed, so no single-day flow print is verifiable. Brent is carried from the morning post-ceasefire read (~$90.28, -8.23%); a midday re-verify returned conflicting/stale quotes ($96.78 with a pre-ceasefire '40% surge' narrative) so it was not overwritten — treat oil as the Monday ceasefire read, not re-confirmed at midday. US10Y ~4.64% is fresh (eased Jul 27). DXY ~100.9 is the last verified level (Jul 14), not cleanly re-verified."
+    },
+    "liquidations": {
+      "longsUsd": null,
+      "shortsUsd": null,
+      "skew": 0.99,
+      "traders": null,
+      "openInterestUsd": 114942513770,
+      "note": "Fresh CoinGlass Liquidation Heatmap Model 3 read live via browser (Jul 27 ~12:45 COT, price axis matched ~$65k). Header aggregates: aggregate Open Interest $114.94B (+0.69%), 24h Liquidation total $438.5M (+294% — a spike as price flushed off the cap), 24h Long/Short 49.83%/50.17% => skew ~0.99 (near balanced, a slight flip from morning's 1.04 long-crowded toward neutral/short). Header does not split long/short USD so longsUsd/shortsUsd left null. OKX public API (OI/funding/long-short/liquidation-orders) returned STALE cache again (ts ~mid-May to mid-June) and was discarded per the freshness guard."
+    },
+    "fearGreed": 30,
+    "earnings": [
+      {
+        "ticker": "FOMC",
+        "reaction": "pending",
+        "note": "Jul 28-29 Federal Reserve meeting is THE near-term catalyst — the binary risk into which BTC is fading off the $65,406/$65,631 cap. The weekend oil crash and lower yields ease the inflation backdrop and tilt the odds toward a friendlier read, but the print is still binary."
+      },
+      {
+        "ticker": "AAPL",
+        "reaction": "pending",
+        "note": "Reports this week with MSFT/META; today's tech-led equity selloff (QQQ -0.95%) shows the mega-cap earnings risk is live and is pressuring risk appetite alongside the Fed."
+      }
+    ]
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 677.73,
+        "changePct": -0.95,
+        "bias": "bearish",
+        "note": "Live intraday $677.73 (-0.95%) at 1:04pm ET (StockAnalysis, market open), a fresh trailing-monthly low below Friday's $684.23 close as tech/Mag-7 led the tape lower into the AAPL/MSFT/META earnings week and the Fed. Day range $675.95-$692.30.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -3.86,
+          "pctFromHigh": -7.08,
+          "rsi14": 35.87,
+          "zone": "very-cheap",
+          "note": "Carried from this morning's computed trailing-close series (RSI not recomputable this run without the raw series). QQQ's fresh intraday print ~$677.73 is BELOW Friday's $684.23 close, so relative cheapness has if anything increased — read this as a floor on cheapness, not a fresh recompute. Monthly DCA relative-cheapness, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 679.25,
+        "changePct": 0.02,
+        "bias": "neutral",
+        "note": "Live intraday $679.25 (+0.02%) at 12:38pm ET (StockAnalysis, market open), essentially flat vs Friday's $679.14 close — the broad S&P held as value/energy offset the tech drag. Day range $676.84-$685.24.",
+        "dcaSignal": {
+          "percentileInMonth": 38,
+          "pctVs20dAvg": -0.98,
+          "pctFromHigh": -2.12,
+          "rsi14": 41.32,
+          "zone": "fair",
+          "note": "Carried from this morning's computed trailing-close series; VOO is essentially unchanged vs Friday's close, so the signal is still valid. Monthly DCA relative-cheapness, not a bottom call."
+        },
+        "source": {
+          "title": "VOO — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": null,
+        "changePct": null,
+        "bias": "cautious",
+        "note": "StockAnalysis/Yahoo/Barchart/GuruFocus quotes remain frozen at a stale mid-June 2026 print (last clean references: NAV $98.14 Jul 1, price $97.36 May 20) — no clean current close is verifiable this run, and Tokyo is not yet in a fresh session besides. Per the data-integrity rule price/changePct are null and dcaSignal is omitted rather than carrying a weeks-old value as current.",
+        "source": {
+          "title": "JPXN — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": true,
+    "rollingRecord": "Discipline holds into the Fed. Midnight trimmed 15% into the cap; morning HELD at $65,350 rather than re-add near resistance; price then eased ~$300 to $65,050, so holding avoided buying the intraday top and the raised cash is now closer to being useful. Midday deploys a small $15 spot DCA on the $65,000 shelf and keeps ~$25 dry for the $64,000/$62,200 magnets. Net worth ~$233, zero blow-ups.",
+    "note": "Morning bias (bull 38 / range 45 / bear 17, reduce $63,000 / add $65,631) is broadly confirmed but the up-tilt cooled: BTC rejected the $65,406/$65,631 cap again and faded to the $65,000 shelf on a risk-off equity tape (QQQ -0.95%), with the fresh CoinGlass heatmap now showing the heaviest liquidity just below ($64,700 then $64,000) and L/S flipping toward balanced (1.04 -> 0.99). Bear odds nudged back to 20; stance is a small dip-DCA on the shelf while keeping powder and the same reduce $63,000 / add-above-$65,631 rails."
+  },
+  "sources": [
+    {
+      "title": "Bitcoin price today Jul 27 2026 — CoinMarketCap $65,141 (+1.11% 24h)",
+      "url": "https://coinmarketcap.com/currencies/bitcoin/"
+    },
+    {
+      "title": "Current price of Bitcoin for July 27, 2026 (7am ET $65,358.92; 9:11am ET $64,974.08) — Fortune",
+      "url": "https://fortune.com/article/price-of-bitcoin-07-27-2026/"
+    },
+    {
+      "title": "Bitcoin holds mid-$65k Monday; 24h range $64,237-$65,461 — CoinDesk / Bybit",
+      "url": "https://www.coindesk.com/price/bitcoin"
+    },
+    {
+      "title": "Bitcoin Liquidation Heatmap Model 3 (Binance BTC/USDT perp, 48h) — read live via browser Jul 27 ~12:45 COT; OI $114.94B, 24h liq $438.5M, L/S 49.83%/50.17% — CoinGlass",
+      "url": "https://www.coinglass.com/pro/futures/LiquidationHeatMapModel3?coin=BTC&type=pair"
+    },
+    {
+      "title": "Stock Market Today: SPY green, QQQ negative; oil slips below $100 — TipRanks",
+      "url": "https://www.tipranks.com/news/stock-market-today-spy-qqq-mixed-as-trump-expands-tariff-push-oil-slips-below-100"
+    },
+    {
+      "title": "QQQ ETF ($677.73, -0.95%, 1:04pm ET) / VOO ETF ($679.25, +0.02%, 12:38pm ET) — StockAnalysis",
+      "url": "https://stockanalysis.com/etf/qqq/"
+    },
+    {
+      "title": "Crypto Fear & Greed Index 30 (Fear) — Jul 27 2026",
+      "url": "https://cfgi.io/crypto-fear-greed-index/"
+    }
+  ]
+}

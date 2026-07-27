@@ -96,5 +96,29 @@ check("reset cash 100", p["latest"]["cashUsd"]==100.0, p["latest"]["cashUsd"])
 check("round incremented", p["round"]==r0+1, p["round"])
 check("action RESET", p["latest"]["action"]=="RESET", p["latest"]["action"])
 
+# 7) spot_sell returns principal to cash + conserves net worth (regression: proceeds were dropped)
+# wallet is active & flat at cash 100 after the revive. Buy spot, then sell.
+run({"session":"morning","ts":"2026-08-02T06:50:00-04:00","today":"2026-08-02","markPrice":68000,
+     "decision":{"type":"spot_buy","usd":40}})
+p=load(); nw_before=p["latest"]["netWorthUsd"]; cash_before=p["latest"]["cashUsd"]; btc_before=p["latest"]["spot"]["btc"]
+# sell half at the SAME mark: no gain, pure principal (~20) must come back to cash; net worth unchanged
+run({"session":"midday","ts":"2026-08-02T12:40:00-04:00","today":"2026-08-02","markPrice":68000,
+     "sessionLow":68000,"sessionHigh":68000,"decision":{"type":"spot_sell","fraction":0.5}})
+p=load()
+check("spot_sell same-mark conserves net worth", abs(p["latest"]["netWorthUsd"]-nw_before)<0.02,
+      f"{p['latest']['netWorthUsd']} vs {nw_before}")
+check("spot_sell returns principal to cash (~+20)", abs((p["latest"]["cashUsd"]-cash_before)-20)<0.05,
+      f"delta {round(p['latest']['cashUsd']-cash_before,2)}")
+check("spot_sell halves btc", abs(p["latest"]["spot"]["btc"]-btc_before/2)<1e-8, p["latest"]["spot"]["btc"])
+# sell remainder at a HIGHER mark: principal back + gain (with 20% sweep), net worth still conserved
+sav_before=p["savingsUsd"]; nw2=p["latest"]["netWorthUsd"]
+run({"session":"endday","ts":"2026-08-02T19:30:00-04:00","today":"2026-08-02","markPrice":72000,
+     "sessionLow":72000,"sessionHigh":72000,"decision":{"type":"spot_sell","fraction":1.0}})
+p=load()
+check("spot_sell in profit conserves net worth", abs(p["latest"]["netWorthUsd"]-(nw2+ (p["latest"]["spot"]["valueUsd"]*0) ))>=0 and abs(p["latest"]["netWorthUsd"] - (nw2 + (72000-68000)*btc_before/2))<0.05,
+      f"nw {p['latest']['netWorthUsd']}")
+check("spot_sell in profit swept to savings", p["savingsUsd"]>sav_before, f"{p['savingsUsd']} vs {sav_before}")
+check("spot flat after full sell", (p["latest"]["spot"]["btc"] or 0)==0, p["latest"]["spot"]["btc"])
+
 print("\n" + ("ALL TESTS PASSED" if not fails else f"{len(fails)} FAILED: {fails}"))
 sys.exit(1 if fails else 0)

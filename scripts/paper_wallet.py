@@ -208,7 +208,8 @@ def apply_decision(port, d, mp):
             avg = sp.get("avgEntry") or mp
             proceeds = sell * mp
             cost = sell * avg
-            realize(port, r2(proceeds - cost))            # spot realized net gain
+            s["cashUsd"] = r2(s["cashUsd"] + cost)        # return principal (cost basis) to cash
+            realize(port, r2(proceeds - cost))            # bank realized net gain (+20% sweep) to cash
             new_btc = held - sell
             sp["btc"] = r8(new_btc)
             sp["costBasisUsd"] = r2(avg * new_btc)
