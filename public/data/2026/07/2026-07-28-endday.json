@@ -1,0 +1,354 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-07-28-endday",
+  "date": "2026-07-28",
+  "session": "endday",
+  "generatedAt": "2026-07-28T19:30:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bearish",
+  "confidence": 5.0,
+  "priceSnapshot": {
+    "value": 63600,
+    "currency": "USD",
+    "changePct": -2.0,
+    "source": "WebSearch/web_fetch consensus, Jul 28 ~19:30 COT: Bitcoin.com Markets (published 3:38pm EDT / 2:37pm-EDT read) had BTC ~$63,660, down ~2% on the day, mkt cap $1.277T; the session flushed to an intraday low $62,684 (~9-10am EDT window) then a relief rally reclaimed $64,000 before fading back into the $63,000-$64,000 band. Yahoo/Fortune had the open $63,706.66 and $63,327 at 8:34am ET. OKX public API STILL stale this run (spot ticker ts ~72d old @ $78k; OI ts ~37.5d, funding ts ~37d) — all discarded per the freshness guard.",
+    "asOf": "2026-07-28T19:30:00-05:00",
+    "note": "Since the midday read (~$63,400, low $63,173) BTC lost the $63,000 shelf INTRADAY, printing a fresh session low $62,684 before buyers reclaimed it and pushed a relief rally back over $64,000, then faded to ~$63,600 into the evening. The shelf broke on a wick but there was NO clean 4H CLOSE below $63,000, so the desk's reduce trigger did not confirm; the deeper $62,200 structural invalidation held with ~$480 to spare. The move flushed $134M of leveraged BTC longs. Net: still range-bound in the lower half of the July box, one binary event (Wed FOMC) from resolution.",
+    "sessionRange": {
+      "low": 62684,
+      "high": 64000
+    }
+  },
+  "decisionBox": {
+    "position": "HOLD",
+    "reduceIf": {
+      "price": 63000,
+      "confirmation": "A 4H CLOSE below $63,000 (not just the intraday $62,684 wick that was bought back today) loses the shelf for real and hands price to the ~$62,000 heatmap magnet / $62,200 structural invalidation into thin overnight liquidity — scale the small spot core down toward EXIT on that confirmed break. Today the shelf was breached on a wick but reclaimed, so the trigger stays UNfired on a close basis."
+    },
+    "addIf": {
+      "price": 65631,
+      "confirmation": "A 1H/4H close above the ~$65,631 50-month EMA that HOLDS confirms a real breakout of the July range — only then redeploy the reserved dry powder into a momentum add. That trigger sits ~$2,000 overhead, a low-probability event before the Fed prints."
+    },
+    "invalidatesAt": 62200,
+    "stopOrder": {
+      "recommended": true,
+      "price": 61900
+    },
+    "changed": "Stance stays HOLD; confidence held at 5.0. What changed vs midday: BTC lost the $63,000 shelf INTRADAY to $62,684 (midday low was $63,173) before a relief rally reclaimed $64,000 and faded to ~$63,600 — a two-sided, volatile session that flushed $134M of longs but held the $62,200 invalidation. Because this is the LAST read before ~02:00 and the overnight spans the eve of a binary FOMC (Wed 2pm ET decision, Warsh presser 2:30pm ET, ~35.8% hike odds) with a bright $62,000 liquidation magnet just below into thin liquidity, the desk now RECOMMENDS a resting protective stop at $61,900 (below the $62,000 magnet and the $62,200 invalidation) to guard the core through the gap. Probabilities nudge a shade more bearish (range 45->44, bear 35->36) on the intraday breakdown and overnight event risk. Powder (~$25) stays reserved for the $62,000 magnet / post-Fed move; no leverage into the decision."
+  },
+  "overnightRisk": "The next read is ~02:00, so this stance carries through the eve of the summer's most event-heavy stretch. Wednesday brings the FOMC decision (2pm ET) and Chair Warsh's press conference (2:30pm ET) — CME FedWatch prices ~35.8% odds of a surprise HIKE (up from 25.7% last week) and Warsh has been consistently hawkish with deliberately thin forward guidance, so the presser IS the signal. Thursday adds Q2 GDP + core PCE (Jul 30) and AAPL/MSFT/AMZN earnings land through the window. Overnight crypto liquidity is thin and a bright $62,000 liquidation magnet sits just below today's $62,684 low, so a hawkish surprise or an earnings miss can gap BTC straight into the $58,000-$60,000 zone (analyst McCluskey's bear case); a dovish hold with constructive earnings/PCE opens $68,000-$70,000. A resting stop is the only real overnight protection — recommended at $61,900. Base case: chop in $62,700-$64,650 until the decision, with tail risk on both sides.",
+  "probabilities": {
+    "bullish": 20.0,
+    "range": 44.0,
+    "bearish": 36.0
+  },
+  "levels": {
+    "support": [
+      62684,
+      62200,
+      62000,
+      61000,
+      60300
+    ],
+    "resistance": [
+      64000,
+      64050,
+      64237,
+      64650,
+      65000,
+      65546,
+      65631
+    ],
+    "liquidation": [
+      {
+        "price": 64050,
+        "side": "above",
+        "intensity": "high",
+        "magnet": true,
+        "note": "Nearest overhead liquidity — the shelf lost Jul 27 and rejected again on today's relief-rally reclaim of $64,000. Late shorts stacked here would squeeze on a holding reclaim. LEVEL carried from the Jul 27 live CoinGlass Model-3 browser read; not re-measured this headless run (OKX feed stale, no browser fallback)."
+      },
+      {
+        "price": 64650,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Secondary band a step higher overlapping the $64,237 prior 24h low; next overhead magnet only on a reclaim of $64,050. Carried level, not re-measured this run."
+      },
+      {
+        "price": 62000,
+        "side": "below",
+        "intensity": "high",
+        "magnet": true,
+        "note": "The bright magnet just below today's $62,684 flush, overlapping the $62,200 structural invalidation. Liquidity between $63,000 and $62,000 is thin, so a CONFIRMED loss of $63,000/$62,200 overnight magnetizes toward this cluster — the desk's reserved add zone and the reason a resting stop sits at $61,900. Estimated leverage-bracket / carried heatmap level — NOT fresh exchange resting-order data this run (OKX stale, no browser fallback)."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 64050,
+      "nearestBelow": 62000,
+      "pull": "down",
+      "source": "OKX public API stale again this run (spot ticker ts ~72d @ $78k; OI/funding ts ~37d) and discarded per the freshness guard; no Claude-in-Chrome browser fallback available in this headless scheduled run. Magnet LEVELS carried from the Jul 27 live CoinGlass Model-3 browser read plus leverage-bracket estimation — not freshly measured. Today's realized $134M long-liquidation aggregate is sourced (Bitcoin.com Markets) and recorded under macro.liquidations.",
+      "asOf": "2026-07-28T19:30:00-05:00",
+      "note": "Pull stays DOWN after the intraday breakdown: heavier liquidity overhead at $64,050 then $64,650, the bright magnet below now closer at ~$62,000 after the $62,684 flush. A confirmed 4H close below $63,000 overnight opens the $62,000-$62,200 magnet; a holding reclaim of $64,050 flips the pull back up toward $64,650/$65,000. The binary sits with the Fed."
+    }
+  },
+  "atr": {
+    "value": null,
+    "period": 14,
+    "pct": null,
+    "source": "Not verified this run (OKX OHLC stale; no clean intraday ATR feed). Today's realized session band ~$62,684-$64,000 (~2.1% intraday) is context only, not carried into any calculation.",
+    "asOf": null
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Whippy two-sided session: a flush to $62,684 was aggressively bought back through $63,000 and $64,000 before fading to ~$63,600. Micro structure is now a lower-high/higher-low coil between the reclaimed $63,000 shelf and the $64,000-$64,050 rejection — a pre-event squeeze. A fresh loss of $63,000 re-opens $62,684/$62,000; a reclaim of $64,050 targets $64,650.",
+      "bias": "neutral",
+      "source": "Price action per web_fetch/WebSearch (Bitcoin.com Markets, Jul 28 ~19:30 COT); intraday indicator table not verified (OKX feed stale).",
+      "asOf": "2026-07-28T19:30:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "The multi-week $63,000-$63,700 higher-low base was pierced intraday to $62,684 but the CLOSE reclaimed it — the base is bruised, not broken. Still capped under the lost $64,050 shelf. A 1H/4H close below $63,000 overnight opens the ~$62,000 magnet; holding $63,000 keeps the July box alive into the decision.",
+      "bias": "bearish",
+      "source": "Structure per web_fetch/WebSearch (Jul 28); RSI/MACD/EMAs not verified (OKX feed stale).",
+      "asOf": "2026-07-28T19:30:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Sits in the lower half of the July box after the Jul 27 rejection at the ~$65,631 50-month EMA cap and today's failed $64,000 reclaim. Range holds while $62,200 does; the make-or-break stays the downside — a 4H close below $63,000 targets $62,000-$62,200, a holding close back above $64,050 then $65,000 repairs it. Coiling into the binary Fed.",
+      "bias": "neutral-bearish",
+      "source": "Structure per web_fetch/WebSearch (Jul 28); indicators not verified (OKX feed stale).",
+      "asOf": "2026-07-28T19:30:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Still inside the daily downtrend under the descending trendline from the May 2026 high; today prints a lower intraday low ($62,684) but an inside-ish daily close near $63,600 keeps the range intact. BTC is on track to close July with a small net gain despite ~-4% on the month. Bias stays capped and heavy into the Fed; a daily CLOSE below $63,000/$62,200 would confirm a lower low toward the $62,000-$62,200 shelf. Daily RSI not computed this run (OKX feed stale) — left null.",
+      "bias": "bearish",
+      "source": "Trend structure per web_fetch/WebSearch (Jul 28); daily EMAs/RSI not re-verified this run (OKX feed stale).",
+      "asOf": "2026-07-28T19:30:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 3.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "hold",
+      "entry": null,
+      "stop": 61900,
+      "tp": [
+        65000,
+        65631
+      ],
+      "rr": null,
+      "confidence": 4.5,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "HOLD",
+      "entry": null,
+      "stop": 61900,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.5,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "two-sided at the range floor after a bought-back $62,684 flush: price coils between the reclaimed $63,000 shelf and the $64,000-$64,050 rejection. A confirmed loss of $63,000 opens ~$62,000; a holding reclaim of $64,050 re-tests $64,650/$65,000. Event risk dominates — the Fed decides direction.",
+    "longAbove": 64050,
+    "shortBelow": 63000,
+    "invalidates": 62200,
+    "note": "Scalp only the edges — live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 86.58,
+      "changePct": -1.54
+    },
+    "dxy": {
+      "value": 101.53
+    },
+    "us10y": {
+      "value": 4.64
+    },
+    "etfFlows": {
+      "streakDays": 0,
+      "note": "US spot-BTC-ETF logged a net OUTFLOW of -$11.64M on Jul 27 (Monday), and Jul 28 saw weaker ETF demand cited as a driver of the slide; the Jul 28 daily settlement is not published at endday, so no confirmed Jul 28 net figure is asserted. Flows stay defensive into Wednesday's decision. CME FedWatch prices ~35.8% odds of a HIKE tomorrow (up from ~25.7% last week). US10Y ~4.64% (carried, near the highest since Jan 2025). DXY 101.53 and Brent $86.58 (-1.54%) both CARRIED from the Jul 28 morning reads — no fresher print verified this run; labelled per RULE 1. USD flow magnitudes for Jul 28 not asserted."
+    },
+    "liquidations": {
+      "longsUsd": 134000000,
+      "shortsUsd": 22000000,
+      "skew": null,
+      "traders": null,
+      "openInterestUsd": null,
+      "note": "SOURCED realized liquidations for today's flush (Bitcoin.com Markets, Jul 28): ~$134M of leveraged BTC LONGS wiped (a jump from ~$30M Monday) vs ~$22M BTC shorts — total BTC ~$156M; across the broader crypto market ~$515M longs vs ~$98M shorts. The lopsided long-side damage confirms longs were the crowded/vulnerable side into the drop. skew left null (this is realized-liquidation USD, not an account long/short ratio); openInterestUsd null because the OKX OI feed was stale (~37d old) and no browser fallback was available this headless run. Consider a keyed CoinGlass source to restore forward OI/heatmap."
+    },
+    "fearGreed": 29,
+    "earnings": [
+      {
+        "ticker": "FOMC",
+        "reaction": "pending",
+        "note": "THE catalyst: the two-day FOMC concludes Wednesday (decision 2pm ET, Chair Warsh press conference 2:30pm ET). FedWatch ~35.8% hike odds; Warsh consistently hawkish with thin forward guidance, so the presser is the real signal. Dovish hold -> BTC eyes $68k-$70k; hike or hawkish hold -> $58k-$60k comes into view."
+      },
+      {
+        "ticker": "PCE",
+        "reaction": "pending",
+        "note": "Q2 GDP + core PCE land Jul 30 (plus the BoE decision). Core PCE easing from May's 3.4% y/y would restore the disinflation narrative; an upside surprise reinforces the hawkish read. A key overnight/48h risk alongside the Fed."
+      },
+      {
+        "ticker": "AAPL",
+        "reaction": "pending",
+        "note": "AAPL/MSFT/AMZN report through this window; tech-led equity softness (QQQ -1.76% Jul 28) is pressuring risk appetite alongside the Fed. An earnings miss into a hawkish Fed is the compounding bear case."
+      }
+    ]
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 670.11,
+        "changePct": -1.76,
+        "bias": "bearish",
+        "note": "Jul 28 SETTLED close $670.11 (~-1.76% vs the $682.12 prior close), day range ~$669.19-$677.30. Third down leg as tech/Mag-7 stays heavy into the AAPL/MSFT/AMZN earnings week and the Fed.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -3.86,
+          "pctFromHigh": -7.08,
+          "rsi14": 35.87,
+          "zone": "very-cheap",
+          "note": "Carried from the Jul 27 computed trailing-close series and consistent with today's settled $670.11 close (bottom of the monthly band). Relative monthly-DCA cheapness, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 680.96,
+        "changePct": 0.24,
+        "bias": "neutral",
+        "note": "Jul 28 close ~$680.96 (+0.24% vs the $679.31 Jul 27 close), day range $676.48-$682.76, open $679.45 (StockAnalysis real-time read). The S&P proxy held marginally GREEN even as QQQ fell ~1.8% — a defensive rotation out of mega-cap tech, not a broad risk-off. Sits mid-range.",
+        "dcaSignal": {
+          "percentileInMonth": 40,
+          "pctVs20dAvg": -0.7,
+          "pctFromHigh": -1.94,
+          "rsi14": 42.0,
+          "zone": "fair",
+          "note": "Carried/updated from the Jul 27 trailing-close series with today's small green close; monthly DCA relative-cheapness, not a bottom call."
+        },
+        "source": {
+          "title": "VOO — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 98.21,
+        "changePct": null,
+        "bias": "neutral",
+        "note": "Jul 27 last close $98.21 CARRIED — no clean Jul 28 print was verifiable this run (search feeds returned stale/erroneous quotes), so changePct is left null rather than fabricated. The Tokyo Topix fell ~2.52% on Jul 28, so JPXN likely traded softer, but no exact close is asserted. dcaSignal omitted: fewer than 15 clean trailing daily closes are verifiable to compute a valid monthly signal.",
+        "source": {
+          "title": "JPXN — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": true,
+    "rollingRecord": "Keep-powder discipline still holding: BTC pierced the $63,000 shelf to $62,684 today but bought it back with no 4H close below, so the reduce trigger stayed unfired on a close basis and the $62,200 invalidation held with ~$480 to spare — the reserved ~$25 powder and the long-term core are intact, no stop hit. The small Jul 25 midday DCA at $65,050 and the wider core (avg $64,067) sit modestly underwater at $63,600. Net worth marks ~$226 at $63,600, still zero blow-ups across the round. Endday adds a recommended $61,900 resting stop to protect the core through the FOMC overnight.",
+    "note": "Midday bias (range-bear, bull 20 / range 45 / bear 35, reduce $63,000 / add $65,631) held: price flushed to $62,684 intraday but reclaimed $63,000 and faded to ~$63,600, so no confirmed reduce. Endday keeps range-bear and nudges a shade more bearish (bull 20 / range 44 / bear 36) on the intraday breakdown and the binary-FOMC overnight gap. Same $63,000 reduce / $65,631 add rails; stopOrder now recommended at $61,900; powder reserved for the $62,000 magnet."
+  },
+  "sources": [
+    {
+      "title": "$134M in Bitcoin Longs Vaporized as BTC Breaks Below $63K Ahead of Fed Showdown (low $62,684, ~$63,660 at 2:37pm EDT) — Bitcoin.com Markets",
+      "url": "https://news.bitcoin.com/market-updates/134m-in-bitcoin-longs-vaporized-as-btc-breaks-below-63k-ahead-of-fed-showdown/"
+    },
+    {
+      "title": "Bitcoin and ethereum prices today, Tuesday, July 28, 2026 (open $63,706.66; $63,327 at 8:34am ET) — Yahoo Finance",
+      "url": "https://finance.yahoo.com/personal-finance/investing/article/bitcoin-and-ethereum-prices-today-tuesday-july-28-2026-crypto-prices-slide-ahead-of-fed-meeting-125210301.html"
+    },
+    {
+      "title": "Bitcoin Price Prediction Ahead of July 28–29 FOMC Meeting — CoinGape",
+      "url": "https://coingape.com/markets/bitcoin-price-prediction-ahead-of-july-28-29-fomc-meeting/"
+    },
+    {
+      "title": "VOO ETF Stock Price & Overview (Jul 28 close ~$680.96, prev $679.31) — StockAnalysis",
+      "url": "https://stockanalysis.com/etf/voo/"
+    },
+    {
+      "title": "QQQ ETF Stock Price & Overview (Jul 28 close $670.11) — StockAnalysis",
+      "url": "https://stockanalysis.com/etf/qqq/"
+    },
+    {
+      "title": "Crypto Fear & Greed Index ~29 (Fear) — Jul 28 2026, Milk Road",
+      "url": "https://milkroad.com/fear-greed/"
+    }
+  ]
+}
