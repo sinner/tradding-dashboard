@@ -1,0 +1,382 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-07-30-midnight",
+  "date": "2026-07-30",
+  "session": "midnight",
+  "generatedAt": "2026-07-30T02:30:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bullish",
+  "confidence": 5.5,
+  "priceSnapshot": {
+    "value": 64043.5,
+    "currency": "USD",
+    "changePct": -0.71,
+    "source": "OKX public spot API /market/ticker BTC-USDT, read through the connected browser (ts 2026-07-30T07:28:19Z = 02:28 COT): last 64043.5, open24h 64500.8, high24h 64751.6, low24h 63261.6. METHOD NOTE, repeated because it keeps mattering: the sandbox HTTP proxy serves a STALE cached OKX response (it returned $78,183.6 stamped 2026-05-16 again this run) and was DISCARDED. Every OKX number below was pulled through the browser and its ts verified against now. Independent cross-check: Kraken XBTUSDT public API, last trade 63,991.8 / 15m close 64,039.2 at 07:15Z, 24h range 63,652.9-64,500.0 - within 0.1% of the OKX print.",
+    "asOf": "2026-07-30T02:28:00-05:00",
+    "note": "THE HAWKISH-HOLD FADE DID NOT FOLLOW THROUGH. Endday handed over at $63,727 with price bleeding under the $64,000 shelf and a bearish tilt built on two pillars - a fifth straight ETF outflow day and an AI-capex de-rating hammering QQQ. BOTH pillars broke overnight. Microsoft reported after the close, jumped ~9% after hours and CUT its 2026 capex guide to $175B from $190B, which is exactly the reassurance the Nasdaq had been demanding; Meta fell ~7% on a weak Q2 and a raised capex floor, but the net read on US futures was risk-ON. And Farside's FINAL Jul 29 print came in at +$32.1M NET INFLOW (IBIT +89.8, FBTC -43.1, ARKB -14.6) - not the -$57.7M preliminary endday used. BTC rallied off $63,611 to tag $64,393.2 at 02:19 COT, stopping the desk's small overnight hedge, then faded back to $64,043. Working against the reclaim: DXY firmed to 101.02, US10Y sits at 4.688% (+0.066 vs the 4.622% prior close, still a year high), and Brent added another $1.43 to $92.17 - an energy-inflation impulse six hours ahead of Q2 GDP and core PCE at 08:30 ET.",
+    "sessionRange": {
+      "low": 63611,
+      "high": 64393.2
+    }
+  },
+  "decisionBox": {
+    "position": "ADD",
+    "reduceIf": {
+      "price": 63000,
+      "confirmation": "A 4H CLOSE below $63,000 confirms the range break. The rail is unchanged for a fifth session and it has still never fired: the 4H closes since the handover are 64,163.2 and 64,039.2, and the lowest print of the whole overnight window is $63,611. Below $63,000 the ladder is thin - $62,684 (the Jul 28 flush low) then the $62,200 structural invalidation - and the realized-liquidation book shows almost nothing resting between $63,000 and $63,500 to slow it down."
+    },
+    "addIf": {
+      "price": 64500,
+      "confirmation": "A 4H close above $64,500 clears the twice-rejected $64,350-$64,500 cap AND the $2.56M realized-liquidation cluster sitting there, and would put price back over the 4H EMA50 ($64,421.9). That is the momentum tranche - the second and larger add. Note the tranche taken THIS session is not that trade: it is a small spot DCA into the $63,900-$64,100 shelf, sized so the reserved powder survives a core-PCE miss."
+    },
+    "invalidatesAt": 62200,
+    "stopOrder": {
+      "recommended": true,
+      "price": 61900
+    },
+    "changed": "Stance moves REDUCE -> ADD, tilt flips bearish -> BULLISH, confidence 5.75 -> 5.50 (lower, because the direction improved while the resolution got fuzzier - PCE is still ahead). What changed, in order of weight: (1) the ETF outflow streak is DEAD - Jul 29 finalised at +$32.1M with BlackRock's IBIT buying $89.8M, breaking a four-day, -$526.5M run; (2) Microsoft's capex CUT to $175B removed the single loudest bear argument in the equity complex and flipped US futures higher; (3) BTC held the $63,611 low and pushed to $64,393, and the 4H MACD histogram has crossed POSITIVE (+30.82) for the first time since the FOMC fade. What did NOT change: price is still below every daily EMA (20/50/100/200), the $64,350-$64,500 cap rejected again, DXY and Brent both firmed, and OKX's long/short account ratio is back to 1.58 - retail is long again into an inflation print. So the add is deliberately SMALL and the $63,000 reduce rail plus the $61,900 resting stop both stay live. Probabilities move to bull 30 / range 45 / bear 25."
+  },
+  "probabilities": {
+    "bullish": 30.0,
+    "range": 45.0,
+    "bearish": 25.0
+  },
+  "levels": {
+    "support": [
+      63611,
+      63500,
+      63262,
+      63000,
+      62684
+    ],
+    "resistance": [
+      64350,
+      64393,
+      64500,
+      64752,
+      65000
+    ],
+    "liquidation": [
+      {
+        "price": 63500,
+        "side": "below",
+        "intensity": "extreme",
+        "magnet": true,
+        "note": "$5.50M of realized OKX BTC-USDT-SWAP liquidations bucketed here over the trailing 24h - by far the largest cluster and 48% of the whole $11.41M book. Price has now bounced off this shelf twice since the FOMC fade, which is what a real magnet looks like: it pulls, it fills, it releases."
+      },
+      {
+        "price": 64000,
+        "side": "below",
+        "intensity": "high",
+        "magnet": false,
+        "note": "$2.77M realized. Sits ~$44 under spot - the shelf price is literally resting on right now, and the pivot the whole overnight range has hinged around."
+      },
+      {
+        "price": 64500,
+        "side": "above",
+        "intensity": "high",
+        "magnet": false,
+        "note": "$2.56M realized, built during the post-FOMC spike when shorts were squeezed. It overlaps the 4H EMA50 at $64,421.9 and the $64,393 rejection high, which is why the $64,350-$64,500 band is the real cap rather than a round number."
+      },
+      {
+        "price": 65000,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "$0.46M realized - thin. If $64,500 goes on a 4H close there is little resting between there and $65,000."
+      },
+      {
+        "price": 63000,
+        "side": "below",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Only $0.12M realized. The near-emptiness BELOW $63,500 is the point: a confirmed loss of $63,000 has very little underneath it until $62,684."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 64500,
+      "nearestBelow": 64000,
+      "pull": "down",
+      "source": "OKX public liquidation-orders (instType=SWAP, uly=BTC-USDT, state=filled, limit=100 -> 1,258 individual fills, $11.41M notional, window 2026-07-29T07:28Z to 2026-07-30T05:23Z), aggregated in 500-dollar buckets; plus OKX rubik long-short-account-ratio (1.58 at 07:00Z) and open-interest (ts 07:21:51Z). All read through the connected browser and timestamp-verified.",
+      "asOf": "2026-07-30T02:28:00-05:00",
+      "note": "Pull is DOWN despite the bullish tilt, and the two are not in conflict. The dominant $5.50M magnet at $63,500 sits below spot while the two clusters above are half its size, and the long/short account ratio has rebuilt from 1.41 at the FOMC flush to 1.58 - crowded longs are the fuel a downside sweep burns. The practical read: a wick into $63,500-$63,700 before any real upside break is the higher-probability path, which is precisely why this session's spot add is small and a second tranche is reserved."
+    }
+  },
+  "atr": {
+    "value": 1566.12,
+    "period": 14,
+    "pct": 2.45,
+    "source": "Computed here (Wilder ATR-14) from Kraken XBTUSDT daily OHLC, 37 sessions through the in-progress 2026-07-30 candle. Math: true range per session = max(H-L, |H-Cprev|, |L-Cprev|), Wilder-smoothed. 2.45% of spot means a normal day covers roughly $1,566 - the entire $63,611-$64,393 overnight range was HALF an average daily range.",
+    "asOf": "2026-07-30T02:28:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": 49.35,
+      "macd": {
+        "line": -0.79,
+        "signal": 10.97,
+        "hist": -11.76
+      },
+      "emas": {
+        "ema20": 64054.02,
+        "ema50": 64044.07,
+        "ema100": 64025.72,
+        "ema200": 63901.0
+      },
+      "structure": "Fully compressed. Price ($64,039 on the 07:15Z close) is inside a $30 band that contains the EMA20, EMA50 and EMA100 - it is above the EMA100 (+0.02%) and EMA200 (+0.22%) and a hair under the EMA20 (-0.02%) and EMA50 (-0.01%). The $64,393 spike at 02:19 COT was sold within three candles and the tape has gone quiet since. This is a coil, not a trend; the first clean 15m close outside $63,975-$64,150 on volume is the tell.",
+      "bias": "neutral",
+      "source": "Kraken XBTUSDT 15m OHLC (230 candles to 2026-07-30T07:15Z); EMA/RSI/MACD computed locally, SMA-seeded EMAs and Wilder RSI",
+      "asOf": "2026-07-30T02:15:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 49.57,
+      "macd": {
+        "line": -11.67,
+        "signal": -11.2,
+        "hist": -0.48
+      },
+      "emas": {
+        "ema20": 64036.14,
+        "ema50": 64077.92,
+        "ema100": 64260.33,
+        "ema200": 64737.71
+      },
+      "structure": "Flat and honest about it. Price ($64,018) sits within 0.1% of both the EMA20 and EMA50 and the MACD histogram is -0.48 - as close to zero as it gets. The overhead map is what matters: EMA100 at $64,260 and EMA200 at $64,738 are both above, so the hourly trend is still technically down and every rally into $64,260-$64,740 is selling into resistance until one of them is closed above.",
+      "bias": "neutral",
+      "source": "Kraken XBTUSDT 1h OHLC (230 candles to 2026-07-30T07:00Z); EMA/RSI/MACD computed locally",
+      "asOf": "2026-07-30T02:00:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": 47.21,
+      "macd": {
+        "line": -172.67,
+        "signal": -203.49,
+        "hist": 30.82
+      },
+      "emas": {
+        "ema20": 64158.9,
+        "ema50": 64421.9,
+        "ema100": 64278.02,
+        "ema200": 63292.61
+      },
+      "structure": "The one constructive chart in the set, and the reason the tilt flipped. The MACD histogram is POSITIVE (+30.82) with the line above its signal - a bullish cross out of a deep hole (-203) that formed on the FOMC fade. Price is above the EMA200 ($63,293, +1.18%) while still under the EMA20 ($64,159), EMA100 ($64,278) and EMA50 ($64,422). That EMA50 is the number: it sits inside the $64,350-$64,500 cap and the $64,500 liquidation cluster, so one 4H close above it does three jobs at once. The last two completed 4H candles closed 64,163.2 and 64,039.2 - higher lows on the body, no close under $63,000 anywhere in the sequence.",
+      "bias": "constructive within range",
+      "source": "Kraken XBTUSDT 4h OHLC (230 candles to 2026-07-30T04:00Z candle in progress); EMA/RSI/MACD computed locally. EMA200 is SMA-seeded over a 230-candle window, so treat it as accurate to roughly a tenth of a percent.",
+      "asOf": "2026-07-30T02:15:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 48.98,
+      "macd": {
+        "line": 146.03,
+        "signal": 272.0,
+        "hist": -125.97
+      },
+      "emas": {
+        "ema20": 64265.52,
+        "ema50": 64913.03,
+        "ema100": 67593.89,
+        "ema200": 72429.59
+      },
+      "structure": "Still the bear's chart, and nothing overnight changed it. Price is below all four daily EMAs - EMA20 -0.35%, EMA50 -1.35%, EMA100 -5.26%, EMA200 -11.58% - and the MACD histogram is -125.97 with the line ($146) under its signal ($272). The saving grace is that the deterioration is SLOW: RSI-14 at 48.98 is dead neutral, and the EMA20 is only $222 overhead. This is a market grinding sideways under its averages, not one accelerating away from them. Reclaiming $64,266 is the first honest daily-scale improvement.",
+      "bias": "bearish structure, neutral momentum",
+      "source": "Kraken XBTUSDT daily OHLC (236 sessions, 2025-12-07 to the in-progress 2026-07-30); EMA/RSI/MACD computed locally",
+      "asOf": "2026-07-30T02:15:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "add",
+      "entry": null,
+      "stop": 61900,
+      "tp": [
+        65631,
+        66557
+      ],
+      "rr": null,
+      "confidence": 5.5,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "ADD",
+      "entry": null,
+      "stop": 61900,
+      "tp": [],
+      "rr": null,
+      "confidence": 5.5,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "Range, mild upward lean. Both edges are well defined: $63,500-$63,700 is where the biggest liquidation magnet and the overnight low live, $64,350-$64,500 is where the 4H EMA50, the $64,393 rejection and the second-biggest cluster stack. Trade the edges, respect the 08:30 ET core-PCE print.",
+    "longAbove": 64500,
+    "shortBelow": 63600,
+    "invalidates": 63000,
+    "note": "Scalp only the edges - live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 92.17,
+      "changePct": 1.58
+    },
+    "dxy": {
+      "value": 101.017
+    },
+    "us10y": {
+      "value": 4.688
+    },
+    "etfFlows": {
+      "streakDays": 1,
+      "note": "THE STREAK BROKE. Farside's finalised Jul 29 print is +$32.1M NET INFLOW - IBIT +$89.8M, FBTC -$43.1M, ARKB -$14.6M, everything else flat - which ends a four-session outflow run (Jul 23 -225.1, Jul 24 -240.1, Jul 27 -11.6, Jul 28 -49.7 = -$526.5M) rather than extending it to five. streakDays here is 1 and it counts INFLOW days. This matters twice over: it is the first day since Jul 22 that institutional demand showed up, and it means endday's bearish tilt was partly built on a preliminary -$57.7M number that the final tape contradicted. Context for the rest of the macro board, all read fresh at 02:25 COT via CNBC: DXY 101.017 (+0.13%, up from 100.886), US 10Y 4.688% (+0.066 versus the 4.622% prior close, still the high for the year), US 2Y 4.271%, and ICE Brent Sep'26 $92.17 (+1.58%, another $1.43 on top of yesterday's jump). Firmer dollar, firmer yields, firmer oil - the rates side of the board still argues the other way from the flow side, and core PCE at 08:30 ET decides which one wins."
+    },
+    "liquidations": {
+      "longsUsd": 7130105,
+      "shortsUsd": 4284817,
+      "skew": 1.58,
+      "traders": null,
+      "openInterestUsd": 1942167684,
+      "note": "MEASURED, not estimated, and all read through the browser (the proxy's OKX cache was stale again and discarded). 1,258 filled liquidations totalling $11.41M across the window 2026-07-29T07:28Z to 2026-07-30T05:23Z: $7.13M of LONGS liquidated (sell-side fills) against $4.29M of shorts, a 1.66x long tilt. Bucketed at $500: $63,500 = $5.50M (dominant), $64,000 = $2.77M, $64,500 = $2.56M, $65,000 = $0.46M, $63,000 = $0.12M. openInterestUsd $1.942B is OKX's BTC-USDT-SWAP book alone (ts 07:21:51Z), up 1.26% from endday's $1.918B - leverage is being ADDED into the coil, not withdrawn. `skew` is the OKX long/short ACCOUNT ratio at 1.58 (07:00Z), which fell to 1.41 in the FOMC flush and has rebuilt steadily since; retail is getting long again ahead of core PCE. Funding is +0.0100% for the current period with the perp premium slightly NEGATIVE (-0.052%) and the last settled rate +0.0040% - so longs pay, but barely. Modest crowding, not euphoria."
+    },
+    "fearGreed": 28,
+    "earnings": [
+      {
+        "ticker": "MSFT",
+        "reaction": "+~9% after hours - the overnight bull catalyst",
+        "note": "Microsoft's fiscal Q4 beat, Azure outran expectations on cloud and AI demand, and - the part that actually moved the complex - it CUT calendar-2026 capex guidance to $175B from $190B. The AI-capex de-rating that took QQQ to $661.73, its cheapest close of the month, was built on the fear that hyperscaler spending was running away. Microsoft just argued the opposite. US equity futures turned higher on it."
+      },
+      {
+        "ticker": "META",
+        "reaction": "-~7% after hours - the offsetting drag",
+        "note": "Meta's Q2 missed and Q3 guidance came in light, and it RAISED the floor of its 2026 capex range to $130-145B from $125-145B - the mirror image of Microsoft's message. The market rewarded discipline and punished spending, which tells you what the tape currently cares about. Net across the two: futures higher, but the Nasdaq's internals are being sorted rather than lifted."
+      },
+      {
+        "ticker": "PCE",
+        "reaction": "pending - 08:30 ET today, inside the morning session's window",
+        "note": "Q2 GDP and core PCE both land at 08:30 ET, roughly six hours after this report. After Wednesday's 9-3 hold with Hammack, Kashkari and Logan dissenting FOR an immediate hike, a hot core-PCE print is the fastest route to September-hike pricing and the $62,000 zone; a cool one is the cleanest path to closing above $64,500. Brent at $92.17 and the 10Y at 4.688% are both leaning toward the hot side. The Bank of England also decides today."
+      },
+      {
+        "ticker": "AAPL",
+        "reaction": "pending - after today's close",
+        "note": "Apple (fiscal Q3) and Amazon (Q2) report after the Jul 30 close, so mega-cap earnings risk runs through the midday and endday sessions too. With Microsoft and Meta having split the tape, these two decide whether the capex-discipline trade holds. BTC has been tracking Nasdaq beta closely all week, so this is a crypto input, not just an equity one."
+      }
+    ]
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 661.73,
+        "changePct": -2.04,
+        "bias": "bearish",
+        "note": "SETTLED Jul 29 close, re-verified this run: $661.73, -2.04%, the lowest close of the trailing 21 sessions. US markets are closed at 02:30 COT and the Jul 30 session has not opened, so this is the last close, correctly labelled. The forward-looking part is in after-hours: Microsoft's ~9% pop and its capex CUT are the first credible answer to the AI-spending fear that produced this drawdown, though Meta's ~7% drop takes some of it back. A -10.14% distance from the monthly high with RSI-14 at 34.04 is the cheapest QQQ has looked since the run began.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -6.05,
+          "pctFromHigh": -10.14,
+          "rsi14": 34.04,
+          "zone": "very-cheap",
+          "note": "Computed this run from 21 verified trailing daily closes via the StockAnalysis history API (last 661.73, 21-day min 661.73, max 736.40, 20-day mean 704.33); RSI-14 is Wilder over a 35-session window. Percentile 0 means this IS the cheapest close of the month. Relative-cheapness for monthly DCA, not a bottom call - a -10% drawdown can easily become -15%."
+        },
+        "source": {
+          "title": "QQQ ETF - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 670.63,
+        "changePct": -1.52,
+        "bias": "bearish",
+        "note": "SETTLED Jul 29 close, re-verified: $670.63, -1.52%, also the cheapest close of the trailing month. Market closed at the time of writing; no Jul 30 session yet. The useful contrast with QQQ is the DEPTH: VOO is only -3.35% off its 21-day high against QQQ's -10.14%, so the broad index is cheap at the margin while the Nasdaq is genuinely beaten up. For a monthly DCA that argues for weighting the next tranche toward QQQ rather than spreading it evenly.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -2.17,
+          "pctFromHigh": -3.35,
+          "rsi14": 39.56,
+          "zone": "very-cheap",
+          "note": "Computed this run from 21 verified trailing daily closes via the StockAnalysis history API (last 670.63, 21-day min 670.63, max 693.86, 20-day mean 685.51); Wilder RSI-14 over 35 sessions. Percentile 0 by construction since the last close IS the monthly low. Relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO ETF - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 96.27,
+        "changePct": -0.4,
+        "bias": "bearish",
+        "note": "FEED FIXED - worth flagging because this has been the broken source all week. StockAnalysis' JPXN history API returned 21 clean trailing closes this run (it had been serving a cached May 27 print of $99.24 through the ETF page), so JPXN finally has a computed dcaSignal instead of an omission. Jul 29 close $96.27, -0.40%, the cheapest close of the trailing month and -5.33% off its 21-day high. Tokyo is closed at the time of writing. Its drawdown sits neatly between VOO's -3.35% and QQQ's -10.14%, which is what you would expect from a Japan large-cap sleeve in a global rate-driven selloff rather than an AI-specific one.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -2.51,
+          "pctFromHigh": -5.33,
+          "rsi14": 42.85,
+          "zone": "very-cheap",
+          "note": "Computed this run from 21 verified trailing daily closes via the StockAnalysis history API (last 96.27, 21-day min 96.27, max 101.69, 20-day mean 98.75); Wilder RSI-14 over 35 sessions. RSI 42.85 is the least oversold of the three, so 'very-cheap' here is driven by the percentile rather than by momentum exhaustion. Relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "JPXN ETF - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": false,
+    "rollingRecord": "26th row in the log. Of the 25 rows before this one, 19 are marked helped, 1 hurt and 5 unscored. The $63,000 reduce rail has now been carried for five consecutive sessions without firing - twenty-one 'false' readings out of twenty-five scored rows across the whole log - which is starting to look less like a live rail and more like a level the market has decided to respect.",
+    "note": "Two honest marks against endday. First, its ACTION: the $33 3x short hedge opened at $63,727 with a $64,350 stop was tagged when price printed $64,393.2 at 02:19 COT, so it stopped out for a small loss - acting did not help. It was still a defensible trade at the time (crowded longs, five apparent outflow days, a stacked overnight calendar) and the sizing did its job: the damage is about a third of a dollar, not a wound. Second, its ANALYSIS: the bearish tilt leaned on a preliminary -$57.7M ETF number that finalised at +$32.1M, and on an AI-capex fear that Microsoft's guidance cut directly contradicted hours later. The lesson is not 'do not hedge' - it is that a tilt built on same-day preliminary flow data and on an un-reported earnings print is a tilt built on two things that can both be revised overnight. The reduce level itself was right: it did not fire, and price never came close."
+  },
+  "sources": [
+    {
+      "title": "OKX public API - spot ticker, open interest, funding rate, long/short account ratio, filled liquidation orders (read via browser, timestamps verified)",
+      "url": "https://www.okx.com/docs-v5/en/"
+    },
+    {
+      "title": "Kraken public API - XBTUSDT ticker and 15m/1h/4h/daily OHLC used for all EMA, RSI, MACD and ATR math",
+      "url": "https://api.kraken.com/0/public/OHLC?pair=XBTUSDT&interval=240"
+    },
+    {
+      "title": "Farside Investors - Bitcoin ETF Flow, all data (Jul 29 finalised at +$32.1M)",
+      "url": "https://farside.co.uk/bitcoin-etf-flow-all-data/"
+    },
+    {
+      "title": "CNBC quote service - DXY 101.017, US10Y 4.688%, US2Y 4.271%, ICE Brent Sep'26 $92.17 at 02:25 COT",
+      "url": "https://www.cnbc.com/quotes/.DXY"
+    },
+    {
+      "title": "StockAnalysis history API - QQQ, VOO and JPXN trailing daily closes for the DCA signals",
+      "url": "https://stockanalysis.com/etf/qqq/"
+    },
+    {
+      "title": "Alternative.me Crypto Fear & Greed Index - 28 (Fear) stamped 2026-07-30T00:00Z, down from 29",
+      "url": "https://alternative.me/crypto/fear-and-greed-index/"
+    },
+    {
+      "title": "Investing.com - US stock futures rise as Microsoft surges on strong earnings (capex guide cut to $175B; Meta -7%)",
+      "url": "https://www.investing.com/news/stock-market-news/us-stock-futures-rise-as-microsoft-surges-on-strong-earnings-4822170"
+    }
+  ]
+}
