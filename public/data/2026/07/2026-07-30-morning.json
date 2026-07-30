@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-07-30-morning",
+  "date": "2026-07-30",
+  "session": "morning",
+  "generatedAt": "2026-07-30T07:05:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bullish",
+  "confidence": 5.75,
+  "priceSnapshot": {
+    "value": 64821.4,
+    "currency": "USD",
+    "changePct": 1.28,
+    "source": "Kraken public API, XBTUSDT. Latest verified print 64,821.4 on the 15m candle opening 2026-07-30T12:00Z (07:00 COT); the ticker at 11:59Z printed 64,808.5 and the 1h candle at 12:00Z printed 64,813.5, so the three agree within $13. changePct is measured against the UTC-day open of 63,999.9 from the same feed. METHOD NOTE, and it matters again this run: the sandbox HTTP proxy serves STALE CACHED responses - the first Kraken ticket call returned the exact same payload midnight received 4.5 hours earlier - and every request below was therefore issued with a unique cache-busting parameter and its timestamp checked against now before use.",
+    "asOf": "2026-07-30T07:00:00-05:00",
+    "note": "THE $64,500 CAP BROKE, AND IT BROKE ON SHORTS BEING FORCED OUT. Midnight handed over at $64,043 with a small spot add, a bullish tilt and one explicit trigger: a 4H close above $64,500. In the four hours since, BTC went 63,991 -> 64,867.2 in a near-straight line and the 08:00Z 4H candle is closing at $64,808 - the trigger has fired. The mechanism is verifiable rather than narrative: OKX's filled-liquidation feed shows 128 fills between 11:21Z and 12:03Z totalling roughly $797K, and every single one is a SHORT being bought back. Zero long liquidations in the window. Open interest is $2.005B, up 3.2% from midnight's $1.942B, so size is being added into the move rather than withdrawn, and the long/short ACCOUNT ratio has FALLEN from 1.58 to 1.40 while price rose $780 - accounts got less long into strength, which is the opposite of a crowded-long top. Equities agree: QQQ is bid $671.13 in pre-market, +1.42% on the Jul 29 close, after Microsoft's ~8% pop and its capex guide cut. The reason confidence is 5.75 and not higher: Q2 advance GDP, jobless claims and June core PCE all land at 08:30 ET, roughly 30 minutes after this snapshot, with consensus at 3.3% core and 3.7% headline. Price is also only at the TOP of the same range it has held all week - the Jul 24-26 highs sit at $65,373 and $65,727 - and the 15m RSI is 75.8. This is a real breakout arriving 30 minutes before a binary event.",
+    "sessionRange": {
+      "low": 63950.1,
+      "high": 64867.2
+    }
+  },
+  "decisionBox": {
+    "position": "TAKE_PROFIT",
+    "reduceIf": {
+      "price": 63000,
+      "confirmation": "A 4H CLOSE below $63,000 still confirms the structural range break, and the rail is carried unchanged into a sixth session. It has never fired: the lowest print since the handover is $63,950.1 and the completed 4H closes are 63,999.3 and (closing now) 64,808.5. Separately, and tighter, the BREAKOUT fails if a 4H closes back under $64,150 - that is the 4H EMA20 ($64,217) and the $64,250-$64,500 base the move launched from. A close back inside that base does not trigger the structural reduce, it just cancels the long setup."
+    },
+    "addIf": {
+      "price": 64400,
+      "confirmation": "A retest of the $64,250-$64,450 breakout base that HOLDS on a 1H close is where the cash recycled by this session's partial sale goes back to work. That band is the verified $88K liquidation shelf and the 15m EMA50 ($64,297) sits inside it. The larger momentum tranche is higher and separate: a 4H close above $65,000 opens the thin air toward $65,373 and $65,727, because nothing in the verified book rests between $65,000 and the range high."
+    },
+    "invalidatesAt": 62200,
+    "stopOrder": {
+      "recommended": true,
+      "price": 61900
+    },
+    "changed": "Stance moves ADD -> TAKE_PROFIT while the tilt STAYS bullish, and those two are not in conflict - read it as taking money off a vertical move, not as turning bearish. Confidence 5.50 -> 5.75. What changed since 02:30 COT: (1) midnight's add trigger FIRED - the $64,500 cap and the 4H EMA50 ($64,436) are both cleared and price is now above every 15m, 1h and 4h EMA except the 1h EMA200 ($64,730 - also cleared, at 64,821) and above the DAILY EMA20 ($64,339) for the first time in the sequence; (2) the fuel is measured short liquidations, $797K in 42 minutes with zero longs, so this is forced buying rather than fresh conviction; (3) midnight's central worry inverted - it flagged the 1.58 long/short account ratio as crowded longs vulnerable to a downside sweep, and instead the ratio fell to 1.40 as price rose. Why take profit anyway: the wallet is 98% spot with 4 USDT of cash, so it has no ability to buy a retest; the squeeze clusters up to $64,861 have already been consumed; 15m RSI is 75.8; and core PCE prints in 30 minutes. Selling a small slice into forced buying to fund a retest bid is the trade. Probabilities move to bull 34 / range 44 / bear 22."
+  },
+  "probabilities": {
+    "bullish": 34.0,
+    "range": 44.0,
+    "bearish": 22.0
+  },
+  "levels": {
+    "support": [
+      64500,
+      64300,
+      64150,
+      63950,
+      63611
+    ],
+    "resistance": [
+      64867,
+      65000,
+      65120,
+      65373,
+      65727
+    ],
+    "liquidation": [
+      {
+        "price": 64850,
+        "side": "above",
+        "intensity": "high",
+        "magnet": true,
+        "note": "$481K of SHORT liquidations bucketed between $64,750 and $65,000 in the verified window 11:21Z-12:03Z, the largest cluster of the run and 60% of the whole $797K. magnet=true because this is where the forced buying is still firing right now - the topmost fill is $64,861 at 12:03:49Z. It is also the level that decides the session: consumed and held, it becomes support; rejected, it is the high of the day."
+      },
+      {
+        "price": 64625,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "$228K of short liquidations between $64,500 and $64,750, all of it eaten on the way up. Having been cleared, it stops being a magnet and becomes the first shelf of real bids underneath price."
+      },
+      {
+        "price": 64375,
+        "side": "below",
+        "intensity": "low",
+        "magnet": false,
+        "note": "$88K between $64,250 and $64,500 - the thinnest of the three, and the base the breakout launched from. The 4H EMA20 ($64,217) and 15m EMA50 ($64,297) both sit inside it, which is why it is the retest level rather than a round number."
+      },
+      {
+        "price": 65470,
+        "side": "above",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Estimated leverage-bracket magnet - not exchange resting-order data. 100x short-liquidation bracket from spot (64,821.4 x 1.01), which lands just under the $65,727 range high. Included because the verified feed shows nothing resting between $65,000 and there."
+      },
+      {
+        "price": 63525,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Estimated leverage-bracket magnet - not exchange resting-order data. 50x long-liquidation bracket from spot (64,821.4 x (1 - 1/50) = 63,525), which happens to coincide with the $63,500 shelf midnight MEASURED as the dominant 24h cluster ($5.50M). It could NOT be re-verified this run: the OKX 24h aggregation needs limit=100 and that response exceeds the fetch size cap, so only a 42-minute window was retrievable. Treat this as an estimate anchored to known support, not as fresh measurement."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 64850,
+      "nearestBelow": 64625,
+      "pull": "up",
+      "source": "OKX public API, all read this run with cache-busting and timestamp-verified: /public/liquidation-orders (instType=SWAP, uly=BTC-USDT, state=filled, limit=8 -> 128 individual fills, $797,263 notional, window 2026-07-30T11:21:52Z to 12:03:49Z, contract multiplier 0.01 BTC); /public/open-interest (oiUsd $2,004,635,314 at ts 12:03:57Z); /public/funding-rate (current period +0.00715%, last settled +0.00962%, premium -0.047% at ts 12:03:07Z); /rubik/stat/contracts/long-short-account-ratio (1.40 at 11:00Z, from 1.58 at 07:00Z).",
+      "asOf": "2026-07-30T07:05:00-05:00",
+      "note": "Pull is UP, and unlike midnight's read it is not a close call: 100% of the verified liquidations in the window are shorts, the heaviest bucket sits at and just above spot, and the long/short account ratio FELL from 1.58 to 1.40 as price rose $780 - accounts leaned short into strength and are paying for it. Funding stays almost flat (+0.00715% for the current period, perp premium -0.047%), so this is a squeeze rather than leveraged euphoria. The honest caveat: a 42-minute window is a snapshot of the move, not the 24h book, and the big measured downside magnet at $63,500 from midnight has not been re-verified. If core PCE runs hot at 08:30 ET the pull inverts fast, because above $65,000 there is nothing verified resting until the range high."
+    }
+  },
+  "atr": {
+    "value": 1589.28,
+    "period": 14,
+    "pct": 2.45,
+    "source": "Computed here (Wilder ATR-14) from Kraken XBTUSDT daily OHLC, 30 sessions through the in-progress 2026-07-30 candle, seeded on the 2026-06-30 close of 58,620.3. Math: TR = max(H-L, |H-Cprev|, |L-Cprev|), Wilder-smoothed over 14. At 2.45% of spot a normal day covers about $1,589 - the entire $63,950-$64,867 move so far today is 58% of one average range, so the breakout is real but not yet extended by ATR standards.",
+    "asOf": "2026-07-30T07:00:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": 75.82,
+      "macd": {
+        "line": 167.25,
+        "signal": 141.66,
+        "hist": 25.59
+      },
+      "emas": {
+        "ema20": 64501.12,
+        "ema50": 64296.69,
+        "ema100": 64169.41,
+        "ema200": 64023.57
+      },
+      "structure": "Cleanly stacked and overbought. Price ($64,821.4) is above all four EMAs and they are in textbook bullish order - EMA20 64,501 > EMA50 64,297 > EMA100 64,169 > EMA200 64,024 - which is exactly what midnight's $30-wide coil resolves into when it breaks. The caution is RSI-14 at 75.82, the most stretched reading of the whole 54-hour window, with the MACD histogram (+25.59) already flattening as the line pulls away. A 15m close back under $64,500 would be the first sign the squeeze is done.",
+      "bias": "bullish, extended",
+      "source": "Kraken XBTUSDT 15m OHLC (216 candles to 2026-07-30T12:00Z); EMA/RSI/MACD computed locally, SMA-seeded EMAs and Wilder RSI",
+      "asOf": "2026-07-30T07:00:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 62.58,
+      "macd": {
+        "line": 154.13,
+        "signal": 63.04,
+        "hist": 91.1
+      },
+      "emas": {
+        "ema20": 64273.72,
+        "ema50": 64176.98,
+        "ema100": 64293.52,
+        "ema200": 64729.58
+      },
+      "structure": "The chart that changed the most. Midnight had the hourly flat with the MACD histogram at -0.48 and price pinned under an EMA100 at $64,260 and an EMA200 at $64,738; both are now RECLAIMED - price is +0.85% over the EMA100 and +0.14% over the EMA200 - and the MACD line has crossed decisively positive (+154.1 against a +63.0 signal, histogram +91.1). RSI 62.58 is firm without being extreme. The EMA200 at $64,730 is the level to hold: an hourly close back beneath it turns this into a failed reclaim.",
+      "bias": "bullish",
+      "source": "Kraken XBTUSDT 1h OHLC (236 candles to the 2026-07-30T12:00Z candle in progress); EMA/RSI/MACD computed locally",
+      "asOf": "2026-07-30T07:00:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": 56.14,
+      "macd": {
+        "line": -102.88,
+        "signal": -183.87,
+        "hist": 81.0
+      },
+      "emas": {
+        "ema20": 64217.33,
+        "ema50": 64435.63,
+        "ema100": 64296.82,
+        "ema200": 63339.1
+      },
+      "structure": "The trigger chart, and it delivered. The 08:00Z candle is closing at $64,808 - above the EMA50 ($64,436) that midnight named as the single number that does three jobs at once, and above the EMA20, EMA100 and EMA200 as well. All four are now beneath price for the first time in this whole sequence. The MACD histogram has widened from +30.82 to +81.00 with the line lifting out of its post-FOMC hole (-203 -> -102.9), and RSI has gone 46.75 -> 56.14 on the same candle. For reference, my method reproduces midnight's completed-candle EMA50 to within $2 (64,420.4 vs 64,421.9), so the reclaim is a real change in state and not a measurement artefact.",
+      "bias": "bullish breakout",
+      "source": "Kraken XBTUSDT 4h OHLC (235 candles including the 2026-07-30T08:00Z candle in progress); EMA/RSI/MACD computed locally. EMA200 is SMA-seeded over the 235-candle window, so treat it as accurate to about a tenth of a percent.",
+      "asOf": "2026-07-30T07:00:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 52.68,
+      "macd": {
+        "line": 207.79,
+        "signal": 284.35,
+        "hist": -76.56
+      },
+      "emas": {
+        "ema20": 64339.26,
+        "ema50": 64943.41,
+        "ema100": 67599.02,
+        "ema200": 72439.43
+      },
+      "structure": "Still the bear's chart, but it just gave up its first line. Price is ABOVE the daily EMA20 ($64,339, +0.75%) - midnight had it $222 overhead and unreclaimed - while remaining below the EMA50 ($64,943, -0.19%), EMA100 ($67,599, -4.11%) and EMA200 ($72,439, -10.52%). The MACD histogram has improved from -125.97 to -76.56 and RSI-14 from 48.98 to 52.68, so the deterioration has stopped rather than reversed. The next honest daily-scale win is a close over the EMA50 at $64,943, which sits $122 under the round $65,000 and inside the same zone as the estimated 100x short bracket. Nothing here yet argues the multi-month downtrend is over.",
+      "bias": "bearish structure, improving momentum",
+      "source": "Kraken XBTUSDT daily OHLC (245 sessions, 2025-11-28 to the in-progress 2026-07-30); EMA/RSI/MACD computed locally",
+      "asOf": "2026-07-30T07:00:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "long",
+      "entry": [
+        64450,
+        64250
+      ],
+      "stop": 63880,
+      "tp": [
+        65373,
+        65727
+      ],
+      "rr": 2.18,
+      "confidence": 5.5,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "reduce",
+      "entry": null,
+      "stop": 61900,
+      "tp": [
+        65373,
+        65727
+      ],
+      "rr": null,
+      "confidence": 5.75,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "REDUCE",
+      "entry": null,
+      "stop": 61900,
+      "tp": [],
+      "rr": null,
+      "confidence": 5.75,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "Breakout, but arriving 30 minutes before a binary print. Both edges are sharp: $64,750-$64,867 is where the short-liquidation cluster and the session high stack, $64,250-$64,500 is the breakout base holding the 4H EMA20 and 15m EMA50. Between them there is no edge worth paying for. Respect 08:30 ET - Q2 GDP, jobless claims and June core PCE all land together, and the Bank of England decides today.",
+    "longAbove": 64900,
+    "shortBelow": 64300,
+    "invalidates": 63950,
+    "note": "Scalp only the edges - live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": null,
+      "changePct": null
+    },
+    "dxy": {
+      "value": null
+    },
+    "us10y": {
+      "value": null
+    },
+    "etfFlows": {
+      "streakDays": 1,
+      "note": "UNCHANGED FROM MIDNIGHT BY NECESSITY, NOT BY CHOICE - and the reason is legitimate: Farside's Jul 30 print cannot exist yet because US cash markets do not open until 09:30 ET, two and a half hours after this report. The live number is still the FINALISED Jul 29 tape at +$32.1M NET INFLOW (IBIT +$89.8M, FBTC -$43.1M, ARKB -$14.6M), which ended a four-session, -$526.5M outflow run. streakDays is 1 and counts INFLOW days. What IS new on the equity side and verified this run: QQQ is quoted $671.13 in pre-market at 07:59 ET, +$9.40 or +1.42% on the $661.73 Jul 29 close, and Dow futures are reported up about 158 points (+0.31%) with Microsoft +8.09% after its capex guide cut to $175B. The rates and commodities side of the board is the gap in this report: DXY, US10Y and Brent are all set to null because every quote feed I could reach was either blocked or empty this run (CNBC's quote service returned nothing, Yahoo and Stooq returned nothing, Firecrawl failed on a self-signed certificate in the proxy chain). Midnight's 02:25 COT readings were DXY 101.017, US10Y 4.688% and Brent $92.17, all firming against risk - but FX, Treasuries and oil trade around the clock, so quoting those four and a half hours later would be carrying a stale number forward, which the data-integrity rule forbids. Treat the rates leg as unknown rather than as unchanged, and note that reporting also flags fresh Middle East tension as an oil risk into the print."
+    },
+    "liquidations": {
+      "longsUsd": 0,
+      "shortsUsd": 797263,
+      "skew": 1.4,
+      "traders": null,
+      "openInterestUsd": 2004635314,
+      "note": "MEASURED, not estimated, but over a NARROW window - read the window before reading the numbers. OKX's filled-liquidation feed returned 128 individual fills between 2026-07-30T11:21:52Z and 12:03:49Z totalling $797,263 of notional (sz x 0.01 BTC x bkPx), and every one of them is posSide=short / side=buy. longsUsd is 0 because the feed showed literally zero long liquidations in the window, not because the field is missing. Bucketed at $250: $64,750-$65,000 = $481K, $64,500-$64,750 = $228K, $64,250-$64,500 = $88K. The 24h aggregation midnight ran (1,258 fills, $11.41M) could not be reproduced because it needs limit=100 and that response exceeds the fetch size cap in this environment, so the $5.50M magnet it measured at $63,500 is carried only as a labelled estimate in levels.liquidation. openInterestUsd $2.0046B is OKX's BTC-USDT-SWAP book alone at ts 12:03:57Z, up 3.2% from midnight's $1.942B - size added into the squeeze. `skew` is the OKX long/short ACCOUNT ratio at 1.40 (11:00Z), DOWN from 1.58 at 07:00Z while price rose $780: accounts got less long into strength, which inverts midnight's crowded-long warning. Funding is +0.00715% for the current period with the perp premium NEGATIVE at -0.047% and the last settled rate +0.00962%, so longs pay next to nothing. Squeeze, not euphoria."
+    },
+    "fearGreed": null,
+    "earnings": [
+      {
+        "ticker": "MSFT",
+        "reaction": "+8.09% - the catalyst that carried overnight into this session",
+        "note": "Microsoft's fiscal Q4 beat on Azure and, more importantly for the tape, CUT calendar-2026 capex guidance to $175B from $190B. That is the direct answer to the AI-overspending fear that took QQQ to $661.73, its cheapest close of the month. Reporting has Dow futures up about 158 points on it and QQQ bid $671.13 pre-market. BTC has tracked Nasdaq beta closely all week, so this is the single clearest external reason the $64,500 cap gave way rather than rejecting a fourth time."
+      },
+      {
+        "ticker": "META",
+        "reaction": "-~7% after hours - the offsetting drag, now largely absorbed",
+        "note": "Meta missed on Q2, guided Q3 light and RAISED the floor of its 2026 capex range to $130-145B. The market rewarded discipline and punished spending. Net across the pair, the Nasdaq's internals are being sorted rather than uniformly lifted - which is why the pre-market bid is +1.42% and not +3%."
+      },
+      {
+        "ticker": "PCE",
+        "reaction": "pending - 08:30 ET, roughly 30 minutes after this report",
+        "note": "Q2 advance GDP, weekly jobless claims (week ending Jul 25), June personal income and spending, and both headline and core PCE all print together at 08:30 ET. Consensus is 3.7% headline and 3.3% core year-over-year. This is the report's biggest single risk: after Wednesday's 9-3 hold with Hammack, Kashkari and Logan dissenting FOR an immediate hike, a hot core print is the fastest route to September-hike pricing, and it would hit a market that is 30 minutes into a leveraged short squeeze with rising open interest - exactly the configuration that unwinds violently. A cool print is the cleanest path to the daily EMA50 at $64,943 and then $65,373."
+      },
+      {
+        "ticker": "AAPL",
+        "reaction": "pending - after today's close, plus AMZN",
+        "note": "Apple (fiscal Q3) and Amazon (Q2) both report after the Jul 30 close, so mega-cap earnings risk runs through midday and endday as well. With Microsoft and Meta having split the tape on capex discipline, these two decide whether that trade holds into the weekend. The Bank of England also decides today, which matters for the dollar leg this report could not measure."
+      }
+    ]
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 661.73,
+        "changePct": -2.04,
+        "bias": "bearish",
+        "note": "RE-VERIFIED THIS RUN directly from StockAnalysis: settled Jul 29 close $661.73, -$13.76 or -2.04%, on volume of 57.2M with a day's range of 661.14-680.05. It remains the cheapest close of the trailing 21 sessions. The Jul 30 US session has not opened at the time of writing, so this is correctly the last close - but the same page shows a PRE-MARKET quote of $671.13, +$9.40 or +1.42%, stamped Jul 30 07:59 AM EDT, which is the Microsoft capex-cut effect arriving. If that holds into the cash open, tomorrow's percentile and RSI improve materially and the very-cheap window closes.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -6.05,
+          "pctFromHigh": -10.14,
+          "rsi14": 34.04,
+          "zone": "very-cheap",
+          "note": "Carried from last close - computed at the midnight session from 21 verified trailing daily closes via the StockAnalysis history API (last 661.73, 21-day min 661.73, max 736.40, 20-day mean 704.33), Wilder RSI-14 over 35 sessions. The inputs cannot have changed because no new session has printed; the $661.73 close underlying it was re-verified this run. Percentile 0 means this IS the cheapest close of the month. Relative-cheapness for monthly DCA, not a bottom call - and the +1.42% pre-market bid is a live warning that the window may be closing."
+        },
+        "source": {
+          "title": "QQQ ETF - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 670.63,
+        "changePct": -1.52,
+        "bias": "bearish",
+        "note": "Jul 29 close, market closed; no Jul 30 session yet. $670.63, -1.52%, also the cheapest close of the trailing month. This is a labelled reuse of the last verified close rather than a fresh read - the StockAnalysis history endpoint was not re-queried for VOO this run to stay inside the fetch budget, and since the US market has not opened the close cannot have moved. The useful contrast with QQQ is DEPTH: VOO is only -3.35% off its 21-day high against QQQ's -10.14%, so the broad index is cheap at the margin while the Nasdaq is genuinely beaten up. For a monthly DCA that still argues for weighting the next tranche toward QQQ.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -2.17,
+          "pctFromHigh": -3.35,
+          "rsi14": 39.56,
+          "zone": "very-cheap",
+          "note": "Carried from last close - computed at the midnight session from 21 verified trailing daily closes (last 670.63, 21-day min 670.63, max 693.86, 20-day mean 685.51), Wilder RSI-14 over 35 sessions. No new session has printed, so the inputs are unchanged. Percentile 0 by construction since the last close IS the monthly low. Relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO ETF - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 96.27,
+        "changePct": -0.4,
+        "bias": "bearish",
+        "note": "Jul 29 close, Tokyo closed; labelled reuse of the last verified close, not re-queried this run. $96.27, -0.40%, the cheapest close of the trailing month and -5.33% off its 21-day high. Its drawdown sits between VOO's -3.35% and QQQ's -10.14%, which is what a Japan large-cap sleeve should look like in a global rate-driven selloff rather than an AI-specific one. Worth remembering that this feed was broken all week and only started returning clean history at the midnight run, so the next session should re-verify rather than keep carrying it.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -2.51,
+          "pctFromHigh": -5.33,
+          "rsi14": 42.85,
+          "zone": "very-cheap",
+          "note": "Carried from last close - computed at the midnight session from 21 verified trailing daily closes (last 96.27, 21-day min 96.27, max 101.69, 20-day mean 98.75), Wilder RSI-14 over 35 sessions. RSI 42.85 is the least oversold of the three, so 'very-cheap' here is driven by the percentile rather than momentum exhaustion. Relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "JPXN ETF - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": true,
+    "rollingRecord": "27th row in the log. Of the 26 rows before this one, 19 are marked helped, 1 hurt and 6 unscored - midnight's row is one of the unscored ones in the file, and on the evidence it belongs in the helped column (see note). The $63,000 reduce rail is carried into a sixth consecutive session and has still never fired; the lowest print since it was first set is $62,684 and the lowest since the last handover is $63,950.1.",
+    "note": "Midnight gets a clean mark on both counts. Its ANALYSIS: it flipped the tilt to bullish on three specific grounds - the ETF outflow streak breaking at +$32.1M, Microsoft's capex cut removing the loudest equity bear argument, and the 4H MACD histogram crossing positive - and all three carried. Its ACTION: the 9 USDT spot add at $64,043 is up about 1.2% four and a half hours later, and the $64,500 add trigger it named fired almost exactly. Its one MISREAD is instructive rather than costly: it treated the 1.58 long/short account ratio as crowded longs and forecast 'a wick into $63,500-$63,700 before any real upside break as the higher-probability path'. The opposite happened - the ratio fell to 1.40 while price rose $780, meaning accounts were adding SHORTS into the move, and those shorts became the $797K of forced buying that produced the breakout. The sizing discipline that came with the wrong forecast (small add, powder reserved) cost nothing, so the correct lesson is about how to read a crowding snapshot, not about position size."
+  },
+  "sources": [
+    {
+      "title": "Kraken public API - XBTUSDT ticker and 15m/1h/4h/daily OHLC, the basis for every price, EMA, RSI, MACD and ATR figure here (all requests cache-busted and timestamp-verified)",
+      "url": "https://api.kraken.com/0/public/OHLC?pair=XBTUSDT&interval=240"
+    },
+    {
+      "title": "OKX public API - filled liquidation orders, open interest, funding rate and long/short account ratio for BTC-USDT-SWAP",
+      "url": "https://www.okx.com/docs-v5/en/"
+    },
+    {
+      "title": "StockAnalysis - QQQ close $661.73 (-2.04%) re-verified and pre-market $671.13 (+1.42%) at 07:59 ET Jul 30",
+      "url": "https://stockanalysis.com/etf/qqq/"
+    },
+    {
+      "title": "Farside Investors - Bitcoin ETF Flow, all data (Jul 29 finalised at +$32.1M; no Jul 30 print until after the 09:30 ET open)",
+      "url": "https://farside.co.uk/bitcoin-etf-flow-all-data/"
+    },
+    {
+      "title": "Benzinga - Dow futures +158 pts, MSFT +8.09%, and the 08:30 ET calendar with core PCE consensus at 3.3% y/y and headline at 3.7%",
+      "url": "https://www.benzinga.com/markets/equities/26/07/60788808/stock-market-today-sp-500-nasdaq-100-futures-gain-as-federal-reserve-holds-interest-rates-meta-microsoft-apple-in-focus"
+    },
+    {
+      "title": "CNBC - stock futures rebound from the Fed-day selloff led by Microsoft and chip stocks",
+      "url": "https://www.cnbc.com/2026/07/29/stock-market-today-live-updates.html"
+    },
+    {
+      "title": "DATA GAP THIS RUN - DXY, US10Y and Brent are null. CNBC's quote service, Yahoo Finance and Stooq all returned empty bodies through the run proxy and Firecrawl failed on a self-signed certificate in the chain. A keyed quote source would close this gap; carrying midnight's 02:25 COT readings forward was rejected because FX, rates and oil trade around the clock.",
+      "url": "https://www.cnbc.com/quotes/.DXY"
+    }
+  ]
+}
