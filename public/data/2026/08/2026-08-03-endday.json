@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-08-03-endday",
+  "date": "2026-08-03",
+  "session": "endday",
+  "generatedAt": "2026-08-03T19:30:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bullish",
+  "confidence": 5.6,
+  "priceSnapshot": {
+    "value": 63320.1,
+    "currency": "USD",
+    "changePct": -0.89,
+    "source": "Kraken public OHLC API (XXBTZUSD), 15m/1h/4h/daily series pulled fresh this run at 00:30Z (19:30 COT). Spot is the in-progress 15m bar stamped 2026-08-04T00:30Z at 63,320.1. THREE FEEDS WERE CROSS-CHECKED AND TWO WERE DISCARDED. Coinbase Exchange candles (timestamped) print the same 00:30Z bar at 63,296.57 — 0.04% from Kraken — which is the corroboration that makes this number usable. Discarded: (a) OKX, stale for the sixth consecutive run — the spot ticker returned ts 1778943168920 (2026-05-16) at 78,183.6 and the 15m candle endpoint returned ts 1781676900000 (~2026-06-17) at 65,862.2, 48-79 days old; (b) the Kraken TICKER endpoint, which returned an untimestamped last of 61,697.40 with a 24h high of 62,800 that is flatly contradicted by its OWN timestamped OHLC series showing 63,9xx prints inside the same window; (c) the Coinbase v2 spot endpoint at 59,977.995, also untimestamped. The lesson this run adds: through this proxy, only endpoints that carry their own timestamp can be trusted, and every one of them must be converted and checked against 'now' before use.",
+    "asOf": "2026-08-03T19:30:00-05:00",
+    "note": "The day's rally gave itself back. Price ran 62,218.4 at 08:30Z to 64,008.2 at 19:30Z (+2.88%) and has since faded to 63,320.1, which is +1.77% off the low and only +0.09% over the last 24 hours. The Aug-3 UTC daily candle CLOSED at 63,461.7 on an O 63,500.0 / H 64,008.2 / L 62,218.4 range — a doji-ish close in the top 69% of its range, i.e. a day that bought the dip and then refused to pay up for it. changePct above is measured against the midday 12:45 COT mark of 63,888.3. The single most informative cross-asset fact today: QQQ closed +1.76% and VOO +1.42% on the Iran de-escalation headline, and Bitcoin could not hold a 2.6% advance on the same tape. That is relative weakness, and it is the main reason the tilt stays modest.",
+    "sessionRange": {
+      "low": 63320.1,
+      "high": 64008.2
+    }
+  },
+  "decisionBox": {
+    "position": "HOLD",
+    "reduceIf": {
+      "price": 63040,
+      "confirmation": "A 1H CLOSE below $63,040 — through the 233.49K CoinGlass pool at 63,070.56 that sits 0.39% under spot. This level is DELIBERATELY MOVED DOWN from midday's 63,246 and the reason is a correction, not a loosening. Midday anchored its reduce to a 4H EMA200 it computed at 63,247.50 and used that to headline 'price is above ALL FOUR 4H EMAs'. Recomputed this run with a properly seeded window, the 4H EMA200 is 63,988.10 — price was NEVER above it, not at midday and not now. The old anchor was an artifact. The honest level to defend is the pool at 63,070.56, because losing it empties the shelf down to 62,375.96 (120.94K) and then the 535.77K magnet at 62,098.12."
+    },
+    "addIf": {
+      "price": 62150,
+      "confirmation": "Two branches, and BOTH are on weakness — this desk does not buy the middle of the range. PRIMARY: a flush into the 535.77K magnet at 62,098.12 that reclaims 62,375.96 within a candle or two. That is the same tag-and-reclaim rule midnight wrote and this morning actually executed at 62,311.3, and it is now aimed at a pool that has survived three consecutive reports unconsumed. SECONDARY: a 1H close back above $63,620 — the 4H EMA50 at 63,618.39 — which would re-open the 841.80K pool at 64,390.3. Note explicitly that midday's add trigger of 63,598 FAILED: price tagged it at 21:00Z and kept going, so the level was reached and the confirmation was not. Not adding there was correct and is recorded as such."
+    },
+    "invalidatesAt": 62050,
+    "stopOrder": {
+      "recommended": true,
+      "price": 62050
+    },
+    "changed": "FIVE things changed since the 12:45 COT midday report. ONE, and it is a correction to our own work: the 4H EMA200 is 63,988.10, not 63,247.50. Midday's central claim — price reclaimed all four 4H EMAs for the first time in the drawdown — was produced by an under-seeded 200-period EMA over a 250-bar window and is withdrawn. Price is above the 4H EMA20 (63,274.06) and below the EMA50, EMA100 and EMA200. TWO: the liquidation map INVERTED. At midday the heaviest pool was below at 62,214 with 980.84K; the heaviest pool now is ABOVE at 64,390.30 with 841.80K, 91.7% of the 918.48K colour maximum, 1.69% overhead and completely untagged. Below, the nearest real pool is only 233.49K at 63,070.56 and then 535.77K at 62,098.12. Net pull is UP for the first time in this sequence. THREE: the ETF tape broke its own story. The 03 Aug Farside row, which was an empty placeholder at midday, has filled in at PLUS $58.7M — the first inflow print after four consecutive reports carried the 31 July outflow of -$265.4M. It is incomplete (IBIT and BRRR still read '-'), so treat it as a directional hint, not a confirmation. FOUR: intraday momentum rolled over hard. The 1h MACD histogram has collapsed from +134.41 to +5.55 and 15m RSI from 69.22 to 35.91, while the 4H histogram only eased from +100.95 to +94.86 and the DAILY histogram improved for a fourth consecutive read (-237.75, -216.04, -194.69, -180.85). Fast timeframes gave back the move; slow timeframes did not. FIVE: Fear & Greed fell from 28 to 25, back into Extreme Fear, on a day price finished roughly flat."
+  },
+  "overnightRisk": "The next report is at ~02:00 COT, six and a half hours away, and the gap covers the thinnest liquidity window of the week — late US Monday into the Asia handover. Four specific things to watch. ONE, the immediate structural risk: price is sitting AT its session low, 63,320.1, having printed the low on the current bar with 15m RSI at 35.91 and the 15m MACD histogram at -37.13. There is 0.39% of air to the 233.49K pool at 63,070.56 and then a genuine vacuum — 62,375.96 holds only 120.94K — before the 535.77K magnet at 62,098.12. A stop-run that covers that whole distance is a 1.93% move, well inside a single overnight leg for an asset with a 2.59% daily ATR. TWO, the offsetting risk, which is the one that would hurt a short: the single heaviest pool on the visible surface is now ABOVE at 64,390.30 with 841.80K, and 24h Long/Short is 49.21/50.79, so the crowd is still fractionally net SHORT after a day that went nowhere. That is squeeze fuel, and it is why the futures book stays flat rather than short. THREE, the scheduled catalyst: the 03 Aug Farside row is only partly reported — IBIT, the largest fund by a distance, still reads '-'. When IBIT prints, a +58.7M day becomes either a convincing reversal of the outflow regime or a much smaller number, and that lands during the overnight. FOUR, the cross-asset one: today's Bitcoin bid was borrowed from an equity risk-on move (QQQ +1.76%) on Iran de-escalation. Headlines on that story reverse fast and Bitcoin trades through the gap while QQQ does not. Concrete plan: the spot core carries a resting stop at 62,050, below the 62,098.12 magnet, because a level that gets tagged and reclaimed should not take the position out but a level that gets lost should. Roughly 35 USDT of cash stays unspent specifically so a flush into 62,098 is an opportunity rather than a problem.",
+  "probabilities": {
+    "bullish": 38.0,
+    "range": 40.0,
+    "bearish": 22.0
+  },
+  "levels": {
+    "support": [
+      63245,
+      63070,
+      62966,
+      62720,
+      62376,
+      62218,
+      62098
+    ],
+    "resistance": [
+      63462,
+      63525,
+      63618,
+      63856,
+      63988,
+      64008,
+      64390
+    ],
+    "liquidation": [
+      {
+        "price": 64390.3,
+        "side": "above",
+        "intensity": "extreme",
+        "magnet": true,
+        "note": "841.80K, tooltip-verified at the newest column (2026-08-03 19:05) of the CoinGlass Model 3 surface. This is 91.7% of the 918.48K colour maximum and it is the single brightest feature anywhere on the visible map — the same status the 62,214 pool held at midday. It sits 1,070.2 points above spot, +1.69%, and is completely unconsumed. Leverage above spot is SHORT liquidation, so this is fuel for an upside squeeze rather than a wall, and it is corroborated by 24h Long/Short at 49.21/50.79."
+      },
+      {
+        "price": 64598.68,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "172.82K, read at the 13:20 column. The second station above and far lighter than the 64,390.30 pool 200 points beneath it, which is what makes 64,390.30 the destination rather than a waypoint."
+      },
+      {
+        "price": 63487.32,
+        "side": "above",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Zero — literally 0 liquidation leverage, tooltip-verified at the newest column. Price has 167 points of completely empty tape immediately overhead, which is why a reclaim of 63,620 can travel quickly."
+      },
+      {
+        "price": 63070.56,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "233.49K, tooltip-verified at the newest column. Only 0.39% below spot and the first real thing price would hit in a flush. Modest in absolute terms but it is the near shelf, and it is the level the reduce trigger is written against."
+      },
+      {
+        "price": 62375.96,
+        "side": "below",
+        "intensity": "low",
+        "magnet": false,
+        "note": "120.94K. This is the important GAP, not a level: between 63,070.56 and 62,098.12 there is almost nothing to slow price down. An overnight flush that clears 63,070 has very little friction until 62,098."
+      },
+      {
+        "price": 62098.12,
+        "side": "below",
+        "intensity": "high",
+        "magnet": true,
+        "note": "535.77K at the newest column, 58.3% of the colour maximum and 1.93% below spot. This is the descendant of the 980.84K pool midday read at 62,214.26 — it has migrated 116 points lower and roughly halved as part of it was consumed in the 08:30Z flush to 62,218.4. It survived that test and it remains the gravitational floor of this range. It also sits directly beneath the Aug-3 daily low of 62,218.4, which is what makes 62,050 the right place for a resting stop."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 64390.3,
+      "nearestBelow": 63070.56,
+      "pull": "up",
+      "source": "CoinGlass Liquidation Heatmap Model 3, Binance BTC/USDT perpetual, 48h window, read via browser with per-cell tooltip verification at the newest (19:05) column. The OKX free endpoints were tried first and failed the freshness guard for the sixth consecutive run.",
+      "asOf": "2026-08-03T19:30:00-05:00",
+      "note": "Pull is UP and this is a genuine regime change from every report today. Weighing the two magnets by size and distance: 841.80K sitting 1.69% above versus 535.77K sitting 1.93% below — bigger, and closer. The nearest pool in either direction is the 233.49K shelf at 63,070.56 just below, so the immediate risk is still downward, but the destination that the map is pointing at is 64,390.30. Read the two together as the honest shape of the overnight: a flush is the likelier first move, a squeeze is the bigger one."
+    }
+  },
+  "atr": {
+    "value": 1642.15,
+    "period": 14,
+    "pct": 2.59,
+    "source": "Computed here (Wilder ATR-14) from 61 completed Kraken XXBTZUSD daily bars ending with the CLOSED 2026-08-03 candle (O 63,500.0 / H 64,008.2 / L 62,218.4 / C 63,461.7), seeded on a 14-bar simple average of true range; residual seed weight 3.3%. Unlike the midday pass this run deliberately EXCLUDES the in-progress 2026-08-04 bar, which is thirty minutes old and would understate range. Today's true range was 1,789.80, above the average, so ATR ticked up from 1,637.30 to 1,642.15. At 2.59% of spot a normal day covers about $1,642. Relevance to the trade: spot to the 62,050 stop is 1,270 points, or 0.77 of a daily ATR — the stop is inside one average day's range, which is exactly why it is a real risk and not a formality.",
+    "asOf": "2026-08-03T19:30:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": 35.91,
+      "macd": {
+        "line": -62.16,
+        "signal": -25.03,
+        "hist": -37.13
+      },
+      "emas": {
+        "ema20": 63524.68,
+        "ema50": 63466.33,
+        "ema100": 63327.68,
+        "ema200": 63245.62
+      },
+      "structure": "The clean downtrend of the four timeframes and the one carrying the immediate risk. Price has made lower highs and lower lows continuously since the 64,008.2 print at 19:30Z, and the current bar IS the session low at 63,320.1. It is below the EMA20, EMA50 and EMA100 and is holding only the EMA200 at 63,245.62, 74.5 points beneath. Importantly there is NO bullish divergence here: the swing from 63,434.3 at RSI 38.57 to 63,320.1 at RSI 35.91 is a lower low in price confirmed by a lower low in the oscillator, which is continuation, not exhaustion. The desk logged a bearish 15m divergence at midday and it paid in full — price is 568.2 points lower. Symmetry requires taking this read equally seriously.",
+      "bias": "bearish",
+      "source": "Kraken 15m series (97 bars, 24h); RSI/MACD computed here",
+      "asOf": "2026-08-03T19:30:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 50.1,
+      "macd": {
+        "line": 140.98,
+        "signal": 135.43,
+        "hist": 5.55
+      },
+      "emas": {
+        "ema20": 63371.53,
+        "ema50": 63250.45,
+        "ema100": 63351.59,
+        "ema200": 63612.32
+      },
+      "structure": "Perfectly, almost uselessly neutral — RSI 50.10 — and that is itself the information. The MACD histogram has collapsed from +134.41 at midday to +5.55, meaning the line and signal are crossing at this bar and the entire hourly impulse has been unwound without price breaking down. The one constructive fact that SURVIVED the fade: the EMA20 at 63,371.53 is still above the EMA50 at 63,250.45, so the golden cross printed during the impulse has not been undone. Price sits between them, below the EMA20 by 51.4 and above the EMA50 by 69.7. Above, the EMA200 at 63,612.32 is now resistance and lines up with the 4H EMA50 at 63,618.39 — that pair is the reclaim level the secondary add is written against.",
+      "bias": "range",
+      "source": "Kraken 1h series (299 completed bars + in-progress); seeded EMA200",
+      "asOf": "2026-08-03T19:30:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": 49.65,
+      "macd": {
+        "line": -95.24,
+        "signal": -190.1,
+        "hist": 94.86
+      },
+      "emas": {
+        "ema20": 63274.06,
+        "ema50": 63618.39,
+        "ema100": 63852.05,
+        "ema200": 63988.1
+      },
+      "structure": "This is where the correction bites. Price at 63,320.1 is above the EMA20 (63,274.06) by 46.0 and below the other three: EMA50 63,618.39, EMA100 63,852.05, EMA200 63,988.10. Midday reported price above all four because it carried a 4H EMA200 of 63,247.50; that figure was an artifact of seeding a 200-period average at the first close of a 250-bar window, and the corrected value is 740 points higher. The 4H reclaim thesis is therefore weaker than this desk said six hours ago, and confidence is marked down accordingly. What remains genuinely constructive: the MACD histogram is +94.86, positive for a third consecutive read, and the 20:00Z bar closed at 63,461.7 after defending 63,295.5. The 4H has stopped falling; it has not started rising.",
+      "bias": "range",
+      "source": "Kraken 4h series (249 completed bars + in-progress); seeded EMA100/200",
+      "asOf": "2026-08-03T19:30:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 46.76,
+      "macd": {
+        "line": -149.38,
+        "signal": 31.46,
+        "hist": -180.85
+      },
+      "emas": {
+        "ema20": 63855.97,
+        "ema50": 64578.6,
+        "ema100": 67069.63,
+        "ema200": 72649.88
+      },
+      "structure": "Still the bear case and still unbroken: price is below all four daily EMAs and the distance to the EMA200 at 72,649.88 is 12.8%. But the daily is quietly the most constructive timeframe on the board. The MACD histogram has now improved for FOUR consecutive reads — -237.75, -216.04, -194.69, -180.85 — computed on a single well-converged 499-close series so the sequence is internally consistent rather than an artifact of changing windows. RSI at 46.76 is the highest it has been in this drawdown. And the Aug-3 candle closed at 63,461.7 after tagging 62,218.4, a 1,789.80 true range that ended in the top 69% of its own bar. Sellers had the whole day and finished the session near the highs. That is not a bottom signal; it is the absence of a breakdown, which after this drawdown is worth noting.",
+      "bias": "bearish",
+      "source": "Kraken daily series (499 completed closes + in-progress)",
+      "asOf": "2026-08-03T19:30:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.2,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "hold",
+      "entry": null,
+      "stop": 62050,
+      "tp": [
+        64390,
+        65337
+      ],
+      "rr": null,
+      "confidence": 5.5,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "HOLD",
+      "entry": null,
+      "stop": 62050,
+      "tp": [],
+      "rr": null,
+      "confidence": 6.0,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "Short-term down, medium-term coiled. Price is at the session low with 15m RSI 35.91 and no divergence to argue with it, so the immediate path of least resistance is the 233.49K pool at 63,070.56. But the map's biggest object is 1.69% ABOVE and the crowd is fractionally net short, so pressing a short here is fighting the heavier magnet. Trade the edges and respect that the overnight gap makes any intraday position a different instrument.",
+    "longAbove": 63620,
+    "shortBelow": 63040,
+    "invalidates": 62050,
+    "note": "Scalp only the edges — live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 84.15,
+      "changePct": 0.45
+    },
+    "dxy": {
+      "value": 99.986
+    },
+    "us10y": {
+      "value": 4.68
+    },
+    "etfFlows": {
+      "streakDays": 1,
+      "note": "THE BIGGEST CHANGE IN THIS REPORT. Re-verified from farside.co.uk/btc at 19:40 COT. The 03 Aug 2026 row, which read as an all-'-' placeholder with a 0.0 total at midday, has now FILLED IN at PLUS $58.7M: FBTC +33.4, EZBC +9.2, BTCO +6.7, HODL +4.5, BITB +2.8, ARKB +2.1, everything else 0.0. That is the first positive published print since 30 July (+233.1) and it directly contradicts the outflow narrative this desk carried across four consecutive reports on the strength of 31 July's -$265.4M. TWO IMPORTANT CAVEATS. First, it is INCOMPLETE: IBIT and BRRR both still read '-', and IBIT is the largest fund by a wide margin — on 31 July IBIT alone was -122.7 of the -265.4 total. The final 03 Aug number could land anywhere. Second, it lands during the overnight gap, which makes it the single most important scheduled data point before the 02:00 COT midnight session. streakDays is 1 because the most recent published session is an inflow."
+    },
+    "liquidations": {
+      "longsUsd": null,
+      "shortsUsd": null,
+      "skew": 0.97,
+      "traders": null,
+      "openInterestUsd": 112966475139,
+      "note": "Read from the CoinGlass header at 19:35 COT via the browser fallback. The OKX free endpoints were tried first and failed the freshness guard for the SIXTH consecutive run, returning bodies weeks stale, so they were discarded rather than used. CoinGlass reads: open interest $112,966,475,139, +1.34% on the day but DOWN 1.5% from the $114.69B this desk read at 12:50 COT — leverage came out during the fade rather than building into it, which is healthier than the alternative; 24h liquidations $242,603,780, +64.00%, the cost of the squeeze and the fade; 24h volume $160,156,625,564, +57.35%, a real expansion. skew is the 24h Long/Short ratio 49.21/50.79 = 0.97, marginally MORE short-tilted than midday's 0.98. That is the number worth carrying overnight: a full day of chop has not cleared the short base, and the 841.80K pool at 64,390.30 is where that base would be forced out. longsUsd and shortsUsd stay null because the CoinGlass header does not split the 24h liquidation total by side."
+    },
+    "fearGreed": 25,
+    "earnings": [
+      {
+        "ticker": "MSFT",
+        "reaction": "positive",
+        "note": "Reported an earnings beat driven by Azure and Copilot growth, per ETF Trends coverage carried on the QQQ page four days ago. Named here because it is part of why the Nasdaq tape was strong enough today to lend Bitcoin a bid it could not hold on its own."
+      },
+      {
+        "ticker": "AMZN",
+        "reaction": "positive",
+        "note": "MarketWatch, one day ago: S&P 500 profit growth 'getting even wilder as Amazon makes its mark'. Same point as MSFT — the equity earnings tape is doing the risk-on work, not anything crypto-native."
+      }
+    ]
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 700.07,
+        "changePct": 1.76,
+        "bias": "bullish",
+        "note": "CLOSED Aug 3 2026 4:00 PM EDT at $700.07, +$12.08 or +1.76%, on 44,395,513 shares. Open 688.30, previous close 687.99, day's range 685.82-701.59, so it finished near the top of a wide range and back above the round 700 handle. After-hours 701.80. The driver per TipRanks was Trump calling off strikes on Iran. Still 6.5% under the 52-week high of 748.65. The BTC-relevant point is the divergence: this is a full risk-on session and Bitcoin finished it flat.",
+        "dcaSignal": {
+          "percentileInMonth": 60,
+          "pctVs20dAvg": 0.03,
+          "pctFromHigh": -3.51,
+          "rsi14": 47.16,
+          "zone": "fair",
+          "note": "Recomputed this run from 21 verified trailing daily closes (Jul 6 - Aug 3) read from the StockAnalysis history table, now including the new Aug 3 close. The zone has moved from cheap-ish to squarely fair after a +1.76% day: price is exactly at its 20-day average (+0.03%). Computed from trailing daily closes — relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ ETF Price and History — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 696.4,
+        "changePct": 1.42,
+        "bias": "bullish",
+        "note": "CLOSED Aug 3 2026 4:00 PM EDT at $696.40, +$9.75 or +1.42%, on 7,241,794 shares. Open 688.83, day's range 688.61-697.31 — it closed at the high end and at a fresh 21-session high. Broad risk-on, same Iran de-escalation catalyst, and notably VOO has been outperforming QQQ through the chip-stock unwind that MarketWatch flagged over the weekend.",
+        "dcaSignal": {
+          "percentileInMonth": 100,
+          "pctVs20dAvg": 1.56,
+          "pctFromHigh": 0.0,
+          "rsi14": 57.21,
+          "zone": "rich",
+          "note": "Recomputed from 21 verified trailing closes (Jul 6 - Aug 3). VOO closed at the TOP of its trailing-21 window — percentile 100, 0.0% from the window high — which mechanically puts it in the rich zone. For a monthly DCA that is a reason to be patient with discretionary top-ups, not a reason to stop a scheduled contribution. Computed from trailing daily closes — relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO ETF Price and History — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 99.74,
+        "changePct": 0.27,
+        "bias": "range",
+        "note": "CLOSED Aug 3 2026 4:00 PM EDT at $99.74, +$0.27 or +0.27%, on 9,159 shares. Open 99.42, previous close 99.47, day's range 99.25-99.86. A DATA-INTEGRITY NOTE THAT MATTERS: the first fetch of the StockAnalysis JPXN page through this host's proxy returned a fully-rendered but STALE page dated 'At close: May 27, 2026' at $99.24, with May-2026 news attached. It was discarded and the figure above was re-read live in the browser. Japan lagged the US move badly today — +0.27% against QQQ's +1.76% — after a violent +4.02% session on 30 July.",
+        "dcaSignal": {
+          "percentileInMonth": 64,
+          "pctVs20dAvg": 1.09,
+          "pctFromHigh": -1.92,
+          "rsi14": 47.8,
+          "zone": "fair",
+          "note": "Recomputed from 21 verified trailing closes (Jul 6 - Aug 3) read from the StockAnalysis history table in the browser. Fair, mid-range, and unremarkable — the cheapest of the three on a from-high basis but not cheap in absolute terms. Computed from trailing daily closes — relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "JPXN ETF Price and History — StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": true,
+    "rollingRecord": "The 12:45 COT midday report called range with a bullish tilt at 40/39/21 and HELD, and holding was right. Neither of its levels resolved into a trade: the 63,246 reduce never fired — session low 63,320.1, 74.1 points of clearance, so it survives literally into the endday print — and the 62,284 invalidation was never approached. The add trigger at 63,598 was TAGGED at roughly 21:00Z and its confirmation failed: price cut straight through and is 278 points lower, so a desk that bought the tag would be down 0.44% into an overnight gap. Midday explicitly priced that add as 'on weakness that HOLDS 63,598' and the holding never happened, so not buying it is scored as a correct non-action. Reaching further back, the 10:20 midday trim at 63,714.7 now looks good rather than merely neutral: spot is 63,320.1, so that trim banked 394.6 points, +0.62%, and the 35.12 USDT it raised is the only reason this desk has anything to spend on the 62,098 magnet tonight.",
+    "note": "The calibration lesson of this run is about our own instrument, not about the market, and it is uncomfortable enough to be worth writing plainly. The midday report's headline finding — 'price is above ALL FOUR 4H EMAs for the first time in this drawdown' — was WRONG, and it was wrong for a methodological reason this desk should have caught: a 200-period EMA computed over a 250-bar window carries 8.2% of its weight in whatever value you seed it with, and seeding it at the first close of a window that began in a much higher price regime dragged the result 740 points too low. The corrected 4H EMA200 is 63,988.10. Price never reclaimed it. Two consequences are already recorded above: the reduce level has been re-anchored to a real object (the 63,070.56 pool) instead of a phantom moving average, and confidence is 5.60 rather than the 6.1 midday carried. The general rule now in force: any long-period EMA whose window is shorter than five times its period must be seeded from an equivalent-half-life average on a longer timeframe, and the naive and seeded values must both be disclosed. The second, smaller lesson: the desk took its own bearish 15m divergence seriously at midday and was rewarded with 568 points. It should keep doing that, including tonight, when the 15m says down and the liquidation map says up."
+  },
+  "sources": [
+    {
+      "title": "Kraken public OHLC API — XXBTZUSD 15m/1h/4h/daily, the only BTC price feed that passed the freshness guard",
+      "url": "https://api.kraken.com/0/public/OHLC?pair=XXBTZUSD&interval=240"
+    },
+    {
+      "title": "Coinbase Exchange candles — independent timestamped cross-check, 00:30Z bar at 63,296.57 vs Kraken 63,320.1",
+      "url": "https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=900"
+    },
+    {
+      "title": "CoinGlass Liquidation Heatmap Model 3 — Binance BTC/USDT perp, 48h; per-cell tooltips verified at the 19:05 column",
+      "url": "https://www.coinglass.com/pro/futures/LiquidationHeatMapModel3?coin=BTC&type=pair"
+    },
+    {
+      "title": "Farside Investors — Bitcoin ETF daily flow table; the 03 Aug row filled in at +$58.7M with IBIT still unreported",
+      "url": "https://farside.co.uk/btc/"
+    },
+    {
+      "title": "Alternative.me Crypto Fear & Greed Index — 25 (Extreme Fear), yesterday 28, last week 29",
+      "url": "https://alternative.me/crypto/fear-and-greed-index/"
+    },
+    {
+      "title": "CNBC — ICE Brent Crude (Oct'26) 84.15 +0.45%, ICE US Dollar Index 99.986 +0.09%, US 10Y 4.68%",
+      "url": "https://www.cnbc.com/quotes/.DXY"
+    },
+    {
+      "title": "StockAnalysis — QQQ / VOO / JPXN closes and 21-session history tables for the DCA signals",
+      "url": "https://stockanalysis.com/etf/qqq/history/"
+    },
+    {
+      "title": "OKX public endpoints — TRIED AND DISCARDED for the sixth consecutive run, stale by 48-79 days through this proxy. Also discarded this run: the Kraken ticker endpoint and the Coinbase v2 spot endpoint, both untimestamped and both contradicted by timestamped series. A keyed CoinGlass source would remove the dependency on the browser fallback.",
+      "url": "https://www.okx.com/api/v5/public/open-interest?instType=SWAP&instId=BTC-USDT-SWAP"
+    }
+  ]
+}
