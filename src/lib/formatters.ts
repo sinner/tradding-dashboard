@@ -56,3 +56,18 @@ export const formatSession = (session: string): string => {
   };
   return map[session] ?? session;
 };
+
+/** Report stamp like `2026-08-05 8:00 AM` from an ISO `generatedAt`. */
+export const formatGeneratedAt = (iso: string): string => {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const time = new Intl.DateTimeFormat('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  }).format(d);
+  return `${y}-${m}-${day} ${time}`;
+};

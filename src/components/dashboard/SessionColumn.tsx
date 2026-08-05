@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/Card';
 import { InfoPopover } from '@/components/ui/InfoPopover';
 import { Title } from '@/components/ui/Title';
 import { routeReport } from '@/config/constants';
-import { formatPrice, formatSession } from '@/lib/formatters';
+import { formatGeneratedAt, formatPrice, formatSession } from '@/lib/formatters';
 import type { Report } from '@/lib/types';
 import { cn } from '@/lib/cn';
 import { Link } from 'react-router-dom';
@@ -60,7 +60,13 @@ export function SessionColumn({
         <div className="flex items-start justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <Title level={3}>{formatSession(session)}</Title>
+              <Title level={3}>
+                {formatSession(session)}
+                <span className="font-normal text-ink-muted">
+                  {' '}
+                  / {formatGeneratedAt(report.generatedAt)}
+                </span>
+              </Title>
               <InfoPopover
                 label={`What is the ${formatSession(session)} snapshot?`}
                 title={`${formatSession(session)} snapshot`}
@@ -68,6 +74,10 @@ export function SessionColumn({
                 <p>
                   {sessionBlurb[session] ??
                     'A point-in-time report for this trading session.'}
+                </p>
+                <p>
+                  <span className="font-medium text-ink">Generated</span> is when this
+                  report file was written ({formatGeneratedAt(report.generatedAt)}).
                 </p>
                 <p>
                   <span className="font-medium text-ink">Snapshot price</span> is BTC’s
