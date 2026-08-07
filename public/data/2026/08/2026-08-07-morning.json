@@ -1,0 +1,293 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-08-07-morning",
+  "date": "2026-08-07",
+  "session": "morning",
+  "generatedAt": "2026-08-07T07:05:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "bullish",
+  "biasTilt": "bullish",
+  "confidence": 6.2,
+  "priceSnapshot": {
+    "value": 65020,
+    "currency": "USD",
+    "changePct": 1.08,
+    "source": "OKX public API v5, keyless, via the run's web_fetch proxy at 06:58-07:00 COT. FRESHNESS AUDIT, and it is unusual this run because the endpoint that is normally the most reliable is the one that failed. /market/ticker returned last 64,316.4 with ts 2026-08-07T07:06:49Z on TWO separate calls including one with a cache-busting query parameter - that is the EXACT value and timestamp the midnight session recorded 4.9 hours ago, so the ticker is serving a stale cached row and was REJECTED. The candle endpoints are all current and they agree with each other: /market/candles bar=1Dutc has the 07 Aug bucket in progress at open 64,326.7, high 65,209.8, low 64,159.6, close 65,020; bar=1H has the 11:00Z bucket in progress at 65,020; bar=15m has the 11:45Z bucket in progress at 65,020; bar=4H has the 08:00Z bucket in progress at 65,019.9. Four independent buckets printing the same number is the verification. NOTE on method: the first 1H request (limit=300) also returned a stale cache, a 06 Aug 14:00Z bucket 22 hours old, and was rejected; re-requesting at limit=299 changed the URL and returned the live series. Also fresh and used below: /public/open-interest ts 11:19:56Z, /public/liquidation-orders newest fill 11:23:36Z, /public/funding-rate for the settled 08:00Z period. Stale and labelled as such: /rubik/stat/contracts/long-short-account-ratio, newest bucket 07:00Z, 5 hours old. changePct is measured against sodUtc0 of 64,326.7, the completed 06 Aug UTC daily close, the same convention every session this week has used.",
+    "asOf": "2026-08-07T06:59:00-05:00",
+    "note": "The line held, and then it broke the other way. Since the midnight snapshot at 64,316.4, BTC has traded up 703.6 points to 65,020, +1.09% in 4 hours 53 minutes, and it did it by running over shorts. OKX filled $1,126,392 of SHORT liquidations and ZERO dollars of long liquidations in a 52-minute window between 10:32Z and 11:24Z - 192 fills, every single one posSide short being bought back, walking the price from 64,730 up to 65,186.7. That is the exact mirror image of what the midnight session documented: a 34.9-to-1 LONG flush at 64,134-64,163 at 05:32Z, then a 100-to-nothing SHORT flush at 65,050-65,190 six hours later. Both sides of the leveraged book were cleared out inside one session. What price cleared on the way up matters more than the squeeze itself. It took the 64,650 add trigger this desk set only four hours ago, it took the 65,030 level that had rejected six times in 102 hours and had been the add trigger for the four sessions before that, and it reclaimed the daily EMA50 at 64,655.02 - the first time price has closed a 1H bar above that line since 03 Aug. Every timeframe is now aligned for the first time in a week: the 15m, 1H, 4H and daily MACD histograms are ALL positive, at +26.48, +73.28, +1.59 and +41.13, and the 4H and daily both crossed up this session from -33.48 and -0.72. Price sits above every 15m, 1H and 4H EMA on the board. Session range since the midnight mark: low 64,264.4, high 65,209.8, a 945.4-point band worth 0.67 of a daily ATR. The caveat is timing, not structure. The US July payrolls report lands at 07:30 COT, twenty-five minutes after this report is stamped, consensus roughly 80-97k after a 44k ADP miss, into a market pricing a September Fed hike. Price has run 703 points into that print with the short fuel above it already spent.",
+    "sessionRange": { "low": 64264.4, "high": 65209.8 }
+  },
+  "decisionBox": {
+    "position": "ADD",
+    "reduceIf": {
+      "price": 64650,
+      "confirmation": "A 1H CLOSE below $64,650. This RETIRES the 64,150 line that has stood for five consecutive sessions, and the reason is that the structure it was defending has been replaced by a better one 500 points higher. 64,650 is three things at once: the daily EMA50 sits at 64,655.02 and was reclaimed on the 09:00Z 1H close for the first time since 03 Aug; it was this desk's own add trigger set at the midnight session and it fired; and it is the open of the 08:00Z 1H bar that started the squeeze. Price is 370 points above it and the 1H ATR(14) is 221.04, so it is 1.7 average hours away - close enough to be tested on a bad payrolls print, far enough that noise will not reach it. A 1H close back below 64,650 would mean the $1.13M short flush was a liquidity event that got retraced, not a trend change, and the burden of proof goes back to the bulls. The warnings between spot and the line, in order: the 15m EMA20 at 64,774.02, the 64,848.3 realized-liquidation shelf where a single 150-contract fill printed, and the 08:00Z 1H open at 64,601.7. 64,150 remains in invalidatesAt as the level that voids the entire reclaim."
+    },
+    "addIf": {
+      "price": 65250,
+      "confirmation": "A 4H CLOSE above $65,250. The 64,650 trigger this desk set at midnight has already fired and is why the position is ADD rather than HOLD, so the board needs a NEW level and this is the honest one. 65,250 clears the 65,209.8 session high, it clears the 65,186.7 top of the short-liquidation cascade, and it is the price the midnight session identified from the CoinGlass heatmap as the single extreme-intensity band on the map. Above it the realized-liquidation record for the last week is empty until 65,423.7, which is where the 24 Jul spike topped. The reason it needs a 4H CLOSE and not a touch is that the fuel which carried price here is spent: the $1.13M of shorts that got bought back between 65,050 and 65,190 are gone, so a poke above 65,250 on thin follow-through is a different event from a four-hour bar settling there on real demand."
+    },
+    "invalidatesAt": 64150,
+    "stopOrder": { "recommended": true, "price": 64620 },
+    "changed": "Position stays ADD but everything underneath it moved, and one thing on the board resolved. FIRST, the midnight session's add trigger FIRED. It set 64,650 as a deliberate step down from the 65,030 level that had rejected six times, on the argument that 65,030 had become a target rather than a trigger and waiting for it meant sitting out every repair. Price cleared 64,650 on the 09:00Z 1H close and then took 65,030 as well within the same two hours. That is the first time this desk's own add level has been reached in a week. SECOND, the reduce line moves up 500 points, from 64,150 to 64,650, and this is the biggest single change to the board in five sessions. 64,150 was never broken - it was tested at 64,159.6 overnight and defended - but price is now 870 points above it and the daily EMA50 at 64,655.02 has been reclaimed, so continuing to run a stop 1.3% below spot would be pretending the structure did not change. THIRD, the momentum picture completed. At midnight the 4H was the holdout, its histogram deepening from -17.38 to -33.48, which is exactly why that report was a range call with a tilt and not a bullish call. The 4H histogram is now +1.59 and the daily is +41.13 from -0.72. All four timeframes positive at once has not happened since 30 Jul. FOURTH, the leveraged positioning inverted inside one session: $125,745 of longs carried out at 05:32Z, then $1,126,392 of shorts carried out at 11:23Z with zero longs. Set against all of that, TWO things argue for 6.2 confidence rather than 7-plus. The US July payrolls report is twenty-five minutes away and price has already travelled 703 points into it, which means the easy part of the move is behind us and the print is a genuine two-sided binary. And the macro trend is unchanged: the daily EMA100 at 66,946.69 and EMA200 at 73,147.53 are both still far above spot, so this is a reclaim inside a downtrend, not a new uptrend. Brent is up another 3.40% to 86.04 on Strait of Hormuz tension and the DXY is up 0.31% to 99.984 - neither is a crypto-friendly backdrop."
+  },
+  "probabilities": { "bullish": 46.0, "range": 38.0, "bearish": 16.0 },
+  "levels": {
+    "support": [
+      65007.3, 65000.0, 64890.7, 64848.3, 64833.6, 64774.02, 64655.02, 64650.0,
+      64601.7, 64596.74, 64556.59, 64543.17, 64500.0, 64464.45, 64451.49,
+      64334.39, 64318.4, 64264.4, 64258.87, 64188.68, 64159.6, 64152.82,
+      64150.0, 64107.34, 64083.67, 64000.0, 63881.0, 63760.0, 63673.89
+    ],
+    "resistance": [
+      65042.4, 65078.7, 65100.0, 65162.4, 65186.7, 65200.0, 65209.8, 65250.0,
+      65300.0, 65423.7, 65500.0, 65713.8, 66000.0, 66946.69, 73147.53
+    ],
+    "liquidation": [
+      {
+        "price": 65162.4,
+        "side": "above",
+        "intensity": "high",
+        "magnet": false,
+        "note": "REALIZED, not resting. $267,770 of short liquidations filled in the 65,150-65,199 band, including the single largest fill of the cascade at 65,162.4 for 175.99 contracts. This fuel is SPENT - these shorts have already been bought back - so treat the band as a price memory and a supply shelf, not as a magnet pulling price up."
+      },
+      {
+        "price": 65186.7,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Top of the cascade. $87,838 filled between 65,200 and the 65,186.7 final print at 11:23:36Z, which is 23.1 points under the 65,209.8 session high. The squeeze stopped here, which makes 65,186-65,210 the first thing a continuation attempt has to take."
+      },
+      {
+        "price": 65080.8,
+        "side": "above",
+        "intensity": "extreme",
+        "magnet": true,
+        "note": "Heaviest band of the entire session: $273,120 of shorts liquidated between 65,050 and 65,099, including the two largest single fills on the tape at 242.51 contracts on 65,080.8 and 194.25 contracts on 65,047.2. This is where the cascade did most of its damage and it is only 60.8 points above spot. Flagged magnet:true because it is the densest verified cluster on the board, with the caveat that it is realized rather than resting - its forward pull comes from being a proven high-volume transaction shelf, not from unfilled orders."
+      },
+      {
+        "price": 65125.3,
+        "side": "above",
+        "intensity": "high",
+        "magnet": false,
+        "note": "$256,041 filled in the 65,100-65,149 band. Together with the two bands either side of it, roughly $797,000 of the $1,126,392 total - 70.8% of the whole cascade - printed inside the 140 points between 65,050 and 65,190."
+      },
+      {
+        "price": 64998.1,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "$64,208 filled between 65,000 and 65,049 as the cascade got going. Spot at 65,020 is sitting inside this band, which is the least comfortable place on the map - directly on top of where the move started."
+      },
+      {
+        "price": 64848.3,
+        "side": "below",
+        "intensity": "high",
+        "magnet": true,
+        "note": "The only meaningful cluster BELOW spot and the nearest real shelf if payrolls disappoints: $124,318 filled between 64,850 and 64,899 at 10:45:22Z, dominated by one 150.06-contract fill at 64,848.3. That was the first leg of the squeeze. A retrace into it would be a normal retest; a 1H close under it puts the 64,650 reduce line directly in play."
+      },
+      {
+        "price": 64730.1,
+        "side": "below",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Where the cascade began at 10:32:02Z. Only $2,480 filled in the whole 64,700-64,799 stretch, which means there is very little transacted volume between here and the 64,650 reduce line - thin air on the way down as well as on the way up."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 65080.8,
+      "nearestBelow": 64848.3,
+      "pull": "up",
+      "source": "OKX /public/liquidation-orders, instType=SWAP uly=BTC-USDT state=filled, 192 filled detail rows read at 06:56 COT spanning 2026-08-07T10:32:02Z to 11:23:36Z, sized bkPx x sz x 0.01 BTC contract value. Cross-checked against /public/open-interest (ts 11:19:56Z) and /public/funding-rate (settled 08:00Z period). The OKX free feed was fully live this run so no CoinGlass browser read was required; consequently these are REALIZED clusters and this report does NOT have a forward resting-order heatmap.",
+      "asOf": "2026-08-07T06:56:00-05:00",
+      "note": "Pull is UP but the honest caveat is that it is weaker than the raw numbers suggest. The mechanical force in this move was 100% one-directional - $1,126,392 of shorts liquidated against ZERO dollars of longs, across 192 consecutive fills, every one of them a short being bought back. Nothing on this tape argues for downside. But realized liquidations are consumed fuel: the shorts that were sitting between 65,050 and 65,190 are gone, so the same band cannot squeeze twice. What is left is a supply shelf where 70.8% of the cascade transacted, 60 to 170 points above spot, and one real demand shelf at 64,848.3 where $124,318 printed. The asymmetry that matters for the next four hours is that there is almost nothing transacted between 64,650 and 64,850 - $2,480 in the entire 100-point stretch below 64,800 - so a payrolls disappointment has thin air to fall through until it reaches the reduce line."
+    }
+  },
+  "atr": {
+    "value": 1404.28,
+    "period": 14,
+    "pct": 2.16,
+    "source": "Wilder ATR(14) on the OKX bar=1Dutc series, advanced recursively from the midnight session's verified prior-bar value of 1,431.52 with the 07 Aug in-progress bar (high 65,209.8, low 64,159.6, prior close 64,325.8), giving TR = 1,050.2 and ATR = (1431.52 x 13 + 1050.2) / 14 = 1,404.28. Same method on the other bars gives 4H 530.10 (from 487.88), 1H 221.04 (from 200.14) and 15m 110.12 (from 116.74). The daily and 15m readings CONTRACTED while the 1H and 4H EXPANDED by 10.4% and 8.7% - that split is the signature of a single sharp intraday impulse inside a still-compressing daily range, which is exactly what a 52-minute liquidation cascade looks like on the tape.",
+    "asOf": "2026-08-07T07:00:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": 71.22,
+      "macd": { "line": 167.59, "signal": 141.12, "hist": 26.48 },
+      "emas": { "ema20": 64774.02, "ema50": 64596.74, "ema100": 64543.17, "ema200": 64451.49 },
+      "structure": "Vertical. Twelve of the last fifteen 15m bars closed higher, the 11:00Z bar ran 64,930.9 to 65,209.8 on the cascade, and price is above all four EMAs with the stack in textbook bullish order - 20 over 50 over 100 over 200. RSI at 71.22 is elevated but NOT overbought by the crypto threshold this desk uses (75), and it is rising into the high rather than diverging from it. The 65,007.3-65,020 shelf that the last three bars have held is the first thing that has to give for the move to stall.",
+      "bias": "bullish",
+      "source": "OKX /market/candles bar=15m, 100 bars, newest bucket 11:45Z in progress",
+      "asOf": "2026-08-07T07:00:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 68.52,
+      "macd": { "line": 62.69, "signal": -10.59, "hist": 73.28 },
+      "emas": { "ema20": 64556.59, "ema50": 64464.45, "ema100": 64258.87, "ema200": 64152.82 },
+      "structure": "The cleanest signal on the board. The MACD line crossed its signal from below and the histogram went from -17.12 at the midnight read to +73.28 here, a 90-point swing in five hours and the widest positive 1H histogram since 30 Jul. Four consecutive higher 1H closes - 64,318.4, 64,601.7, 64,833.6, 64,890.7 - and the in-progress 11:00Z bar at 65,020 makes five. Price is 463 points above the 1H EMA20 and 867 above the EMA200, and the full stack has flipped bullish order for the first time this week. Stretched, but stretched in the right direction.",
+      "bias": "bullish",
+      "source": "OKX /market/candles bar=1H, 100 bars, newest bucket 11:00Z in progress",
+      "asOf": "2026-08-07T07:00:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": 63.6,
+      "macd": { "line": 240.63, "signal": 239.05, "hist": 1.59 },
+      "emas": { "ema20": 64334.39, "ema50": 64107.34, "ema100": 64083.67, "ema200": 63673.89 },
+      "structure": "The timeframe that was the holdout has turned, but only just. The histogram is +1.59 against -33.48 at the midnight read - a genuine cross, and the reason this report is a bullish call rather than another range-with-a-tilt, but 1.59 is a rounding error and the bar does not close until 12:00Z. The 08:00Z bar is currently a 906.7-point range from 64,303.1 to 65,209.8, the widest 4H bar since 31 Jul, and it will settle as a large bullish body if it holds here. Price is 686 points above the 4H EMA20 and clear of all four EMAs.",
+      "bias": "bullish",
+      "source": "OKX /market/candles bar=4H, 100 bars, newest bucket 08:00Z in progress",
+      "asOf": "2026-08-07T07:00:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 54.89,
+      "macd": { "line": 75.5, "signal": 34.38, "hist": 41.13 },
+      "emas": { "ema20": 64188.68, "ema50": 64655.02, "ema100": 66946.69, "ema200": 73147.53 },
+      "structure": "Reclaim inside a downtrend, and both halves of that sentence matter. The bullish half: the histogram crossed positive at +41.13 from -0.72, the 07 Aug bar is a 1,050-point range holding near its high, this will be a NINTH consecutive close above the EMA20 at 64,188.68 if it holds, and price has taken back the EMA50 at 64,655.02 for the first time since 03 Aug. The bearish half: RSI is only 54.89 despite the rip, and the EMA100 at 66,946.69 and EMA200 at 73,147.53 are 2,927 and 8,128 points overhead. A 65,020 print does not change a structure that has been below its 200-day since June.",
+      "bias": "bullish",
+      "source": "OKX /market/candles bar=1Dutc, 100 bars, 07 Aug bucket in progress",
+      "asOf": "2026-08-07T07:00:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "long",
+      "entry": [64775],
+      "stop": 64590,
+      "tp": [65250, 65500, 65713.8],
+      "rr": 2.57,
+      "confidence": 5.8,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "hold",
+      "entry": null,
+      "stop": 64150,
+      "tp": [65250, 66000],
+      "rr": null,
+      "confidence": 6.0,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "ADD",
+      "entry": null,
+      "stop": 64150,
+      "tp": [],
+      "rr": null,
+      "confidence": 6.2,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "Bullish while price holds above the reclaimed daily EMA50 at 64,655, but the next sixty minutes belong to the US July payrolls print at 07:30 COT, not to the chart. Price has already run 703 points into that release and the short fuel above it is spent, so the risk of a violent two-way reaction on the number is higher than usual.",
+    "longAbove": 65100,
+    "shortBelow": 64830,
+    "invalidates": 64650,
+    "note": "Scalp only the edges - live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": { "value": 86.04, "changePct": 3.4 },
+    "dxy": { "value": 99.984 },
+    "us10y": { "value": 4.674 },
+    "etfFlows": {
+      "streakDays": 4,
+      "note": "Farside Investors, Bitcoin ETF Flow (US$m). The 06 Aug row is complete and unchanged from the midnight read: IBIT +128.3, FBTC +11.2, BITB +1.7, ARKB 0.0, MSBT +14.9, GBTC -32.8, EZBC +7.5, BTCO +6.8, for a TOTAL of +137.6M. That confirms four consecutive positive days - 03 Aug +170.1, 04 Aug +211.5, 05 Aug +244.4, 06 Aug +137.6 - for a four-day sum of +763.6M, following 31 Jul's -265.4M. GBTC's -32.8M is still the only persistent outflow in the complex. The 07 Aug row does not print until after the US session and will not be readable before tonight's endday run, so the ETF leg under this reclaim is confirmed as of yesterday and unverified as of today. No new ETF information has arrived since the midnight session; this block is a restatement, not a fresh signal."
+    },
+    "liquidations": {
+      "longsUsd": 0,
+      "shortsUsd": 1126392,
+      "skew": 1.33,
+      "traders": null,
+      "openInterestUsd": 2082013683,
+      "note": "REALIZED LIQUIDATIONS from OKX /public/liquidation-orders, 192 filled detail rows spanning 2026-08-07T10:32:02Z to 11:23:36Z, sized bkPx x sz x 0.01 BTC contract value: $1,126,392 of SHORTS against $0.00 of longs. Not a ratio - a shutout. Every one of the 192 fills is posSide short, side buy, walking price from 64,730.1 to 65,186.7 in 52 minutes, with 70.8% of the notional printing inside the 140 points between 65,050 and 65,190. Set that against what the midnight session recorded six hours earlier - $125,745 of LONGS against $3,607 of shorts, 34.9-to-1 the other way, at 64,134-64,163 - and the picture is a leveraged book that has been cleared out from both ends inside a single trading day. OPEN INTEREST is $2,082,013,683 from /public/open-interest at ts 11:19:56Z, which is genuinely FRESH this run, unlike the 19.8-hour-old cached row the endday and midnight sessions both had to reject. FUNDING is +0.00517% for the settled 08:00Z period from /public/funding-rate - positive, so longs pay, but roughly half the 0.01% neutral baseline, which means the perp market is NOT crowded long despite the rally. SKEW of 1.33 is the OKX long/short ACCOUNT ratio and carries a caveat: the newest bucket is stamped 07:00Z, five hours stale on an hourly feed, so it describes positioning BEFORE the squeeze and is quoted for trend only. On that basis it rose steadily from 1.17 at 06 Aug 21:00Z to 1.33 at 07:00Z, meaning retail accounts were rebuilding long exposure into the move. Read together, light funding plus a short shutout plus rising account skew says the rally was driven by forced short covering rather than by fresh leveraged buying."
+    },
+    "fearGreed": 29,
+    "earnings": []
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 714.65,
+        "changePct": -0.37,
+        "bias": "Rich, three consecutive lower closes, and the one of the three most exposed to the payrolls print thirty minutes from now",
+        "note": "CARRIED FROM LAST CLOSE - US equity markets are shut at the time of this report. It is stamped 07:05 COT on Friday 07 Aug and the NYSE/Nasdaq opening bell is 08:30 COT, so the 06 Aug settled close of 714.65, down 0.37%, is still the newest verified print and is unchanged from the midnight read. Range that day 708.50-719.32 on 31.6M shares after opening 710.82. That is a third straight lower close - 723.85, 717.30, 714.65 - driven by the same oil spike that shows up in this report's macro block, and Brent has since added another 3.40% to 86.04. The close sits 1.50% under the 21-day high of 725.51 and 2.03% above its 20-day average of 700.46. The July jobs report at 07:30 COT decides whether the fourth day is up or down, and with the market pricing a September Fed hike a hot print is the bearish outcome here.",
+        "dcaSignal": {
+          "percentileInMonth": 83,
+          "pctVs20dAvg": 2.03,
+          "pctFromHigh": -1.5,
+          "rsi14": 54.62,
+          "zone": "rich",
+          "note": "Computed from trailing daily closes - relative-cheapness for monthly DCA, not a bottom call. Carried from the 06 Aug close; market closed, no new session."
+        },
+        "source": { "title": "QQQ Historical Stock Price Data - StockAnalysis", "url": "https://stockanalysis.com/etf/qqq/" }
+      },
+      {
+        "ticker": "VOO",
+        "price": 706.4,
+        "changePct": -0.17,
+        "bias": "Rich, a fraction under a 21-day high, and still the least attractive entry of the three",
+        "note": "CARRIED FROM LAST CLOSE - US equity markets are shut and reopen at 08:30 COT. The 06 Aug settled close of 706.40, down 0.17%, on a notably tight 705.43-709.46 range, remains the newest verified print. That is 0.36% under the 21-day high of 708.98 set on 04 Aug and 2.57% above its 20-day average of 688.71, with the 21-day low at 670.63. RSI at 64.25 is the highest of the three and the only one within reach of overbought. Two small down days after the 1.81% gain on 04 Aug means the broad index is drifting rather than breaking, and a DXY at 99.984 up 0.31% is a mild headwind into the open.",
+        "dcaSignal": {
+          "percentileInMonth": 93,
+          "pctVs20dAvg": 2.57,
+          "pctFromHigh": -0.36,
+          "rsi14": 64.25,
+          "zone": "rich",
+          "note": "Computed from trailing daily closes - relative-cheapness for monthly DCA, not a bottom call. Carried from the 06 Aug close; market closed, no new session."
+        },
+        "source": { "title": "VOO Historical Stock Price Data - StockAnalysis", "url": "https://stockanalysis.com/etf/voo/" }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 102.21,
+        "changePct": -0.09,
+        "bias": "Effectively pinned to a 21-day high and the worst monthly-DCA entry on the board",
+        "note": "CARRIED FROM LAST CLOSE - JPXN is a US-listed ETF and US markets are shut. The Tokyo cash session for Friday 07 Aug also closed at 06:00Z, an hour before this report, but that does not produce a new JPXN print until the US open at 08:30 COT. The 06 Aug settled close of 102.21, down 0.09%, on a 102.05-102.72 range, is the newest verified print. That is a pause rather than a reversal after +0.27%, +1.72% and +0.83% on the three preceding days, and it leaves the fund a fraction under its 21-day high. For a monthly DCA this is the clearest wait of the three - the 21-day range has been travelled almost entirely and the entry is at the expensive end of it.",
+        "dcaSignal": {
+          "percentileInMonth": 96,
+          "pctVs20dAvg": 2.71,
+          "pctFromHigh": -0.5,
+          "rsi14": 61.83,
+          "zone": "rich",
+          "note": "Computed from trailing daily closes - relative-cheapness for monthly DCA, not a bottom call. Carried from the 06 Aug close; market closed, no new session."
+        },
+        "source": { "title": "JPXN Historical Stock Price Data - StockAnalysis", "url": "https://stockanalysis.com/etf/jpxn/" }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": true,
+    "rollingRecord": "52 rows on file. The midnight session called range with a bullish tilt at 34/45/21 from 64,316.4, moved the position to ADD, and cut its add trigger from 65,030 to 64,650 specifically so the desk would stop sitting out repairs. Price is 65,020, the trigger fired, and the retired 65,030 level was taken as well - the single best-calibrated call of the week.",
+    "note": "The midnight row backfills to price_next_report 65,020, reduce_fired false and add_fired true. Reduce did not fire: the standing 64,150 line was never approached this session, the lowest print since the midnight mark being 64,264.4 at 07:00Z, 114.4 points clear. Add DID fire: the trigger was a 4H close above 64,650 and while the 08:00Z 4H bar does not settle until 12:00Z, it has traded as high as 65,209.8 and is holding 65,019.9 with two minutes left, 370 points above the level, and the 09:00Z, 10:00Z and 11:00Z 1H bars have all closed above it. acting_helped is TRUE - the midnight session added at 64,316.4 and price is 703.6 points higher. Worth recording honestly for future calibration: the 65,030 add trigger that the midnight session RETIRED as unreachable was reached four hours later. Lowering it to 64,650 was still correct on the evidence available then, but the desk should note that its instinct to abandon a level right before it prints has now happened twice this week."
+  },
+  "sources": [
+    { "title": "OKX Market Ticker and Candles API (BTC-USDT, 15m/1H/4H/1Dutc)", "url": "https://www.okx.com/api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=299" },
+    { "title": "OKX Public Liquidation Orders API (BTC-USDT-SWAP, filled)", "url": "https://www.okx.com/api/v5/public/liquidation-orders?instType=SWAP&uly=BTC-USDT&state=filled&limit=12" },
+    { "title": "OKX Public Open Interest API (BTC-USDT-SWAP)", "url": "https://www.okx.com/api/v5/public/open-interest?instType=SWAP&instId=BTC-USDT-SWAP" },
+    { "title": "OKX Public Funding Rate API (BTC-USDT-SWAP)", "url": "https://www.okx.com/api/v5/public/funding-rate?instId=BTC-USDT-SWAP" },
+    { "title": "OKX Rubik Long/Short Account Ratio (BTC, 1H) - newest bucket 5h stale this run, quoted for trend only", "url": "https://www.okx.com/api/v5/rubik/stat/contracts/long-short-account-ratio?ccy=BTC&period=1H" },
+    { "title": "Crypto Fear and Greed Index - alternative.me", "url": "https://api.alternative.me/fng/" },
+    { "title": "Bitcoin ETF Flow (US$m) - Farside Investors", "url": "https://farside.co.uk/btc/" },
+    { "title": "Crypto ETFs Extend Winning Streak on August 6 as Bitcoin Funds Add $137.6 Million - FinanceFeeds", "url": "https://financefeeds.com/crypto-etfs-extend-winning-streak-on-august-6-as-bitcoin-funds-add-137-6-million/" },
+    { "title": "Current price of oil as of August 7, 2026 - Fortune", "url": "https://fortune.com/article/price-of-oil-08-07-2026/" },
+    { "title": "Global Economy Briefing - August 7, 2026 (DXY 99.984, +0.31%) - Rio Times", "url": "https://www.riotimesonline.com/global-economy-briefing-august-7-2026/" },
+    { "title": "The July jobs numbers are due out Friday. Here's what to expect - CNBC", "url": "https://www.cnbc.com/2026/08/06/the-july-jobs-numbers-are-due-out-friday-heres-what-to-expect.html" },
+    { "title": "US 10 Year Treasury Note Yield - Trading Economics", "url": "https://tradingeconomics.com/united-states/government-bond-yield" },
+    { "title": "QQQ Historical Stock Price Data - StockAnalysis", "url": "https://stockanalysis.com/etf/qqq/" },
+    { "title": "VOO Historical Stock Price Data - StockAnalysis", "url": "https://stockanalysis.com/etf/voo/" },
+    { "title": "JPXN Historical Stock Price Data - StockAnalysis", "url": "https://stockanalysis.com/etf/jpxn/" }
+  ]
+}
