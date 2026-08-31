@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-08-29-morning",
+  "date": "2026-08-29",
+  "session": "morning",
+  "generatedAt": "2026-08-30T08:02:41-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "bullish",
+  "biasTilt": "bullish",
+  "confidence": 5.5,
+  "priceSnapshot": {
+    "value": 78700.9,
+    "currency": "USD",
+    "changePct": 1.42,
+    "source": "OKX public API, BTC-USDT spot ticker (server ts 1788094961567)",
+    "asOf": "2026-08-30T08:02:41-05:00",
+    "note": "Cross-checked against Coinbase BTC-USD spot 78,153.94 and Kraken XBT/USDT 77,711.90 earlier in the run; all three tracked within 0.06 percent at matched timestamps. Scheduled 06:50 COT morning run executed ~25h late (started 07:40 COT 29 Aug, completed 08:02 COT 30 Aug) because the sandbox web tool stalled repeatedly on 180s timeouts. Filed in the 29 Aug morning slot as tasked; every timestamp is the true clock, not the scheduled one.",
+    "sessionRange": {
+      "low": 77254.5,
+      "high": 78852.8
+    }
+  },
+  "decisionBox": {
+    "position": "ADD",
+    "reduceIf": {
+      "price": 77900.0,
+      "confirmation": "Settled 1H close below 77,900.0 - the 100x long-liquidation shelf and the 77,848.0 prior-day low. That would put the reclaim back in doubt and hand the range back to sellers."
+    },
+    "addIf": {
+      "price": 78860.0,
+      "confirmation": "Settled 1H close above 78,852.8, the 24h high, which opens 79,300.0 and then the 79,487.9 short-liquidation magnet."
+    },
+    "invalidatesAt": 77254.5,
+    "stopOrder": {
+      "recommended": true,
+      "price": 77200.0
+    },
+    "changed": "Yesterday's midday read was bearish with a reduce gate at 77,480.0. Both of that report's gates have since fired in sequence: reduce triggered at the 20:00Z close of 77,410.3, then the add gate at 78,160.0 triggered at the 19:00Z close of 78,188.2. Price has now reclaimed the 1H EMA50/EMA100 cluster at 78,292-78,334 and the 4H EMA20 at 78,387, and printed a higher high at 78,852.8. Bias flips from bearish to bullish; the ceiling has become the floor."
+  },
+  "probabilities": {
+    "bullish": 44.0,
+    "range": 36.0,
+    "bearish": 20.0
+  },
+  "levels": {
+    "support": [
+      78390.0,
+      78040.0,
+      77562.0,
+      77254.5,
+      76888.0
+    ],
+    "resistance": [
+      78852.8,
+      79300.0,
+      79839.3,
+      80500.0,
+      81499.9
+    ],
+    "liquidation": [
+      {
+        "price": 79487.9,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": true,
+        "note": "Estimated 100x short-liquidation bracket, sits inside the 79,300-79,839 resistance shelf. Estimated leverage-bracket magnet - not exchange resting-order data."
+      },
+      {
+        "price": 80274.9,
+        "side": "above",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Estimated 50x short-liquidation bracket, anchored to the 80,000-80,500 supply band. Estimated leverage-bracket magnet - not exchange resting-order data."
+      },
+      {
+        "price": 81848.9,
+        "side": "above",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Estimated 25x short-liquidation bracket, just above the 81,499.9 swing high. Estimated leverage-bracket magnet - not exchange resting-order data."
+      },
+      {
+        "price": 77913.9,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Estimated 100x long-liquidation bracket, level with the 77,848.0 prior-day low. Estimated leverage-bracket magnet - not exchange resting-order data."
+      },
+      {
+        "price": 77126.9,
+        "side": "below",
+        "intensity": "high",
+        "magnet": true,
+        "note": "Estimated 50x long-liquidation bracket, level with the 77,254.5 session low and the invalidation. The heaviest downside shelf. Estimated leverage-bracket magnet - not exchange resting-order data."
+      },
+      {
+        "price": 75552.9,
+        "side": "below",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Estimated 25x long-liquidation bracket, deep below structure. Estimated leverage-bracket magnet - not exchange resting-order data."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 79487.9,
+      "nearestBelow": 77913.9,
+      "pull": "up",
+      "source": "Estimated from leverage brackets anchored to verified support/resistance. OKX realized liquidation-orders endpoint timed out this run and the CoinGlass browser fallback was unavailable (Claude-in-Chrome not connected; the in-app browser refused both okx.com and stockanalysis.com), so no measured resting-order data was obtainable.",
+      "asOf": "2026-08-30T08:02:41-05:00",
+      "note": "Price broke up through the 78,292-78,387 EMA cluster and the retail long/short account ratio eased from 1.26 to 1.18 while it did, so the crowd is not the one pushing this. Pull is up toward 79,487.9 while 77,900.0 holds."
+    }
+  },
+  "atr": {
+    "value": 2193.67,
+    "period": 14,
+    "pct": 2.81,
+    "source": "Computed from 341 OKX BTC-USDT daily candles (Wilder ATR14)",
+    "asOf": "2026-08-29T19:00:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": 51.99,
+      "macd": {
+        "line": 52.39,
+        "signal": 62.14,
+        "hist": -9.74
+      },
+      "emas": {
+        "ema20": 78166.11,
+        "ema50": 78048.49,
+        "ema100": 78049.88,
+        "ema200": null
+      },
+      "structure": "Coiled just under the session ceiling at the time of computation; histogram had rolled slightly negative after the push. EMA200 is null - only 156 verified 15m bars were obtainable this run, short of the 200 needed.",
+      "bias": "neutral",
+      "source": "OKX BTC-USDT 15m candles, 156 bars",
+      "asOf": "2026-08-29T19:00:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 53.08,
+      "macd": {
+        "line": 5.69,
+        "signal": -80.86,
+        "hist": 86.55
+      },
+      "emas": {
+        "ema20": 78040.86,
+        "ema50": 78292.29,
+        "ema100": 78333.68,
+        "ema200": 76600.4
+      },
+      "structure": "MACD line crossed back above signal with the histogram at +86.55 and rising - the momentum turn that preceded the reclaim. Price held the EMA200 at 76,600.40 through the flush and has since taken the EMA50/EMA100 cluster at 78,292-78,334, which now sits beneath spot as support.",
+      "bias": "bullish",
+      "source": "OKX BTC-USDT 1H candles, 311 bars",
+      "asOf": "2026-08-29T19:00:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": 49.08,
+      "macd": {
+        "line": -51.24,
+        "signal": 164.45,
+        "hist": -215.7
+      },
+      "emas": {
+        "ema20": 78387.02,
+        "ema50": 77016.2,
+        "ema100": 73861.73,
+        "ema200": 70214.1
+      },
+      "structure": "The laggard. Histogram still deeply negative at -215.70 from the 81,500-to-76,888 impulse, and RSI is dead flat at 49.08. Price was pinned under the EMA20 at 78,387.02 at computation and has since cleared it. Above EMA50/100/200 throughout.",
+      "bias": "range",
+      "source": "OKX BTC-USDT 4H candles, 252 bars",
+      "asOf": "2026-08-29T19:00:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 70.9,
+      "macd": {
+        "line": 3898.53,
+        "signal": 3361.04,
+        "hist": 537.49
+      },
+      "emas": {
+        "ema20": 73508.1,
+        "ema50": 69291.33,
+        "ema100": 68695.89,
+        "ema200": 73317.4
+      },
+      "structure": "Untouched by the correction. Price sits above all four daily EMAs and the nearest of them, the EMA200 at 73,317.40, is 5,383.5 points below spot. RSI at 70.90 is overbought, which is the one genuine caution here.",
+      "bias": "bullish",
+      "source": "OKX BTC-USDT daily candles, 341 bars (OKX 1D buckets open 16:00Z)",
+      "asOf": "2026-08-29T19:00:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "add",
+      "entry": null,
+      "stop": 77200.0,
+      "tp": [
+        79839.3,
+        81499.9
+      ],
+      "rr": null,
+      "confidence": 5.5,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "ADD",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 6.0,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "Constructive while 78,390 holds as reclaimed support; the edges are 77,900 and 78,860.",
+    "longAbove": 78860.0,
+    "shortBelow": 77900.0,
+    "invalidates": 77254.5,
+    "note": "Scalp only the edges - live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 88.29,
+      "changePct": -0.26
+    },
+    "dxy": {
+      "value": 99.68
+    },
+    "us10y": {
+      "value": 4.728
+    },
+    "etfFlows": {
+      "streakDays": -1,
+      "note": "28 Aug printed -201.9m, the first outflow after nine straight inflow days (17-27 Aug) totalling +3,044.2m. ARKB -114.9m and BITB -49.7m drove it; IBIT was only -33.4m. One red day against a nine-day green run is a pause, not a reversal, but it is the first crack. Source: Farside Investors, read 29 Aug."
+    },
+    "liquidations": {
+      "longsUsd": null,
+      "shortsUsd": null,
+      "skew": 1.18,
+      "traders": null,
+      "openInterestUsd": 2250174552.75,
+      "note": "skew is the OKX retail long/short ACCOUNT ratio, 1.18 as of 23:15 COT 29 Aug - longs modestly crowded, eased from a 1.26 peak around 15:00 COT while price rose, which is healthy. Funding +0.00420 percent for the period settling 19:00 COT 29 Aug, essentially neutral. openInterestUsd carries OKX's own ts of 06:29 COT 29 Aug - the endpoint served a cached payload all run and never advanced, so treat it as roughly 26h stale and do not read a delta from it. longsUsd/shortsUsd are null: the realized liquidation-orders endpoint timed out on every attempt."
+    },
+    "fearGreed": 69,
+    "earnings": []
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 716.43,
+        "changePct": -0.65,
+        "bias": "neutral",
+        "note": "Friday 28 Aug close, market closed for the weekend; no new session. Fell 0.65 percent as Warsh's Jackson Hole remarks revived the rate-hike trade.",
+        "dcaSignal": {
+          "percentileInMonth": 65,
+          "pctVs20dAvg": -0.21,
+          "pctFromHigh": -2.14,
+          "rsi14": 61.62,
+          "zone": "fair",
+          "note": "Computed from trailing daily closes - relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ - Invesco QQQ Trust Series I - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 707.24,
+        "changePct": -0.21,
+        "bias": "neutral",
+        "note": "Friday 28 Aug close, market closed for the weekend; no new session. Held up better than QQQ on the same hawkish headline.",
+        "dcaSignal": {
+          "percentileInMonth": 73,
+          "pctVs20dAvg": 0.03,
+          "pctFromHigh": -1.08,
+          "rsi14": 65.48,
+          "zone": "rich",
+          "note": "Computed from trailing daily closes - relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO - Vanguard S&P 500 ETF - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 102.53,
+        "changePct": 0.77,
+        "bias": "neutral",
+        "note": "Last verified close is 25 Aug - JPXN is thinly traded and printed no sessions on 26, 27 or 28 Aug. Market closed for the weekend; carried and labelled rather than re-estimated.",
+        "dcaSignal": {
+          "percentileInMonth": 70,
+          "pctVs20dAvg": 0.38,
+          "pctFromHigh": -2.57,
+          "rsi14": 65.58,
+          "zone": "fair",
+          "note": "Computed from trailing daily closes - relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "JPXN - iShares JPX-Nikkei 400 ETF - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": true,
+    "actingHelped": false,
+    "rollingRecord": "38 helped / 21 did not / 54 graded in narrative, across 132 logged rows",
+    "note": "Yesterday's midday reduce gate at 77,480.0 fired at the 20:00Z close of 77,410.3 and price ran on to 77,254.5, so the trim was 605.7 points better within three hours. It has since been overtaken: spot at 78,700.9 is 840.7 points above the 77,860.2 reduce price, so measured now the trim cost money. That is the honest grade - right for the session, wrong for the swing. The transferable lesson is that a reduce triggered on a hawkish macro headline, with the daily structure still above all four EMAs, is a session trade and needs a re-entry plan attached, not an open-ended flat."
+  },
+  "sources": [
+    {
+      "title": "OKX public API - BTC-USDT spot ticker, candles, funding, open interest, long/short account ratio",
+      "url": "https://www.okx.com/docs-v5/en/"
+    },
+    {
+      "title": "Coinbase Exchange API - BTC-USD spot and hourly candles (cross-check)",
+      "url": "https://api.exchange.coinbase.com/products/BTC-USD/ticker"
+    },
+    {
+      "title": "Kraken public API - XBT/USDT ticker (cross-check)",
+      "url": "https://api.kraken.com/0/public/Ticker?pair=XBTUSDT"
+    },
+    {
+      "title": "Farside Investors - Bitcoin ETF Flow",
+      "url": "https://farside.co.uk/btc/"
+    },
+    {
+      "title": "Alternative.me - Crypto Fear and Greed Index",
+      "url": "https://api.alternative.me/fng/"
+    },
+    {
+      "title": "StockAnalysis - QQQ / VOO / JPXN price history",
+      "url": "https://stockanalysis.com/etf/qqq/history/"
+    },
+    {
+      "title": "DATA GAP - no measured liquidation map this run. OKX realized liquidation-orders timed out repeatedly; the CoinGlass browser fallback was unavailable because Claude-in-Chrome is not connected and the in-app browser denied okx.com and stockanalysis.com. levels.liquidation is an explicitly labelled leverage-bracket estimate and macro.liquidations longsUsd/shortsUsd are null. Consider configuring a keyed CoinGlass source.",
+      "url": "https://www.coinglass.com/pro/futures/LiquidationHeatMapModel3"
+    }
+  ]
+}
