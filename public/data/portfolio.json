@@ -3,19 +3,19 @@
   "baseCurrency": "USDT",
   "initialCapitalUsd": 227.8,
   "startedAt": "2026-07-24T14:30:00-05:00",
-  "updatedAt": "2026-09-02T02:18:00-05:00",
+  "updatedAt": "2026-09-02T07:00:00-05:00",
   "latest": {
-    "ts": "2026-09-02T02:18:00-05:00",
-    "session": "midnight",
-    "reportId": "2026-09-02-midnight",
-    "markPrice": 77745.4,
-    "action": "CLOSE",
+    "ts": "2026-09-02T07:00:00-05:00",
+    "session": "morning",
+    "reportId": "2026-09-02-morning",
+    "markPrice": 76795.3,
+    "action": "OPEN_SHORT",
     "autoExits": [],
     "spot": {
       "btc": 0.00194008,
       "avgEntry": 77559.76,
       "costBasisUsd": 150.47,
-      "valueUsd": 150.83,
+      "valueUsd": 148.99,
       "lots": [
         {
           "btc": 0.001,
@@ -30,26 +30,30 @@
       ]
     },
     "futures": {
-      "side": "flat",
-      "sizeUsd": 0.0,
-      "btc": null,
-      "leverage": 1,
-      "entryPrice": null,
-      "marginUsd": 0.0,
-      "stopPrice": null,
-      "liquidationPrice": null,
-      "takeProfit": [],
+      "side": "short",
+      "sizeUsd": 60.0,
+      "btc": -0.0007813,
+      "leverage": 2,
+      "entryPrice": 76795.3,
+      "marginUsd": 30.0,
+      "stopPrice": 77185.0,
+      "liquidationPrice": 115192.95,
+      "takeProfit": [
+        76500.0,
+        76261.0,
+        76050.0
+      ],
       "unrealizedPnlUsd": 0.0
     },
-    "cashUsd": 48.17,
-    "realizedPnlUsd": -0.43,
+    "cashUsd": 18.17,
+    "realizedPnlUsd": 0.0,
     "unrealizedPnlUsd": 0.0,
-    "equityUsd": 199.0,
+    "equityUsd": 197.16,
     "savingsUsd": 0.02,
-    "netWorthUsd": 199.02,
+    "netWorthUsd": 197.18,
     "sweptToSavingsUsd": null,
     "consecutiveSkips": 0,
-    "rationale": "Close the futures hedge on the kill condition endday wrote for it, rather than wait to be stopped 54.6 points away. The endday rationale said in plain words that a settled reclaim of the hourly EMA20 kills the short thesis and should kill the hedge. The 06:00Z hour closed 77,612.8 against a 1H EMA20 of 77,610.3 - the condition is met, by 2.5 points, and a rule that is only honoured when it is comfortably satisfied is not a rule. Everything the hedge was sized against has also softened overnight: the endday reduce gate at 76,380.0 was never reached, the low came in at 76,713.6 for a HIGHER low against yesterday's 76,416.6, the 1H MACD histogram flipped positive at +61.47 from -45.10, the 1H RSI recovered 37.67 to 47.84, price reclaimed the 4H EMA50 at 77,622.8, and funding EASED from 0.0000900731748201 to 0.0000744604525652 so longs are paying less into a rising tape rather than more into a falling one. Mechanically the squeeze is live: spot at 77,745.4 is sitting inside the 77,750 bucket that has absorbed 456,180 USD of short liquidations in the last six hours, and the resting stop at 77,800.0 is 54.6 points - 0.125 of one hourly ATR - above that. Holding a short into a short-liquidation shelf with the stop that close is not a position, it is a coin flip with worse odds. The exit is taken at 77,745.4 against an entry of 77,269.1, a 476.3-point adverse move, 0.616 percent on 70 USDT of notional, roughly -0.43 USDT realised, and it returns 23.33 USDT of margin to free cash. What is deliberately NOT done: the spot core is untouched. The structural bear case has not been dismissed - the 4H MACD histogram is still -114.69 with price 376.3 points under the 4H EMA20, the completed Farside tape revised 1 September to -236.5m from the -35.3m endday could see, open interest has rebuilt 3.56 percent to 2,228,565,594.79 USD so the flushed leverage is fully replaced, and the OKX retail long/short account ratio is unchanged at 1.30 with the crowd still long. That is why the hedge is closed rather than flipped, and why cash is left free rather than immediately redeployed into a spot add at the top of a 1,074-point overnight box. The next decision point is mechanical: a settled 1H close above 77,950.0 clears the overnight high, the 77,750 short shelf and the 1H EMA50 at 77,925.9 and is the add trigger; a settled 1H close below 76,600.0 loses the defended higher low and is the reduce trigger for the core."
+    "rationale": "Re-open the hedge that midnight closed, smaller and with a buffered invalidation. Midnight covered the inherited 70 USDT short at 77,745.4 for -0.43 USDT because the 06:00Z hour settled 2.5 points above the 1H EMA20 and endday had written that reclaim as the kill condition. Price then fell 1,351.8 points to 76,261.0. The rule was fine; the tolerance was not. A confirmation satisfied by 2.5 points on a tape whose hourly ATR is 463.38 is noise, so this position's invalidation is placed 389.7 points away - 0.84 ATR - at 77,185.0, above the 15m EMA50 at 77,175.30 and below the 1H EMA20 at 77,379.75, where being wrong would actually mean something. The thesis is the same one that was right overnight and got abandoned early: price is below all four 15m EMAs and all four 1H EMAs in bearish stack order, the 4H EMA50 at 77,617.26 has been lost again, and the 1H MACD histogram flipped back to -37.23 from +61.47. The positioning is what makes it actionable rather than merely late. Of 524 filled liquidations in the last six hours, 512 were longs worth 3,402,208 USD against 12 shorts worth 76,432 USD, a 44-to-1 skew, and the newest fill is five and a half minutes old, so the cascade is still running. Underneath it the OKX long/short account ratio has RISEN from 1.30 to 1.37 while price fell 950 points, and funding has risen from 0.0000744604525652 to 0.0001000000000000. Accounts are net-adding longs into a decline and paying more to do it - that is the fuel for the 76,500 shelf, which took 1,184,575 USD across 161 all-sell fills, and the 76,250 shelf beneath it, which took 713,318 USD. Size is deliberately small: 60 USDT of notional at 2x, 30 USDT of margin against 48.17 of free cash, half the leverage the endday hedge carried, because 1H RSI at 32.84 is 2.84 points off oversold and the first target sits only 295.3 points below entry. Risk if stopped is roughly 0.30 USDT; the run to 76,050.0 is worth roughly 0.58 USDT, a 1.91 reward-to-risk. What is deliberately NOT done: the 0.00194008 BTC spot core is untouched. The daily timeframe has not given a single bearish signal - RSI 65.68, MACD histogram +89.80, price 2,426.1 points above the daily EMA20 - and this whole move is a 5.8 percent pullback from 81,499.9 inside that uptrend. The hedge is how the bearish tilt gets expressed; selling the core is not."
   },
   "history": [
     {
@@ -6781,23 +6785,74 @@
       "sweptToSavingsUsd": null,
       "consecutiveSkips": 0,
       "rationale": "Close the futures hedge on the kill condition endday wrote for it, rather than wait to be stopped 54.6 points away. The endday rationale said in plain words that a settled reclaim of the hourly EMA20 kills the short thesis and should kill the hedge. The 06:00Z hour closed 77,612.8 against a 1H EMA20 of 77,610.3 - the condition is met, by 2.5 points, and a rule that is only honoured when it is comfortably satisfied is not a rule. Everything the hedge was sized against has also softened overnight: the endday reduce gate at 76,380.0 was never reached, the low came in at 76,713.6 for a HIGHER low against yesterday's 76,416.6, the 1H MACD histogram flipped positive at +61.47 from -45.10, the 1H RSI recovered 37.67 to 47.84, price reclaimed the 4H EMA50 at 77,622.8, and funding EASED from 0.0000900731748201 to 0.0000744604525652 so longs are paying less into a rising tape rather than more into a falling one. Mechanically the squeeze is live: spot at 77,745.4 is sitting inside the 77,750 bucket that has absorbed 456,180 USD of short liquidations in the last six hours, and the resting stop at 77,800.0 is 54.6 points - 0.125 of one hourly ATR - above that. Holding a short into a short-liquidation shelf with the stop that close is not a position, it is a coin flip with worse odds. The exit is taken at 77,745.4 against an entry of 77,269.1, a 476.3-point adverse move, 0.616 percent on 70 USDT of notional, roughly -0.43 USDT realised, and it returns 23.33 USDT of margin to free cash. What is deliberately NOT done: the spot core is untouched. The structural bear case has not been dismissed - the 4H MACD histogram is still -114.69 with price 376.3 points under the 4H EMA20, the completed Farside tape revised 1 September to -236.5m from the -35.3m endday could see, open interest has rebuilt 3.56 percent to 2,228,565,594.79 USD so the flushed leverage is fully replaced, and the OKX retail long/short account ratio is unchanged at 1.30 with the crowd still long. That is why the hedge is closed rather than flipped, and why cash is left free rather than immediately redeployed into a spot add at the top of a 1,074-point overnight box. The next decision point is mechanical: a settled 1H close above 77,950.0 clears the overnight high, the 77,750 short shelf and the 1H EMA50 at 77,925.9 and is the add trigger; a settled 1H close below 76,600.0 loses the defended higher low and is the reduce trigger for the core."
+    },
+    {
+      "ts": "2026-09-02T07:00:00-05:00",
+      "session": "morning",
+      "reportId": "2026-09-02-morning",
+      "markPrice": 76795.3,
+      "action": "OPEN_SHORT",
+      "autoExits": [],
+      "spot": {
+        "btc": 0.00194008,
+        "avgEntry": 77559.76,
+        "costBasisUsd": 150.47,
+        "valueUsd": 148.99,
+        "lots": [
+          {
+            "btc": 0.001,
+            "entryPrice": 67500,
+            "costUsd": 67.5
+          },
+          {
+            "btc": 0.001,
+            "entryPrice": 60300,
+            "costUsd": 60.3
+          }
+        ]
+      },
+      "futures": {
+        "side": "short",
+        "sizeUsd": 60.0,
+        "btc": -0.0007813,
+        "leverage": 2,
+        "entryPrice": 76795.3,
+        "marginUsd": 30.0,
+        "stopPrice": 77185.0,
+        "liquidationPrice": 115192.95,
+        "takeProfit": [
+          76500.0,
+          76261.0,
+          76050.0
+        ],
+        "unrealizedPnlUsd": 0.0
+      },
+      "cashUsd": 18.17,
+      "realizedPnlUsd": 0.0,
+      "unrealizedPnlUsd": 0.0,
+      "equityUsd": 197.16,
+      "savingsUsd": 0.02,
+      "netWorthUsd": 197.18,
+      "sweptToSavingsUsd": null,
+      "consecutiveSkips": 0,
+      "rationale": "Re-open the hedge that midnight closed, smaller and with a buffered invalidation. Midnight covered the inherited 70 USDT short at 77,745.4 for -0.43 USDT because the 06:00Z hour settled 2.5 points above the 1H EMA20 and endday had written that reclaim as the kill condition. Price then fell 1,351.8 points to 76,261.0. The rule was fine; the tolerance was not. A confirmation satisfied by 2.5 points on a tape whose hourly ATR is 463.38 is noise, so this position's invalidation is placed 389.7 points away - 0.84 ATR - at 77,185.0, above the 15m EMA50 at 77,175.30 and below the 1H EMA20 at 77,379.75, where being wrong would actually mean something. The thesis is the same one that was right overnight and got abandoned early: price is below all four 15m EMAs and all four 1H EMAs in bearish stack order, the 4H EMA50 at 77,617.26 has been lost again, and the 1H MACD histogram flipped back to -37.23 from +61.47. The positioning is what makes it actionable rather than merely late. Of 524 filled liquidations in the last six hours, 512 were longs worth 3,402,208 USD against 12 shorts worth 76,432 USD, a 44-to-1 skew, and the newest fill is five and a half minutes old, so the cascade is still running. Underneath it the OKX long/short account ratio has RISEN from 1.30 to 1.37 while price fell 950 points, and funding has risen from 0.0000744604525652 to 0.0001000000000000. Accounts are net-adding longs into a decline and paying more to do it - that is the fuel for the 76,500 shelf, which took 1,184,575 USD across 161 all-sell fills, and the 76,250 shelf beneath it, which took 713,318 USD. Size is deliberately small: 60 USDT of notional at 2x, 30 USDT of margin against 48.17 of free cash, half the leverage the endday hedge carried, because 1H RSI at 32.84 is 2.84 points off oversold and the first target sits only 295.3 points below entry. Risk if stopped is roughly 0.30 USDT; the run to 76,050.0 is worth roughly 0.58 USDT, a 1.91 reward-to-risk. What is deliberately NOT done: the 0.00194008 BTC spot core is untouched. The daily timeframe has not given a single bearish signal - RSI 65.68, MACD histogram +89.80, price 2,426.1 points above the daily EMA20 - and this whole move is a 5.8 percent pullback from 81,499.9 inside that uptrend. The hedge is how the bearish tilt gets expressed; selling the core is not."
     }
   ],
   "scoreboard": [
     {
       "session": "midnight",
       "decisions": 36,
-      "attributedPnlUsd": 16.59,
+      "attributedPnlUsd": 14.75,
       "wins": 16,
-      "losses": 18,
+      "losses": 19,
       "note": null,
       "quotaUsd": 7.5,
-      "quotaCoveredUsd": 16.59,
+      "quotaCoveredUsd": 14.75,
       "skips": 0
     },
     {
       "session": "morning",
-      "decisions": 36,
+      "decisions": 37,
       "attributedPnlUsd": -2.36,
       "wins": 20,
       "losses": 16,
@@ -7641,15 +7696,15 @@
       "session": "midnight",
       "pattern": "A hedge whose written kill condition is met by a hair",
       "insight": "Endday wrote the exit rule into the trade: a settled 1H close back above the hourly EMA20 kills the hedge. It closed 2.5 points above. The pull is to call that noise and wait one more bar, but a threshold honoured only when it clears comfortably is not a threshold - it is a preference with a number attached. Act on the barely-satisfied rule exactly as on the comfortably-satisfied one, and if 2.5 points feels too thin, that is an argument for choosing a better level next time, not for ignoring this one."
+    },
+    {
+      "ts": "2026-09-02T07:00:00-05:00",
+      "session": "morning",
+      "pattern": "A confirmation threshold with no buffer is not a rule, it is a coin flip with extra steps - midnight killed a working short on a 2.5-point EMA reclaim and gave back 1,351.8 points of move.",
+      "insight": "Endday wrote a correct kill condition: a settled reclaim of the 1H EMA20 ends the short thesis. Midnight honoured it to the letter at 77,612.8 against an EMA20 of 77,610.3 and covered at 77,745.4 for -0.43 USDT, and price proceeded to fall to 76,261.0 where the position's own first target at 76,420.0 would have paid roughly +1.20. Honouring a rule literally is not the same as honouring it well. Any level-cross confirmation on this book now has to clear by a fraction of the prevailing ATR - 0.15 ATR is the standard adopted here, which is why the add gate sits at 77,450.0 rather than at the 77,379.75 EMA itself. The deeper point is that the tolerance belongs in the rule when it is WRITTEN, not in the judgement of whoever reads it at 02:00; endday wrote 'a settled reclaim' and left the margin undefined, and the session that inherited it had no defensible way to say two points was not enough."
     }
   ],
   "messages": [
-    {
-      "ts": "2026-08-27T02:15:00-05:00",
-      "from": "midnight",
-      "to": "morning",
-      "text": "You inherit roughly 0.00240 BTC of spot core and about 37.4 USDT of cash, futures flat by choice for the third session running. Three things to grade. ONE: did 79,025.8 give way on a settled 1H close? The 79,000 liquidation rung has now been drained twice - 328,671 USD of pure short liquidations in the eight hours to 03:54Z, on top of 924,622 over the full 24h - and there is only 37,130 USD of fuel left above it at 79,250. A break through a drained rung moves fast because nothing slows it, but it also has no forced buying behind it, so demand it CLOSE above 79,025.8 before you treat it as real. TWO: did the 1H EMA50 at 78,674.8 hold on settled closes? It has not been breached on a close since the endday reclaim, and it is the reduce gate for a reason. The 01:00Z bar wicked 122.1 points through it and closed 228.6 above - do not act on wicks, that is now three sessions in a row where the close-only rule saved a bad trim. THREE: watch whether BTC finally prices the NVIDIA beat. It ignored it overnight while QQQ marked +1.18 percent after hours. If US equities open strong and BTC still refuses, the August equity-crypto correlation is broken and the 37.4 USDT should go to the 78,500 retest rather than the breakout. And do not spend the whole reserve on one gate - two tranches of 18, not one of 37."
-    },
     {
       "ts": "2026-08-27T07:09:00-05:00",
       "from": "morning",
@@ -7763,6 +7818,12 @@
       "from": "midnight",
       "to": "morning",
       "text": "Futures book is flat as of 02:18 COT - the endday short was closed at 77,745.4 on its own written kill rule (settled 1H close back above the hourly EMA20, which happened at 06:00Z by 2.5 points). Cash is free and the spot core is untouched. Two live gates for you: ADD on a settled 1H close above 77,950.0, which clears the 77,788.1 overnight high, the 77,750 short-liquidation shelf and the 1H EMA50 at 77,925.9 together; REDUCE on a settled 1H close below 76,600.0, which is beneath the 76,713.6 higher low and beneath the 76,625 edge of the bucket that took 1,480,643 USD of long liquidations making that low. Watch open interest - it rebuilt 3.56 percent overnight to 2.229bn while price went nowhere, so the calm is leveraged."
+    },
+    {
+      "ts": "2026-09-02T07:00:00-05:00",
+      "from": "morning",
+      "to": "midday",
+      "text": "You inherit a 60 USDT 2x short opened at 76,795.3, stop 77,185.0, targets 76,500.0 / 76,261.0 / 76,050.0, against an untouched 0.00194008 BTC spot core and roughly 18 USDT of free cash. Three checks before you touch it. FIRST, did a settled 1H close print below 76,200.0? If so the report's reduce gate armed, the 76,250 shelf gave way and the position should be allowed to run to 76,050.0 rather than taken off at target one. SECOND, if instead an hourly bar settled above 77,450.0 - the 1H EMA20 plus a real buffer this time - the short thesis is dead and the hedge should be closed the same hour, not held hoping. Do NOT accept a two-point reclaim as that signal; midnight did and it cost 1,351.8 points of move. THIRD, check the long/short account ratio and funding together. The whole edge here is that accounts were ADDING longs at 1.37 and paying 0.0001 into a falling tape. If the ratio has fallen back toward 1.25 and funding has gone flat or negative, the crowd has capitulated, the fuel is spent, and a short into 1H RSI in the low 30s becomes a bad trade regardless of what the chart looks like. Take the profit and stand aside."
     }
   ],
   "status": "active"
