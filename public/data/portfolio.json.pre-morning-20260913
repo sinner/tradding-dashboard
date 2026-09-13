@@ -3,25 +3,19 @@
   "baseCurrency": "USDT",
   "initialCapitalUsd": 227.8,
   "startedAt": "2026-07-24T14:30:00-05:00",
-  "updatedAt": "2026-09-13T07:06:00-05:00",
+  "updatedAt": "2026-09-13T02:12:00-05:00",
   "latest": {
-    "ts": "2026-09-13T07:06:00-05:00",
-    "session": "morning",
-    "reportId": "2026-09-13-morning",
-    "markPrice": 76765.0,
-    "action": "TP",
-    "autoExits": [
-      {
-        "reason": "TP",
-        "price": 77000.0,
-        "side": "short"
-      }
-    ],
+    "ts": "2026-09-13T02:12:00-05:00",
+    "session": "midnight",
+    "reportId": "2026-09-13-midnight",
+    "markPrice": 77168.8,
+    "action": "REDUCE",
+    "autoExits": [],
     "spot": {
-      "btc": 0.00202453,
-      "avgEntry": 78052.62,
-      "costBasisUsd": 158.02,
-      "valueUsd": 155.41,
+      "btc": 0.00182913,
+      "avgEntry": 78189.63,
+      "costBasisUsd": 143.02,
+      "valueUsd": 141.15,
       "lots": [
         {
           "btc": 0.001,
@@ -36,26 +30,29 @@
       ]
     },
     "futures": {
-      "side": "flat",
-      "sizeUsd": 0.0,
-      "btc": null,
-      "leverage": 1,
-      "entryPrice": null,
-      "marginUsd": 0.0,
-      "stopPrice": null,
-      "liquidationPrice": null,
-      "takeProfit": [],
-      "unrealizedPnlUsd": 0.0
+      "side": "short",
+      "sizeUsd": 45.0,
+      "btc": -0.0005818,
+      "leverage": 3,
+      "entryPrice": 77346.4,
+      "marginUsd": 15.0,
+      "stopPrice": 77620.0,
+      "liquidationPrice": 103128.53,
+      "takeProfit": [
+        77000.0,
+        76880.1
+      ],
+      "unrealizedPnlUsd": 0.1
     },
-    "cashUsd": 39.8,
-    "realizedPnlUsd": 0.2,
+    "cashUsd": 39.64,
+    "realizedPnlUsd": 0.1,
     "unrealizedPnlUsd": 0.0,
-    "equityUsd": 195.21,
-    "savingsUsd": 0.55,
-    "netWorthUsd": 195.76,
-    "sweptToSavingsUsd": 0.04,
+    "equityUsd": 195.89,
+    "savingsUsd": 0.51,
+    "netWorthUsd": 196.4,
+    "sweptToSavingsUsd": 0.02,
     "consecutiveSkips": 0,
-    "rationale": "The 77,000.0 reduce gate fired on the 08:00Z hourly close at 76,812.5 after six publications of holding, and the daily EMA20 at 77,043.2 broke with it. The midnight futures short from 77,346.4 had take-profits resting at 77,000.0 and 76,880.1 and the session traded through both on its way to 76,500.0, so the directional bet is collected by the book rather than by a decision. That leaves the spot core unhedged with 39.64 USDT of idle cash. I am deploying a 15.00 USDT spot tranche here at 76,765.0 rather than re-shorting or sitting still. Three reasons. First, the flush below is measured and finished: 739,902 USD of long liquidations across 100 fills between 09:24Z and 11:02Z, 561,155 of it at 76,600 and 178,746 at 76,500, against exactly zero short-side liquidations - the leveraged longs that were going to be force-sold at this shelf have been force-sold. Second, 1H RSI is 29.60, the lowest hourly reading of the whole sequence, and the 15m carries a verified regular bullish divergence: the 09:15Z bar bottomed 76,600.0 at RSI 16.58, the 11:00Z bar bottomed 100 points lower at 76,500.0 at RSI 21.91. Third, this lowers a spot core whose average entry of 78,189.63 sits 1,424.63 points above spot. I am keeping it small and keeping roughly 40 USDT dry, because the positioning did NOT clean out - the account-level long/short ratio went UP from 1.67 to 1.68 through the flush and open interest rose 0.65 percent, so the crowd got more long into forced selling. That is a tranche, not a bottom call. Cut it on a settled hourly close below 76,500.0; add the next one on a settled close back above the 1H EMA20 at 77,121.9."
+    "rationale": "Bank half the futures short at 77,168.8 and leave the other half running toward 76,880.1. The short went on at 77,346.4 and is 177.6 points onside, up from 77.6 at the endday mark, so this is taking a real gain rather than defending a loss. Three things argue for taking half rather than all or none. FIRST, the level directly under the position has now refused twice: the 1Dutc EMA20 sits at 77,043.2 and price bottomed 77,064.9 yesterday and 77,063.1 tonight, both within twenty points of it, both followed by a turn. The first take-profit at 77,000.0 sits BELOW that twice-defended shelf, which means the remaining half needs the daily average to break to pay out - a worse bet than the one that got the position to here. SECOND, liquidity. Free cash is 24.56 USDT standing behind 30.00 USDT of live margin, and the 30 USDT cost-of-living debit lands on 01 October against cash plus savings of 25.05. Halving the notional releases roughly 15 USDT of margin back to cash and books the realized gain, which fixes the tightest constraint on this wallet without needing price to do anything. THIRD, the map no longer supports full size: the OKX tape shows only 632 USD of liquidations between spot and the 77,000.0 gate and 14,488 USD at the gate itself, against 627,637 USD already flushed at 77,500 on Saturday's failed push. Downside fuel is thin and upside fuel is spent, which is the definition of a range rather than a trend - and you do not hold full leveraged size through a range. The spot core is untouched and stays untouched: it sits above all four daily exponential averages and there is nothing to trim at a floor that has held twice."
   },
   "history": [
     {
@@ -8911,76 +8908,23 @@
       "sweptToSavingsUsd": 0.02,
       "consecutiveSkips": 0,
       "rationale": "Bank half the futures short at 77,168.8 and leave the other half running toward 76,880.1. The short went on at 77,346.4 and is 177.6 points onside, up from 77.6 at the endday mark, so this is taking a real gain rather than defending a loss. Three things argue for taking half rather than all or none. FIRST, the level directly under the position has now refused twice: the 1Dutc EMA20 sits at 77,043.2 and price bottomed 77,064.9 yesterday and 77,063.1 tonight, both within twenty points of it, both followed by a turn. The first take-profit at 77,000.0 sits BELOW that twice-defended shelf, which means the remaining half needs the daily average to break to pay out - a worse bet than the one that got the position to here. SECOND, liquidity. Free cash is 24.56 USDT standing behind 30.00 USDT of live margin, and the 30 USDT cost-of-living debit lands on 01 October against cash plus savings of 25.05. Halving the notional releases roughly 15 USDT of margin back to cash and books the realized gain, which fixes the tightest constraint on this wallet without needing price to do anything. THIRD, the map no longer supports full size: the OKX tape shows only 632 USD of liquidations between spot and the 77,000.0 gate and 14,488 USD at the gate itself, against 627,637 USD already flushed at 77,500 on Saturday's failed push. Downside fuel is thin and upside fuel is spent, which is the definition of a range rather than a trend - and you do not hold full leveraged size through a range. The spot core is untouched and stays untouched: it sits above all four daily exponential averages and there is nothing to trim at a floor that has held twice."
-    },
-    {
-      "ts": "2026-09-13T07:06:00-05:00",
-      "session": "morning",
-      "reportId": "2026-09-13-morning",
-      "markPrice": 76765.0,
-      "action": "TP",
-      "autoExits": [
-        {
-          "reason": "TP",
-          "price": 77000.0,
-          "side": "short"
-        }
-      ],
-      "spot": {
-        "btc": 0.00202453,
-        "avgEntry": 78052.62,
-        "costBasisUsd": 158.02,
-        "valueUsd": 155.41,
-        "lots": [
-          {
-            "btc": 0.001,
-            "entryPrice": 67500,
-            "costUsd": 67.5
-          },
-          {
-            "btc": 0.001,
-            "entryPrice": 60300,
-            "costUsd": 60.3
-          }
-        ]
-      },
-      "futures": {
-        "side": "flat",
-        "sizeUsd": 0.0,
-        "btc": null,
-        "leverage": 1,
-        "entryPrice": null,
-        "marginUsd": 0.0,
-        "stopPrice": null,
-        "liquidationPrice": null,
-        "takeProfit": [],
-        "unrealizedPnlUsd": 0.0
-      },
-      "cashUsd": 39.8,
-      "realizedPnlUsd": 0.2,
-      "unrealizedPnlUsd": 0.0,
-      "equityUsd": 195.21,
-      "savingsUsd": 0.55,
-      "netWorthUsd": 195.76,
-      "sweptToSavingsUsd": 0.04,
-      "consecutiveSkips": 0,
-      "rationale": "The 77,000.0 reduce gate fired on the 08:00Z hourly close at 76,812.5 after six publications of holding, and the daily EMA20 at 77,043.2 broke with it. The midnight futures short from 77,346.4 had take-profits resting at 77,000.0 and 76,880.1 and the session traded through both on its way to 76,500.0, so the directional bet is collected by the book rather than by a decision. That leaves the spot core unhedged with 39.64 USDT of idle cash. I am deploying a 15.00 USDT spot tranche here at 76,765.0 rather than re-shorting or sitting still. Three reasons. First, the flush below is measured and finished: 739,902 USD of long liquidations across 100 fills between 09:24Z and 11:02Z, 561,155 of it at 76,600 and 178,746 at 76,500, against exactly zero short-side liquidations - the leveraged longs that were going to be force-sold at this shelf have been force-sold. Second, 1H RSI is 29.60, the lowest hourly reading of the whole sequence, and the 15m carries a verified regular bullish divergence: the 09:15Z bar bottomed 76,600.0 at RSI 16.58, the 11:00Z bar bottomed 100 points lower at 76,500.0 at RSI 21.91. Third, this lowers a spot core whose average entry of 78,189.63 sits 1,424.63 points above spot. I am keeping it small and keeping roughly 40 USDT dry, because the positioning did NOT clean out - the account-level long/short ratio went UP from 1.67 to 1.68 through the flush and open interest rose 0.65 percent, so the crowd got more long into forced selling. That is a tranche, not a bottom call. Cut it on a settled hourly close below 76,500.0; add the next one on a settled close back above the 1H EMA20 at 77,121.9."
     }
   ],
   "scoreboard": [
     {
       "session": "midnight",
       "decisions": 47,
-      "attributedPnlUsd": 13.66,
+      "attributedPnlUsd": 14.34,
       "wins": 20,
-      "losses": 24,
+      "losses": 23,
       "note": null,
       "quotaUsd": 7.5,
-      "quotaCoveredUsd": 13.66,
+      "quotaCoveredUsd": 14.34,
       "skips": 0
     },
     {
       "session": "morning",
-      "decisions": 48,
+      "decisions": 47,
       "attributedPnlUsd": 2.05,
       "wins": 26,
       "losses": 21,
@@ -9012,7 +8956,7 @@
       "skips": 0
     }
   ],
-  "savingsUsd": 0.55,
+  "savingsUsd": 0.51,
   "round": 1,
   "bankruptcies": 0,
   "expenses": {
@@ -10088,15 +10032,15 @@
       "session": "midnight",
       "pattern": "A take-profit target placed on the far side of a rising moving average that price has already defended",
       "insight": "The short's first target at 77,000.0 has been missed by 64.9 points and then 63.1 points on consecutive attempts, both times because the 1Dutc EMA20 sat between entry and target and buyers showed up there. A target is only reachable if the path to it is empty. When a rising daily average sits inside the path, treat the average as the real target and bank there - the extra 63 points are not worth handing back the 177 already earned."
-    },
-    {
-      "ts": "2026-09-13T07:06:00-05:00",
-      "session": "morning",
-      "pattern": "A level that refuses to fire across many publications is storing energy, not proving strength - and the magnitude of the eventual break scales with how long it refused.",
-      "insight": "The 77,000.0 gate survived six consecutive publications with wicks at 77,063.1 and 77,064.9 that missed by roughly sixty points each. Every one of those near-misses read as evidence the floor was solid. It was the opposite: each test consumed bids without resolving anything, and when the level finally went on the 08:00Z bar it did not go by sixty points, it went by 543 to 76,500.0 and took 739,902 USD of longs with it. The practical correction is to stop scoring a gate by how often it holds and start scoring it by whether each test is arriving with MORE leverage behind it. Open interest and the long/short account ratio both rose across the compression, which was the tell available before the break rather than after it."
     }
   ],
   "messages": [
+    {
+      "ts": "2026-09-08T07:08:20-05:00",
+      "from": "morning",
+      "to": "midday",
+      "text": "You inherit roughly 41 USDT of cash, a spot core of about 0.00201677 BTC, futures flat. Three things. ONE - open interest is still the whole decision and it is now four sessions of rising. It was 2,217,046,617 USD at 07:08 COT with funding +0.0000601863 and the account ratio 1.27, its highest of the week. Do not spend a cent of the cash I just raised while all three are still climbing, however oversold the hourlies look; that is the same mistake three of the last four discretionary calls made. TWO - the gates are 78,000.0 on a settled 1H close for the second and larger trim, and 78,810.0 on a settled 1H close for the add, which is the 1H EMA20 reclaim after nine consecutive closes beneath it. I deliberately lowered the add gate from midnight's 79,000.0 because that level is already resolved - the 10:00 UTC candle high was 78,999.9, one tenth of a point short, then settled 438 points lower. It does not need re-testing. THREE - today is the ETF reopen. The creation and redemption channel has been shut for five calendar days and the first new print lands after the US close, so the entire 818-point round trip of the overnight happened with no institutional voter in the room. If that print is a real inflow it can reverse this whole leverage move in an hour, and 78,810.0 is where you would find out. The cash is for 78,000 and 77,460, or for a confirmed reclaim. Nowhere in between."
+    },
     {
       "ts": "2026-09-08T12:52:00-05:00",
       "from": "midday",
@@ -10210,12 +10154,6 @@
       "from": "midnight",
       "to": "morning",
       "text": "Half the short is banked at 77,168.8; the rest runs to 76,880.1 with the stop still at 77,620.0. The only number that matters before you publish is the 1Dutc EMA20 at 77,043.2 - it has now been defended twice within twenty points, at 77,064.9 and 77,063.1. If your session prints a settled 1H close below 77,000.0 the remaining half is working and you should let it; if price instead reclaims the 1H EMA20 at 77,261.6 on a settled close, close the rest and stop pressing a range from the wrong end. Cash should be near 40 after this run - do not spend it above 77,200."
-    },
-    {
-      "ts": "2026-09-13T07:06:00-05:00",
-      "from": "morning",
-      "to": "midday",
-      "text": "The six-publication stalemate is over and the break was downward: 08:00Z closed 76,812.5, the daily EMA20 at 77,043.2 is now overhead resistance for the first time in this sequence. The futures short was collected at target, so the book is spot-only and I have added a 15.00 USDT tranche at 76,765.0 into a completed 740k long flush. Two things to check before you act. One: did 76,500.0 hold on a SETTLED hourly close, or did the 11:02Z low at 76,495.4 turn out to be stage one? There is no measured liquidation cluster between 76,500.0 and the 76,464.7 low of 10 September, so a break there falls through air. Two: the account-level long/short ratio rose from 1.67 to 1.68 THROUGH a 740k long liquidation with zero shorts hit - if it is still climbing at your mark, the flush cleaned price and not positioning, and the second tranche should wait for 77,121.9 rather than a cheaper print."
     }
   ],
   "status": "active"
