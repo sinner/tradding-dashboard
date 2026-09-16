@@ -1,0 +1,13 @@
+import {build} from 'esbuild';
+import fs from 'node:fs';
+const r = await build({entryPoints:['src/lib/types.ts'],bundle:true,write:false,format:'esm',platform:'node'});
+const T = await import('data:text/javascript;base64,'+Buffer.from(r.outputFiles[0].text).toString('base64'));
+const load = p => JSON.parse(fs.readFileSync(p,'utf8'));
+const names = Object.keys(T).filter(k=>/Schema$/.test(k));
+const run=(n,d)=>{const s=T[n]; if(!s?.safeParse) return; const x=s.safeParse(d);
+  console.log(n, x.success?'PASS':'FAIL '+JSON.stringify(x.error.issues.slice(0,6)));};
+console.log('schemas:', names.join(', '));
+for (const n of names) if(/^Report/.test(n)) run(n, load('public/data/2026/08/2026-08-31-morning.json'));
+for (const n of names) if(/Manifest/.test(n) && !/Day/.test(n)) run(n, load('public/data/manifest.json'));
+for (const n of names) if(/Portfolio/.test(n)) run(n, load('public/data/portfolio.json'));
+for (const n of names) if(/Calibration/.test(n)) run(n, load('public/data/calibration.json'));
