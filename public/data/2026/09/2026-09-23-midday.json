@@ -1,0 +1,385 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-09-23-midday",
+  "date": "2026-09-23",
+  "session": "midday",
+  "generatedAt": "2026-09-23T12:50:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bearish",
+  "confidence": 4.5,
+  "priceSnapshot": {
+    "value": 84308.7,
+    "currency": "USD",
+    "changePct": -2.5,
+    "source": "OKX Public API v5 (market/ticker), fetched in-browser from the okx.com origin (device_bash curl to OKX is blocked by the sandbox proxy allowlist -- 403 blocked-by-allowlist; fetched instead via an in-page fetch() on www.okx.com and timestamp-verified against wall clock).",
+    "asOf": "2026-09-23T12:47:00-05:00",
+    "note": "Morning closed the handover at 85,648.0 (06:56 COT) after HOLDing through a second long-liquidation cascade. Since then price fell further and printed a settled 1H close of 84,047.2 (16:00-17:00 UTC / 11:00-12:00 COT) -- a confirmed close that broke not just the 85,325.2 reduce level flagged since midnight/morning but also the 85,111.1 invalidatesAt and the 85,050 stop-order price from the morning report. Price continued to a fresh session low of 83,500.2 before a liquidation-driven bounce back to 84,308.7. Net since morning: -1,339.3 points (-1.56%). Net since midnight's 86,393.2 add: -2,084.5 (-2.41%). Open interest fell 5.3% this session (2,655.7M to 2,514.4M USD) -- unlike the two prior cascades (both of which saw OI rise), this one shows genuine deleveraging, not fresh positioning building underneath.",
+    "sessionRange": {
+      "low": 83500.2,
+      "high": 85945.6
+    }
+  },
+  "decisionBox": {
+    "position": "REDUCE",
+    "reduceIf": {
+      "price": 83500.2,
+      "confirmation": "A settled 1H close below 83,500.2 (today's session low) would confirm the breakdown is extending past this session's flush rather than the liquidation-driven low holding as support."
+    },
+    "addIf": {
+      "price": 85111.1,
+      "confirmation": "A settled 1H close back above 85,111.1 -- the former invalidation level, now the first reclaim hurdle -- would be the first sign this leg is repairing; a full reclaim of 85,325.2 (the level that fired this reduce) would restore the pre-pullback structure."
+    },
+    "invalidatesAt": 82500,
+    "stopOrder": {
+      "recommended": true,
+      "price": 83300
+    },
+    "changed": "Downgraded HOLD -> REDUCE. The 85,325.2 reduce trigger set at midnight and held through morning fired with a confirmed settled 1H close at 84,047.2 (16:00-17:00 UTC / 11:00-12:00 COT) -- and price didn't stop there, it also broke the 85,111.1 invalidatesAt and the 85,050 stop-order price flagged at morning, printing a session low of 83,500.2 before a partial bounce to 84,308.7 (roughly +800 points off the low within the same hour). Trimming the tactical midnight tranche (15 USDT added at 86,393.2) rather than the full multi-week core: daily structure (price above every daily EMA, RSI 63.94, MACD histogram still positive at 432.29 though decelerating from 603.70 at morning) stays intact, and OI actually fell this session (real deleveraging) rather than rising as in the prior two cascades, so this reads as a sharp liquidation-amplified flush inside an still-standing daily uptrend rather than a confirmed reversal. But the pre-set invalidation was tagged with a settled close, not just wicked -- letting a second consecutive report slide past a fired reduce level without acting would be the discipline failure the skill warns about, so this session acts on it rather than waiting for a cleaner signal."
+  },
+  "probabilities": {
+    "bullish": 28.0,
+    "range": 37.0,
+    "bearish": 35.0
+  },
+  "levels": {
+    "support": [
+      83500.2,
+      83100,
+      82500
+    ],
+    "resistance": [
+      84650,
+      85111.1,
+      85325.2
+    ],
+    "liquidation": [
+      {
+        "price": 83900,
+        "side": "below",
+        "intensity": "extreme",
+        "magnet": true,
+        "note": "41,925,600 USD of long liquidations in a single fill -- the dominant cluster of this session's flush (100 fills, 16:05:49-17:23:32 UTC / 11:05-12:23 COT, covering 83,700-84,300). Spent fuel roughly 400 points below current spot (84,308.7), not a resting order."
+      },
+      {
+        "price": 83800,
+        "side": "below",
+        "intensity": "high",
+        "magnet": false,
+        "note": "23,699,029 USD of long liquidations across 36 fills, the low end of the drop toward the 83,500.2 session low. Already discharged."
+      },
+      {
+        "price": 84300,
+        "side": "below",
+        "intensity": "high",
+        "magnet": false,
+        "note": "13,696,009 USD of SHORT liquidations across 9 fills -- the opposite side, discharged earlier in the session as price first pushed up through this zone before reversing lower."
+      },
+      {
+        "price": 84100,
+        "side": "below",
+        "intensity": "high",
+        "magnet": false,
+        "note": "12,139,062 USD of short liquidations across 19 fills, same up-move as the 84,300 cluster."
+      },
+      {
+        "price": 83700,
+        "side": "below",
+        "intensity": "high",
+        "magnet": false,
+        "note": "11,227,973 USD of long liquidations across 19 fills, the deepest point of the flush before the bounce."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": null,
+      "nearestBelow": 83900,
+      "pull": "down",
+      "source": "OKX Public API v5 /public/liquidation-orders (SWAP, uly BTC-USDT, state filled, 100 fills covering 2026-09-23T16:05:49-17:23:32 UTC / 11:05:49-12:23:32 COT -- the API caps at 100 fills and this session generated more than that in under 90 minutes, so earlier-session liquidations are not captured), summed via in-page fetch (bkPx x sz per posSide) and bucketed to 100-dollar bins; positioning from /public/open-interest, /public/funding-rate and /rubik/stat/contracts/long-short-account-ratio. All re-fetched in-browser with the origin's own fetch(), timestamp-verified against a fresh ticker read in the same session.",
+      "asOf": "2026-09-23T12:47:00-05:00",
+      "note": "This session's captured window was two-sided for the first time in a while: 76,900,485 USD of longs vs 31,464,992 USD of shorts (about 2.44-to-1 long-skewed), versus one-sided 13,249-to-1 and 218-to-1 cascades at morning and midnight. Shorts got flushed first as price pushed toward 84,300, then longs got flushed harder on the drop to 83,500.2. No verified magnet sits above current spot right now -- everything captured already discharged below it. OI fell 5.3% through the session (real deleveraging, unlike the prior two cascades where OI rose), which is a more constructive setup for a durable bounce than the last two flushes had."
+    }
+  },
+  "atr": {
+    "value": 2481.31,
+    "period": 14,
+    "pct": 2.94,
+    "source": "Computed (Wilder ATR14) from OKX daily candles (market/candles, bar=1D, limit=250), fetched in-browser.",
+    "asOf": "2026-09-23T12:44:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": 38.44,
+      "macd": {
+        "line": -440.23,
+        "signal": -437.93,
+        "hist": -2.29
+      },
+      "emas": {
+        "ema20": 84537.0,
+        "ema50": 85205.86,
+        "ema100": 85576.91,
+        "ema200": 85366.65
+      },
+      "structure": "Price (~84,308) is below EMA20/50/100/200 on the 15m, though the MACD histogram has decelerated sharply on the bounce (-25.48 to -2.29), close to a fresh bullish cross if the recovery holds.",
+      "bias": "bearish structure, momentum flattening on the bounce",
+      "source": "OKX market/candles bar=15m, in-browser fetch",
+      "asOf": "2026-09-23T12:44:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 30.06,
+      "macd": {
+        "line": -433.39,
+        "signal": -148.68,
+        "hist": -284.71
+      },
+      "emas": {
+        "ema20": 85443.51,
+        "ema50": 85293.31,
+        "ema100": 84001.23,
+        "ema200": 81966.67
+      },
+      "structure": "Price is now below EMA20, EMA50 AND EMA100 on the 1H (only EMA200 at 81,966.67 still holds below spot) -- the deepest EMA break of this leg. RSI at 30.06 is the most oversold 1H print in over a week, and the last SETTLED 1H close (84,047.2, 16:00-17:00 UTC) confirmed the break of 85,325.2/85,111.1/85,050 before the current bar's bounce.",
+      "bias": "bearish",
+      "source": "OKX market/candles bar=1H, in-browser fetch",
+      "asOf": "2026-09-23T12:44:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": 52.68,
+      "macd": {
+        "line": 1232.09,
+        "signal": 1597.39,
+        "hist": -365.29
+      },
+      "emas": {
+        "ema20": 84433.28,
+        "ema50": 82096.06,
+        "ema100": 80263.01,
+        "ema200": 77666.11
+      },
+      "structure": "Price has broken below EMA20 (84,433.28) on the 4H for the first time this leg, though it still holds above EMA50/100/200. MACD histogram has extended its negative cross from -83.21 at morning to -365.29 -- clearly accelerating lower, not just decelerating. RSI has cooled further to 52.68 (neutral) from 65.30 at morning.",
+      "bias": "structure cracking, momentum bearish",
+      "source": "OKX market/candles bar=4H, in-browser fetch",
+      "asOf": "2026-09-23T12:44:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 63.94,
+      "macd": {
+        "line": 2411.52,
+        "signal": 1979.24,
+        "hist": 432.29
+      },
+      "emas": {
+        "ema20": 80386.87,
+        "ema50": 76160.05,
+        "ema100": 73084.16,
+        "ema200": 73515.07
+      },
+      "structure": "Price remains well above every daily EMA (EMA20 at 80,386.87 is nearly 3,900 points below spot). MACD histogram is still positive but decelerating for a second straight report (603.70 at morning to 432.29 now), and RSI has eased from 69.39 to 63.94. The primary uptrend structure is intact but momentum has now cooled for three consecutive reports.",
+      "bias": "bullish (structure), cooling (momentum)",
+      "source": "OKX market/candles bar=1D, in-browser fetch",
+      "asOf": "2026-09-23T12:44:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 3.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "reduce",
+      "entry": null,
+      "stop": 82500,
+      "tp": [
+        86000,
+        87500
+      ],
+      "rr": null,
+      "confidence": 4.5,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "HOLD",
+      "entry": null,
+      "stop": 82500,
+      "tp": [],
+      "rr": null,
+      "confidence": 6.0,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "oversold bounce inside a broken tactical uptrend",
+    "longAbove": 84650,
+    "shortBelow": 83500.2,
+    "invalidates": 82500,
+    "note": "Scalp only the edges -- live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 102.45,
+      "changePct": 3.22
+    },
+    "dxy": {
+      "value": 100.9
+    },
+    "us10y": {
+      "value": 5.12
+    },
+    "etfFlows": {
+      "streakDays": 4,
+      "note": "Still 17, 18, 21 and 22 Sep at +159.5M, +433.0M, +999.0M, +714.7M per Farside -- four straight trading days of net inflow, 2.31B USD over the stretch, unchanged from morning. 23 Sep has not printed yet at this hour."
+    },
+    "liquidations": {
+      "longsUsd": 76900485.05,
+      "shortsUsd": 31464992.88,
+      "skew": 2.44,
+      "traders": null,
+      "openInterestUsd": 2514376778.12,
+      "note": "OKX realized liquidation-orders feed, 100 fills covering 16:05:49-17:23:32 UTC (11:05:49-12:23:32 COT), price range 83,700-84,300 -- a genuinely two-sided cascade for the first time this cycle (2.44-to-1 long-skewed, versus 13,249-to-1 and 218-to-1 at morning and midnight). OI fell 5.3% over the session (2,655.7M to 2,514.4M USD) -- real deleveraging, not fresh leverage building beneath the flush as in the prior two cascades."
+    },
+    "fearGreed": 78,
+    "earnings": []
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 740.78,
+        "changePct": -0.89,
+        "bias": "rich",
+        "note": "Live intraday quote (market open, 1:45 PM EDT); today's session earlier printed a low of 738.19. US 10Y yield spiking to a 19-year high (5.12%) and Brent up 3.22% are weighing on equities broadly today.",
+        "dcaSignal": {
+          "percentileInMonth": 84,
+          "pctVs20dAvg": 3.36,
+          "pctFromHigh": -0.89,
+          "rsi14": 65.16,
+          "zone": "rich",
+          "note": "Computed from trailing daily closes (incl. today's live print) -- relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ Historical Stock Price Data - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/history/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 708.21,
+        "changePct": -0.64,
+        "bias": "rich",
+        "note": "Live intraday quote (market open, 1:45 PM EDT), off Sep 22's 712.78 close as the same rates/oil-driven pullback hits broad equities.",
+        "dcaSignal": {
+          "percentileInMonth": 77,
+          "pctVs20dAvg": 0.65,
+          "pctFromHigh": -0.64,
+          "rsi14": 53.9,
+          "zone": "rich",
+          "note": "Computed from trailing daily closes (incl. today's live print) -- relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO Historical Stock Price Data - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/history/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 102.94,
+        "changePct": -1.58,
+        "bias": "fair",
+        "note": "Live intraday quote (market open, 1:13 PM EDT), off Sep 22's 104.60 close. Weakest of the three today, extending Japan-specific softness (BOJ policy, yen moves) on top of the broad rates-driven risk-off.",
+        "dcaSignal": {
+          "percentileInMonth": 31,
+          "pctVs20dAvg": -0.49,
+          "pctFromHigh": -1.78,
+          "rsi14": 49.59,
+          "zone": "fair",
+          "note": "Computed from trailing daily closes (incl. today's live print) -- relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "JPXN Historical Stock Price Data - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/history/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": true,
+    "actingHelped": false,
+    "rollingRecord": "Morning HELD at 85,648.0 with the reduce level (85,325.2) about 115 points away -- the closest it had been tested all week -- rather than trim. Price proceeded to blow through that level, the 85,111.1 invalidation, AND the 85,050 stop-order price with a confirmed settled 1H close (84,047.2) before this report, printing a session low of 83,500.2. Holding through the near-miss at morning did not help; the level fired anyway and travelled further than the morning report's own stop-order price. Midnight's 15 USDT tranche (entry 86,393.2) is now about 2,084 points offside (-2.41%) before this session's reduce.",
+    "note": "Flag for endday: does the bounce off 83,500.2 hold and reclaim 85,111.1, or does this session's reduceIf (83,500.2) get tested again on a retest of the low."
+  },
+  "sources": [
+    {
+      "title": "OKX Public API v5 - Ticker",
+      "url": "https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT"
+    },
+    {
+      "title": "OKX Public API v5 - Candles",
+      "url": "https://www.okx.com/api/v5/market/candles?instId=BTC-USDT"
+    },
+    {
+      "title": "OKX Public API v5 - Open Interest",
+      "url": "https://www.okx.com/api/v5/public/open-interest?instType=SWAP&instId=BTC-USDT-SWAP"
+    },
+    {
+      "title": "OKX Public API v5 - Funding Rate",
+      "url": "https://www.okx.com/api/v5/public/funding-rate?instId=BTC-USDT-SWAP"
+    },
+    {
+      "title": "OKX Public API v5 - Long/Short Account Ratio",
+      "url": "https://www.okx.com/api/v5/rubik/stat/contracts/long-short-account-ratio?ccy=BTC&period=1H"
+    },
+    {
+      "title": "OKX Public API v5 - Liquidation Orders",
+      "url": "https://www.okx.com/api/v5/public/liquidation-orders?instType=SWAP&uly=BTC-USDT&state=filled&limit=100"
+    },
+    {
+      "title": "Alternative.me Fear & Greed Index",
+      "url": "https://api.alternative.me/fng/?limit=3"
+    },
+    {
+      "title": "Farside Investors - Bitcoin ETF Flow",
+      "url": "https://farside.co.uk/btc/"
+    },
+    {
+      "title": "Trading Economics - US Dollar Index (DXY)",
+      "url": "https://tradingeconomics.com/dxy:cur"
+    },
+    {
+      "title": "Trading Economics - US 10 Year Government Bond Yield",
+      "url": "https://tradingeconomics.com/united-states/government-bond-yield"
+    },
+    {
+      "title": "Trading Economics - Brent Crude Oil",
+      "url": "https://tradingeconomics.com/commodity/brent-crude-oil"
+    },
+    {
+      "title": "StockAnalysis - QQQ",
+      "url": "https://stockanalysis.com/etf/qqq/history/"
+    },
+    {
+      "title": "StockAnalysis - VOO",
+      "url": "https://stockanalysis.com/etf/voo/history/"
+    },
+    {
+      "title": "StockAnalysis - JPXN",
+      "url": "https://stockanalysis.com/etf/jpxn/history/"
+    }
+  ]
+}
