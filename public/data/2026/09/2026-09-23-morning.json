@@ -1,0 +1,364 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-09-23-morning",
+  "date": "2026-09-23",
+  "session": "morning",
+  "generatedAt": "2026-09-23T06:56:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "bullish",
+  "biasTilt": "bearish",
+  "confidence": 5.0,
+  "priceSnapshot": {
+    "value": 85648.0,
+    "currency": "USD",
+    "changePct": -0.86,
+    "source": "OKX Public API v5 (market/ticker), fetched in-browser from the okx.com origin (sandbox proxy again served a stale ~13h cached ticker; discarded per the freshness guard, then re-pulled in-browser and timestamp-verified).",
+    "asOf": "2026-09-23T06:54:16-05:00",
+    "note": "Midnight closed the handover at 86,393.2 after the add gate fired-then-failed and a first $55.8M long-liquidation cascade. Since then price drifted down to a fresh session low of 85,440.8 (07:5x-08:2x COT) and a SECOND long-liquidation cascade discharged $56,695,162.73 of longs versus just $4,279.50 of shorts (about 13,249-to-1) between 06:20:55 and 06:47:58 COT, spanning 85,421.3-85,596.4, as price pushed toward but did not reach the 85,325.2 reduce level. Net since midnight: -745.2 points (-0.86%). Open interest actually rose slightly through this window (2,621.68M to 2,655.71M USD, +1.30%) even as longs got flushed - unlike the first cascade, this one came with fresh positioning building underneath it, not pure deleveraging.",
+    "sessionRange": {
+      "low": 85440.8,
+      "high": 86429.8
+    }
+  },
+  "decisionBox": {
+    "position": "HOLD",
+    "reduceIf": {
+      "price": 85325.2,
+      "confirmation": "A settled 1H close below 85,325.2, unchanged for a sixth consecutive report. Today's session low is 85,440.8 - about 115 points clear, the closest this level has been tested all week."
+    },
+    "addIf": {
+      "price": 86632.6,
+      "confirmation": "A settled 1H close back above 86,632.6, ideally on the far side of a completed liquidation flush rather than immediately ahead of one. Fired once at midnight (04:00 UTC settled close, 87,169.8) and failed within the hour; needs a fresh settled reclaim, ideally with less overhead long leverage than last time."
+    },
+    "invalidatesAt": 85111.1,
+    "stopOrder": {
+      "recommended": true,
+      "price": 85050.0
+    },
+    "changed": "Holds at HOLD - no change from the small ADD executed at midnight. That tranche (15 USDT at 86,393.2) is the position; this session does not add to it, because neither pre-set trigger has printed: price has not reached the 85,325.2-85,111.1 zone flagged at midnight as the level for a second tranche, and there has been no fresh settled reclaim of 86,632.6. What DID happen is a second long-liquidation cascade ($56.7M longs vs $4.3K shorts, 06:20:55-06:47:58 COT) pushing price to a fresh session low of 85,440.8, and the 4H MACD histogram - which had been decelerating for six straight readings at midnight (289.64 down to 27.58) - has now crossed negative (-83.21), the first negative 4H MACD print since this uptrend began. Daily RSI has cooled from 72.22 to 69.39 and daily MACD histogram is still expanding but at a slower pace (649.98 to 603.70) - the primary trend structure (price above every EMA on 4H and daily) is intact, but momentum continues to erode exactly as flagged. This is read as a second leg of the same healthy-pullback-in-an-uptrend story rather than a trend change, but with the reduce level now materially closer (115 points versus roughly 1,050 at midnight), the disciplined move is to hold the existing tranche, keep the stop in place, and let the pre-set 85,325.2/86,632.6 triggers do the work rather than force a mid-range decision."
+  },
+  "probabilities": {
+    "bullish": 38.0,
+    "range": 35.0,
+    "bearish": 27.0
+  },
+  "levels": {
+    "support": [
+      85440.8,
+      85325.2,
+      85111.1
+    ],
+    "resistance": [
+      85936.7,
+      86175.9,
+      86632.6
+    ],
+    "liquidation": [
+      {
+        "price": 85600.0,
+        "side": "below",
+        "intensity": "extreme",
+        "magnet": true,
+        "note": "40,238,513.82 USD of long liquidations, the dominant cluster of a second cascade (06:20:55-06:47:58 COT, 85,421.3-85,596.4 range, 100 fills, 56,695,162.73 USD longs vs 4,279.50 USD shorts). Spent fuel sitting just below current spot (85,648.0), not a resting order book."
+      },
+      {
+        "price": 85400.0,
+        "side": "below",
+        "intensity": "high",
+        "magnet": false,
+        "note": "10,316,623.27 USD, entirely long liquidations, the low end of the same cascade as price approached the 85,440.8 session low. Also already discharged."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": null,
+      "nearestBelow": 85600.0,
+      "pull": "down",
+      "source": "OKX Public API v5 /public/liquidation-orders (SWAP, uly BTC-USDT, state filled, 100 fills covering 2026-09-23T06:20:55-06:47:58 COT), summed via in-page fetch (bkPx times sz) and bucketed to 100-dollar bins; positioning from /public/open-interest, /public/funding-rate and /rubik/stat/contracts/long-short-account-ratio. All re-fetched in-browser with the origin's own fetch(), timestamp-verified against a fresh ticker read in the same session.",
+      "asOf": "2026-09-23T06:54:16-05:00",
+      "note": "Called down again: this is the second one-sided long-liquidation cascade since midnight (13,249-to-1 this time, versus 218-to-1 at midnight) with no verified short-liquidation magnet above spot. The L/S account ratio is essentially unchanged at 0.96 (14:00-15:00 COT window) versus 0.96 at midnight, so the accounts most exposed to a future squeeze (shorts) are still not the ones being flushed. Unlike the first cascade, open interest rose through this one (+1.30%) rather than falling, meaning fresh leveraged positioning is building beneath the flush rather than pure deleveraging - worth watching at midday."
+    }
+  },
+  "atr": {
+    "value": 2493.14,
+    "period": 14,
+    "pct": 2.91,
+    "source": "Computed (Wilder ATR14) from OKX daily candles (market/candles, bar=1D, limit=250), fetched in-browser.",
+    "asOf": "2026-09-23T06:56:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": 37.34,
+      "macd": {
+        "line": -216.27,
+        "signal": -193.51,
+        "hist": -22.77
+      },
+      "emas": {
+        "ema20": 85936.67,
+        "ema50": 86168.95,
+        "ema100": 86091.04,
+        "ema200": 85450.11
+      },
+      "structure": "Price (85,648.0) is below EMA20, EMA50 and EMA100, and has now dipped to essentially test EMA200 (85,450.11) at the session low. Short-term structure has flipped bearish for the first time in several sessions.",
+      "bias": "bearish (short-term)",
+      "source": "OKX market/candles bar=15m, in-browser fetch",
+      "asOf": "2026-09-23T06:56:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 42.42,
+      "macd": {
+        "line": 45.72,
+        "signal": 191.72,
+        "hist": -145.99
+      },
+      "emas": {
+        "ema20": 86163.78,
+        "ema50": 85473.78,
+        "ema100": 83934.29,
+        "ema200": 81427.7
+      },
+      "structure": "Price is below EMA20 (86,163.78) but still above EMA50/100/200 - the medium-term uptrend structure holds, but momentum has faded further from the 71.04 RSI peak seen at midnight to 42.42 now, the lowest 1H RSI print in over a week.",
+      "bias": "neutral structure, bearish momentum",
+      "source": "OKX market/candles bar=1H, in-browser fetch",
+      "asOf": "2026-09-23T06:56:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": 65.3,
+      "macd": {
+        "line": 1671.37,
+        "signal": 1754.58,
+        "hist": -83.21
+      },
+      "emas": {
+        "ema20": 84514.03,
+        "ema50": 81931.59,
+        "ema100": 80015.48,
+        "ema200": 77423.21
+      },
+      "structure": "Price still holds above every EMA, but the MACD histogram - which had decelerated for six straight readings at midnight (down to +27.58) - has now crossed negative to -83.21, the first negative 4H MACD print of this leg. RSI has cooled from 72.58 to 65.30, out of the overbought caution zone.",
+      "bias": "bullish structure, momentum now negative",
+      "source": "OKX market/candles bar=4H, in-browser fetch",
+      "asOf": "2026-09-23T06:56:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 69.39,
+      "macd": {
+        "line": 2501.47,
+        "signal": 1897.78,
+        "hist": 603.7
+      },
+      "emas": {
+        "ema20": 80149.62,
+        "ema50": 75899.58,
+        "ema100": 72785.18,
+        "ema200": 72697.92
+      },
+      "structure": "Price remains far above every EMA (EMA20 at 80,149.62 is over 5,400 points below spot); MACD histogram is still expanding but at a slower pace than midnight (649.98 to 603.70), and RSI has eased from 72.22 to 69.39 - the primary uptrend is unambiguously intact and this reads as a cooling-off, not a reversal.",
+      "bias": "bullish",
+      "source": "OKX market/candles bar=1D, in-browser fetch",
+      "asOf": "2026-09-23T06:56:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 3.5,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "hold",
+      "entry": null,
+      "stop": 85111.1,
+      "tp": [
+        87399.0,
+        88500.0
+      ],
+      "rr": null,
+      "confidence": 5.0,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "HOLD",
+      "entry": null,
+      "stop": 85111.1,
+      "tp": [],
+      "rr": null,
+      "confidence": 5.0,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "bearish-tilted range, primary trend still up",
+    "longAbove": 86632.6,
+    "shortBelow": 85440.8,
+    "invalidates": 85111.1,
+    "note": "Scalp only the edges - live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 100.36,
+      "changePct": 1.12
+    },
+    "dxy": {
+      "value": 100.87
+    },
+    "us10y": {
+      "value": 4.978
+    },
+    "etfFlows": {
+      "streakDays": 4,
+      "note": "Still 17, 18, 21 and 22 Sep at +159.5M, +433.0M, +999.0M, +714.7M per Farside - four straight trading days of net inflow, 2.31B USD over the stretch, unchanged from midnight. 23 Sep has not printed yet at this hour (pre-market)."
+    },
+    "liquidations": {
+      "longsUsd": 56695162.73,
+      "shortsUsd": 4279.5,
+      "skew": 13248.87,
+      "traders": null,
+      "openInterestUsd": 2655707687.2,
+      "note": "OKX realized liquidation-orders feed, 100 fills covering 06:20:55-06:47:58 COT (11:20:55-11:47:58 UTC), price range 85,421.3-85,596.4 - a second, even more one-sided long-liquidation cascade (13,249-to-1 vs 218-to-1 at midnight). Unlike midnight, OI rose 1.30% over the session (2,621.68M to 2,655.71M USD) - fresh leverage building beneath the flush, not pure deleveraging."
+    },
+    "fearGreed": 71,
+    "earnings": []
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 747.46,
+        "changePct": 0.81,
+        "bias": "rich",
+        "note": "Market not yet open (pre-market -0.25% at 745.60 as of 7:52 AM EDT); carrying the verified Sep 22 close and its computed DCA signal from last close - percentile-in-month 100, RSI14 72.68, still stretched.",
+        "dcaSignal": {
+          "percentileInMonth": 100,
+          "pctVs20dAvg": 4.29,
+          "pctFromHigh": 0.0,
+          "rsi14": 72.68,
+          "zone": "rich",
+          "note": "Carried from last close (market not yet open at report time) - relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ Historical Stock Price Data - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/history/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 712.78,
+        "changePct": 0.0,
+        "bias": "rich",
+        "note": "Market not yet open (pre-market -0.06% at 712.34); carrying the verified Sep 22 close - percentile-in-month 100, RSI14 60.53.",
+        "dcaSignal": {
+          "percentileInMonth": 100,
+          "pctVs20dAvg": 1.3,
+          "pctFromHigh": 0.0,
+          "rsi14": 60.53,
+          "zone": "rich",
+          "note": "Carried from last close (market not yet open at report time) - relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO Historical Stock Price Data - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/history/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 104.6,
+        "changePct": 0.62,
+        "bias": "rich",
+        "note": "Market not yet open (flat pre-market at 104.60); carrying the verified Sep 22 close - percentile-in-month 93, RSI14 60.27.",
+        "dcaSignal": {
+          "percentileInMonth": 93,
+          "pctVs20dAvg": 1.11,
+          "pctFromHigh": -0.2,
+          "rsi14": 60.27,
+          "zone": "rich",
+          "note": "Carried from last close (market not yet open at report time) - relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "JPXN Historical Stock Price Data - StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/history/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": false,
+    "rollingRecord": "Midnight's 15 USDT spot tranche (bought at 86,393.2) is 745.2 points offside as of this read (85,648.0), about -0.86% - small and within the noise of a single session, but the second consecutive long-liquidation cascade means the pullback has not yet turned; grade again at midday.",
+    "note": "4H MACD histogram crossed negative for the first time this leg (27.58 to -83.21); daily RSI cooling (72.22 to 69.39) but still bullish-aligned. Flag for midday: is 85,325.2 tested on this leg, or does 86,632.6 get a cleaner reclaim attempt first."
+  },
+  "sources": [
+    {
+      "title": "OKX Public API v5 - Ticker",
+      "url": "https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT"
+    },
+    {
+      "title": "OKX Public API v5 - Candles",
+      "url": "https://www.okx.com/api/v5/market/candles?instId=BTC-USDT"
+    },
+    {
+      "title": "OKX Public API v5 - Open Interest",
+      "url": "https://www.okx.com/api/v5/public/open-interest?instType=SWAP&instId=BTC-USDT-SWAP"
+    },
+    {
+      "title": "OKX Public API v5 - Funding Rate",
+      "url": "https://www.okx.com/api/v5/public/funding-rate?instId=BTC-USDT-SWAP"
+    },
+    {
+      "title": "OKX Public API v5 - Long/Short Account Ratio",
+      "url": "https://www.okx.com/api/v5/rubik/stat/contracts/long-short-account-ratio?ccy=BTC&period=1H"
+    },
+    {
+      "title": "OKX Public API v5 - Liquidation Orders",
+      "url": "https://www.okx.com/api/v5/public/liquidation-orders?instType=SWAP&uly=BTC-USDT&state=filled&limit=100"
+    },
+    {
+      "title": "Alternative.me Fear & Greed Index",
+      "url": "https://api.alternative.me/fng/?limit=3"
+    },
+    {
+      "title": "Farside Investors - Bitcoin ETF Flow",
+      "url": "https://farside.co.uk/btc/"
+    },
+    {
+      "title": "CNBC - ICE U.S. Dollar Index",
+      "url": "https://www.cnbc.com/quotes/.DXY"
+    },
+    {
+      "title": "CNBC - U.S. 10 Year Treasury",
+      "url": "https://www.cnbc.com/quotes/US10Y"
+    },
+    {
+      "title": "CNBC - ICE Brent Crude",
+      "url": "https://www.cnbc.com/quotes/@LCO.1"
+    },
+    {
+      "title": "StockAnalysis - QQQ",
+      "url": "https://stockanalysis.com/etf/qqq/"
+    },
+    {
+      "title": "StockAnalysis - VOO",
+      "url": "https://stockanalysis.com/etf/voo/"
+    },
+    {
+      "title": "StockAnalysis - JPXN",
+      "url": "https://stockanalysis.com/etf/jpxn/"
+    }
+  ]
+}
