@@ -156,3 +156,16 @@
 - Files: report JSON, narrative MD (data/reports/2026/09/), manifest merged (64 days, all four session keys intact), calibration appended (219 -> 220 rows).
 - Gates: all JSON parse; schema checked against src/lib/types.ts ReportSchema; ledger tests ALL PASSED; zero `-04:00` timestamps. pnpm unavailable in sandbox (no app code changed). No git run; no push; no email.
 - Browser: 1 tab opened (OKX/alternative.me/StockAnalysis/Farside/CNBC), closed at end; tab group auto-removed.
+
+## 2026-09-24 06:58 COT — Morning session
+
+- **Report**: `data/2026/09/2026-09-24-morning.json` written and validated (schema OK, all timestamps -05:00).
+- **Bias**: range (bearish tilt), confidence 5.75/10. Price 83,414.1 (session low 82,874.5, high 84,628.2 since midnight).
+- **Key finding**: midnight's reduceIf (83,717.1) fired — three confirmed settled 1H closes below it, plus a real long-liquidation cascade (~1,492 BTC notional at 83,000/82,750, freshly verified via in-page OKX fetch after the standard API path returned stale ~22h-old cached data).
+- **Decision**: REDUCE. Trimmed 30% of the spot core (0.00066792 BTC) via `paper_wallet.py` — exit 0, summary `morning REDUCE · mark 83414.1 · equity 208.05 · savings 2.47 · net 210.52 · round 1 · bankruptcies 0`.
+- **manifest.json / calibration.json**: merged (read-modify-write), morning pointer added for 2026-09-24, prior days/rows intact (66 days, 226 calibration rows). Backfilled midnight row's `price_next_report`/`reduce_fired`/`acting_helped`.
+- **Narrative**: `data/reports/2026/09/2026-09-24-morning.md` written.
+- **JPXN**: StockAnalysis still hasn't refreshed past Sep 21; Yahoo returned an implausible quote again — emitted price/changePct as null rather than relabeling a stale close.
+- **Local test gate**: `python3 scripts/test_paper_wallet.py` — ALL TESTS PASSED. No `src/**` changes this run, so `pnpm build`/`lint` were not required (and `pnpm` wasn't on PATH in this shell anyway).
+- **Git**: no git commands run. No `.git/index.lock` present.
+- **Browser hygiene**: opened one OKX tab (id 970755422) for fresh in-page fetches (OKX ticker/candles/liquidation/open-interest data was stale via the sandbox's WebFetch proxy); closed it before finishing, tab group auto-removed. No other tabs touched.
