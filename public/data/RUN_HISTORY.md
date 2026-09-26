@@ -217,3 +217,16 @@
 - Gates: all JSON parse; `python3 scripts/test_paper_wallet.py` -- ALL TESTS PASSED; grepped outputs for `-04:00` -- only pre-existing historical narrative text ("04:00 UTC" mentions in old calibration rows), no new timezone offset issues. No `src/**` changes this run, so `pnpm build`/`lint` were not required.
 - No git run (no `.git/index.lock` present, none created). No `pnpm data:publish`. No email. No writes to `~/crypto-reports`.
 - Browser hygiene: opened 1 tab (okx.com, navigated onward to stockanalysis.com pages for in-page fetches and live JPXN read) -- closed before finishing, tab group auto-removed.
+
+## 2026-09-26 02:22 COT — Midnight session / wallet seeder
+
+- Ran `/crypto-levels BTC-USDT` + `/crypto-technical-analyst BTC-USDT`, then `btc-paper-desk` (MIDNIGHT, isSeeder=true; portfolio.json already existed and was active, so this was a normal relay, not an init/revive).
+- Data: OKX WebFetch ticker was ~17h stale (discarded per freshness guard) — switched to Claude-in-Chrome in-page `fetch()` against the okx.com origin for all BTC price/candle/derivatives/liquidation data (0-second lag confirmed). Macro (Brent/DXY/US10Y) via WebFetch, confirmed as genuine Friday/last-close reuse since today is Saturday and those markets are closed. JPXN required a live browser read (WebFetch's markdown conversion served a stale Sep-18 cache again); confirmed identical to Friday's close ($103.98), so carried with dcaSignal from endday, labelled "carried from last close".
+- Mark 84,011.6 (+0.17% vs endday's 83,868.2), tight overnight range 83,829.4-84,137.7 inside the day's 83,174.7-85,258.8. reduceIf (82,874.5) and addIf (84,944.4) both carried unchanged, neither tested for a 5th straight session.
+- **Key finding**: no new OKX realized-liquidation fills in ~6.6h (same 100-fill sample as endday) — a genuinely quiet overnight, not a stale-feed issue. Funding, OI and L/S ratio all ticked up modestly (1.29->1.36), Fear&Greed rose 71->74, and Farside published Sep 25's ETF flow (+134.5M), extending the net-inflow streak to 7 days — mildly bullish tilt with nothing structurally broken.
+- Bias range (bullish tilt), confidence 5.5/10. Probabilities 32/44/24.
+- Decision: spot_buy 8 USDT (small DCA, sized down given cash already thinned by two prior consecutive DCA adds and the Oct-1 monthly expense five days out). Ledger: `midnight ADD · mark 84011.6 · equity 209.03 · savings 2.47 · net 211.50 · round 1 · bankruptcies 0` (cash 21.05 -> 13.05; BTC 0.00223753 -> 0.00233275).
+- Files: report JSON (`data/2026/09/2026-09-26-midnight.json`), narrative MD (`data/reports/2026/09/2026-09-26-midnight.md`), manifest merged (67 -> 68 days, new day seeded with all four session keys, midnight populated), calibration appended (231 -> 232 rows), portfolio via ledger script.
+- Gates: all four core JSON files parse; `python3 scripts/test_paper_wallet.py` — ALL TESTS PASSED; ledger exit 0, printed summary mark/action matched the intent exactly; zero `-04:00` timestamps. No `src/**` changes this run, so `pnpm build`/`lint` were not required.
+- No git run (no `.git/index.lock` present, none created). No `pnpm data:publish`. No email. No writes to `~/crypto-reports`.
+- Browser hygiene: opened 1 tab (okx.com, navigated to stockanalysis.com/etf/jpxn/ for the live read) — closed before finishing, tab group auto-removed.
