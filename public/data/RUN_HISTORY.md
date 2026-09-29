@@ -326,3 +326,12 @@
 - Gates: all four core JSON files parse and retain prior data (spot-checked). Grepped all touched files for `-04:00` — none found. No `src/**` or ledger-script changes this run; ran `node_modules/.bin/tsc -b` as a sanity check (exit 0, clean) and `python3 scripts/test_paper_wallet.py` (all tests passed).
 - No `git` run. No `pnpm data:publish`. No email. No writes to `~/crypto-reports`. Two scratch files left under `.tmp_midday_20260928/` (delete permission not requested/granted this run) — harmless, not referenced by the app, consistent with many similar leftovers from earlier sessions already in the repo.
 - Browser hygiene: opened 1 tab (okx.com, in-page fetches only) — closed before finishing, tab group auto-removed.
+
+## 2026-09-29 07:05 COT — Morning session
+
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MORNING; not the seeder). Compared against today's `-midnight.json`.
+- Data: direct OKX WebFetch was stale (ticker ~19h old); used Claude-in-Chrome in-page fetch on the okx.com origin (fresh ticker/OI/funding/candles/liquidations). Indicators and ATR computed from OKX candles. Macro via TradingEconomics, F&G alternative.me (74), Farside (+31.0M Sep 28), QQQ/VOO/JPXN via StockAnalysis with dcaSignal recomputed.
+- Mark 84,366.4; session range 83,760.1-84,497.9. Range-bull, confidence 5.8, probabilities 35/43/22.
+- Decision: **hold** (ledger `morning HOLD · mark 84366.4 · equity 209.39 · net 212.48`). Breakout above 84,374.2 unconfirmed on 4H, longs crowded, cash reserved for the Oct-1 30 USDT expense.
+- Files: report JSON, narrative MD, manifest merged, calibration appended (244 → 245; midnight row backfilled), portfolio via ledger (exit 0). No `git`, publish or email.
+- Browser hygiene: 1 tab (okx.com) opened by this run; closed at the end.
