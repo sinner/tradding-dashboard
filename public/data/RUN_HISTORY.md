@@ -335,3 +335,10 @@
 - Decision: **hold** (ledger `morning HOLD · mark 84366.4 · equity 209.39 · net 212.48`). Breakout above 84,374.2 unconfirmed on 4H, longs crowded, cash reserved for the Oct-1 30 USDT expense.
 - Files: report JSON, narrative MD, manifest merged, calibration appended (244 → 245; midnight row backfilled), portfolio via ledger (exit 0). No `git`, publish or email.
 - Browser hygiene: 1 tab (okx.com) opened by this run; closed at the end.
+
+## 2026-09-30 02:10 COT — Midnight session (seeder)
+
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk`. Compared against 2026-09-29 endday (reduce/add did not fire; endday calibration row backfilled).
+- Data: OKX via Claude-in-Chrome in-page fetch (fresh). Mark 83,053; range 82,978.1-83,663.9. Range, bearish tilt, confidence 5.2, 26/47/27.
+- Decision: 5 USDT spot DCA (`midnight ADD · mark 83053.0 · equity 206.92 · net 210.01`). Cash reserved for the Oct-1 30 USDT expense. Portfolio existed, so no init needed.
+- Files: report JSON, narrative MD, manifest merged, calibration appended, portfolio via ledger (exit 0). No git/publish/email.
