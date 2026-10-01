@@ -348,3 +348,9 @@
 - Data: OKX via Claude-in-Chrome in-page fetch (fresh). Mark 83,849.6; range 83,019.8-83,979.7. Range, no tilt, confidence 5.0, 29/48/23.
 - Decision: 4 USDT spot DCA (`morning ADD · mark 83849.6 · equity 208.59 · net 211.68`). Cash reserved for the Oct-1 expense.
 - Files: report JSON, narrative MD, manifest merged, calibration appended, portfolio via ledger (exit 0). No git/publish/email.
+
+## 2026-10-01 midday (12:45 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk`. Compared against 2026-10-01 morning (reduce did not fire, add 84,418.2 fired; morning calibration row backfilled).
+- Data: OKX via Claude-in-Chrome in-page fetch (fresh). Mark 85,029.7; range 83,432.6-85,039.5. Range, bullish tilt, confidence 5.6, 38/45/17.
+- Decision: 6 USDT spot DCA (`midday ADD · mark 85029.7 · equity 183.98 · net 183.98`). JPXN carried from Sep 30 (feed stale).
+- Files: report JSON, narrative MD, manifest merged, calibration appended, portfolio via ledger (exit 0). No git/publish/email.
