@@ -360,3 +360,9 @@
 - Data: OKX via Claude-in-Chrome in-page fetch (direct WebFetch was stale). Mark 84,760.5; range 84,490.9-85,266. Range, bullish tilt, confidence 5.4, 33/47/20. Resting stop recommended at 82,500.
 - Decision: sold 15% of spot into the overnight gap (`endday REDUCE · mark 84760.5 · equity 183.29 · savings 0.11 · net 183.4`). JPXN carried from Sep 30 (feed stale).
 - Files: report JSON, narrative MD, manifest merged, calibration appended, portfolio via ledger (exit 0). Leftover scratch `.intent_endday_20261001.json` in project root (delete not permitted). No git/publish/email.
+
+## 2026-10-02 midnight (02:10 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDNIGHT seeder). Compared against 2026-10-01 endday (reduce/add did not fire; endday calibration row backfilled).
+- Data: OKX via Claude-in-Chrome in-page fetch (fresh). Mark 85,933.2; range 84,518.6-86,914.8. Range, bullish tilt, confidence 5.6, 38/45/17.
+- Decision: 10 USDT spot buy (`midnight ADD · mark 85933.2 · equity 185.45 · savings 0.11 · net 185.56`). JPXN carried from Sep 30 (feed stale).
+- Files: report JSON, narrative MD, manifest merged, calibration appended, portfolio via ledger (exit 0). No git/publish/email.
