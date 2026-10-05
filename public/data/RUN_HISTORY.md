@@ -372,3 +372,14 @@
 - Data: OKX via Claude-in-Chrome in-page fetch (fresh). Mark 84,608; range 83,884-84,906.8. Range, bearish tilt, confidence 5.3, 24/46/30. Resting stop recommended at 82,500.
 - Decision: sold 15% of spot into the overnight gap (`endday REDUCE · mark 84608.0 · equity 182.64 · savings 0.18 · net 182.82`). JPXN carried from Sep 30 (feed stale). QQQ/VOO Friday closes.
 - Files: report JSON, narrative MD, manifest merged, calibration appended, portfolio via ledger (exit 0). Scratch `.intent_endday_20261002.json` in project root. No git/publish/email.
+
+## 2026-10-05 midnight (08:50 COT, fired late)
+- Ran /crypto-levels + /crypto-technical-analyst BTC-USDT, then btc-paper-desk (MIDNIGHT seeder). Compared vs 2026-10-02 endday (latest). OKX via Chrome in-page fetch (fresh).
+- Mark 86,000; range bullish-tilt, conf 5.6, 38/44/18. Decision: spot_buy 15 USDT (`midnight ADD · mark 86000.0 · equity 185.13 · savings 0.18 · net 185.31`).
+- Files: report, narrative, manifest, calibration (10-02 endday row backfilled), portfolio via ledger (exit 0). No git/publish/email.
+
+## 2026-10-05 morning (08:50 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MORNING; not the seeder). No midnight report today; compared against 2026-10-02 endday (add trigger fired, reduce did not; endday calibration row backfilled).
+- Data: OKX via Claude-in-Chrome in-page fetch (fresh; direct WebFetch was stale). Mark 86,010.1; range 84,516.4-86,994.3. Range, bullish tilt, confidence 5.8, 36/44/20.
+- Decision: 12 USDT spot buy (`morning ADD · mark 86010.1 · equity 185.15 · savings 0.18 · net 185.33`). JPXN carried (feed stale); Fear & Greed/Brent/DXY/US10Y unverified, omitted.
+- Files: report JSON, narrative MD, manifest merged (new day, four keys), calibration appended, portfolio via ledger (exit 0). Scratch `.intent_morning_20261005.json` and `.gen_morning_20261005.py` in project root. No git/publish/email.
