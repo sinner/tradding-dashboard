@@ -383,3 +383,8 @@
 - Data: OKX via Claude-in-Chrome in-page fetch (fresh; direct WebFetch was stale). Mark 86,010.1; range 84,516.4-86,994.3. Range, bullish tilt, confidence 5.8, 36/44/20.
 - Decision: 12 USDT spot buy (`morning ADD · mark 86010.1 · equity 185.15 · savings 0.18 · net 185.33`). JPXN carried (feed stale); Fear & Greed/Brent/DXY/US10Y unverified, omitted.
 - Files: report JSON, narrative MD, manifest merged (new day, four keys), calibration appended, portfolio via ledger (exit 0). Scratch `.intent_morning_20261005.json` and `.gen_morning_20261005.py` in project root. No git/publish/email.
+
+## 2026-10-06 midday (12:45 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDDAY; not the seeder). Compared vs 2026-10-06 morning (reduce 85,297 not hit; add zone reached; trim helped). OKX via Chrome in-page fetch (fresh, newest liq 17:20Z).
+- Mark 85,568.5; range bullish-tilt, conf 5.0, 31/47/22. Decision: spot_buy 15 USDT (`midday ADD · mark 85568.5 · equity 184.3 · savings 0.37 · net 184.67`). QQQ/VOO/JPXN intraday quotes; Brent/DXY/US10Y from CNBC; ETF flows TFTC.
+- Files: report, narrative, manifest merged, calibration appended (morning price_next_report backfilled), portfolio via ledger (exit 0). Scratch `.intent_midday_20261006.json` and `.gen_midday_20261006.py` in project root. Browser tab closed. No git/publish/email.
