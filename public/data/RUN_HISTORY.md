@@ -388,3 +388,8 @@
 - Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDDAY; not the seeder). Compared vs 2026-10-06 morning (reduce 85,297 not hit; add zone reached; trim helped). OKX via Chrome in-page fetch (fresh, newest liq 17:20Z).
 - Mark 85,568.5; range bullish-tilt, conf 5.0, 31/47/22. Decision: spot_buy 15 USDT (`midday ADD · mark 85568.5 · equity 184.3 · savings 0.37 · net 184.67`). QQQ/VOO/JPXN intraday quotes; Brent/DXY/US10Y from CNBC; ETF flows TFTC.
 - Files: report, narrative, manifest merged, calibration appended (morning price_next_report backfilled), portfolio via ledger (exit 0). Scratch `.intent_midday_20261006.json` and `.gen_midday_20261006.py` in project root. Browser tab closed. No git/publish/email.
+
+## 2026-10-08 midnight (02:10 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDNIGHT seeder). Compared vs 2026-10-07 endday (reduce 82,753 fired, add did not; trim helped; endday calibration row backfilled). OKX via Chrome in-page fetch (fresh).
+- Mark 82,824.3; range-bear, conf 4.8, 22/41/37. Decision: spot_buy 15 USDT (`midnight ADD · mark 82824.3 · equity 179.28 · savings 0.42 · net 179.7`). JPXN carried (feed stale); DXY/Brent/US10Y omitted.
+- Files: report, narrative, manifest (new day, four keys), calibration, portfolio via ledger (exit 0). Scratch `.intent_midnight_20261008.json`, `.gen_midnight_20261008.py` in project root. No git/publish/email.
