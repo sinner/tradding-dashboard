@@ -393,3 +393,8 @@
 - Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDNIGHT seeder). Compared vs 2026-10-07 endday (reduce 82,753 fired, add did not; trim helped; endday calibration row backfilled). OKX via Chrome in-page fetch (fresh).
 - Mark 82,824.3; range-bear, conf 4.8, 22/41/37. Decision: spot_buy 15 USDT (`midnight ADD · mark 82824.3 · equity 179.28 · savings 0.42 · net 179.7`). JPXN carried (feed stale); DXY/Brent/US10Y omitted.
 - Files: report, narrative, manifest (new day, four keys), calibration, portfolio via ledger (exit 0). Scratch `.intent_midnight_20261008.json`, `.gen_midnight_20261008.py` in project root. No git/publish/email.
+
+## 2026-10-08 endday (19:35 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (ENDDAY). Compared vs 2026-10-08 midday (reduce 80,400 not fired, add 81,631 reclaimed; midday calibration row backfilled). OKX via Chrome in-page fetch (fresh).
+- Mark 81846.4; range-bear, conf 5.2, 24/42/34. Decision: spot_buy 12 USDT (`endday ADD · mark 81846.4 · equity 177.12 · savings 0.42 · net 177.54 · round 1 · bankruptcies 0`). Stop 80,300 recommended overnight. JPXN intraday print, no DCA; DXY/Brent/US10Y omitted.
+- Files: report, narrative, manifest, calibration, portfolio via ledger (exit 0). No git/publish/email.
