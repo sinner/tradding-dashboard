@@ -403,3 +403,8 @@
 - Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDNIGHT seeder). Compared vs 2026-10-08 endday (reduce 80,400 not fired, add 82,111 reclaimed; endday calibration row backfilled). OKX via Chrome in-page fetch (fresh).
 - Mark 82,544.1; range, conf 5.0, 28/46/26. Decision: spot_buy 15 USDT (`midnight ADD · mark 82544.1 · equity 178.18 · savings 0.42 · net 178.6`). QQQ/VOO/JPXN carried from Oct 8; F&G/DXY/Brent/US10Y omitted.
 - Files: report, narrative, manifest (new day, four keys), calibration, portfolio via ledger (exit 0). No git/publish/email.
+
+## 2026-10-09 midday (12:50 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDDAY). Compared vs 2026-10-09 morning (reduce 81,612 not fired; add 83,177 fired on 11:00Z 1H close 83,241 but faded). OKX via Chrome in-page fetch (fresh).
+- Mark 82,733.3; range, conf 5.0, 28/48/24. Decision: spot_buy 12 USDT (`midday ADD · mark 82733.3 · equity 178.49 · savings 0.42 · net 178.91`). QQQ/VOO/JPXN live Oct 9 prints; DXY/Brent/US10Y omitted.
+- Files: report, narrative, manifest, calibration, portfolio via ledger (exit 0). No git/publish/email.
