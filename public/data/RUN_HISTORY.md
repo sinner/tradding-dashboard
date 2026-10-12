@@ -408,3 +408,8 @@
 - Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDDAY). Compared vs 2026-10-09 morning (reduce 81,612 not fired; add 83,177 fired on 11:00Z 1H close 83,241 but faded). OKX via Chrome in-page fetch (fresh).
 - Mark 82,733.3; range, conf 5.0, 28/48/24. Decision: spot_buy 12 USDT (`midday ADD · mark 82733.3 · equity 178.49 · savings 0.42 · net 178.91`). QQQ/VOO/JPXN live Oct 9 prints; DXY/Brent/US10Y omitted.
 - Files: report, narrative, manifest, calibration, portfolio via ledger (exit 0). No git/publish/email.
+
+## 2026-10-11 endday (19:35 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (ENDDAY). Compared vs 2026-10-11 midday (reduce 83,000 and add 84,200 not fired; midday calibration row backfilled). OKX via Chrome in-page fetch (fresh).
+- Mark 83869.3; range-bull, conf 5.4, 34/46/20. Decision: hold (`endday HOLD · mark 83869.3 · equity 180.69 · savings 0.42 · net 181.11 · round 1 · bankruptcies 0`). Stop 82,300 recommended overnight. QQQ/VOO/JPXN carried (weekend); DXY/Brent/US10Y omitted.
+- Files: report, narrative, manifest, calibration, portfolio via ledger (exit 0). Browser tab closed. No git/publish/email.
