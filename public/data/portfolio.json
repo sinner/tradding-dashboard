@@ -3,19 +3,19 @@
   "baseCurrency": "USDT",
   "initialCapitalUsd": 227.8,
   "startedAt": "2026-07-24T14:30:00-05:00",
-  "updatedAt": "2026-10-12T06:55:00-05:00",
+  "updatedAt": "2026-10-12T12:46:00-05:00",
   "latest": {
-    "ts": "2026-10-12T06:55:00-05:00",
-    "session": "morning",
-    "reportId": "2026-10-12-morning",
-    "markPrice": 83368.6,
-    "action": "HOLD",
+    "ts": "2026-10-12T12:46:00-05:00",
+    "session": "midday",
+    "reportId": "2026-10-12-midday",
+    "markPrice": 82429.1,
+    "action": "REDUCE",
     "autoExits": [],
     "spot": {
-      "btc": 0.00214442,
+      "btc": 0.00160832,
       "avgEntry": 83435.3,
-      "costBasisUsd": 178.92,
-      "valueUsd": 178.78,
+      "costBasisUsd": 134.19,
+      "valueUsd": 132.57,
       "lots": [
         {
           "btc": 0.001,
@@ -41,15 +41,15 @@
       "takeProfit": [],
       "unrealizedPnlUsd": 0.0
     },
-    "cashUsd": 0.82,
-    "realizedPnlUsd": 0.0,
+    "cashUsd": 45.01,
+    "realizedPnlUsd": -0.54,
     "unrealizedPnlUsd": 0.0,
-    "equityUsd": 179.6,
+    "equityUsd": 177.58,
     "savingsUsd": 0.42,
-    "netWorthUsd": 180.02,
+    "netWorthUsd": 178.0,
     "sweptToSavingsUsd": null,
     "consecutiveSkips": 0,
-    "rationale": "Price faded from the 84.35k high back to 83.37k as about 2.1M USD of longs were flushed at 83.3k-83.5k. The wallet holds a spot-only core with 0.82 USDT of cash, so there is nothing to deploy and no leverage edge inside the 83.3k-84.4k range. Keep the spot core; the 83,300 reduce needs a completed 1H close to fire."
+    "rationale": "The 83,300 reduce fired on a completed 1H close at 82,507 and price broke the 4H EMA200. Trim 25% of the spot core to raise cash and cut exposure into a falling EMA cluster. No leverage edge, futures stay flat."
   },
   "history": [
     {
@@ -13611,6 +13611,53 @@
       "sweptToSavingsUsd": null,
       "consecutiveSkips": 0,
       "rationale": "Price faded from the 84.35k high back to 83.37k as about 2.1M USD of longs were flushed at 83.3k-83.5k. The wallet holds a spot-only core with 0.82 USDT of cash, so there is nothing to deploy and no leverage edge inside the 83.3k-84.4k range. Keep the spot core; the 83,300 reduce needs a completed 1H close to fire."
+    },
+    {
+      "ts": "2026-10-12T12:46:00-05:00",
+      "session": "midday",
+      "reportId": "2026-10-12-midday",
+      "markPrice": 82429.1,
+      "action": "REDUCE",
+      "autoExits": [],
+      "spot": {
+        "btc": 0.00160832,
+        "avgEntry": 83435.3,
+        "costBasisUsd": 134.19,
+        "valueUsd": 132.57,
+        "lots": [
+          {
+            "btc": 0.001,
+            "entryPrice": 67500,
+            "costUsd": 67.5
+          },
+          {
+            "btc": 0.001,
+            "entryPrice": 60300,
+            "costUsd": 60.3
+          }
+        ]
+      },
+      "futures": {
+        "side": "flat",
+        "sizeUsd": 0.0,
+        "btc": null,
+        "leverage": 1,
+        "entryPrice": null,
+        "marginUsd": 0.0,
+        "stopPrice": null,
+        "liquidationPrice": null,
+        "takeProfit": [],
+        "unrealizedPnlUsd": 0.0
+      },
+      "cashUsd": 45.01,
+      "realizedPnlUsd": -0.54,
+      "unrealizedPnlUsd": 0.0,
+      "equityUsd": 177.58,
+      "savingsUsd": 0.42,
+      "netWorthUsd": 178.0,
+      "sweptToSavingsUsd": null,
+      "consecutiveSkips": 0,
+      "rationale": "The 83,300 reduce fired on a completed 1H close at 82,507 and price broke the 4H EMA200. Trim 25% of the spot core to raise cash and cut exposure into a falling EMA cluster. No leverage edge, futures stay flat."
     }
   ],
   "scoreboard": [
@@ -13628,17 +13675,17 @@
     {
       "session": "morning",
       "decisions": 74,
-      "attributedPnlUsd": -0.39,
+      "attributedPnlUsd": -2.41,
       "wins": 39,
-      "losses": 34,
+      "losses": 35,
       "note": null,
       "quotaUsd": 7.5,
-      "quotaCoveredUsd": -0.39,
+      "quotaCoveredUsd": -2.41,
       "skips": 0
     },
     {
       "session": "midday",
-      "decisions": 71,
+      "decisions": 72,
       "attributedPnlUsd": 9.08,
       "wins": 28,
       "losses": 42,
@@ -15081,12 +15128,6 @@
   ],
   "messages": [
     {
-      "ts": "2026-10-07T12:25:00-05:00",
-      "from": "morning",
-      "to": "midday",
-      "text": "Reduce level 82,753 is the line: a 1H close below it means stop adding and trim; a held retest of 82.75-83.35k is the next add zone."
-    },
-    {
       "ts": "2026-10-07T12:50:00-05:00",
       "from": "midday",
       "to": "endday",
@@ -15199,6 +15240,12 @@
       "from": "midnight",
       "to": "morning",
       "text": "Spot is nearly fully deployed. Add only on a 1H close above 84,351 or a held dip at 83.7k-83.9k; reduce on a 1H close below 83,300. No futures edge."
+    },
+    {
+      "ts": "2026-10-12T12:46:00-05:00",
+      "from": "midday",
+      "to": "endday",
+      "text": "Spot trimmed by a quarter. Add small only on a 1H close back above 83,300; trim more on a 1H close below 82,277. No futures edge."
     }
   ],
   "status": "active"
