@@ -413,3 +413,8 @@
 - Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (ENDDAY). Compared vs 2026-10-11 midday (reduce 83,000 and add 84,200 not fired; midday calibration row backfilled). OKX via Chrome in-page fetch (fresh).
 - Mark 83869.3; range-bull, conf 5.4, 34/46/20. Decision: hold (`endday HOLD · mark 83869.3 · equity 180.69 · savings 0.42 · net 181.11 · round 1 · bankruptcies 0`). Stop 82,300 recommended overnight. QQQ/VOO/JPXN carried (weekend); DXY/Brent/US10Y omitted.
 - Files: report, narrative, manifest, calibration, portfolio via ledger (exit 0). Browser tab closed. No git/publish/email.
+
+## 2026-10-12 endday (19:40 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (ENDDAY). Compared vs 2026-10-12 midday (second reduce 82,277 fired; 83,300 add not fired; midday calibration row backfilled). OKX via Chrome in-page fetch (fresh).
+- Mark 81349.2; bearish, conf 5.8, 18/36/46. Decision: spot_sell 25% (`endday REDUCE · mark 81349.2 · equity 175.85 · savings 0.42 · net 176.27 · round 1 · bankruptcies 0`). Stop 80,100 recommended overnight. QQQ/VOO final closes, JPXN carried; DXY/Brent/US10Y omitted.
+- Files: report, narrative, manifest, calibration, portfolio via ledger (exit 0). Browser tab closed. No git/publish/email.
