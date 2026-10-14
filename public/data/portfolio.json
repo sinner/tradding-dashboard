@@ -3,19 +3,19 @@
   "baseCurrency": "USDT",
   "initialCapitalUsd": 227.8,
   "startedAt": "2026-07-24T14:30:00-05:00",
-  "updatedAt": "2026-10-14T06:55:00-05:00",
+  "updatedAt": "2026-10-14T12:44:00-05:00",
   "latest": {
-    "ts": "2026-10-14T06:55:00-05:00",
-    "session": "morning",
-    "reportId": "2026-10-14-morning",
-    "markPrice": 83452.0,
-    "action": "ADD",
+    "ts": "2026-10-14T12:44:00-05:00",
+    "session": "midday",
+    "reportId": "2026-10-14-midday",
+    "markPrice": 81734.5,
+    "action": "REDUCE",
     "autoExits": [],
     "spot": {
-      "btc": 0.00192432,
+      "btc": 0.00096216,
       "avgEntry": 83447.69,
-      "costBasisUsd": 160.58,
-      "valueUsd": 160.59,
+      "costBasisUsd": 80.29,
+      "valueUsd": 78.64,
       "lots": [
         {
           "btc": 0.001,
@@ -41,15 +41,15 @@
       "takeProfit": [],
       "unrealizedPnlUsd": 0.0
     },
-    "cashUsd": 17.78,
-    "realizedPnlUsd": 0.0,
+    "cashUsd": 96.42,
+    "realizedPnlUsd": -1.65,
     "unrealizedPnlUsd": 0.0,
-    "equityUsd": 178.37,
+    "equityUsd": 175.06,
     "savingsUsd": 0.42,
-    "netWorthUsd": 178.79,
+    "netWorthUsd": 175.48,
     "sweptToSavingsUsd": null,
     "consecutiveSkips": 0,
-    "rationale": "Range with a mild bullish lean. The overnight flush liquidated longs at 83.0k and the low held, and neither midnight trigger fired. No leverage edge under 83.96k resistance, so a small 10 USDT spot DCA tranche near the defended shelf keeps the wallet positioned."
+    "rationale": "The morning reduce rule fired: 1H closes at 82,739 and 82,332 lost the 83,000 floor and price hit 81,594. Every 1H and 4H EMA is lost and OI rose into the drop. Selling half the spot follows the stated rule and keeps cash for a better level. No leverage edge while an oversold bounce is possible."
   },
   "history": [
     {
@@ -13987,6 +13987,53 @@
       "sweptToSavingsUsd": null,
       "consecutiveSkips": 0,
       "rationale": "Range with a mild bullish lean. The overnight flush liquidated longs at 83.0k and the low held, and neither midnight trigger fired. No leverage edge under 83.96k resistance, so a small 10 USDT spot DCA tranche near the defended shelf keeps the wallet positioned."
+    },
+    {
+      "ts": "2026-10-14T12:44:00-05:00",
+      "session": "midday",
+      "reportId": "2026-10-14-midday",
+      "markPrice": 81734.5,
+      "action": "REDUCE",
+      "autoExits": [],
+      "spot": {
+        "btc": 0.00096216,
+        "avgEntry": 83447.69,
+        "costBasisUsd": 80.29,
+        "valueUsd": 78.64,
+        "lots": [
+          {
+            "btc": 0.001,
+            "entryPrice": 67500,
+            "costUsd": 67.5
+          },
+          {
+            "btc": 0.001,
+            "entryPrice": 60300,
+            "costUsd": 60.3
+          }
+        ]
+      },
+      "futures": {
+        "side": "flat",
+        "sizeUsd": 0.0,
+        "btc": null,
+        "leverage": 1,
+        "entryPrice": null,
+        "marginUsd": 0.0,
+        "stopPrice": null,
+        "liquidationPrice": null,
+        "takeProfit": [],
+        "unrealizedPnlUsd": 0.0
+      },
+      "cashUsd": 96.42,
+      "realizedPnlUsd": -1.65,
+      "unrealizedPnlUsd": 0.0,
+      "equityUsd": 175.06,
+      "savingsUsd": 0.42,
+      "netWorthUsd": 175.48,
+      "sweptToSavingsUsd": null,
+      "consecutiveSkips": 0,
+      "rationale": "The morning reduce rule fired: 1H closes at 82,739 and 82,332 lost the 83,000 floor and price hit 81,594. Every 1H and 4H EMA is lost and OI rose into the drop. Selling half the spot follows the stated rule and keeps cash for a better level. No leverage edge while an oversold bounce is possible."
     }
   ],
   "scoreboard": [
@@ -14004,17 +14051,17 @@
     {
       "session": "morning",
       "decisions": 76,
-      "attributedPnlUsd": -2.7,
+      "attributedPnlUsd": -6.01,
       "wins": 39,
-      "losses": 36,
+      "losses": 37,
       "note": null,
       "quotaUsd": 7.5,
-      "quotaCoveredUsd": -2.7,
+      "quotaCoveredUsd": -6.01,
       "skips": 0
     },
     {
       "session": "midday",
-      "decisions": 73,
+      "decisions": 74,
       "attributedPnlUsd": 7.81,
       "wins": 29,
       "losses": 43,
@@ -15453,15 +15500,15 @@
       "session": "endday",
       "pattern": "Waiting for the stated add confirmation",
       "insight": "Midday's plan said add only on a 1H close above 81,631; it printed 81,760 and the small add followed the rule rather than the bounce."
+    },
+    {
+      "ts": "2026-10-14T12:44:00-05:00",
+      "session": "midday",
+      "pattern": "Small add before the stated confirmation, then the reduce rule fires",
+      "insight": "The morning 10 USDT add at 83,452 lost about 2% when 83,000 failed. The reduce rule worked; the add had no confirmation. Keep tranches small until the add level prints."
     }
   ],
   "messages": [
-    {
-      "ts": "2026-10-09T06:58:00-05:00",
-      "from": "morning",
-      "to": "midday",
-      "text": "Add the next tranche only on a completed 1H close above 83,177; reduce on a 1H close below 81,612. 4H EMA200 82,098 is the line in the sand."
-    },
     {
       "ts": "2026-10-09T12:50:00-05:00",
       "from": "midday",
@@ -15575,6 +15622,12 @@
       "from": "morning",
       "to": "midday",
       "text": "Spot now includes two small tranches. Add on a 1H close above 83,960; reduce on a 1H close below 83,000. No futures edge."
+    },
+    {
+      "ts": "2026-10-14T12:44:00-05:00",
+      "from": "midday",
+      "to": "endday",
+      "text": "Sold half the spot after the 83,000 floor failed. Short or cut the rest on a 1H close below 81,590; re-add only on a 1H close back above 83,000. No futures edge yet."
     }
   ],
   "status": "active"
