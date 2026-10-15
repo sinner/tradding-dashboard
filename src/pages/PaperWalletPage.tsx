@@ -43,11 +43,11 @@ export function PaperWalletPage(): React.ReactNode {
       {hasData ? (
         <>
           <HandoffNotes portfolio={p!} />
-          <div className="grid gap-4 md:grid-cols-2">
+          <RecentSnapshots portfolio={p!} />
+          <div className="space-y-4">
             <HallOfShame portfolio={p!} />
             <LearnedPatterns portfolio={p!} />
           </div>
-          <RecentSnapshots portfolio={p!} />
         </>
       ) : null}
     </div>

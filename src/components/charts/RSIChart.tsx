@@ -124,7 +124,7 @@ export function RSIChart({
               </text>
             </g>
           ))}
-          <path d={geom.path} fill="none" stroke="#A78BFA" strokeWidth={1.5} />
+          <path d={geom.path} fill="none" stroke="#A78BFA" strokeWidth={1} />
           {divergences && divergenceActive ? (
             <DivergenceOverlay
               hits={divergences.map((h) => ({

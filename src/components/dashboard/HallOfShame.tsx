@@ -1,21 +1,30 @@
 import { Skull } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-import { Title } from '@/components/ui/Title';
+import { CollapsibleCard } from '@/components/ui/CollapsibleCard';
 import { formatSession, formatPrice } from '@/lib/formatters';
 import type { Portfolio } from '@/lib/types';
 
 /** Bankruptcy log — each fall from grace with its lesson. */
 export function HallOfShame({ portfolio }: { portfolio: Portfolio }): React.ReactNode {
   const entries = [...(portfolio.hallOfShame ?? [])].reverse();
+  const bankruptcies = portfolio.bankruptcies ?? 0;
   return (
-    <Card className="space-y-3">
-      <Title level={4} className="flex items-center gap-2">
-        <Skull className="size-4 text-bear" aria-hidden />
-        Hall of shame
-        <span className="text-xs font-normal text-ink-muted">
-          {portfolio.bankruptcies ?? 0} bankruptcies
+    <CollapsibleCard
+      defaultOpen={false}
+      summary={
+        bankruptcies === 0
+          ? 'no falls yet'
+          : `${bankruptcies} bankruptc${bankruptcies === 1 ? 'y' : 'ies'}`
+      }
+      title={
+        <span className="flex items-center gap-2 text-base font-medium text-ink">
+          <Skull className="size-4 text-bear" aria-hidden />
+          Hall of shame
+          <span className="text-xs font-normal text-ink-muted">
+            {bankruptcies} bankruptcies
+          </span>
         </span>
-      </Title>
+      }
+    >
       {entries.length === 0 ? (
         <p className="text-sm text-ink-muted">
           No bankruptcies yet — nobody has fallen from grace. 🎉
@@ -36,6 +45,6 @@ export function HallOfShame({ portfolio }: { portfolio: Portfolio }): React.Reac
           ))}
         </ul>
       )}
-    </Card>
+    </CollapsibleCard>
   );
 }

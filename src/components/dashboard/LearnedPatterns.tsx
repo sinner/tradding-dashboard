@@ -1,6 +1,5 @@
 import { Lightbulb } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-import { Title } from '@/components/ui/Title';
+import { CollapsibleCard } from '@/components/ui/CollapsibleCard';
 import { formatSession } from '@/lib/formatters';
 import type { Portfolio } from '@/lib/types';
 
@@ -8,11 +7,20 @@ import type { Portfolio } from '@/lib/types';
 export function LearnedPatterns({ portfolio }: { portfolio: Portfolio }): React.ReactNode {
   const lessons = [...(portfolio.lessons ?? [])].reverse();
   return (
-    <Card className="space-y-3">
-      <Title level={4} className="flex items-center gap-2">
-        <Lightbulb className="size-4 text-amber-300" aria-hidden />
-        Learned patterns
-      </Title>
+    <CollapsibleCard
+      defaultOpen={false}
+      summary={
+        lessons.length === 0
+          ? 'empty'
+          : `${lessons.length} lesson${lessons.length === 1 ? '' : 's'}`
+      }
+      title={
+        <span className="flex items-center gap-2 text-base font-medium text-ink">
+          <Lightbulb className="size-4 text-amber-300" aria-hidden />
+          Learned patterns
+        </span>
+      }
+    >
       {lessons.length === 0 ? (
         <p className="text-sm text-ink-muted">No lessons recorded yet.</p>
       ) : (
@@ -30,6 +38,6 @@ export function LearnedPatterns({ portfolio }: { portfolio: Portfolio }): React.
           ))}
         </ul>
       )}
-    </Card>
+    </CollapsibleCard>
   );
 }

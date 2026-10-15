@@ -108,8 +108,8 @@ export function MACDChart({
               />
             ) : null,
           )}
-          <path d={geom.macdPath} fill="none" stroke="#A78BFA" strokeWidth={1.5} />
-          <path d={geom.signalPath} fill="none" stroke="#E879F9" strokeWidth={1.25} />
+          <path d={geom.macdPath} fill="none" stroke="#A78BFA" strokeWidth={1} />
+          <path d={geom.signalPath} fill="none" stroke="#E879F9" strokeWidth={0.85} />
         </g>
       </svg>
       <p className="mt-1 text-[11px] text-ink-muted">

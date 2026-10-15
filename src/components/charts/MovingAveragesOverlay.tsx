@@ -54,7 +54,7 @@ export function MovingAveragesOverlay({
   return (
     <g aria-hidden>
       {paths.map((p) => (
-        <path key={p.key} d={p.d} fill="none" stroke={p.color} strokeWidth={1.25} opacity={0.9} />
+        <path key={p.key} d={p.d} fill="none" stroke={p.color} strokeWidth={0.85} opacity={0.85} />
       ))}
       {crosses.map((c) => {
         const g = candles[c.index];

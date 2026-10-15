@@ -52,9 +52,9 @@ export function DivergenceOverlay({
               x2={b.x}
               y2={b.y}
               stroke={color}
-              strokeWidth={1.5}
+              strokeWidth={1}
               strokeDasharray="4 3"
-              opacity={0.85}
+              opacity={0.8}
             />
             <circle cx={a.x} cy={a.y} r={3.5} fill={color} />
             <circle cx={b.x} cy={b.y} r={3.5} fill={color} />
