@@ -6,7 +6,24 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  {
+    ignores: [
+      'dist',
+      '.agent-scratch/**',
+      '.tmp*/**',
+      '.val*/**',
+      'val*.tmp.*',
+      'val_*.tmp.*',
+      'valcheck*',
+      'zcheck*.ts',
+      'zfinal.ts',
+      '_val.*',
+      '__val.*',
+      'v3.tmp.*',
+      'validate-tmp.*',
+    ],
+  },
+
   {
     extends: [
       js.configs.recommended,

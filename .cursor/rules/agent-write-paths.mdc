@@ -1,0 +1,24 @@
+---
+description: Hard allowlist for agent/bot file writes — keep scratch out of the repo root
+alwaysApply: true
+---
+
+# Write paths
+
+Durable writes **only** under:
+
+- `public/data/YYYY/MM/*.json` (reports)
+- `public/data/reports/YYYY/MM/*.md`
+- `public/data/manifest.json`
+- `public/data/calibration.json`
+- `public/data/portfolio.json` (via `scripts/paper_wallet.py` only)
+- `public/data/RUN_HISTORY.md`
+
+Ephemeral scratch **only** under:
+
+- `/tmp/tradding-dashboard/<session>-YYYYMMDD>/` (preferred)
+- `.agent-scratch/<session>-YYYYMMDD>/` (fallback if `/tmp` blocked)
+
+**Never** create files at the repo root (`val*`, `zcheck*`, `.intent_*`, `.gen_*`, `.tmp_*`, `_val*`, etc.) or under `scripts/_build_*` / `scripts/_intent_*`.
+
+Prefer `npx tsx -e` / `node -e` for one-off validation so no harness file is left behind. Full detail: `CLAUDE.md`.

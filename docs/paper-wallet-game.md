@@ -132,8 +132,10 @@ The split that keeps token cost and errors low:
   does arithmetic or hand-edits the wallet.
 
 **Interface**
-- The session writes a small **intent JSON** and runs:
+- The session writes a small **intent JSON** under
+  `/tmp/tradding-dashboard/<session>-YYYYMMDD>/` (see root `CLAUDE.md`) and runs:
   `python3 scripts/paper_wallet.py --portfolio public/data/portfolio.json --intent <tmp>`
+
 - Intent fields: `session, reportId, ts, today, markPrice, sessionHigh, sessionLow,
   isSeeder, decision{…}, message?, lesson?, rationale?`.
 - Exit codes: `0` ok · `2` rule violation (e.g. a 3rd skip → pick a real stance and

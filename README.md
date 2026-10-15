@@ -26,6 +26,10 @@ pnpm format:check
 
 Editor: `.vscode/settings.json` enables **format on save** via the Prettier extension (`esbenp.prettier-vscode`).
 
+## Agents / scheduled bots
+
+Write-path allowlist is in [`CLAUDE.md`](./CLAUDE.md) (also [`AGENTS.md`](./AGENTS.md)). Durable output stays under `public/data/`; scratch goes to `/tmp/tradding-dashboard/…` only.
+
 ## Data
 
 Drop report files under `public/data/`:

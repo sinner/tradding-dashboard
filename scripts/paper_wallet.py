@@ -6,7 +6,9 @@ The LLM (a scheduled session) only decides the trade and verifies the price;
 THIS script does all the math and writes public/data/portfolio.json.
 
 USAGE
-  python3 scripts/paper_wallet.py --portfolio public/data/portfolio.json --intent /tmp/intent.json
+  python3 scripts/paper_wallet.py --portfolio public/data/portfolio.json \
+    --intent /tmp/tradding-dashboard/morning-20261014/intent.json
+
   python3 scripts/paper_wallet.py --portfolio public/data/portfolio.json --print      # show state, no changes
 
 INTENT JSON (produced by the session)
