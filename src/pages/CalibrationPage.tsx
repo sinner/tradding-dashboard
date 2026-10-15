@@ -13,12 +13,36 @@ import {
   type TriState,
 } from '@/lib/calibrationMetrics';
 import { formatDate } from '@/lib/formatters';
-import { cn } from '@/lib/cn';
 
-function TriIcon({ v }: { v: TriState }): React.ReactNode {
-  if (v === true) return <Check className="size-5" aria-label="yes" />;
-  if (v === false) return <X className="size-5" aria-label="no" />;
-  return <Minus className="size-4 text-ink-muted" aria-label="n/a" />;
+function TriCell({
+  v,
+  pendingLabel = 'Pending',
+}: {
+  v: TriState;
+  pendingLabel?: string;
+}): React.ReactNode {
+  if (v === true) {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-bull">
+        <Check className="size-4 shrink-0" aria-hidden />
+        Yes
+      </span>
+    );
+  }
+  if (v === false) {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-bear">
+        <X className="size-4 shrink-0" aria-hidden />
+        No
+      </span>
+    );
+  }
+  return (
+    <span className="inline-flex items-center gap-1.5 text-ink-muted">
+      <Minus className="size-3.5 shrink-0" aria-hidden />
+      {pendingLabel}
+    </span>
+  );
 }
 
 function MetricCard({
@@ -57,6 +81,8 @@ export function CalibrationPage(): React.ReactNode {
   const { data, isLoading, error } = useCalibration();
 
   const scores = useMemo(() => (data ?? []).map(scoreSession), [data]);
+  // Metrics need chronological order; table shows newest first.
+  const newestFirst = useMemo(() => [...scores].reverse(), [scores]);
   const bias = rollingRate(scores, 'bias');
   const levels = rollingRate(scores, 'levels');
   const acting = rollingRate(scores, 'acting');
@@ -67,8 +93,8 @@ export function CalibrationPage(): React.ReactNode {
       <div>
         <Title level={1}>Calibration</Title>
         <p className="mt-1 text-sm text-ink-muted">
-          Should you trust today&apos;s call? Track record of bias, levels, and whether
-          acting beat holding.
+          Scoreboard of past sessions (newest first). Cards = last 5 scored sessions.
+          Newest rows often say Pending until the next report fills them in.
         </p>
       </div>
 
@@ -116,7 +142,7 @@ export function CalibrationPage(): React.ReactNode {
         />
       </div>
 
-      {scores.length > 0 ? (
+      {newestFirst.length > 0 ? (
         <Card className="overflow-x-auto">
           <table className="w-full min-w-[720px] text-left text-sm">
             <thead className="text-xs uppercase text-ink-muted">
@@ -125,70 +151,59 @@ export function CalibrationPage(): React.ReactNode {
                 <th className="pb-2 pr-3">Session</th>
                 <th className="pb-2 pr-3">Bias</th>
                 <th className="pb-2 pr-3">
-                  <span title="Did bias match the next-report move?">Bias correct?</span>
-                </th>
-                <th className="pb-2 pr-3">
-                  <span title="Did price trade at/through the REDUCE level?">
-                    Reduce level hit?
+                  <span title="Did the bias match the price move to the next report?">
+                    Bias OK?
                   </span>
                 </th>
                 <th className="pb-2 pr-3">
-                  <span title="Did price trade at/through the ADD level?">
-                    Add level hit?
+                  <span title="Did price reach the Reduce-if level before the next report?">
+                    Reduce hit?
+                  </span>
+                </th>
+                <th className="pb-2 pr-3">
+                  <span title="Did price reach the Add-if level before the next report?">
+                    Add hit?
                   </span>
                 </th>
                 <th className="pb-2">
-                  <span title="Would acting have beaten holding?">Acting beat holding?</span>
+                  <span title="Did acting on the call beat doing nothing?">Acting helped?</span>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {scores.map((s) => (
+              {newestFirst.map((s) => (
                 <tr
                   key={`${s.row.date}-${s.row.session}`}
                   className="border-t border-stroke"
                 >
-                  <td className="py-2 pr-3">{formatDate(s.row.date)}</td>
+                  <td className="py-2 pr-3 tabular-nums">{formatDate(s.row.date)}</td>
                   <td className="py-2 pr-3 capitalize">{s.row.session}</td>
                   <td className="py-2 pr-3 capitalize">{s.row.bias}</td>
-                  <td
-                    className={cn(
-                      'py-2 pr-3 font-mono',
-                      s.biasCorrect === true && 'text-bull',
-                      s.biasCorrect === false && 'text-bear',
-                    )}
-                  >
-                    <TriIcon v={s.biasCorrect} />
+                  <td className="py-2 pr-3 text-xs">
+                    <TriCell v={s.biasCorrect} />
                   </td>
-                  <td
-                    className={cn(
-                      'py-2 pr-3 font-mono',
-                      s.reduceHit === true && 'text-bull',
-                      s.reduceHit === false && 'text-bear',
-                    )}
-                  >
-                    <TriIcon v={s.reduceHit} />
+                  <td className="py-2 pr-3 text-xs">
+                    <TriCell
+                      v={s.reduceHit}
+                      pendingLabel={s.row.reduce_level == null ? 'None' : 'Pending'}
+                    />
                   </td>
-                  <td
-                    className={cn(
-                      'py-2 pr-3 font-mono',
-                      s.addHit === true && 'text-bull',
-                      s.addHit === false && 'text-bear',
-                    )}
-                  >
-                    <TriIcon v={s.addHit} />
+                  <td className="py-2 pr-3 text-xs">
+                    <TriCell
+                      v={s.addHit}
+                      pendingLabel={s.row.add_level == null ? 'None' : 'Pending'}
+                    />
                   </td>
-                  <td
-                    className={cn(
-                      'py-2 font-mono',
-                      s.actingHelped === true && 'text-bull',
-                      s.actingHelped === false && 'text-bear',
-                    )}
-                  >
+                  <td className="py-2 text-xs">
                     {s.actingHelped === null ? (
-                      <span className="text-xs text-ink-muted">{s.actingLabel}</span>
+                      <span
+                        className="line-clamp-2 max-w-[28rem] text-ink-muted"
+                        title={s.actingLabel}
+                      >
+                        {s.actingLabel === '—' ? 'Pending' : s.actingLabel}
+                      </span>
                     ) : (
-                      <TriIcon v={s.actingHelped} />
+                      <TriCell v={s.actingHelped} />
                     )}
                   </td>
                 </tr>
