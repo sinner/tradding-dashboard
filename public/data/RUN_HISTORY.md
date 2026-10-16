@@ -433,3 +433,8 @@
 - Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (MIDDAY). Compared vs 2026-10-14 morning: 83,000 reduce FIRED (1H close 82,739), add 83,960 not; morning calibration row backfilled. OKX via Chrome in-page fetch (fresh; the WebFetch candle feed was ~2.7h stale and discarded).
 - Mark 81734.5; bearish, conf 5.5, 18/30/52. Decision: spot_sell 50% (`midday REDUCE · mark 81734.5 · equity 175.06 · savings 0.42 · net 175.48 · round 1 · bankruptcies 0`). QQQ/VOO Oct 13 closes, JPXN Oct 12 close; DXY/Brent/US10Y and ETF flows carried/omitted.
 - Files: report, narrative, manifest, calibration, portfolio via ledger. No git/publish/email.
+
+## 2026-10-15 endday (19:40 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (END-DAY). Compared vs 2026-10-15 midday: neither 80,228 reduce nor 83,000 add fired; midday calibration row backfilled (price_next_report 82378.6). OKX via Chrome in-page fetch (fresh; WebFetch ticker was ~1h45m stale and discarded).
+- Mark 82378.6; range, conf 5.0, 30/45/25. Decision: hold (`endday HOLD · mark 82378.6 · equity 174.91 · savings 0.42 · net 175.33 · round 1 · bankruptcies 0`). Overnight stop recommended at 80,200. QQQ/VOO Oct 15 closes; JPXN last verified print is intraday (close unavailable); DXY/Brent/US10Y omitted; ETF flows Oct 14 (Oct 15 not reported).
+- Files: report, narrative, manifest, calibration, portfolio via ledger. No git/publish/email. Chrome tab group closed.
