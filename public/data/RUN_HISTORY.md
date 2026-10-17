@@ -438,3 +438,8 @@
 - Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (END-DAY). Compared vs 2026-10-15 midday: neither 80,228 reduce nor 83,000 add fired; midday calibration row backfilled (price_next_report 82378.6). OKX via Chrome in-page fetch (fresh; WebFetch ticker was ~1h45m stale and discarded).
 - Mark 82378.6; range, conf 5.0, 30/45/25. Decision: hold (`endday HOLD · mark 82378.6 · equity 174.91 · savings 0.42 · net 175.33 · round 1 · bankruptcies 0`). Overnight stop recommended at 80,200. QQQ/VOO Oct 15 closes; JPXN last verified print is intraday (close unavailable); DXY/Brent/US10Y omitted; ETF flows Oct 14 (Oct 15 not reported).
 - Files: report, narrative, manifest, calibration, portfolio via ledger. No git/publish/email. Chrome tab group closed.
+
+## 2026-10-16 endday (19:40 COT)
+- Ran `/crypto-levels` + `/crypto-technical-analyst` BTC-USDT, then `btc-paper-desk` (END-DAY). Compared vs 2026-10-16 midday: neither 80,800 reduce nor 82,950 add fired; midday calibration row backfilled (price_next_report 81616.6). OKX via Chrome in-page fetch (fresh).
+- Mark 81616.6; range-bear, conf 4.5, 25/48/27. Decision: hold (`endday HOLD · mark 81616.6 · equity 173.83 · savings 0.42 · net 174.25 · round 1 · bankruptcies 0`). Overnight stop recommended at 80,200. QQQ/VOO/JPXN Oct 16 closes; Brent daily change unavailable.
+- Files: report, narrative, manifest, calibration, portfolio via ledger. No git/publish/email. Chrome tab closed.
