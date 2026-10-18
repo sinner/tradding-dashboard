@@ -1,0 +1,343 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-10-18-midday",
+  "date": "2026-10-18",
+  "session": "midday",
+  "generatedAt": "2026-10-18T12:42:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": "bearish",
+  "confidence": 4.4,
+  "priceSnapshot": {
+    "value": 81150.0,
+    "currency": "USD",
+    "changePct": -0.19,
+    "source": "OKX BTC-USDT spot ticker (live), fetched in-page via Claude in Chrome",
+    "asOf": "2026-10-18T12:41:42-05:00",
+    "note": "24h change vs open24h 81,305.8. 24h range 80,813.6-82,291.1. Since the morning report (07:00 COT) 15m bars ranged 81,007.7-82,128.0.",
+    "sessionRange": {
+      "low": 81007.7,
+      "high": 82128.0
+    }
+  },
+  "decisionBox": {
+    "position": "HOLD",
+    "reduceIf": {
+      "price": 80800.0,
+      "confirmation": "Two consecutive 1H closes below 80,800 (the 80,813.6 flush low is the line, only 0.4% away); next 80,228 and the 79,775 Oct 14 low."
+    },
+    "addIf": {
+      "price": 82950.0,
+      "confirmation": "A completed 1H close above 82,950 (4H 100 EMA 82,772). Small dip adds near 81k are allowed in spot only."
+    },
+    "invalidatesAt": 80200.0,
+    "stopOrder": {
+      "recommended": true,
+      "price": 80200.0
+    },
+    "changed": "Neither trigger fired. Price faded 0.4% from the 82.1k morning high to 81,150, flushing about $0.4M of long liquidations at 81.0-81.1k. The 80,800 reduce line was not touched (low 81,007.7). 1H RSI is 36.5 and the 4H stays under its 50/100/200 EMAs, so the tilt turns mildly bearish."
+  },
+  "probabilities": {
+    "bullish": 24.0,
+    "range": 50.0,
+    "bearish": 26.0
+  },
+  "levels": {
+    "support": [
+      81007.7,
+      80813.6,
+      80228.2,
+      79775.0
+    ],
+    "resistance": [
+      81666.8,
+      82128.0,
+      82291.1,
+      82950.0
+    ],
+    "liquidation": [
+      {
+        "price": 81100,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": true,
+        "note": "Largest bucket in the newest 100 OKX realized fills (newest about 2h old): about $0.24M of LONG liquidations at 81.1k (assuming 0.01 BTC per contract)."
+      },
+      {
+        "price": 81000,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "About $0.18M of LONG liquidations at 81.0k in the same fills. Shorts are negligible."
+      },
+      {
+        "price": 77900,
+        "side": "below",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Estimated leverage-bracket level (25x long liquidation = price x 0.96) - not exchange resting-order data."
+      },
+      {
+        "price": 84400,
+        "side": "above",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Estimated leverage-bracket level (25x short liquidation = price x 1.04) - not exchange resting-order data."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": null,
+      "nearestBelow": 81000.0,
+      "pull": "down",
+      "source": "OKX Public API v5 (ticker, candles, open-interest, funding-rate, long-short-account-ratio, liquidation-orders), fetched in-page via Claude in Chrome.",
+      "asOf": "2026-10-18T12:42:00-05:00",
+      "note": "Realized-fill sample only (100 fills, newest about 2h old, freshness OK), almost all longs. Not a resting-order map. Longs still crowded (1H ratio 1.89) keeps the pull down. Direct curl was blocked; browser fetch used; CoinGlass heatmap fallback not needed."
+    }
+  },
+  "atr": {
+    "value": 2075.3,
+    "period": 14,
+    "pct": 2.56,
+    "source": "Computed from OKX BTC-USDT daily candles (Wilder 14)",
+    "asOf": "2026-10-18T12:42:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": 36.5,
+      "macd": {
+        "line": -183.9,
+        "signal": -187.5,
+        "hist": 3.6
+      },
+      "emas": {
+        "ema20": 81326.9,
+        "ema50": 81538.3,
+        "ema100": 81606.0,
+        "ema200": 81666.8
+      },
+      "structure": "Price 81,175 under all four EMAs (81.3k-81.7k), which are stacked bearishly; RSI 36.5, MACD below zero with a flat histogram.",
+      "bias": "bearish",
+      "source": "Computed from OKX BTC-USDT candles (latest bar included)",
+      "asOf": "2026-10-18T12:42:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 36.5,
+      "macd": {
+        "line": -69.8,
+        "signal": 17.1,
+        "hist": -86.9
+      },
+      "emas": {
+        "ema20": 81593.3,
+        "ema50": 81672.2,
+        "ema100": 81889.4,
+        "ema200": 82358.1
+      },
+      "structure": "Price 81,078 under all four EMAs; RSI 36.5, MACD crossed below signal with a negative histogram.",
+      "bias": "bearish",
+      "source": "Computed from OKX BTC-USDT candles (latest bar included)",
+      "asOf": "2026-10-18T12:42:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": 42.2,
+      "macd": {
+        "line": -253.5,
+        "signal": -284.9,
+        "hist": 31.4
+      },
+      "emas": {
+        "ema20": 81827.7,
+        "ema50": 82365.0,
+        "ema100": 82772.4,
+        "ema200": 82407.9
+      },
+      "structure": "Price 81,175 under all four EMAs (81.8k-82.8k); RSI 42, MACD below zero but histogram improving.",
+      "bias": "range-bearish",
+      "source": "Computed from OKX BTC-USDT candles (latest bar included)",
+      "asOf": "2026-10-18T12:42:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": 45.3,
+      "macd": {
+        "line": 1.5,
+        "signal": 519.8,
+        "hist": -518.3
+      },
+      "emas": {
+        "ema20": 82545.0,
+        "ema50": 80483.2,
+        "ema100": 76952.0,
+        "ema200": 75153.6
+      },
+      "structure": "Price under the 20 EMA (82,545), above the 50/100/200; MACD histogram deeply negative, RSI 45.",
+      "bias": "range-bearish",
+      "source": "Computed from OKX BTC-USDT candles (latest bar included)",
+      "asOf": "2026-10-18T12:42:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "add",
+      "entry": null,
+      "stop": 80200.0,
+      "tp": [
+        82950.0
+      ],
+      "rr": null,
+      "confidence": 4.2,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "HOLD",
+      "entry": null,
+      "stop": 80200.0,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.4,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "Range with a soft tilt; 81.0k held, 81.67k capped",
+    "longAbove": 81667.0,
+    "shortBelow": 81000.0,
+    "invalidates": 80200.0,
+    "note": "Scalp only the edges \u2014 live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 109.86,
+      "changePct": null
+    },
+    "dxy": {
+      "value": 101.779
+    },
+    "us10y": {
+      "value": 5.081
+    },
+    "etfFlows": {
+      "streakDays": -1,
+      "note": "Spot BTC ETFs per Farside (carried, weekend has no prints): Oct 16 -82.4M after Oct 15 +5.1M, Oct 14 -261.4M, Oct 13 +175.7M. One outflow day."
+    },
+    "liquidations": {
+      "longsUsd": 415000.0,
+      "shortsUsd": 1000.0,
+      "skew": 1.89,
+      "traders": null,
+      "openInterestUsd": 2507055441.9,
+      "note": "OKX last-100-realized-fills sample (newest about 2h old): about $0.42M LONG vs under $0.01M SHORT, mostly at 81.0-81.1k (0.01 BTC per contract assumed). OI $2.507B (up from $2.487B this morning); funding +0.0057% (longs pay slightly); 1H long/short account ratio 1.89 (longs crowded). Brent, DXY and US10Y are Friday Oct 16 closes carried (market closed). Fear and Greed 53 (Neutral) per alternative.me."
+    },
+    "fearGreed": 53,
+    "earnings": []
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 709.8,
+        "changePct": -2.5,
+        "bias": "weak, at the month's low",
+        "note": "Oct 16 final close (Friday), market closed Sunday; no new session until Monday. dcaSignal carried from last close.",
+        "dcaSignal": {
+          "percentileInMonth": 0,
+          "pctVs20dAvg": -4.41,
+          "pctFromHigh": -6.56,
+          "rsi14": 34.2,
+          "zone": "very-cheap",
+          "note": "Computed from trailing daily closes \u2014 relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ \u2014 StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 701.61,
+        "changePct": -1.1,
+        "bias": "weak, near the month's low",
+        "note": "Oct 16 final close (Friday), market closed Sunday; no new session until Monday. dcaSignal carried from last close.",
+        "dcaSignal": {
+          "percentileInMonth": 5,
+          "pctVs20dAvg": -1.09,
+          "pctFromHigh": -2.04,
+          "rsi14": 42.8,
+          "zone": "very-cheap",
+          "note": "Computed from trailing daily closes \u2014 relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO \u2014 StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 102.35,
+        "changePct": -0.35,
+        "bias": "soft, near the month's low",
+        "note": "Oct 16 final close (Friday), market closed Sunday; no new session until Monday. dcaSignal carried from last close.",
+        "dcaSignal": {
+          "percentileInMonth": 6,
+          "pctVs20dAvg": -1.32,
+          "pctFromHigh": -2.8,
+          "rsi14": 42.8,
+          "zone": "very-cheap",
+          "note": "Computed from trailing daily closes \u2014 relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "JPXN \u2014 StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": null,
+    "rollingRecord": "Morning reduce (80,800) and add (82,950) triggers both unfired through midday.",
+    "note": "The 80,813.6 low held and the 82,128 high stayed under 82,950. Morning was HOLD at 82,022; price is now 81,150 (-1.1%), so holding without adding was neutral to slightly costly."
+  },
+  "sources": [
+    {
+      "title": "OKX Public API v5",
+      "url": "https://www.okx.com/docs-v5/en/"
+    },
+    {
+      "title": "alternative.me Fear & Greed",
+      "url": "https://alternative.me/crypto/fear-and-greed-index/"
+    },
+    {
+      "title": "QQQ \u2014 StockAnalysis (Oct 16 close carried)",
+      "url": "https://stockanalysis.com/etf/qqq/"
+    },
+    {
+      "title": "VOO \u2014 StockAnalysis (Oct 16 close carried)",
+      "url": "https://stockanalysis.com/etf/voo/"
+    },
+    {
+      "title": "JPXN \u2014 StockAnalysis (Oct 16 close carried)",
+      "url": "https://stockanalysis.com/etf/jpxn/"
+    }
+  ]
+}
