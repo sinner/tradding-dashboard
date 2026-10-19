@@ -453,3 +453,8 @@
 - Ran crypto-levels + crypto-technical-analyst BTC-USDT, then btc-paper-desk (MORNING). Compared vs 2026-10-18 midnight: neither 80,800 reduce nor 82,950 add fired; midnight calibration row backfilled (price_next_report 82022.3). OKX via Chrome in-page fetch (fresh).
 - Mark 82022.3; range, conf 4.5, 27/48/25. Decision: hold (`morning HOLD · mark 82022.3 · equity 174.51 · savings 0.42 · net 174.93 · round 1 · bankruptcies 0`). QQQ/VOO/JPXN Oct 16 closes carried (weekend); Brent/DXY/US10Y and ETF flows carried.
 - Files: report, narrative, manifest, calibration, portfolio via ledger. No git/publish/email. Chrome tab closed.
+
+## 2026-10-19 morning (08:17 COT)
+- Ran crypto-levels + crypto-technical-analyst BTC-USDT, then btc-paper-desk (MORNING). No midnight report today; compared vs 2026-10-18 endday: neither 80,800 reduce nor 82,950 add fired; endday calibration row backfilled (price_next_report 82536.9). OKX via Chrome in-page fetch (WebFetch OKX was ~14h stale and discarded); CoinGlass heatmap read via browser; indicators computed from Coinbase candles.
+- Mark 82536.9; range/bull tilt, conf 4.8, 33/46/21. Decision: spot_buy 8 USDT (`morning ADD · mark 82536.9 · equity 175.47 · savings 0.42 · net 175.89 · round 1 · bankruptcies 0`). QQQ/VOO/JPXN Oct 16 closes carried (US market not yet open); Brent/DXY/US10Y and ETF flows carried.
+- Files: report, narrative, manifest, calibration, portfolio via ledger. No git/publish/email. Chrome tab closed.
