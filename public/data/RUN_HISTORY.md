@@ -463,3 +463,5 @@
 - Ran crypto-levels + crypto-technical-analyst BTC-USDT, then btc-paper-desk (MIDNIGHT seeder). Compared vs 2026-10-22 endday; calibration row for endday backfilled (price_next_report 81787).
 - Mark 81787.0; range/bear tilt, conf 4.9, 28/42/30. Decision: spot_buy 15 USDT (`midnight ADD · mark 81787.0 · equity 174.31 · savings 0.56 · net 174.87 · round 1 · bankruptcies 0`). OKX via Chrome in-page fetch (sandbox curl blocked). QQQ/VOO/JPXN Oct 22 closes carried (market not open); DXY carried; ETF, Brent, US10Y refreshed.
 - Files: report, narrative, manifest, calibration, portfolio via ledger. No git/publish/email.
+
+- 2026-10-23 12:45 COT midday: range-bear, conf 4.6, 27/44/29. Reduce 81,212 wicked (low 81,084.7) but unconfirmed; add 82,640 not hit. Ledger: spot DCA 8 USDT at 81,585 (`midday ADD · mark 81585.0 · equity 173.94 · savings 0.56 · net 174.5`). OKX via Chrome in-page fetch (curl blocked). QQQ/VOO/JPXN intraday prints; DXY carried; Oct 23 ETF flow not yet published. No git/publish/email.
