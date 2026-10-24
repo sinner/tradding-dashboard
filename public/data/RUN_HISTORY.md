@@ -465,3 +465,6 @@
 - Files: report, narrative, manifest, calibration, portfolio via ledger. No git/publish/email.
 
 - 2026-10-23 12:45 COT midday: range-bear, conf 4.6, 27/44/29. Reduce 81,212 wicked (low 81,084.7) but unconfirmed; add 82,640 not hit. Ledger: spot DCA 8 USDT at 81,585 (`midday ADD · mark 81585.0 · equity 173.94 · savings 0.56 · net 174.5`). OKX via Chrome in-page fetch (curl blocked). QQQ/VOO/JPXN intraday prints; DXY carried; Oct 23 ETF flow not yet published. No git/publish/email.
+
+## 2026-10-23 endday (19:34 COT)
+- Report, manifest, calibration (midnight/morning/midday price_next_report backfilled), narrative written. Bias bearish 5.4; ledger: spot_sell 25% (REDUCE), equity 172.24. OKX fresh, no heatmap fallback.
