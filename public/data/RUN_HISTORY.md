@@ -468,3 +468,6 @@
 
 ## 2026-10-23 endday (19:34 COT)
 - Report, manifest, calibration (midnight/morning/midday price_next_report backfilled), narrative written. Bias bearish 5.4; ledger: spot_sell 25% (REDUCE), equity 172.24. OKX fresh, no heatmap fallback.
+
+## 2026-10-24 midnight (02:08 COT)
+- Report, manifest, calibration (endday price_next_report backfilled 80881.5), narrative written. Range/bear tilt, conf 5.0, 24/42/34. Ledger: spot_buy 10 USDT (`midnight ADD · mark 80881.5 · equity 172.46 · savings 0.56 · net 173.02 · round 1 · bankruptcies 0`). OKX via Chrome in-page fetch (curl blocked); QQQ/VOO/JPXN/DXY carried (weekend). No git/publish/email. Chrome tab closed.
