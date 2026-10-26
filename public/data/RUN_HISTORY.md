@@ -471,3 +471,9 @@
 
 ## 2026-10-24 midnight (02:08 COT)
 - Report, manifest, calibration (endday price_next_report backfilled 80881.5), narrative written. Range/bear tilt, conf 5.0, 24/42/34. Ledger: spot_buy 10 USDT (`midnight ADD · mark 80881.5 · equity 172.46 · savings 0.56 · net 173.02 · round 1 · bankruptcies 0`). OKX via Chrome in-page fetch (curl blocked); QQQ/VOO/JPXN/DXY carried (weekend). No git/publish/email. Chrome tab closed.
+
+## 2026-10-26 endday (10:08 COT, delayed run; scheduled 2026-10-25 19:31 COT)
+- Report, manifest (new 10-26 day, 4 keys), calibration (10-24 endday/midday price_next_report backfilled), narrative written. No Oct 25/26 sessions existed; compared vs 10-24 endday. Range/bear tilt, conf 4.8, 25/45/30. Ledger: spot_sell 10% (`endday REDUCE · mark 80430.5 · equity 171.82 · savings 0.56 · net 172.38 · round 1 · bankruptcies 0`). OKX fresh via Chrome in-page fetch; QQQ/VOO/JPXN live intraday prints. No git/publish/email.
+
+## 2026-10-26 midday (12:46 COT)
+- Report, manifest (midday pointer + latest), calibration row, narrative written. Compared vs 10-26 morning. Range/bear tilt, conf 4.6, 26/45/29. Ledger: spot_buy 8 USDT (`midday ADD · mark 80251.1 · equity 171.55 · savings 0.56 · net 172.11 · round 1 · bankruptcies 0`). OKX fresh via Chrome in-page fetch (proxy copies stale); Brent/US10Y/DXY from CNBC; QQQ/VOO/JPXN live intraday. No git/publish/email. Chrome tabs closed.
