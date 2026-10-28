@@ -480,3 +480,6 @@
 
 ## 2026-10-27 midnight (02:08 COT)
 - Report, manifest (new 10-27 day, 4 keys), calibration (10-26 endday price_next_report backfilled 79653.6), narrative written. Range/bear tilt, conf 4.6, 24/42/34. Ledger: spot_buy 5 USDT (`midnight ADD · mark 79653.6 · equity 170.61 · savings 0.56 · net 171.17 · round 1 · bankruptcies 0`). OKX fresh via Chrome in-page fetch; QQQ/VOO/JPXN Oct 26 closes (pre-market). No git/publish/email. Chrome tab closed.
+
+## 2026-10-28 midnight (02:12 COT)
+- Report, manifest (new 10-28 day, 4 keys), calibration (10-27 endday price_next_report backfilled 80919.8), narrative written. Range, no tilt, conf 4.7, 30/46/24. Ledger: spot_buy 2.5 USDT (`midnight ADD · mark 80919.8 · equity 172.73 · savings 0.56 · net 173.29 · round 1 · bankruptcies 0`). OKX fresh via Chrome in-page fetch; macro from CNBC quote API; QQQ/VOO/JPXN Oct 27 closes carried (pre-market). No git/publish/email. Chrome tab closed.
