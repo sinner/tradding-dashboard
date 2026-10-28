@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "2026-10-28-morning",
+  "date": "2026-10-28",
+  "session": "morning",
+  "generatedAt": "2026-10-28T11:20:00-05:00",
+  "asset": "BTC-USDT",
+  "overallBias": "range",
+  "biasTilt": null,
+  "confidence": 4.2,
+  "priceSnapshot": {
+    "value": 80583.4,
+    "currency": "USD",
+    "changePct": 0.15,
+    "source": "OKX BTC-USDT ticker (fresh, ts 16:19 UTC); session range from Kraken XBT/USDT 1H",
+    "asOf": "2026-10-28T11:20:00-05:00",
+    "note": "24h open 80,464.9; 24h range 80,420-81,820. Since the 02:12 COT midnight print (80,919.8) BTC poked 81,786 around 03:00-04:00 COT (cleared the 81,298 add line), then faded back through the 80.9k entry to 80.58k. Run fired late (11:20 COT).",
+    "sessionRange": {
+      "low": 80432.8,
+      "high": 81786.5
+    }
+  },
+  "decisionBox": {
+    "position": "HOLD",
+    "reduceIf": {
+      "price": 79838.5,
+      "confirmation": "A 1H close below 79,838 (the 79.6-79.8k overnight pivot) puts the 79,500 resting stop in play."
+    },
+    "addIf": {
+      "price": 81298.4,
+      "confirmation": "A fresh 1H close back above 81,298 after the failed 81.79k poke; the 81,850 high is the trend gate."
+    },
+    "invalidatesAt": 81850.0,
+    "stopOrder": {
+      "recommended": true,
+      "price": 79500.0
+    },
+    "changed": "Midnight's add line (81,298) fired: BTC printed 81,786 then gave it all back and is now under the 80.92k midnight entry. No reduce line hit (low 80,433). Cash is held for the 30 USDT due Nov 1, so no new buy; HOLD."
+  },
+  "probabilities": {
+    "bullish": 29.0,
+    "range": 47.0,
+    "bearish": 24.0
+  },
+  "levels": {
+    "support": [
+      80432.8,
+      79838.5,
+      79500.0
+    ],
+    "resistance": [
+      80812.8,
+      81324.2,
+      81786.5,
+      81850.0
+    ],
+    "liquidation": [
+      {
+        "price": 77366,
+        "side": "below",
+        "intensity": "medium",
+        "magnet": false,
+        "note": "Estimated leverage-bracket magnet (25x long liquidation from spot) - not exchange resting-order data. OKX liquidation feed was stale this run and the browser fallback was unavailable."
+      },
+      {
+        "price": 83800,
+        "side": "above",
+        "intensity": "low",
+        "magnet": false,
+        "note": "Estimated leverage-bracket magnet (25x short liquidation from spot) - not exchange resting-order data."
+      }
+    ],
+    "liquidityMagnet": {
+      "nearestAbove": 83800.0,
+      "nearestBelow": 77366.0,
+      "pull": "balanced",
+      "source": "Leverage-bracket estimate only (OKX derivatives feeds stale; Chrome extension offline)",
+      "asOf": "2026-10-28T11:20:00-05:00",
+      "note": "No fresh measured liquidation, OI, funding or ratio data this run; both markers are estimates."
+    }
+  },
+  "atr": {
+    "value": null,
+    "period": 14,
+    "pct": null,
+    "source": "Not computed: no fresh 4H candle history available this run",
+    "asOf": "2026-10-28T11:20:00-05:00"
+  },
+  "timeframes": [
+    {
+      "tf": "15m",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Not computed: fresh 15m history unavailable this run",
+      "bias": "unverified",
+      "source": "n/a",
+      "asOf": "2026-10-28T11:20:00-05:00"
+    },
+    {
+      "tf": "1h",
+      "rsi": 43.86,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": 80812.8,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Price 80,552 under the 1H EMA20 (80,813) after rejecting 81.79k; RSI 44 and turned down. EMA50/100/200 and MACD need more history than the 40 fresh hourly bars available.",
+      "bias": "neutral, fading",
+      "source": "Kraken XBT/USDT 1H closes (40 bars), computed: RSI Wilder, EMA20 seeded on SMA20; last bar unconfirmed",
+      "asOf": "2026-10-28T11:20:00-05:00"
+    },
+    {
+      "tf": "4h",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Not computed: fresh 4H history unavailable (feeds returned stale caches)",
+      "bias": "unverified",
+      "source": "n/a",
+      "asOf": "2026-10-28T11:20:00-05:00"
+    },
+    {
+      "tf": "daily",
+      "rsi": null,
+      "macd": {
+        "line": null,
+        "signal": null,
+        "hist": null
+      },
+      "emas": {
+        "ema20": null,
+        "ema50": null,
+        "ema100": null,
+        "ema200": null
+      },
+      "structure": "Not recomputed this run. Midnight read: price under daily EMA20 (81,723), above EMA50 (80,780). Price now sits on EMA50.",
+      "bias": "range, bearish tilt (from midnight, not refreshed)",
+      "source": "n/a",
+      "asOf": "2026-10-28T11:20:00-05:00"
+    }
+  ],
+  "operations": [
+    {
+      "horizon": "swing",
+      "market": "futures",
+      "action": "wait",
+      "entry": null,
+      "stop": null,
+      "tp": [],
+      "rr": null,
+      "confidence": 3.0,
+      "hold": "days-weeks"
+    },
+    {
+      "horizon": "position",
+      "market": "spot",
+      "action": "hold",
+      "entry": null,
+      "stop": 79500.0,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.0,
+      "hold": "weeks-months"
+    },
+    {
+      "horizon": "spot_core",
+      "market": "spot",
+      "action": "HOLD",
+      "entry": null,
+      "stop": 79500.0,
+      "tp": [],
+      "rr": null,
+      "confidence": 4.0,
+      "hold": "long-term"
+    }
+  ],
+  "scalpContext": {
+    "intradayBias": "Range 80.4-81.3k with a fade bias after the failed 81.79k poke; lose 80,433 and 79.8k is next",
+    "longAbove": 81298.4,
+    "shortBelow": 80432.8,
+    "invalidates": 81850.0,
+    "note": "Scalp only the edges - live signals come from the chart, not this report."
+  },
+  "macro": {
+    "brent": {
+      "value": 115.9,
+      "changePct": 1.77
+    },
+    "dxy": {
+      "value": 102.479
+    },
+    "us10y": {
+      "value": 5.028
+    },
+    "etfFlows": {
+      "streakDays": 1,
+      "note": "Carried from midnight (Farside Oct 26 +110.3M); Farside unreachable this run, Oct 27 flow unverified."
+    },
+    "liquidations": {
+      "longsUsd": null,
+      "shortsUsd": null,
+      "skew": null,
+      "traders": null,
+      "openInterestUsd": null,
+      "note": "OKX open interest, funding, long/short ratio and liquidation feeds returned stale cached data (timestamps 26-38h old) and the browser fallback was unavailable, so all positioning fields are null. Fear and Greed 48 (alternative.me, down from 50). Brent/DXY/US10Y carried from the midnight CNBC print (~03:05 EDT), not refreshed."
+    },
+    "fearGreed": 48,
+    "earnings": []
+  },
+  "nonCrypto": {
+    "indices": [
+      {
+        "ticker": "QQQ",
+        "price": 715.56,
+        "changePct": 0.47,
+        "bias": "modest rebound, still about 5% under the month high",
+        "note": "Oct 27 final close (StockAnalysis); US session Oct 28 in progress, no close yet. dcaSignal carried from last close.",
+        "dcaSignal": {
+          "percentileInMonth": 20,
+          "pctVs20dAvg": -2.37,
+          "pctFromHigh": -5.81,
+          "rsi14": 42.5,
+          "zone": "cheap",
+          "note": "Computed from trailing daily closes \u2014 relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "QQQ \u2014 StockAnalysis",
+          "url": "https://stockanalysis.com/etf/qqq/"
+        }
+      },
+      {
+        "ticker": "VOO",
+        "price": 707.52,
+        "changePct": 0.58,
+        "bias": "steady rebound near the middle of its month range",
+        "note": "Oct 27 close carried from endday verification (StockAnalysis history lagged at Oct 26 703.41 again this run); Oct 28 session in progress. dcaSignal carried from last close.",
+        "dcaSignal": {
+          "percentileInMonth": 51,
+          "pctVs20dAvg": -0.09,
+          "pctFromHigh": -1.21,
+          "rsi14": 54.2,
+          "zone": "fair",
+          "note": "Computed from trailing daily closes \u2014 relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "VOO \u2014 StockAnalysis",
+          "url": "https://stockanalysis.com/etf/voo/"
+        }
+      },
+      {
+        "ticker": "JPXN",
+        "price": 102.89,
+        "changePct": 0.68,
+        "bias": "gentle bounce in the lower part of its range",
+        "note": "Oct 27 close carried from endday verification (StockAnalysis history lags at Oct 16 this run); Oct 28 session in progress. dcaSignal carried from last close.",
+        "dcaSignal": {
+          "percentileInMonth": 28,
+          "pctVs20dAvg": -0.56,
+          "pctFromHigh": -2.29,
+          "rsi14": 53.2,
+          "zone": "cheap",
+          "note": "Computed from trailing daily closes \u2014 relative-cheapness for monthly DCA, not a bottom call."
+        },
+        "source": {
+          "title": "JPXN \u2014 StockAnalysis",
+          "url": "https://stockanalysis.com/etf/jpxn/"
+        }
+      }
+    ],
+    "stockWatchlist": []
+  },
+  "divergences": [],
+  "calibration": {
+    "priorReduceFired": false,
+    "actingHelped": false,
+    "rollingRecord": "Midnight add (81,298) fired intraday but reversed; the 2.5 USDT tranche at 80.92k is under water.",
+    "note": "Compared against today's midnight report."
+  },
+  "sources": [
+    {
+      "title": "OKX BTC-USDT ticker",
+      "url": "https://www.okx.com/docs-v5/en/"
+    },
+    {
+      "title": "Kraken XBT/USDT OHLC",
+      "url": "https://docs.kraken.com/api/docs/rest-api/get-ohlc-data"
+    },
+    {
+      "title": "Coinbase BTC-USD candles",
+      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getproductcandles"
+    },
+    {
+      "title": "StockAnalysis ETF history",
+      "url": "https://stockanalysis.com/etf/qqq/history/"
+    },
+    {
+      "title": "Alternative.me Fear and Greed Index",
+      "url": "https://alternative.me/crypto/fear-and-greed-index/"
+    },
+    {
+      "title": "Note: OKX derivatives feeds stale and Chrome extension offline this run; positioning fields are null",
+      "url": "https://www.okx.com/docs-v5/en/"
+    }
+  ]
+}
