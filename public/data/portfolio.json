@@ -3,19 +3,19 @@
   "baseCurrency": "USDT",
   "initialCapitalUsd": 227.8,
   "startedAt": "2026-07-24T14:30:00-05:00",
-  "updatedAt": "2026-11-10T06:55:00-05:00",
+  "updatedAt": "2026-11-10T12:50:00-05:00",
   "latest": {
-    "ts": "2026-11-10T06:55:00-05:00",
-    "session": "morning",
-    "reportId": "2026-11-10-morning",
-    "markPrice": 74435.0,
-    "action": "HOLD",
+    "ts": "2026-11-10T12:50:00-05:00",
+    "session": "midday",
+    "reportId": "2026-11-10-midday",
+    "markPrice": 72922.9,
+    "action": "REDUCE",
     "autoExits": [],
     "spot": {
-      "btc": 0.00170636,
+      "btc": 0.00127977,
       "avgEntry": 77252.16,
-      "costBasisUsd": 131.82,
-      "valueUsd": 127.01,
+      "costBasisUsd": 98.86,
+      "valueUsd": 93.32,
       "lots": [
         {
           "btc": 0.001,
@@ -41,15 +41,15 @@
       "takeProfit": [],
       "unrealizedPnlUsd": 0.0
     },
-    "cashUsd": 6.23,
-    "realizedPnlUsd": 0.0,
+    "cashUsd": 37.33,
+    "realizedPnlUsd": -1.85,
     "unrealizedPnlUsd": 0.0,
-    "equityUsd": 133.24,
+    "equityUsd": 130.65,
     "savingsUsd": 0.1,
-    "netWorthUsd": 133.34,
+    "netWorthUsd": 130.75,
     "sweptToSavingsUsd": null,
     "consecutiveSkips": 0,
-    "rationale": "The wallet already deployed a 15 USDT spot tranche at midnight and holds about 6 USDT of cash as a buffer. Price sits mid-range under the 4H EMA20 with crowded longs (2.97), so there is no leverage edge and no reason to add before a 4H reclaim of 75.34k. Hold the book and mark it."
+    "rationale": "The morning reduce rule fired: BTC closed 1H bars under 73,500 and broke the 72,850 invalidation to 72,727. Longs are still crowded (L/S 3.16) with the next liquidation bracket near 71.4k, so trim 25% of spot to raise cash; no futures, since shorting an oversold flush has no edge."
   },
   "history": [
     {
@@ -17994,6 +17994,53 @@
       "sweptToSavingsUsd": null,
       "consecutiveSkips": 0,
       "rationale": "The wallet already deployed a 15 USDT spot tranche at midnight and holds about 6 USDT of cash as a buffer. Price sits mid-range under the 4H EMA20 with crowded longs (2.97), so there is no leverage edge and no reason to add before a 4H reclaim of 75.34k. Hold the book and mark it."
+    },
+    {
+      "ts": "2026-11-10T12:50:00-05:00",
+      "session": "midday",
+      "reportId": "2026-11-10-midday",
+      "markPrice": 72922.9,
+      "action": "REDUCE",
+      "autoExits": [],
+      "spot": {
+        "btc": 0.00127977,
+        "avgEntry": 77252.16,
+        "costBasisUsd": 98.86,
+        "valueUsd": 93.32,
+        "lots": [
+          {
+            "btc": 0.001,
+            "entryPrice": 67500,
+            "costUsd": 67.5
+          },
+          {
+            "btc": 0.001,
+            "entryPrice": 60300,
+            "costUsd": 60.3
+          }
+        ]
+      },
+      "futures": {
+        "side": "flat",
+        "sizeUsd": 0.0,
+        "btc": null,
+        "leverage": 1,
+        "entryPrice": null,
+        "marginUsd": 0.0,
+        "stopPrice": null,
+        "liquidationPrice": null,
+        "takeProfit": [],
+        "unrealizedPnlUsd": 0.0
+      },
+      "cashUsd": 37.33,
+      "realizedPnlUsd": -1.85,
+      "unrealizedPnlUsd": 0.0,
+      "equityUsd": 130.65,
+      "savingsUsd": 0.1,
+      "netWorthUsd": 130.75,
+      "sweptToSavingsUsd": null,
+      "consecutiveSkips": 0,
+      "rationale": "The morning reduce rule fired: BTC closed 1H bars under 73,500 and broke the 72,850 invalidation to 72,727. Longs are still crowded (L/S 3.16) with the next liquidation bracket near 71.4k, so trim 25% of spot to raise cash; no futures, since shorting an oversold flush has no edge."
     }
   ],
   "scoreboard": [
@@ -18011,17 +18058,17 @@
     {
       "session": "morning",
       "decisions": 97,
-      "attributedPnlUsd": -0.68,
+      "attributedPnlUsd": -3.26,
       "wins": 50,
-      "losses": 46,
+      "losses": 47,
       "note": null,
       "quotaUsd": 7.5,
-      "quotaCoveredUsd": -0.68,
+      "quotaCoveredUsd": -3.26,
       "skips": 0
     },
     {
       "session": "midday",
-      "decisions": 94,
+      "decisions": 95,
       "attributedPnlUsd": 1.76,
       "wins": 38,
       "losses": 55,
@@ -19694,15 +19741,15 @@
       "session": "endday",
       "pattern": "Pinned under daily EMA200 with crowded longs into the overnight gap",
       "insight": "When price stalls under the daily EMA200 with a 3:1 long ratio and bleeding ETFs, trimming into resistance and holding cash costs little and gives dry powder for the 74.4k liquidation pocket."
+    },
+    {
+      "ts": "2026-11-10T12:50:00-05:00",
+      "session": "midday",
+      "pattern": "Range-bear lean with crowded longs (L/S ~3) under the 4H EMA20",
+      "insight": "When longs stay crowded under resistance, the break of the range low tends to come the same day; pre-set reduce levels pay off."
     }
   ],
   "messages": [
-    {
-      "ts": "2026-11-02T16:12:00-05:00",
-      "from": "endday",
-      "to": "midnight",
-      "text": "Trimmed 25% of spot at 76,928 to rebuild cash after the Nov 1 charge. Futures flat. Reduce the rest on a 1H close under 76,063 (daily EMA200); re-add only on a 1H close above 78,867."
-    },
     {
       "ts": "2026-11-02T16:10:00-05:00",
       "from": "morning",
@@ -19816,6 +19863,12 @@
       "from": "morning",
       "to": "midday",
       "text": "Reduce under 73,500 (1H close); add only on a 4H close above 75,342. About 6 USDT cash left."
+    },
+    {
+      "ts": "2026-11-10T12:50:00-05:00",
+      "from": "midday",
+      "to": "endday",
+      "text": "Trimmed 25% spot at ~72.9k after 73.5k broke. Trim again on a 1H close under 72,000; rebuild only on a 4H close above 74,200. Consider an overnight stop near 71,800."
     }
   ],
   "status": "active"
