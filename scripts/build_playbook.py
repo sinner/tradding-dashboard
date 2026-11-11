@@ -8,6 +8,7 @@ USAGE: python3 scripts/build_playbook.py [--data public/data] [--out docs/playbo
 import argparse, collections, json, os, sys, datetime as dt
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import paper_wallet as pw
+import compact_calibration as cc
 
 RULES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs", "playbook-rules.md")
 
@@ -21,7 +22,7 @@ def pct(a, b): return f"{(100*a/b):.0f}%" if b else "n/a"
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--data", default="public/data"); ap.add_argument("--out", default="docs/playbook.md")
     a = ap.parse_args()
-    cal = json.load(open(os.path.join(a.data, "calibration.json")))
+    cal = cc.load_all_rows(a.data)  # recent rows + monthly archives (all-time stats)
     port = json.load(open(os.path.join(a.data, "portfolio.json")))
     rows = [r for r in cal if r.get("price_at_report") and r.get("price_next_report")]
     def call(r): return max((("bull", r["bull_pct"]), ("range", r["range_pct"]), ("bear", r["bear_pct"])), key=lambda t: t[1])[0]

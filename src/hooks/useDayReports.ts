@@ -62,6 +62,24 @@ export function useCalibration() {
   });
 }
 
+export function useCalibrationMonthly() {
+  return useQuery({
+    queryKey: QUERY_KEYS.calibrationMonthly,
+    queryFn: () => reportService.fetchCalibrationMonthly(),
+    staleTime: 60 * 60_000,
+  });
+}
+
+/** Archived rows for one month; only fetched when `enabled` (row expanded). */
+export function useCalibrationArchive(month: string, enabled: boolean) {
+  return useQuery({
+    queryKey: QUERY_KEYS.calibrationArchive(month),
+    queryFn: () => reportService.fetchCalibrationArchive(month),
+    staleTime: Infinity,
+    enabled,
+  });
+}
+
 export function usePortfolio(options: DayReportOptions = {}) {
   return useQuery({
     queryKey: QUERY_KEYS.portfolio,

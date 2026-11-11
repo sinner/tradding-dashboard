@@ -363,6 +363,35 @@ export const CalibrationRowSchema = z
 export const CalibrationSchema = z.array(CalibrationRowSchema);
 export type CalibrationRow = z.infer<typeof CalibrationRowSchema>;
 
+const HitCountSchema = z.object({ hits: z.number(), known: z.number() });
+export type HitCount = z.infer<typeof HitCountSchema>;
+
+/** One month × one session, summarised by scripts/compact_calibration.py (counts, so they add up). */
+export const CalibrationMonthSchema = z
+  .object({
+    month: z.string(),
+    session: SessionSchema,
+    rows: z.number(),
+    bias: HitCountSchema,
+    levels: HitCountSchema,
+    acting: HitCountSchema,
+    calls: z.record(z.string(), z.number()).optional(),
+    avgAbsMovePct: NullableNumber.optional(),
+    archive: z.string().nullable().optional(),
+  })
+  .passthrough();
+export type CalibrationMonth = z.infer<typeof CalibrationMonthSchema>;
+
+export const CalibrationMonthlySchema = z
+  .object({
+    schemaVersion: z.string(),
+    keepMonths: z.number().optional(),
+    updatedAt: z.string().optional(),
+    months: z.array(CalibrationMonthSchema).default([]),
+  })
+  .passthrough();
+export type CalibrationMonthly = z.infer<typeof CalibrationMonthlySchema>;
+
 export type Candle = {
   openTime: number;
   open: number;

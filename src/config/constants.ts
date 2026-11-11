@@ -29,6 +29,8 @@ export const QUERY_KEYS = {
   report: (id: string) => ['report', id] as const,
   reportPath: (path: string) => ['reportPath', path] as const,
   calibration: ['calibration'] as const,
+  calibrationMonthly: ['calibrationMonthly'] as const,
+  calibrationArchive: (month: string) => ['calibrationArchive', month] as const,
   portfolio: ['portfolio'] as const,
   livePrice: (symbol: string) => ['livePrice', symbol] as const,
   klines: (symbol: string, interval: string, start?: number, end?: number) =>

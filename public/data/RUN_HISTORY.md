@@ -532,3 +532,12 @@
 - PriceLevelsChart: support, resistance, add and reduce OFF by default (liquidation heatmap ON); toggle from the legend. REDUCE/ADD first-touch markers and touch-alert snackbars now follow the visible kinds. tsc -b OK, eslint 0 errors. No git.
 
 ## 2026-11-11 15:05 COT — UI: price chart defaults to log scale (user request). tsc -b OK. No git.
+
+## 2026-11-11 15:20 COT — maintenance: weekly repo cleanup (user request)
+- New scripts/clean_repo.py (explicit junk patterns, 24 h age guard, dry-run by default, falls back to moving into _to_delete/ when deletion is not permitted) + scripts/test_clean_repo.py (PASS). Dry-run today: 494 junk files, 102.2 MB (452 in public/data, mostly *.pre-* JSON backups).
+- "Weekly lessons digest" task now runs the cleanup after the digest (step 7) and asks once for delete permission if needed. No git.
+
+## 2026-11-11 15:45 COT — maintenance: monthly calibration compaction (user request)
+- New scripts/compact_calibration.py (+ test, PASS): keeps current + previous month in calibration.json; older months -> public/data/calibration/archive/<YYYY-MM>.json + per-session COUNT summaries in public/data/calibration-monthly.json (scoring mirrors src/lib/calibrationMetrics.ts). Applied: 385 -> 134 rows (300 KB -> 50 KB); Jul/Aug/Sep archived (251 rows, integrity-checked); playbook all-time stats unchanged.
+- build_playbook.py reads recent + archived rows. UI: CalibrationPage groups the 2 full months by month header and adds "Earlier months" (totals + per-agent chips, archived rows loaded on demand); types/service/hooks for monthly + archive. tsc -b OK, eslint 0 errors, zod VALID.
+- "Weekly lessons digest" task runs the compaction (step 5). No git.
