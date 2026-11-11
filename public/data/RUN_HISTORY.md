@@ -492,3 +492,6 @@
 
 ## 2026-11-02 midday (16:12 COT)
 - Report, manifest (new 11-02 day, 4 keys), calibration row, narrative written. Range/bear tilt, conf 5.0, 21/40/39. Compared vs Oct 30 endday (weekend, Nov 2 midnight/morning did not run). Ledger: hold (`midday HOLD · mark 76929.5 · equity 135.75 · savings 0.0 · net 135.75 · round 1 · bankruptcies 0`); Nov 1 cost of living charged. OKX fresh via Chrome in-page fetch; CoinGlass heatmap read; QQQ/VOO/JPXN Nov 2 closes. No git/publish/email. Chrome tab closed.
+
+## 2026-11-11 midday (12:50 COT)
+- Report, manifest (midday pointer + latest), calibration (midday row; morning price_next_report backfilled 74585.8), narrative written. Compared vs 11-11 morning. Range/bull tilt, conf 5.2, 32/46/22. Ledger: fut_close of remaining short hedge (`midday CLOSE · mark 74585.8 · equity 132.63 · savings 0.1 · net 132.73 · round 1 · bankruptcies 0`). OKX fresh via Chrome in-page fetch (shorts $1.5M liquidated at 74.75k); macro from CNBC quote API; QQQ/VOO/JPXN Nov 11 intraday (StockAnalysis). tsc -b clean (pnpm not on PATH in VM). No git/publish/email. Chrome tab closed.
