@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { LivePriceStrip } from '@/components/dashboard/LivePriceStrip';
+import { SessionAccordion } from '@/components/dashboard/SessionAccordion';
 import { SessionColumn } from '@/components/dashboard/SessionColumn';
 import { PriceLevelsChart } from '@/components/charts/PriceLevelsChart';
 import { Card } from '@/components/ui/Card';
@@ -11,6 +12,7 @@ import { useLivePrice } from '@/hooks/useLivePrice';
 import { useManifest } from '@/hooks/useManifest';
 import { formatDate } from '@/lib/formatters';
 import type { Report } from '@/lib/types';
+import { SESSION_ORDER } from '@/lib/sessions';
 
 export function DayPage(): React.ReactNode {
   const { date = '' } = useParams();
@@ -77,14 +79,12 @@ export function DayPage(): React.ReactNode {
       {isLoading ? (
         <p className="text-sm text-ink-muted">Loading reports…</p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <SessionColumn
-            session="morning"
-            report={reports.morning}
-            livePrice={live.data}
-          />
-          <SessionColumn session="midday" report={reports.midday} livePrice={live.data} />
-          <SessionColumn session="endday" report={reports.endday} livePrice={live.data} />
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {SESSION_ORDER.map((sKey) => (
+            <SessionAccordion key={sKey} session={sKey} report={reports[sKey]}>
+              <SessionColumn session={sKey} report={reports[sKey]} livePrice={live.data} />
+            </SessionAccordion>
+          ))}
         </div>
       )}
     </div>

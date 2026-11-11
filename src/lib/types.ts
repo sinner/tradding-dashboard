@@ -562,6 +562,22 @@ export const PortfolioLessonSchema = z
   .passthrough();
 export type PortfolioLesson = z.infer<typeof PortfolioLessonSchema>;
 
+/** Weekly summary of the week's lessons (written by the Sunday digest task). */
+export const LessonDigestSchema = z
+  .object({
+    weekStart: z.string(),
+    weekEnd: z.string(),
+    title: z.string().nullable().optional(),
+    patterns: z
+      .array(z.object({ pattern: z.string(), insight: z.string() }).passthrough())
+      .default([]),
+    stats: z.record(z.string(), z.union([z.number(), z.string(), z.null()])).nullable().optional(),
+    lessonCount: z.number().nullable().optional(),
+    createdAt: z.string().nullable().optional(),
+  })
+  .passthrough();
+export type LessonDigest = z.infer<typeof LessonDigestSchema>;
+
 /** A note one session leaves for the next (the relay hand-off channel). */
 export const PortfolioMessageSchema = z
   .object({
@@ -598,7 +614,9 @@ export const PortfolioSchema = z
     hallOfShame: z.array(HallOfShameEntrySchema).default([]),
     /** Accumulated learned patterns that improve the next round. */
     lessons: z.array(PortfolioLessonSchema).default([]),
-    /** Hand-off notes between sessions (keep the most recent ~20). */
+    /** Weekly lesson digests, oldest first (raw lessons of digested weeks are archived). */
+    lessonDigests: z.array(LessonDigestSchema).default([]),
+    /** Hand-off notes between sessions (the ledger keeps the last 5 days). */
     messages: z.array(PortfolioMessageSchema).default([]),
   })
   .passthrough();

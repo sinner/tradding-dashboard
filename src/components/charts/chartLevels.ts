@@ -1,10 +1,23 @@
 export type LevelKind = 'support' | 'resistance' | 'reduce' | 'add' | 'liquidation';
 
+export type LiquidationIntensity = 'low' | 'medium' | 'high' | 'extreme';
+
 export type LevelLine = {
   price: number;
   label: string;
   kind: LevelKind;
   session: string;
+  /** Liquidation levels only: band strength for the heatmap. */
+  intensity?: LiquidationIntensity | null;
+  magnet?: boolean;
+};
+
+/** Heatmap palette, cold → hot (CoinGlass-style: blue → teal → green → yellow). */
+export const LIQ_HEAT: Record<LiquidationIntensity, { color: string; halfHeight: number; peak: number }> = {
+  low: { color: '#3B82F6', halfHeight: 5, peak: 0.35 },
+  medium: { color: '#14B8A6', halfHeight: 8, peak: 0.5 },
+  high: { color: '#84CC16', halfHeight: 11, peak: 0.65 },
+  extreme: { color: '#FACC15', halfHeight: 15, peak: 0.8 },
 };
 
 export const LEVEL_COLORS: Record<LevelKind, string> = {
@@ -91,7 +104,12 @@ export function collectLevels(
     levels: {
       support: number[];
       resistance: number[];
-      liquidation?: { price: number; note?: string | null }[];
+      liquidation?: {
+        price: number;
+        note?: string | null;
+        intensity?: LiquidationIntensity | null;
+        magnet?: boolean | null;
+      }[];
     };
     decisionBox: {
       reduceIf?: { price: number } | null;
@@ -123,6 +141,8 @@ export function collectLevels(
         label: `${r.session} liquidation${l.note ? ` · ${l.note}` : ''}`,
         kind: 'liquidation',
         session: r.session,
+        intensity: l.intensity ?? 'medium',
+        magnet: Boolean(l.magnet),
       });
     }
     if (r.decisionBox.reduceIf) {

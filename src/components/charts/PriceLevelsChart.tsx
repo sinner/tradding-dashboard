@@ -198,7 +198,7 @@ export function PriceLevelsChart({
         <ChartLevelSnackbar alerts={alerts} onDismiss={dismiss} />
       </div>
       <p className="text-[11px] text-ink-muted">
-        Candles = intraday structure. Dashed lines = report levels. Markers = REDUCE/ADD
+        Candles = intraday structure. Dashed lines = report levels. Glow bands = liquidation heatmap (blue → yellow = low → extreme; solid core = magnet). Markers = REDUCE/ADD
         first touch. Snackbar fires when a live candle touches a level.
       </p>
     </div>

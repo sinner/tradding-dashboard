@@ -120,5 +120,73 @@ check("spot_sell in profit conserves net worth", abs(p["latest"]["netWorthUsd"]-
 check("spot_sell in profit swept to savings", p["savingsUsd"]>sav_before, f"{p['savingsUsd']} vs {sav_before}")
 check("spot flat after full sell", (p["latest"]["spot"]["btc"] or 0)==0, p["latest"]["spot"]["btc"])
 
+# ---- risk rules / spot stop / lessons cap / context (2026-11-11 aggressive mode) ----
+TMP2 = tempfile.mkdtemp(); PORT = os.path.join(TMP2, "portfolio.json")
+run({"session":"midnight","ts":"2026-09-01T02:00:00-05:00","today":"2026-09-01","markPrice":70000,"isSeeder":True,"decision":{"type":"hold"}})
+run({"session":"morning","ts":"2026-09-01T06:50:00-05:00","today":"2026-09-01","markPrice":70000,
+     "decision":{"type":"fut_open","side":"long","sizeUsd":100,"leverage":5,"tp":[72000]}}, expect=2)
+check("fut_open without stop rejected (exit 2)", load()["latest"]["futures"]["side"]=="flat")
+p=run({"session":"morning","ts":"2026-09-01T06:51:00-05:00","today":"2026-09-01","markPrice":70000,
+     "decision":{"type":"fut_open","side":"long","sizeUsd":100,"leverage":5,"stop":69800,"tp":[72000]}}, expect=2)
+check("stop tighter than 0.6% rejected", "minimum" in p.stdout, p.stdout)
+p=run({"session":"morning","ts":"2026-09-01T06:52:00-05:00","today":"2026-09-01","markPrice":70000,
+     "decision":{"type":"fut_open","side":"long","sizeUsd":400,"leverage":5,"stop":69000,"tp":[72000]}}, expect=2)
+check("risk > 3% equity rejected", "risk at stop" in p.stdout, p.stdout)
+run({"session":"morning","ts":"2026-09-01T06:53:00-05:00","today":"2026-09-01","markPrice":70000,
+     "decision":{"type":"fut_open","side":"long","sizeUsd":200,"leverage":5,"stop":69000,"tp":[72000]}})
+f=load()["latest"]["futures"]; check("5x long accepted at 2.86% risk", f["side"]=="long" and f["leverage"]==5 and abs(f["marginUsd"]-40)<0.01, f)
+run({"session":"midday","ts":"2026-09-01T12:40:00-05:00","today":"2026-09-01","markPrice":70500,"sessionLow":69900,"sessionHigh":70600,
+     "decision":{"type":"spot_buy","usd":50},"spotStop":{"price":68500,"fraction":0.5},
+     "lesson":{"pattern":"p","insight":"i"}})
+sp=load()["latest"]["spot"]; check("spot stop rests on the book", sp.get("stopPrice")==68500 and sp.get("stopFraction")==0.5, sp)
+btc0=sp["btc"]
+run({"session":"endday","ts":"2026-09-01T19:30:00-05:00","today":"2026-09-01","markPrice":68700,"sessionLow":68400,"sessionHigh":70500,"decision":{"type":"hold"}})
+p=load(); L=p["latest"]
+check("spot stop fired: half sold, SPOT_STOP logged", abs(L["spot"]["btc"]-btc0/2)<1e-8 and any(a["reason"]=="SPOT_STOP" for a in L["autoExits"]) and "stopPrice" not in L["spot"], L)
+check("futures long stopped at 69000 same window", L["futures"]["side"]=="flat" and L["action"]=="STOPPED_OUT", (L["action"],L["futures"]))
+for i in range(45):
+    run({"session":"midnight","ts":f"2026-09-02T{2+i//60:02d}:{i%60:02d}:00-05:00","today":"2026-09-02","markPrice":68700,"decision":{"type":"hold"},"lesson":{"pattern":f"p{i}","insight":"x"}})
+p=load(); arch=json.load(open(os.path.join(TMP2,"lessons-archive.json")))
+check("lessons capped at 40 + archived", len(p["lessons"])==40 and len(arch)==6 and p["lessons"][-1]["pattern"]=="p44", (len(p["lessons"]),len(arch)))
+c=subprocess.run([sys.executable, SCRIPT, "--portfolio", PORT, "--context"], capture_output=True, text=True)
+ctx=json.loads(c.stdout); check("context is compact and has risk limits", len(c.stdout)<4000 and ctx["riskLimits"]["maxLeverage"]==5 and len(ctx["lessons"])==5, len(c.stdout))
+
+# ---- goals + drawdown brake ----
+TMP3 = tempfile.mkdtemp(); PORT = os.path.join(TMP3, "portfolio.json")
+run({"session":"midnight","ts":"2026-10-02T02:00:00-05:00","today":"2026-10-02","markPrice":70000,"isSeeder":True,"decision":{"type":"hold"}})
+run({"session":"midnight","ts":"2026-10-02T02:05:00-05:00","today":"2026-10-02","markPrice":70000,"decision":{"type":"spot_buy","usd":90}})
+run({"session":"morning","ts":"2026-10-02T06:50:00-05:00","today":"2026-10-02","markPrice":70000,
+     "decision":{"type":"fut_open","side":"short","sizeUsd":2,"leverage":1,"stop":71000,"tp":[68000]}})
+run({"session":"midday","ts":"2026-10-02T12:40:00-05:00","today":"2026-10-02","markPrice":68100,"sessionLow":67900,"sessionHigh":70100,"decision":{"type":"hold"}})
+c=json.loads(subprocess.run([sys.executable, SCRIPT, "--portfolio", PORT, "--context"], capture_output=True, text=True).stdout)
+g=c["goals"]; check("expectancy in R from the TP trade (~+2R)", g["expectancyR"]["trades"]==1 and abs(g["expectancyR"]["value"]-2.0)<0.05, g["expectancyR"])
+check("participation counted", g["participation"]["value"]>0, g["participation"])
+check("brake off near the peak", g["drawdown"]["brakeActive"] is False and c["riskLimits"]["maxRiskUsd"]>2.5, g["drawdown"])
+# crash spot 40% -> net ~ -36% -> brake on, risk cap halves (1.5%)
+run({"session":"endday","ts":"2026-10-02T19:30:00-05:00","today":"2026-10-02","markPrice":42000,"sessionLow":42000,"sessionHigh":68200,"decision":{"type":"hold"}})
+c=json.loads(subprocess.run([sys.executable, SCRIPT, "--portfolio", PORT, "--context"], capture_output=True, text=True).stdout)
+eq=load()["latest"]["equityUsd"]
+check("drawdown brake halves the risk cap", c["goals"]["drawdown"]["brakeActive"] and abs(c["riskLimits"]["maxRiskUsd"]-round(0.015*eq,2))<0.02, (c["goals"]["drawdown"], c["riskLimits"]))
+p=run({"session":"midnight","ts":"2026-10-03T02:00:00-05:00","today":"2026-10-03","markPrice":42000,
+     "decision":{"type":"fut_open","side":"long","sizeUsd":round(0.025*eq/0.02,2),"leverage":5,"stop":41160,"tp":[44000]}}, expect=2)
+check("2.5% risk rejected while the brake is on", "risk at stop" in p.stdout, p.stdout)
+
+# ---- messages 5-day window + weekly digest ----
+TMP4 = tempfile.mkdtemp(); PORT = os.path.join(TMP4, "portfolio.json")
+run({"session":"midnight","ts":"2026-10-01T02:00:00-05:00","today":"2026-10-01","markPrice":70000,"isSeeder":True,"decision":{"type":"hold"}})
+run({"session":"morning","ts":"2026-10-01T06:50:00-05:00","today":"2026-10-01","markPrice":70000,"decision":{"type":"hold"},
+     "message":{"to":"midday","text":"old"},"lesson":{"pattern":"w1","insight":"a"}})
+run({"session":"morning","ts":"2026-10-08T06:50:00-05:00","today":"2026-10-08","markPrice":70000,"decision":{"type":"hold"},
+     "message":{"to":"midday","text":"new"},"lesson":{"pattern":"w2","insight":"b"}})
+p=load(); check("messages older than 5 days pruned", [m["text"] for m in p["messages"]]==["new"], p["messages"])
+dg=os.path.join(TMP4,"dg.json"); json.dump({"weekStart":"2026-09-28","weekEnd":"2026-10-04","title":"t","patterns":[{"pattern":"P","insight":"I"}],"stats":{"avgR":0.4}},open(dg,"w"))
+c=subprocess.run([sys.executable, SCRIPT, "--portfolio", PORT, "--digest", dg], capture_output=True, text=True)
+p=load(); arch=json.load(open(os.path.join(TMP4,"lessons-archive.json")))
+check("digest stored + week archived", len(p["lessonDigests"])==1 and [l["pattern"] for l in p["lessons"]]==["w2"] and arch[-1]["pattern"]=="w1", (c.stdout, c.stderr))
+subprocess.run([sys.executable, SCRIPT, "--portfolio", PORT, "--digest", dg], capture_output=True, text=True)
+check("digest idempotent per week", len(load()["lessonDigests"])==1)
+ctx=json.loads(subprocess.run([sys.executable, SCRIPT, "--portfolio", PORT, "--context"], capture_output=True, text=True).stdout)
+check("context carries last weekly digest", ctx["lastWeeklyDigest"]["title"]=="t", ctx.get("lastWeeklyDigest"))
+
 print("\n" + ("ALL TESTS PASSED" if not fails else f"{len(fails)} FAILED: {fails}"))
 sys.exit(1 if fails else 0)

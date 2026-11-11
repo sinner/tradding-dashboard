@@ -49,7 +49,7 @@ The cash and the BTC are **separate**: cash is liquidity, the BTC is a held posi
 
 - **Spot book** — BTC held outright, **long-only**, no liquidation. The long-term core;
   the gifted BTC lives here.
-- **Futures book** — one perp position, **long or short**, leverage **≤ 3x**, margined
+- **Futures book** — one perp position, **long or short**, leverage **≤ 5x** (aggressive mode since 2026-11-11; risk ≤ 3% equity per trade, stop required), margined
   from free cash, with a liquidation price.
 - **Free cash** — liquid USDT (margins futures / buys spot).
 - **Savings** — an **untouchable** USDT bucket; it cannot be traded and only pays the
@@ -67,7 +67,7 @@ The cash and the BTC are **separate**: cash is liquidity, the BTC is a held posi
 ## 4. The rules we agreed
 
 **Trading**
-- Spot + shorts + leverage allowed; **leverage capped at 3x**.
+- Spot + shorts + leverage allowed; **leverage capped at 5x; ledger enforces stop + 3% risk cap; optional resting spotStop**.
 - Each session picks exactly one decision: `hold · skip · spot_buy · spot_sell ·
   fut_open · fut_reduce · fut_close · fut_flip`.
 - Opening futures **must** set a `stop` and `take-profit`.

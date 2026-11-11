@@ -11,6 +11,7 @@ import { dayBoundsBogota, useKlines } from '@/hooks/useKlines';
 import { useLivePrice } from '@/hooks/useLivePrice';
 import { formatDate } from '@/lib/formatters';
 import type { Report } from '@/lib/types';
+import { SESSION_ORDER } from '@/lib/sessions';
 import { Link } from 'react-router-dom';
 
 export function DashboardPage(): React.ReactNode {
@@ -26,7 +27,6 @@ export function DashboardPage(): React.ReactNode {
     enabled: Boolean(bounds),
   });
 
-  const SESSION_ORDER = ['midnight', 'morning', 'midday', 'endday'] as const;
   const orderedReports = SESSION_ORDER.map((sKey) => reports[sKey]).filter(
     Boolean,
   ) as Report[];

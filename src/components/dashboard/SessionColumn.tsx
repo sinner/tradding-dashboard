@@ -10,6 +10,7 @@ import { routeReport } from '@/config/constants';
 import { formatGeneratedAt, formatPrice, formatSession } from '@/lib/formatters';
 import type { Report } from '@/lib/types';
 import { cn } from '@/lib/cn';
+import { sessionMeta } from '@/lib/sessions';
 import { Link } from 'react-router-dom';
 
 type Props = {
@@ -19,16 +20,6 @@ type Props = {
   className?: string;
 };
 
-const sessionBlurb: Record<string, string> = {
-  midnight:
-    'Written in the small hours (ET, ~2am). It reads the overnight Asia/Europe tape versus yesterday\'s close and sets the first plan before the US morning.',
-  morning:
-    'Written near the open (ET). It captures overnight moves and sets the first plan for the day.',
-  midday:
-    'Written around lunch (ET). It updates the morning call with how the session has actually traded.',
-  endday:
-    'Written after the cash close (ET). It scores the day and sets overnight / next-session risk.',
-};
 
 export function SessionColumn({
   report,
@@ -60,19 +51,13 @@ export function SessionColumn({
         <div className="flex items-start justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <Title level={3}>
-                {formatSession(session)}
-                <span className="font-normal text-ink-muted">
-                  {' '}
-                  / {formatGeneratedAt(report.generatedAt)}
-                </span>
-              </Title>
+              <Title level={3}>Snapshot</Title>
               <InfoPopover
                 label={`What is the ${formatSession(session)} snapshot?`}
                 title={`${formatSession(session)} snapshot`}
               >
                 <p>
-                  {sessionBlurb[session] ??
+                  {sessionMeta(session)?.blurb ??
                     'A point-in-time report for this trading session.'}
                 </p>
                 <p>

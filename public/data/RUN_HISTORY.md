@@ -495,3 +495,27 @@
 
 ## 2026-11-11 midday (12:50 COT)
 - Report, manifest (midday pointer + latest), calibration (midday row; morning price_next_report backfilled 74585.8), narrative written. Compared vs 11-11 morning. Range/bull tilt, conf 5.2, 32/46/22. Ledger: fut_close of remaining short hedge (`midday CLOSE · mark 74585.8 · equity 132.63 · savings 0.1 · net 132.73 · round 1 · bankruptcies 0`). OKX fresh via Chrome in-page fetch (shorts $1.5M liquidated at 74.75k); macro from CNBC quote API; QQQ/VOO/JPXN Nov 11 intraday (StockAnalysis). tsc -b clean (pnpm not on PATH in VM). No git/publish/email. Chrome tab closed.
+
+## 2026-11-11 13:45 COT — maintenance: aggressive risk mode + context compaction (user request)
+- paper_wallet.py: MAX_LEVERAGE 5, futures opens require a stop (>=0.6% away, right side) and risk <= 3% of equity (exit 2 otherwise); resting `spotStop` on the spot book (autoExit SPOT_STOP); lessons auto-capped at 20 (overflow -> lessons-archive.json); new `--context` (~3 KB session state + buy&hold benchmark) and `--compact`. Tests extended, ALL PASS.
+- Archived 257 old lessons to public/data/lessons-archive.json (20 kept; total preserved). portfolio.json 1.13 MB -> 0.91 MB; history untouched.
+- New scripts/build_playbook.py -> docs/playbook.md (curated rules distilled from 277 lessons + live accuracy stats). Endday regenerates it daily.
+- 4 scheduled tasks (midnight/morning/midday/endday) re-prompted: aggressive risk rules, context budget (playbook + --context, never read full JSON files), RUN_HISTORY line. Compact SKILL.md v2 delivered to the user (docs/btc-paper-desk.SKILL.md copy).
+- docs/paper-wallet-game.md updated to 5x / risk-cap rules. No git, no publish.
+
+## 2026-11-11 14:05 COT — maintenance: session goals + drawdown brake (user request)
+- paper_wallet.py: `--context` now returns `goals` (beat buy&hold, 7-day expectancy >= +0.3R, futures participation >= 40%, session league by avg R). Drawdown brake: expense-adjusted net worth >= 20% under the round's peak halves the risk cap to 1.5% (enforced). Futures opens store `riskUsd`. Tests extended, ALL PASS.
+- build_playbook.py: Goals section + live goals line; docs/playbook.md regenerated.
+- 4 scheduled tasks re-prompted with the GOALS block; SKILL.md v2.1 delivered (docs/btc-paper-desk.SKILL.md). No git, no publish.
+
+## 2026-11-11 14:15 COT — maintenance: hand-off window, weekly digests, liquidation heatmap (user request)
+- paper_wallet.py: hand-off messages pruned to the last 5 days; new `--digest` (weekly lessonDigests, archives that week's raw lessons, idempotent per week); `--context` adds lastWeeklyDigest; lesson safety cap 40. Tests extended, ALL PASS.
+- Backfilled 16 weekly digests (2026-07-20 .. 2026-11-08) from the 277 lessons; portfolio keeps only this week's 4 lessons; archive 273; messages 12 (since Nov 6).
+- Curated rules moved to docs/playbook-rules.md (edited weekly); build_playbook.py reads it + shows the last digest.
+- UI: HandoffNotes = last 5 days grouped by day; LearnedPatterns = this week + collapsible weekly digests; price chart liquidation levels rendered as heatmap glow bands (intensity colour/size, magnet core line, additive blend); legend "liq heatmap"; types.ts LessonDigestSchema + lessonDigests. tsc -b OK, eslint 0 errors (4 pre-existing warnings), zod VALID.
+- New scheduled task "Weekly lessons digest" (Sun 20:40 COT). No git, no publish.
+
+## 2026-11-11 14:30 COT — UI: session cards grouped per scheduled agent (user request)
+- New src/lib/sessions.ts (order, COT schedule, accent colour, blurb per agent). SessionAccordion is now a framed, collapsible panel per agent (coloured top border + header: icon, "<Agent> agent", schedule, generated time, bias) wrapping that agent's Snapshot/Decision/Operations/Levels cards.
+- DashboardPage + DayPage use it; DayPage now shows all 4 agents (midnight was missing) in a 2-column grid. Blurbs corrected from ET to COT.
+- tsc -b OK; eslint 0 errors on touched dirs. No git.

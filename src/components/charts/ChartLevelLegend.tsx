@@ -1,4 +1,4 @@
-import { LEVEL_COLORS, type LevelKind } from '@/components/charts/chartLevels';
+import { LEVEL_COLORS, LIQ_HEAT, type LevelKind } from '@/components/charts/chartLevels';
 import { cn } from '@/lib/cn';
 
 type Props = {
@@ -34,10 +34,16 @@ export function ChartLevelLegend({
           )}
         >
           <span
-            className="size-2 rounded-full"
-            style={{ backgroundColor: LEVEL_COLORS[kind] }}
+            className={cn('rounded-full', kind === 'liquidation' ? 'h-2 w-5' : 'size-2')}
+            style={
+              kind === 'liquidation'
+                ? {
+                    background: `linear-gradient(90deg, ${LIQ_HEAT.low.color}, ${LIQ_HEAT.medium.color}, ${LIQ_HEAT.high.color}, ${LIQ_HEAT.extreme.color})`,
+                  }
+                : { backgroundColor: LEVEL_COLORS[kind] }
+            }
           />
-          {kind}
+          {kind === 'liquidation' ? 'liq heatmap' : kind}
         </button>
       ))}
       <span className="self-center text-[11px] text-ink-muted">

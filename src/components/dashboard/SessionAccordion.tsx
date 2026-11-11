@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Moon, Sun, Sunrise, Sunset } from 'lucide-react';
 import { BiasBadge } from '@/components/dashboard/BiasBadge';
-import { formatSession } from '@/lib/formatters';
+import { formatGeneratedAt, formatSession } from '@/lib/formatters';
+import { sessionMeta, type SessionKey } from '@/lib/sessions';
 import type { Report } from '@/lib/types';
 import { cn } from '@/lib/cn';
 
@@ -12,10 +13,17 @@ type Props = {
   children: React.ReactNode;
 };
 
+const ICONS: Record<SessionKey, typeof Moon> = {
+  midnight: Moon,
+  morning: Sunrise,
+  midday: Sun,
+  endday: Sunset,
+};
+
 /**
- * Mobile-only accordion wrapper for a session box.
- * On desktop (lg+) the header toggle is hidden and the content is always shown,
- * so the look & feel is identical to before. On mobile the header collapses the box.
+ * Groups every card of one scheduled agent (session) inside a single framed panel:
+ * a coloured header (agent, schedule, generated time, bias) and the agent's cards
+ * below. Collapsible on every screen size so you can focus on one agent.
  */
 export function SessionAccordion({
   session,
@@ -24,17 +32,41 @@ export function SessionAccordion({
   children,
 }: Props): React.ReactNode {
   const [open, setOpen] = useState(defaultOpen);
+  const meta = sessionMeta(session);
+  const accent = meta?.accent ?? '#A78BFA';
+  const Icon = ICONS[session as SessionKey] ?? Sun;
 
   return (
-    <div>
+    <section
+      aria-label={`${formatSession(session)} agent`}
+      className="overflow-hidden rounded-2xl border border-stroke/60 bg-bg/30"
+      style={{ borderTopColor: accent, borderTopWidth: 3 }}
+    >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="mb-2 flex w-full items-center justify-between gap-2 rounded-xl border border-stroke/60 bg-bg px-3 py-2 text-left lg:hidden"
+        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition hover:bg-bg/60"
+        style={{ backgroundColor: `${accent}14` }}
       >
-        <span className="text-sm font-medium text-ink">{formatSession(session)}</span>
-        <span className="flex items-center gap-2">
+        <span className="flex min-w-0 items-center gap-3">
+          <span
+            className="flex size-8 shrink-0 items-center justify-center rounded-full"
+            style={{ backgroundColor: `${accent}26`, color: accent }}
+          >
+            <Icon className="size-4" aria-hidden />
+          </span>
+          <span className="min-w-0">
+            <span className="block text-sm font-semibold text-ink">
+              {formatSession(session)} agent
+            </span>
+            <span className="block truncate text-[11px] text-ink-muted">
+              {meta?.schedule ?? ''}
+              {report ? ` · generated ${formatGeneratedAt(report.generatedAt)}` : ' · not run yet'}
+            </span>
+          </span>
+        </span>
+        <span className="flex shrink-0 items-center gap-2">
           {report ? (
             <BiasBadge bias={report.overallBias} />
           ) : (
@@ -46,7 +78,7 @@ export function SessionAccordion({
           />
         </span>
       </button>
-      <div className={cn('lg:block', open ? 'block' : 'hidden')}>{children}</div>
-    </div>
+      <div className={cn('p-3', open ? 'block' : 'hidden')}>{children}</div>
+    </section>
   );
 }
