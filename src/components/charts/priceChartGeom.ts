@@ -16,7 +16,7 @@ export const CHART_MARGIN = { top: 12, right: 16, bottom: 28, left: 58 } as cons
 export type PriceChartGeom = {
   innerW: number;
   innerH: number;
-  y: d3.ScaleLinear<number, number>;
+  y: d3.ScaleContinuousNumeric<number, number>;
   xTicks: { x: number; label: string }[];
   yTicks: { y: number; label: string }[];
   levelLines: (LevelLine & { y: number })[];
@@ -24,14 +24,18 @@ export type PriceChartGeom = {
   hits: LevelHit[];
 };
 
+/** 'linear' = equal price steps; 'log' = equal percentage steps (useful on wide ranges). */
+export type YScaleMode = 'linear' | 'log';
+
 export function buildPriceChartGeom(options: {
   candles: Candle[];
   reports: Report[];
   height: number;
   fitMode: YFitMode;
   showHitMarkers: boolean;
+  scaleMode?: YScaleMode;
 }): PriceChartGeom {
-  const { candles, reports, height, fitMode, showHitMarkers } = options;
+  const { candles, reports, height, fitMode, showHitMarkers, scaleMode = 'linear' } = options;
   const { left, right, top, bottom } = CHART_MARGIN;
   const innerW = CHART_WIDTH - left - right;
   const innerH = height - top - bottom;
@@ -53,11 +57,16 @@ export function buildPriceChartGeom(options: {
     .range([0, innerW])
     .padding(0.2);
   const levels = collectLevels(reports);
-  const y = d3
+  // Nice the domain on a linear scale first: nice() on a log scale snaps to powers of 10.
+  const lin = d3
     .scaleLinear()
     .domain(priceYDomain(candles, levels, fitMode))
     .nice()
     .range([innerH, 0]);
+  const y: d3.ScaleContinuousNumeric<number, number> =
+    scaleMode === 'log' && lin.domain()[0] > 0
+      ? d3.scaleLog().domain(lin.domain()).range([innerH, 0])
+      : lin;
   const step = Math.max(1, Math.floor(candles.length / 6));
 
   return {
@@ -71,7 +80,8 @@ export function buildPriceChartGeom(options: {
         x: (x(String(i)) ?? 0) + x.bandwidth() / 2,
         label: d3.timeFormat('%H:%M')(new Date(c.openTime)),
       })),
-    yTicks: y.ticks(5).map((t) => ({ y: y(t), label: formatPrice(t, 0) })),
+    // Tick values come from the linear scale (log ticks over a narrow range are unreadable).
+    yTicks: lin.ticks(scaleMode === 'log' ? 7 : 5).map((t) => ({ y: y(t), label: formatPrice(t, 0) })),
     levelLines: levels.map((l) => ({ ...l, y: y(l.price) })),
     candleRects: candles.map((c, i) => {
       const cx = x(String(i)) ?? 0;

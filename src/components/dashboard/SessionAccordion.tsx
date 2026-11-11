@@ -39,7 +39,7 @@ export function SessionAccordion({
   return (
     <section
       aria-label={`${formatSession(session)} agent`}
-      className="overflow-hidden rounded-2xl border border-stroke/60 bg-bg/30"
+      className="self-start overflow-hidden rounded-2xl border border-stroke/60 bg-bg/30 transition-shadow duration-300 hover:shadow-lg hover:shadow-black/20"
       style={{ borderTopColor: accent, borderTopWidth: 3 }}
     >
       <button
@@ -67,18 +67,36 @@ export function SessionAccordion({
           </span>
         </span>
         <span className="flex shrink-0 items-center gap-2">
-          {report ? (
-            <BiasBadge bias={report.overallBias} />
-          ) : (
-            <span className="text-xs text-ink-muted">no data</span>
-          )}
+          <BiasBadge bias={report?.overallBias} />
           <ChevronDown
-            className={cn('size-4 text-ink-muted transition', open && 'rotate-180')}
+            className={cn(
+              'size-4 text-ink-muted transition-transform duration-300 motion-reduce:transition-none',
+              open && 'rotate-180',
+            )}
             aria-hidden
           />
         </span>
       </button>
-      <div className={cn('p-3', open ? 'block' : 'hidden')}>{children}</div>
+      {/* grid-rows 0fr→1fr animates to the content's real height; motion-reduce skips it */}
+      <div
+        className={cn(
+          'grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none',
+          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
+        )}
+        aria-hidden={!open}
+        inert={!open}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div
+            className={cn(
+              'p-3 transition-transform duration-300 ease-out motion-reduce:transition-none',
+              open ? 'translate-y-0' : '-translate-y-2',
+            )}
+          >
+            {children}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

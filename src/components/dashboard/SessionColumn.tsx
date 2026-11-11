@@ -35,7 +35,10 @@ export function SessionColumn({
           className,
         )}
       >
-        No {formatSession(session)} report
+        <span className="flex flex-col items-center gap-2">
+          <BiasBadge bias={null} />
+          No {formatSession(session)} report yet
+        </span>
       </Card>
     );
   }

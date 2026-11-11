@@ -108,7 +108,7 @@ export function DashboardPage(): React.ReactNode {
       {isLoading ? (
         <p className="text-sm text-ink-muted">Loading session reports…</p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-2">
           {SESSION_ORDER.map((sKey) => (
             <SessionAccordion key={sKey} session={sKey} report={reports[sKey]}>
               <SessionColumn

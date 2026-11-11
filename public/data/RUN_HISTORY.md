@@ -519,3 +519,16 @@
 - New src/lib/sessions.ts (order, COT schedule, accent colour, blurb per agent). SessionAccordion is now a framed, collapsible panel per agent (coloured top border + header: icon, "<Agent> agent", schedule, generated time, bias) wrapping that agent's Snapshot/Decision/Operations/Levels cards.
 - DashboardPage + DayPage use it; DayPage now shows all 4 agents (midnight was missing) in a 2-column grid. Blurbs corrected from ET to COT.
 - tsc -b OK; eslint 0 errors on touched dirs. No git.
+
+## 2026-11-11 14:45 COT — UI: animated independent agent panels + log price scale (user request)
+- SessionAccordion: each agent panel collapses fully and independently (grid items-start/self-start, no stretching to the neighbour), animated height (grid-rows 0fr→1fr) + fade/slide + chevron rotation, prefers-reduced-motion respected, collapsed content inert.
+- Price chart: new Lin/Log toggle (d3 scaleLog; domain niced linearly first, ticks from the linear scale). Scale prop types widened to ScaleContinuousNumeric.
+- tsc -b OK; eslint 0 errors. No git.
+
+## 2026-11-11 14:55 COT — UI: "No data" bias tag (user request)
+- BiasBadge: new `nodata` tag (dashed muted pill + CircleDashed icon, "NO DATA"); null/undefined bias renders it. Added to BiasLegend; used in the agent panel header and the empty session card. tsc -b OK, eslint 0 errors. No git.
+
+## 2026-11-11 15:00 COT — UI: chart level defaults (user request)
+- PriceLevelsChart: support, resistance, add and reduce OFF by default (liquidation heatmap ON); toggle from the legend. REDUCE/ADD first-touch markers and touch-alert snackbars now follow the visible kinds. tsc -b OK, eslint 0 errors. No git.
+
+## 2026-11-11 15:05 COT — UI: price chart defaults to log scale (user request). tsc -b OK. No git.

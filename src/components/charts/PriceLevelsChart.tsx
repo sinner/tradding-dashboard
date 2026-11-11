@@ -14,6 +14,7 @@ import { type YFitMode } from '@/components/charts/chartScale';
 import {
   CHART_WIDTH,
   buildPriceChartGeom,
+  type YScaleMode,
 } from '@/components/charts/priceChartGeom';
 import { useDelayedPreview } from '@/components/charts/useDelayedPreview';
 import { useLevelTouchAlerts } from '@/components/charts/useLevelTouchAlerts';
@@ -55,12 +56,14 @@ export function PriceLevelsChart({
 }: Props): React.ReactNode {
   const [hover, setHover] = useState<CandleHover | null>(null);
   const [fitMode, setFitMode] = useState<YFitMode>('price');
+  const [scaleMode, setScaleMode] = useState<YScaleMode>('log');
   const [maActive, setMaActive] = useState(defaultMaActive);
   const [activeKinds, setActiveKinds] = useState<Record<LevelKind, boolean>>({
-    support: true,
-    resistance: true,
-    reduce: true,
-    add: true,
+    // Only the liquidation heatmap is on by default; the rest can be toggled from the legend.
+    support: false,
+    resistance: false,
+    reduce: false,
+    add: false,
     liquidation: true,
   });
   const { previewKind, openPreview, schedulePreviewClose, clearPreviewClose } =
@@ -74,13 +77,20 @@ export function PriceLevelsChart({
         height,
         fitMode,
         showHitMarkers,
+        scaleMode,
       }),
-    [candles, reports, height, fitMode, showHitMarkers],
+    [candles, reports, height, fitMode, showHitMarkers, scaleMode],
+  );
+
+  // Only alert on level kinds that are visible on the chart (memoised: the hook's effect depends on it).
+  const visibleLevels = useMemo(
+    () => geom.levelLines.filter((l) => activeKinds[l.kind]),
+    [geom.levelLines, activeKinds],
   );
 
   const { alerts, dismiss } = useLevelTouchAlerts({
     candles,
-    levels: geom.levelLines,
+    levels: visibleLevels,
   });
 
   const previewLevels = previewKind
@@ -125,6 +135,26 @@ export function PriceLevelsChart({
               )}
             >
               Fit {m}
+            </button>
+          ))}
+          <span className="mx-1 self-center text-stroke" aria-hidden>
+            |
+          </span>
+          {(['linear', 'log'] as const).map((m) => (
+            <button
+              key={m}
+              type="button"
+              onClick={() => setScaleMode(m)}
+              aria-pressed={scaleMode === m}
+              title={m === 'log' ? 'Logarithmic: equal % moves look equal' : 'Linear: equal price steps'}
+              className={cn(
+                'rounded-full px-2.5 py-1 text-[11px] font-medium transition',
+                scaleMode === m
+                  ? 'bg-brand/25 text-brand-light'
+                  : 'text-ink-muted hover:text-ink',
+              )}
+            >
+              {m === 'log' ? 'Log' : 'Lin'}
             </button>
           ))}
         </div>

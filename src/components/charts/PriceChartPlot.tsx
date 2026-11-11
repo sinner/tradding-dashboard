@@ -1,4 +1,4 @@
-import type { ScaleLinear } from 'd3';
+import type { ScaleContinuousNumeric } from 'd3';
 import { ChartCandleLayer, type CandleGeom } from '@/components/charts/ChartCandleLayer';
 import { ChartLevelLayer } from '@/components/charts/ChartLevelLayer';
 import { DivergenceOverlay } from '@/components/charts/DivergenceOverlay';
@@ -17,7 +17,7 @@ type Props = {
   height: number;
   innerW: number;
   innerH: number;
-  y: ScaleLinear<number, number>;
+  y: ScaleContinuousNumeric<number, number>;
   yTicks: { y: number; label: string }[];
   xTicks: { x: number; label: string }[];
   levelLines: (LevelLine & { y: number })[];
@@ -134,7 +134,7 @@ export function PriceChartPlot({
             }}
           />
         ) : null}
-        {hits.map((h) => {
+        {hits.filter((h) => activeKinds[h.kind]).map((h) => {
           const g = candleRects[h.index];
           if (!g) return null;
           const sessions = new Set([

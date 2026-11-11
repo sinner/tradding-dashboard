@@ -24,7 +24,7 @@ const MA_COLORS: Record<keyof MaSeriesMap, string> = {
 type Props = {
   series: MaSeriesMap;
   candles: CandleGeom[];
-  y: d3.ScaleLinear<number, number>;
+  y: d3.ScaleContinuousNumeric<number, number>;
   crosses?: MaCrossMark[];
   active: Record<keyof MaSeriesMap, boolean>;
 };
