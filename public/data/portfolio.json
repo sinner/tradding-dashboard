@@ -3,19 +3,25 @@
   "baseCurrency": "USDT",
   "initialCapitalUsd": 227.8,
   "startedAt": "2026-07-24T14:30:00-05:00",
-  "updatedAt": "2026-11-12T06:55:00-05:00",
+  "updatedAt": "2026-11-12T12:45:00-05:00",
   "latest": {
-    "ts": "2026-11-12T06:55:00-05:00",
-    "session": "morning",
-    "reportId": "2026-11-12-morning",
-    "markPrice": 72892.4,
-    "action": "HOLD",
-    "autoExits": [],
+    "ts": "2026-11-12T12:45:00-05:00",
+    "session": "midday",
+    "reportId": "2026-11-12-midday",
+    "markPrice": 71816.0,
+    "action": "REDUCE",
+    "autoExits": [
+      {
+        "reason": "SPOT_STOP",
+        "price": 71800.0,
+        "side": "long"
+      }
+    ],
     "spot": {
-      "btc": 0.00137492,
+      "btc": 0.00068746,
       "avgEntry": 76993.31,
-      "costBasisUsd": 105.86,
-      "valueUsd": 100.22,
+      "costBasisUsd": 52.93,
+      "valueUsd": 49.37,
       "lots": [
         {
           "btc": 0.001,
@@ -28,7 +34,7 @@
           "costUsd": 60.3
         }
       ],
-      "stopPrice": 71800.0,
+      "stopPrice": 70300.0,
       "stopFraction": 0.5
     },
     "futures": {
@@ -43,15 +49,15 @@
       "takeProfit": [],
       "unrealizedPnlUsd": 0.0
     },
-    "cashUsd": 30.08,
-    "realizedPnlUsd": 0.0,
+    "cashUsd": 79.44,
+    "realizedPnlUsd": -3.57,
     "unrealizedPnlUsd": 0.0,
-    "equityUsd": 130.3,
+    "equityUsd": 128.81,
     "savingsUsd": 0.1,
-    "netWorthUsd": 130.4,
+    "netWorthUsd": 128.91,
     "sweptToSavingsUsd": null,
     "consecutiveSkips": 0,
-    "rationale": "Price flushed into the 72.7k-72.9k long zone (low 72,891) but the midnight trigger needs a 15m close back above 73,000 and longs are still being liquidated ($0.70M long fills in the last 15 min, zero shorts) with OKX L/S 2.97. Funding a 180-notional long (36 margin) would mean selling ~40% of spot at the flush low to keep 25% free cash (cash 30 < 25% of equity already). Futures stay flat on purpose; spot stop 71,800 x0.5 covers a range-low break."
+    "rationale": "Range floor 72,727 lost on a 4H close (71,717); flush to 71,238.6 tagged the resting spot stop 71,800 x0.5. Futures flat for a specific reason: price sits mid-air between the 71.24k day low and the 72.73k broken floor with RSI 24 (1H)/28 (4H); a short here sells the oversold flush low (playbook rule 2) and a long needs a stop under 70.3k (1x ATR below 71,238) for only ~0.6R to the broken floor. Neither edge offers >=1.5R. The freed ~50 USDT is margin for the plans below."
   },
   "history": [
     {
@@ -18387,6 +18393,61 @@
       "sweptToSavingsUsd": null,
       "consecutiveSkips": 0,
       "rationale": "Price flushed into the 72.7k-72.9k long zone (low 72,891) but the midnight trigger needs a 15m close back above 73,000 and longs are still being liquidated ($0.70M long fills in the last 15 min, zero shorts) with OKX L/S 2.97. Funding a 180-notional long (36 margin) would mean selling ~40% of spot at the flush low to keep 25% free cash (cash 30 < 25% of equity already). Futures stay flat on purpose; spot stop 71,800 x0.5 covers a range-low break."
+    },
+    {
+      "ts": "2026-11-12T12:45:00-05:00",
+      "session": "midday",
+      "reportId": "2026-11-12-midday",
+      "markPrice": 71816.0,
+      "action": "REDUCE",
+      "autoExits": [
+        {
+          "reason": "SPOT_STOP",
+          "price": 71800.0,
+          "side": "long"
+        }
+      ],
+      "spot": {
+        "btc": 0.00068746,
+        "avgEntry": 76993.31,
+        "costBasisUsd": 52.93,
+        "valueUsd": 49.37,
+        "lots": [
+          {
+            "btc": 0.001,
+            "entryPrice": 67500,
+            "costUsd": 67.5
+          },
+          {
+            "btc": 0.001,
+            "entryPrice": 60300,
+            "costUsd": 60.3
+          }
+        ],
+        "stopPrice": 70300.0,
+        "stopFraction": 0.5
+      },
+      "futures": {
+        "side": "flat",
+        "sizeUsd": 0.0,
+        "btc": null,
+        "leverage": 1,
+        "entryPrice": null,
+        "marginUsd": 0.0,
+        "stopPrice": null,
+        "liquidationPrice": null,
+        "takeProfit": [],
+        "unrealizedPnlUsd": 0.0
+      },
+      "cashUsd": 79.44,
+      "realizedPnlUsd": -3.57,
+      "unrealizedPnlUsd": 0.0,
+      "equityUsd": 128.81,
+      "savingsUsd": 0.1,
+      "netWorthUsd": 128.91,
+      "sweptToSavingsUsd": null,
+      "consecutiveSkips": 0,
+      "rationale": "Range floor 72,727 lost on a 4H close (71,717); flush to 71,238.6 tagged the resting spot stop 71,800 x0.5. Futures flat for a specific reason: price sits mid-air between the 71.24k day low and the 72.73k broken floor with RSI 24 (1H)/28 (4H); a short here sells the oversold flush low (playbook rule 2) and a long needs a stop under 70.3k (1x ATR below 71,238) for only ~0.6R to the broken floor. Neither edge offers >=1.5R. The freed ~50 USDT is margin for the plans below."
     }
   ],
   "scoreboard": [
@@ -18404,17 +18465,17 @@
     {
       "session": "morning",
       "decisions": 99,
-      "attributedPnlUsd": -2.64,
+      "attributedPnlUsd": -4.13,
       "wins": 51,
-      "losses": 47,
+      "losses": 48,
       "note": null,
       "quotaUsd": 7.5,
-      "quotaCoveredUsd": -2.64,
+      "quotaCoveredUsd": -4.13,
       "skips": 0
     },
     {
       "session": "midday",
-      "decisions": 96,
+      "decisions": 97,
       "attributedPnlUsd": 2.03,
       "wins": 39,
       "losses": 56,
@@ -18473,6 +18534,12 @@
       "session": "midday",
       "pattern": "Hedge against a crowded-long tape while shorts get squeezed",
       "insight": "When the long/short ratio is high but price keeps reclaiming EMAs and realized liquidations are on the short side, the hedge bleeds; scale out early rather than waiting for the stop."
+    },
+    {
+      "ts": "2026-11-12T12:45:00-05:00",
+      "session": "midday",
+      "pattern": "Range floor lost with L/S 3.2+ and rising OI (2.615B to 2.646B) while price fell",
+      "insight": "Crowded longs plus rising OI into the range low broke it within 6h (72,727 to 71,239, -2.0%); when both show at the floor, the long trigger should wait for the flush, not the first reclaim."
     }
   ],
   "messages": [
@@ -18553,6 +18620,12 @@
       "from": "morning",
       "to": "midday",
       "text": "Futures flat (3rd session) for a specific reason: flush into 72.89k with no 73.0k reclaim, long cascade live, L/S 2.97, and cash 30 below the 25% floor. LONG trigger: 15m close back above 73,000 (or a wick to 72.15-72.7k that reclaims 73.0k) -> sell ~20% spot to fund, long ~180 notional 5x, stop 71,850, TP 74,450/75,100 (1.5R/2.1R), risk <=2.6. SHORT only a bounce into 74.2k-74.4k (4H EMA20 74,227): stop 75,450, TP 73,300/72,750. Spot stop 71,800 x0.5. US open + 5-day ETF outflow streak are the risk."
+    },
+    {
+      "ts": "2026-11-12T12:45:00-05:00",
+      "from": "midday",
+      "to": "endday",
+      "text": "Spot stop 71,800 x0.5 filled on the flush to 71,238.6; cash now funds margin. Futures flat (4th session) because the tape is mid-air at RSI 24/28. SHORT the retest of the broken range floor 72.7k-73.0k (1H EMA20 72,937): entry ~72,850, stop 73,950 (>1x 4H ATR 932 above 73.0k), TP 71,250 partial / 70,600 (1.45R/2.05R), ~255 notional 5x, risk <=3.9. LONG only a sweep of 71,238 into 70.4k-71.1k (50x/100x long brackets) that reclaims 71,240 on a 1H close: stop 69,400, TP 72,700/73,400. New spot stop 70,300 x0.5 on the remaining stack."
     }
   ],
   "status": "active",
