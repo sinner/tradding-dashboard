@@ -3,19 +3,25 @@
   "baseCurrency": "USDT",
   "initialCapitalUsd": 227.8,
   "startedAt": "2026-07-24T14:30:00-05:00",
-  "updatedAt": "2026-11-25T06:55:00-05:00",
+  "updatedAt": "2026-11-25T12:45:00-05:00",
   "latest": {
-    "ts": "2026-11-25T06:55:00-05:00",
-    "session": "morning",
-    "reportId": "2026-11-25-morning",
-    "markPrice": 58792.8,
-    "action": "HOLD",
-    "autoExits": [],
+    "ts": "2026-11-25T12:45:00-05:00",
+    "session": "midday",
+    "reportId": "2026-11-25-midday",
+    "markPrice": 59700.0,
+    "action": "REDUCE",
+    "autoExits": [
+      {
+        "reason": "SPOT_STOP",
+        "price": 57700.0,
+        "side": "long"
+      }
+    ],
     "spot": {
-      "btc": 0.00058282,
+      "btc": 0.00029141,
       "avgEntry": 61442.64,
-      "costBasisUsd": 35.81,
-      "valueUsd": 34.27,
+      "costBasisUsd": 17.9,
+      "valueUsd": 17.4,
       "lots": [
         {
           "btc": 0.001,
@@ -28,30 +34,34 @@
           "costUsd": 60.3
         }
       ],
-      "stopPrice": 57700.0,
+      "stopPrice": 56700.0,
       "stopFraction": 0.5
     },
     "futures": {
-      "side": "flat",
-      "sizeUsd": 0.0,
-      "btc": null,
-      "leverage": 1,
-      "entryPrice": null,
-      "marginUsd": 0.0,
-      "stopPrice": null,
-      "liquidationPrice": null,
-      "takeProfit": [],
-      "unrealizedPnlUsd": 0.0
+      "side": "short",
+      "sizeUsd": 110.0,
+      "btc": -0.00184255,
+      "leverage": 3,
+      "entryPrice": 59700.0,
+      "marginUsd": 36.67,
+      "stopPrice": 61200,
+      "liquidationPrice": 79600.0,
+      "takeProfit": [
+        58300,
+        57400
+      ],
+      "unrealizedPnlUsd": 0.0,
+      "riskUsd": 2.7638
     },
-    "cashUsd": 75.17,
-    "realizedPnlUsd": 0.0,
+    "cashUsd": 55.31,
+    "realizedPnlUsd": -1.09,
     "unrealizedPnlUsd": 0.0,
-    "equityUsd": 109.44,
+    "equityUsd": 109.38,
     "savingsUsd": 0.2,
-    "netWorthUsd": 109.64,
+    "netWorthUsd": 109.58,
     "sweptToSavingsUsd": null,
     "consecutiveSkips": 0,
-    "rationale": "Futures stay flat with a specific reason: price 58,793 sits mid-way between the just-swept floor 58,456 and the 59,480 lid; a long here needs a 57,200 stop (1 4H ATR under the floor) and its first TP 60,189 (4H EMA20) is only 0.9R. OI rose 1.834B -> 1.865B while price fell and 3.1M of longs were liquidated at 58.4-58.5k at 06:30-06:51 COT with L/S still 2.62 crowded (playbook rules 6-7: more downside, long only at the bracket below after the flush). Plan: fade-long 57.6-58.0k (50x bracket 57,617) on a 1H reclaim, stop 56,300 (under 25x bracket), TP 60,189/61,120 (1.6R/2.2R); short only a rejection of 59.7-60.2k. Spot holds with the 57,700 x0.5 stop resting."
+    "rationale": "Range fade short into resistance: price +4.2% off the 57,300 sweep into the 59.7-60.3k lid (1H EMA50 59,699, 4H EMA20 59,971, 1H EMA100 60,268, 24h high 60,290 = 100x short bracket 60,297). OKX L/S jumped 2.61 -> 2.92 into the bounce with OI up 1.865B -> 1.889B (crowded longs chasing under resistance, playbook #6). 4H MACD hist negative, QQQ -2.4%. Stop 61,200 sits above the 50x short bracket 60,894 and >1 4H ATR from entry; risk 2.5% of equity (mixed: daily RSI 24, fresh V off the low). TP1 58,300 range mid (0.93R), TP2 57,400 (1.53R)."
   },
   "history": [
     {
@@ -20199,6 +20209,65 @@
       "sweptToSavingsUsd": null,
       "consecutiveSkips": 0,
       "rationale": "Futures stay flat with a specific reason: price 58,793 sits mid-way between the just-swept floor 58,456 and the 59,480 lid; a long here needs a 57,200 stop (1 4H ATR under the floor) and its first TP 60,189 (4H EMA20) is only 0.9R. OI rose 1.834B -> 1.865B while price fell and 3.1M of longs were liquidated at 58.4-58.5k at 06:30-06:51 COT with L/S still 2.62 crowded (playbook rules 6-7: more downside, long only at the bracket below after the flush). Plan: fade-long 57.6-58.0k (50x bracket 57,617) on a 1H reclaim, stop 56,300 (under 25x bracket), TP 60,189/61,120 (1.6R/2.2R); short only a rejection of 59.7-60.2k. Spot holds with the 57,700 x0.5 stop resting."
+    },
+    {
+      "ts": "2026-11-25T12:45:00-05:00",
+      "session": "midday",
+      "reportId": "2026-11-25-midday",
+      "markPrice": 59700.0,
+      "action": "REDUCE",
+      "autoExits": [
+        {
+          "reason": "SPOT_STOP",
+          "price": 57700.0,
+          "side": "long"
+        }
+      ],
+      "spot": {
+        "btc": 0.00029141,
+        "avgEntry": 61442.64,
+        "costBasisUsd": 17.9,
+        "valueUsd": 17.4,
+        "lots": [
+          {
+            "btc": 0.001,
+            "entryPrice": 67500,
+            "costUsd": 67.5
+          },
+          {
+            "btc": 0.001,
+            "entryPrice": 60300,
+            "costUsd": 60.3
+          }
+        ],
+        "stopPrice": 56700.0,
+        "stopFraction": 0.5
+      },
+      "futures": {
+        "side": "short",
+        "sizeUsd": 110.0,
+        "btc": -0.00184255,
+        "leverage": 3,
+        "entryPrice": 59700.0,
+        "marginUsd": 36.67,
+        "stopPrice": 61200,
+        "liquidationPrice": 79600.0,
+        "takeProfit": [
+          58300,
+          57400
+        ],
+        "unrealizedPnlUsd": 0.0,
+        "riskUsd": 2.7638
+      },
+      "cashUsd": 55.31,
+      "realizedPnlUsd": -1.09,
+      "unrealizedPnlUsd": 0.0,
+      "equityUsd": 109.38,
+      "savingsUsd": 0.2,
+      "netWorthUsd": 109.58,
+      "sweptToSavingsUsd": null,
+      "consecutiveSkips": 0,
+      "rationale": "Range fade short into resistance: price +4.2% off the 57,300 sweep into the 59.7-60.3k lid (1H EMA50 59,699, 4H EMA20 59,971, 1H EMA100 60,268, 24h high 60,290 = 100x short bracket 60,297). OKX L/S jumped 2.61 -> 2.92 into the bounce with OI up 1.865B -> 1.889B (crowded longs chasing under resistance, playbook #6). 4H MACD hist negative, QQQ -2.4%. Stop 61,200 sits above the 50x short bracket 60,894 and >1 4H ATR from entry; risk 2.5% of equity (mixed: daily RSI 24, fresh V off the low). TP1 58,300 range mid (0.93R), TP2 57,400 (1.53R)."
     }
   ],
   "scoreboard": [
@@ -20216,17 +20285,17 @@
     {
       "session": "morning",
       "decisions": 107,
-      "attributedPnlUsd": -10.11,
+      "attributedPnlUsd": -10.17,
       "wins": 52,
-      "losses": 54,
+      "losses": 55,
       "note": null,
       "quotaUsd": 7.5,
-      "quotaCoveredUsd": -10.11,
+      "quotaCoveredUsd": -10.17,
       "skips": 0
     },
     {
       "session": "midday",
-      "decisions": 105,
+      "decisions": 106,
       "attributedPnlUsd": 0.9,
       "wins": 41,
       "losses": 62,
@@ -20313,24 +20382,6 @@
   ],
   "messages": [
     {
-      "ts": "2026-11-20T11:16:00-05:00",
-      "from": "midnight",
-      "to": "morning",
-      "text": "Midnight (fired late, 11:16 COT) HOLD, futures flat (5th flat session, reason: price at 59.5k sits mid-flush between edges, OI 2.046B->2.059B rising into the drop + L/S 2.86 crowded = no long yet; short at RSI 23.6 4H is a chase). Box 62.0-65.7k BROKE: 4H close 59,474, low 58,762. Spot stop 61,300 x0.5 filled; new spotStop 57,500 x0.5. Your setups: (1) LONG a sweep of 58.0-58.4k (50x long bracket 58,350) that closes a 1H back above 58,762 with OI falling below 2.04B, entry ~58,600, stop 57,100, TP 60,900 / 62,000 (~1.5R/2.3R), size = maxRiskUsd / 2.56% (~140 notional). (2) SHORT a 1H rejection at 61.3-62.0k (breakdown retest, 1H EMA50 62,457, 4H EMA20 62,662 overhead) with L/S >= 2.8, entry ~61,700, stop 62,900, TP 59,900 / 58,800 (~1.5R/2.4R). F&G 12, ETF Nov 19 -582.3M (3rd outflow day), daily RSI 17.9, funding +0.0028%."
-    },
-    {
-      "ts": "2026-11-20T11:20:00-05:00",
-      "from": "morning",
-      "to": "midday",
-      "text": "Floor 62k lost on a 4H close; low 58,762, L/S 3.0 and OI up (2.046B->2.058B). Short only a rejected 61.3-62.0k retest (stop 63,200, TP 59,500/58,000); long only a 57.1-57.6k flush that closes 1H back above 58,760 with OI falling (stop 56,000). Spot stop now 57,500 x0.5."
-    },
-    {
-      "ts": "2026-11-20T12:42:00-05:00",
-      "from": "midday",
-      "to": "endday",
-      "text": "Midday HOLD, futures flat (mid-air again: 59,010 between the 61.3-62.0k short zone and the 56.65-57.8k long brackets; no 1.5R at mark). Since morning: bounce capped at 59,680 (lower high under 59,839), back to 58,911. OI 2.058B -> 2.063B and L/S 3.01 -> 3.07 while 629k of longs liquidated at 58.9-59.0k = longs not cleared yet. Your setups: (1) LONG a flush into 56.65-57.8k (50x 57,830 / 25x 56,650) that closes 1H back above 58,760 with OI falling under 2.04B: entry ~58,800, stop 56,000, TP 60,500 / 61,300 (~0.6R/0.9R from 58.8k; only take it from <=57.9k where TP 61,300 is 1.5R+). (2) SHORT a 1H rejection at 61.3-62.0k (1H EMA20 61,359, 25x short 61,370) with L/S >= 2.8: entry ~61,500, stop 63,200, TP 59,000 / 58,000 (1.5R/2.1R), size ~ 3.59 / 2.76% = 130 notional, 3x. Endday: keep spotStop 57,500 x0.5 (or 56,500 if a flush reclaims). F&G 12, ETF 3 outflow days (-1.13B), daily RSI 17.5."
-    },
-    {
       "ts": "2026-11-20T19:33:00-05:00",
       "from": "endday",
       "to": "midnight",
@@ -20407,6 +20458,12 @@
       "from": "morning",
       "to": "midday",
       "text": "Morning HOLD, futures flat by design. 06:30-06:51 COT flush liquidated 3.1M longs at 58.4-58.5k (low 58,455.6), OI UP 1.834B -> 1.865B while price fell, L/S 2.62, funding +0.008%. Plan: long a flush into 57.6-58.0k (50x bracket 57,617) that reclaims 58,000 on a 1H close, stop 56,300, TP 60,189/61,120; or long a 4H close above 60,189 (4H EMA20). Short only a 1H rejection of 59.7-60.2k, stop above 61,000. Spot stop 57,700 x0.5 resting. Daily RSI 23, F&G 13, ETF outflows 6 days."
+    },
+    {
+      "ts": "2026-11-25T12:45:00-05:00",
+      "from": "midday",
+      "to": "endday",
+      "text": "Midday SHORT 110 USD 3x @59,700 stop 61,200 TP 58,300/57,400 (risk ~2.75 USDT). Morning long trigger FIRED unattended (09:45 sweep to 57,300, 1H close 58,235 > 58,000) and the resting spot stop 57,700 x0.5 filled. L/S 2.92 rising, OI 1.889B rising into 59.7k lid. Manage: take TP1 partial at 58,300 and move stop to 59,700 (BE) once +1R (58,200); cut on a 4H close above 60,300 (100x short bracket 60,297 / 24h high). Spot stop now 56,700 x0.5. Month-end: cash after margin still >= 30."
     }
   ],
   "status": "active",
